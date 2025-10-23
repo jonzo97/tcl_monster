@@ -184,6 +184,50 @@ User will manually execute TCL scripts in Libero (initially via GUI TCL console 
 - Mark tasks complete immediately after finishing
 - Keep active list focused (5-10 items)
 
+## Microchip IP Cores - MI-V RISC-V (CRITICAL)
+
+**ALWAYS use Microchip/Microsemi IP cores** instead of third-party alternatives.
+
+### MI-V RISC-V Core Information
+
+**Core Type:** Libero IP Catalog Core (not raw RTL)
+**VLNV:** `Microsemi:MiV:MIV_RV32:3.1.200`
+**Location:** Downloaded automatically by Libero when using `create_and_configure_core -download_core`
+
+**Reference Designs:**
+- `hdl/miv_polarfire_eval/` - Complete MI-V designs for MPF300 Eval Kit
+- Key script: `Libero_Projects/PF_Eval_Kit_MIV_RV32_BaseDesign.tcl`
+- Component configs: `Libero_Projects/import/components/MIV_RV32_CFG*.tcl`
+
+**MI-V RV32 Configurations:**
+- **CFG1** (RV32IMC): M+C extensions, 32kB TCM, JTAG debug
+- **CFG2** (RV32IMC): Similar to CFG1 with different memory map
+- **CFG3** (RV32IMCF): Adds floating-point extension
+
+**Instantiation Pattern:**
+```tcl
+create_and_configure_core \
+    -core_vlnv {Microsemi:MiV:MIV_RV32:3.1.200} \
+    -download_core \
+    -component_name {MIV_RV32_CFG1_C0} \
+    -params { \
+        "M_EXT:true" \
+        "C_EXT:true" \
+        "F_EXT:false" \
+        "DEBUGGER:true" \
+        "TCM_PRESENT:true" \
+        "INTERNAL_MTIME:true" \
+        ... \
+    }
+```
+
+**GitHub Resources:**
+- Organization: https://github.com/Mi-V-Soft-RISC-V
+- Platform HAL: `hdl/miv_platform/` (drivers, HAL)
+- Documentation: `hdl/miv_documentation/` (user guides)
+
+**DO NOT** use third-party RISC-V cores (PicoRV32, VexRiscv, etc.) unless specifically required.
+
 ## Comprehensive Documentation Structure
 
 **NEW (2025-10-22):** Extensive planning documents created for long-term development
@@ -232,10 +276,90 @@ User will manually execute TCL scripts in Libero (initially via GUI TCL console 
 ### Session Start Protocol (MANDATORY)
 
 **Every session MUST start with:**
-1. Query Memory MCP: "tcl_monster_project status"
-2. Read relevant sections of THIS file (`.claude/CLAUDE.md`)
-3. Check `docs/ROADMAP.md` for current phase
-4. Confirm with user: "Resuming [phase X], last completed [task Y]?"
+1. Check context usage with `/check-context` or `/compact-check`
+2. Read `.mcp.json` for last session state
+3. Read relevant sections of THIS file (`.claude/CLAUDE.md`)
+4. Check `docs/ROADMAP.md` for current phase
+5. Confirm with user: "Resuming [phase X], last completed [task Y]?"
+
+## Autonomous Context Compaction (CRITICAL)
+
+**Philosophy:** Treat context like precious RAM. Compact proactively before quality degrades.
+
+### When to Check Context (Proactive Monitoring)
+
+**ALWAYS check context before:**
+- Starting large research tasks (WebSearch, reading multiple files)
+- Beginning new feature/phase
+- After completing 5-7 conversational turns
+
+**Use `/compact-check` to:**
+- Get current context percentage
+- Receive intelligent recommendations
+- Plan compaction timing
+
+### Compaction Thresholds
+
+**< 75% (Safe Zone)** ✅
+- Continue working normally
+- Check again after completing current task
+
+**75-85% (Planning Zone)** ⚠️
+- Start planning compaction
+- Run `/save-state` to preserve context
+- Complete current task, then evaluate
+- **Recommendation:** Compact after current task
+
+**85-90% (Warning Zone)** 🟠
+- Compact within 1-2 tasks
+- MUST save state before continuing major work
+- No new large research tasks
+- **Recommendation:** Complete current task, compact immediately
+
+**90-95% (Urgent Zone)** 🔴
+- COMPACT NOW before starting new work
+- Run `/save-state` immediately
+- Don't start new features or research
+- **Recommendation:** Save and compact now
+
+**> 95% (Critical Zone)** 🚨
+- EMERGENCY COMPACT
+- Auto-compact will trigger imminently
+- Loss of control over what gets summarized
+- **Action:** Immediate save-state and compact
+
+### Pre-Compact Checklist
+
+**Before every `/compact`, run `/save-state` to create:**
+1. **`.mcp.json`** - Updated project state, decisions, next steps
+2. **`docs/sessions/session_[date].md`** - Session summary
+3. **`docs/lessons_learned/[topic].md`** - Any new patterns/learnings
+4. **Git commit** - If substantial work completed
+
+### Compaction Best Practices
+
+**Compact proactively when:**
+- Finishing a feature/phase (even if < 75%)
+- Pivoting to new work direction
+- Session ending soon
+- Every 5-7 deep conversational turns
+
+**DON'T wait for:**
+- 95% auto-compact threshold
+- User to manually trigger
+- Context quality to degrade
+
+**Philosophy from experts:**
+> "Curate the smallest high-signal set of tokens" - Anthropic
+> "Compact every 5-7 turns to prevent context rot" - BinaryVerseAI
+
+### Post-Compact Recovery
+
+**After compacting:**
+1. Read `.mcp.json` to restore state
+2. Read last session summary from `docs/sessions/`
+3. Check TodoWrite list for active tasks
+4. Confirm understanding with user before continuing
 
 ## Success Metrics
 
