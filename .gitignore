@@ -83,8 +83,11 @@ Thumbs.db
 libero_projects/counter_demo/designer/counter/counter_compile_*.html
 libero_projects/counter_demo/tooldata/
 
-# Ignore MI-V demo project (regenerable from TCL)
+# Ignore MI-V demo project build artifacts (regenerable from TCL)
+# But keep the constraint files we created
 libero_projects/miv_rv32_demo/
+!libero_projects/miv_rv32_demo/constraint/
+!libero_projects/miv_rv32_demo/constraint/*.pdc
 
 # Keep README files in otherwise ignored directories
 !**/README.md
