@@ -1,0 +1,17 @@
+{
+  "project_name": "example_project",
+  "project_location": "./libero_projects",
+  "device_family": "PolarFire",
+  "device": "MPF300TS",
+  "package": "FCG1152",
+  "speed_grade": "STD",
+  "die_voltage": "1.0",
+  "design_flow": "default",
+  "hdl_language": "VERILOG",
+  "top_module": "top",
+  "source_files": [
+    "hdl/top.v"
+  ],
+  "constraint_files": [],
+  "notes": "Template configuration for PolarFire MPF300 projects"
+}

@@ -1,0 +1,95 @@
+<html><body><samp><pre>
+<!@TC:1761195136>
+
+Copyright (C) 1994-2023 Synopsys, Inc.
+This Synopsys software and all associated documentation are proprietary to Synopsys, Inc.
+and may only be used pursuant to the terms and conditions of a written license agreement
+with Synopsys, Inc. All other use, reproduction, modification, or distribution of the
+Synopsys software or the associated documentation is strictly prohibited.
+Tool: Synplify Pro (R)
+Build: V-2023.09M-3
+Install: C:\Microchip\Libero_SoC_v2024.2\SynplifyPro
+OS: Windows 10 or later
+Hostname: SVD-LT-C75683
+
+Implementation : synthesis
+
+# Written on Wed Oct 22 21:52:21 2025
+
+##### DESIGN INFO #######################################################
+
+Top View:                "counter"
+Constraint File(s):      "C:\tcl_monster\libero_projects\counter_demo\designer\counter\synthesis.fdc"
+
+
+
+
+##### SUMMARY ############################################################
+
+Found 0 issues in 0 out of 8 constraints
+
+
+##### DETAILS ############################################################
+
+
+
+Clock Relationships
+*******************
+
+Starting      Ending        |     rise to rise     |     fall to fall     |     rise to fall     |     fall to rise                     
+---------------------------------------------------------------------------------------------------------------------------------------
+clk_50mhz     clk_50mhz     |     20.000           |     No paths         |     No paths         |     No paths                         
+=======================================================================================================================================
+ Note: 'No paths' indicates there are no paths in the design for that pair of clock edges.
+       'Diff grp' indicates that paths exist but the starting clock and ending clock are in different clock groups.
+
+
+<a name=UnconstrainedStartEndPointsCCK29></a>Unconstrained Start/End Points</a>
+******************************
+
+(none)
+
+
+<a name=InapplicableconstraintsCCK30></a>Inapplicable constraints</a>
+************************
+
+(none)
+
+
+<a name=ApplicableConstraintsWithIssuesCCK31></a>Applicable constraints with issues</a>
+**********************************
+
+(none)
+
+
+<a name=ConstraintsWithMatchingWildcardExpressionsCCK32></a>Constraints with matching wildcard expressions</a>
+**********************************************
+
+set_output_delay 0 -min -clock clk_50mhz [get_ports { leds[*] }]
+	@N:MF891:"c:/tcl_monster/libero_projects/counter_demo/designer/counter/synthesis.fdc":11:0:11:0|expression "[get_ports { leds[*] }]" applies to objects:
+		leds[0]
+		leds[1]
+		leds[2]
+		leds[3]
+		leds[4]
+		leds[5]
+		leds[6]
+		leds[7]
+set_output_delay 10 -max -clock clk_50mhz [get_ports { leds[*] }]
+	@N:MF891:"c:/tcl_monster/libero_projects/counter_demo/designer/counter/synthesis.fdc":10:0:10:0|expression "[get_ports { leds[*] }]" applies to objects:
+		leds[0]
+		leds[1]
+		leds[2]
+		leds[3]
+		leds[4]
+		leds[5]
+		leds[6]
+		leds[7]
+
+<a name=LibraryReportCCK33></a>Library Report</a>
+**************
+
+
+# End of Constraint Checker Report
+
+</pre></samp></body></html>

@@ -1,0 +1,5 @@
+#List of actual used RTLs.
+
+File                                                                                 Type     IN_PROJECT/INCLUDED/LIBRARY
+
+"C:\tcl_monster\libero_projects\counter_demo\hdl\counter.v"                       verilog                      IN PROJECT

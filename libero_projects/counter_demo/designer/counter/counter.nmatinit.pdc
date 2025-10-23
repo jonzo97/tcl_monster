@@ -1,0 +1,79 @@
+# Microchip Physical design constraints file
+
+# Version: 2024.2 2024.2.0.13
+
+# Design Name: counter 
+
+# Input Netlist Format: EDIF 
+
+# Family: PolarFire , Die: MPF300TS , Package: FCG1152 , Speed grade: -1 
+
+# Date generated: Wed Oct 22 21:53:29 2025 
+
+
+#
+# I/O constraints
+#
+
+set_io -port_name clk_50mhz -DIRECTION INPUT -pin_name E25 -fixed false
+set_io -port_name leds\[0\] -DIRECTION OUTPUT -pin_name F22 -fixed false
+set_io -port_name leds\[1\] -DIRECTION OUTPUT -pin_name B26 -fixed false
+set_io -port_name leds\[2\] -DIRECTION OUTPUT -pin_name C26 -fixed false
+set_io -port_name leds\[3\] -DIRECTION OUTPUT -pin_name D25 -fixed false
+set_io -port_name leds\[4\] -DIRECTION OUTPUT -pin_name C27 -fixed false
+set_io -port_name leds\[5\] -DIRECTION OUTPUT -pin_name F23 -fixed false
+set_io -port_name leds\[6\] -DIRECTION OUTPUT -pin_name H22 -fixed false
+set_io -port_name leds\[7\] -DIRECTION OUTPUT -pin_name H21 -fixed false
+set_io -port_name reset_n -DIRECTION INPUT -pin_name B27 -fixed false
+
+#
+# Core cell constraints
+#
+
+set_location -inst_name led_reg\[1\] -fixed false -x 2348 -y 4
+set_location -inst_name counter\[17\] -fixed false -x 2357 -y 7
+set_location -inst_name led_reg\[5\] -fixed false -x 2345 -y 4
+set_location -inst_name counter\[2\] -fixed false -x 2342 -y 7
+set_location -inst_name led_reg7_13 -fixed false -x 2355 -y 3
+set_location -inst_name counter\[7\] -fixed false -x 2347 -y 7
+set_location -inst_name led_reg\[0\] -fixed false -x 2341 -y 4
+set_location -inst_name counter_RNO\[0\] -fixed false -x 2346 -y 3
+set_location -inst_name counter\[6\] -fixed false -x 2346 -y 7
+set_location -inst_name counter\[8\] -fixed false -x 2348 -y 7
+set_location -inst_name counter\[22\] -fixed false -x 2362 -y 7
+set_location -inst_name led_reg\[4\] -fixed false -x 2351 -y 4
+set_location -inst_name counter\[16\] -fixed false -x 2356 -y 7
+set_location -inst_name counter\[15\] -fixed false -x 2355 -y 7
+set_location -inst_name led_reg7_16 -fixed false -x 2347 -y 3
+set_location -inst_name counter\[14\] -fixed false -x 2354 -y 7
+set_location -inst_name counter\[21\] -fixed false -x 2361 -y 7
+set_location -inst_name counter\[4\] -fixed false -x 2344 -y 7
+set_location -inst_name counter\[5\] -fixed false -x 2345 -y 7
+set_location -inst_name led_reg7_12 -fixed false -x 2357 -y 3
+set_location -inst_name led_reg7_17 -fixed false -x 2352 -y 3
+set_location -inst_name counter\[12\] -fixed false -x 2352 -y 7
+set_location -inst_name led_reg\[2\] -fixed false -x 2350 -y 4
+set_location -inst_name counter\[1\] -fixed false -x 2341 -y 7
+set_location -inst_name led_reg7_21 -fixed false -x 2354 -y 3
+set_location -inst_name counter\[3\] -fixed false -x 2343 -y 7
+set_location -inst_name counter\[23\] -fixed false -x 2363 -y 7
+set_location -inst_name counter\[19\] -fixed false -x 2359 -y 7
+set_location -inst_name counter\[20\] -fixed false -x 2360 -y 7
+set_location -inst_name led_reg\[7\] -fixed false -x 2343 -y 4
+set_location -inst_name led_reg\[6\] -fixed false -x 2349 -y 4
+set_location -inst_name counter\[11\] -fixed false -x 2351 -y 7
+set_location -inst_name counter\[18\] -fixed false -x 2358 -y 7
+set_location -inst_name led_reg\[3\] -fixed false -x 2344 -y 4
+set_location -inst_name I_1/U0_RGB1 -fixed false -x 1747 -y 14
+set_location -inst_name I_1 -fixed false -x 1166 -y 162
+set_location -inst_name led_reg7_15 -fixed false -x 2353 -y 3
+set_location -inst_name led_reg7 -fixed false -x 2362 -y 3
+set_location -inst_name counter\[13\] -fixed false -x 2353 -y 7
+set_location -inst_name counter\[0\] -fixed false -x 2346 -y 4
+set_location -inst_name counter\[10\] -fixed false -x 2350 -y 7
+set_location -inst_name led_reg7_14 -fixed false -x 2340 -y 3
+set_location -inst_name counter\[9\] -fixed false -x 2349 -y 7
+set_location -inst_name counter_s_24 -fixed false -x 2340 -y 6
+set_location -inst_name I_1/U0_IOBA -fixed false -x 1742 -y 5
+set_location -inst_name counter_s_24_CC_0 -fixed false -x 2340 -y 8
+set_location -inst_name counter_s_24_CC_1 -fixed false -x 2352 -y 8

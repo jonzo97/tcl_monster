@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SynplifyOutput>
+	<result>Success</result>
+	<design>counter</design>
+	<target_verilog>C:\tcl_monster\libero_projects\counter_demo\synthesis\counter.vm</target_verilog>
+</SynplifyOutput>

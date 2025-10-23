@@ -1,0 +1,143 @@
+Compile Report
+Microchip Technology Inc. - Microchip Libero Software Release v2024.2 (Version 2024.2.0.13)
+Date: Wed Oct 22 21:52:34 2025
+
+Device Selection
++------------------------+-------------+
+| Family                 | PolarFire   |
+| Device                 | MPF300TS    |
+| Package                | FCG1152     |
+| Speed Grade            | -1          |
+| Core Voltage           | 1.0V        |
+| Part Range             | IND         |
+| Default I/O technology | LVCMOS 1.8V |
++------------------------+-------------+
+
+Source Files
++---------+------------------------------------------------------------------+
+| Topcell | counter                                                          |
+| Format  | Verilog                                                          |
+| Source  | C:\tcl_monster\libero_projects\counter_demo\synthesis\counter.vm |
++---------+------------------------------------------------------------------+
+
+Options
++----------------------------------------------------+----+
+| Limit the number of high fanout nets to display to | 10 |
++----------------------------------------------------+----+
+
+Resource Usage
++---------------------------+------+--------+------------+
+| Type                      | Used | Total  | Percentage |
++---------------------------+------+--------+------------+
+| 4LUT                      | 33   | 299544 | 0.01       |
+| DFF                       | 32   | 299544 | 0.01       |
+| I/O Register              | 0    | 1536   | 0.00       |
+| User I/O                  | 10   | 512    | 1.95       |
+| -- Single-ended I/O       | 10   | 512    | 1.95       |
+| -- Differential I/O Pairs | 0    | 256    | 0.00       |
+| uSRAM                     | 0    | 2772   | 0.00       |
+| LSRAM                     | 0    | 952    | 0.00       |
+| Math                      | 0    | 924    | 0.00       |
+| H-Chip Global             | 1    | 48     | 2.08       |
+| PLL                       | 0    | 8      | 0.00       |
+| DLL                       | 0    | 8      | 0.00       |
+| Transceiver Lanes         | 0    | 16     | 0.00       |
+| Transceiver PCIe          | 0    | 2      | 0.00       |
++---------------------------+------+--------+------------+
+
+Detailed Logic Resource Usage
++-----------------------+------+-----+
+| Type                  | 4LUT | DFF |
++-----------------------+------+-----+
+| Fabric Logic          | 33   | 32  |
+| uSRAM Interface Logic | 0    | 0   |
+| LSRAM Interface Logic | 0    | 0   |
+| Math Interface Logic  | 0    | 0   |
+| Total Used            | 33   | 32  |
++-----------------------+------+-----+
+
+Detailed Carry Chains Resource Usage
++--------+------+
+| Length | Used |
+| 24     | 1    |
+| Total  | 1    |
++--------+------+
+
+I/O Function
++-------------------------------+--------------+-------------+-----------------+
+| Type                          | w/o register | w/ register | w/ DDR register |
++-------------------------------+--------------+-------------+-----------------+
+| Input I/O                     | 2            | 0           | 0               |
+| Output I/O                    | 8            | 0           | 0               |
+| Bidirectional I/O             | 0            | 0           | 0               |
+| Differential Input I/O Pairs  | 0            | 0           | 0               |
+| Differential Output I/O Pairs | 0            | 0           | 0               |
++-------------------------------+--------------+-------------+-----------------+
+
+Nets assigned to chip global resources
++--------+---------+---------------------+
+| Fanout | Type    | Name                |
++--------+---------+---------------------+
+| 32     | INT_NET | Net   : NN_1        |
+|        |         | Driver: I_1/U0_RGB1 |
+|        |         | Source: NETLIST     |
++--------+---------+---------------------+
+
+Nets assigned to row global resources
++--------+------+------+
+| Fanout | Type | Name |
++--------+------+------+
++--------+------+------+
+
+High fanout nets
++--------+---------+-----------------------+
+| Fanout | Type    | Name                  |
++--------+---------+-----------------------+
+| 32     | INT_NET | Net   : reset_n_c     |
+|        |         | Driver: reset_n_ibuf  |
+| 8      | INT_NET | Net   : led_reg7_Z    |
+|        |         | Driver: led_reg7      |
+| 3      | INT_NET | Net   : counter_Z[0]  |
+|        |         | Driver: counter[0]    |
+| 2      | INT_NET | Net   : counter_Z[23] |
+|        |         | Driver: counter[23]   |
+| 2      | INT_NET | Net   : counter_Z[22] |
+|        |         | Driver: counter[22]   |
+| 2      | INT_NET | Net   : counter_Z[21] |
+|        |         | Driver: counter[21]   |
+| 2      | INT_NET | Net   : counter_Z[20] |
+|        |         | Driver: counter[20]   |
+| 2      | INT_NET | Net   : counter_Z[19] |
+|        |         | Driver: counter[19]   |
+| 2      | INT_NET | Net   : counter_Z[18] |
+|        |         | Driver: counter[18]   |
+| 2      | INT_NET | Net   : counter_Z[17] |
+|        |         | Driver: counter[17]   |
++--------+---------+-----------------------+
+
+High fanout nets (through buffer trees)
++--------+---------+-----------------------+
+| Fanout | Type    | Name                  |
++--------+---------+-----------------------+
+| 32     | INT_NET | Net   : reset_n_c     |
+|        |         | Driver: reset_n_ibuf  |
+| 8      | INT_NET | Net   : led_reg7_Z    |
+|        |         | Driver: led_reg7      |
+| 3      | INT_NET | Net   : counter_Z[0]  |
+|        |         | Driver: counter[0]    |
+| 2      | INT_NET | Net   : counter_Z[23] |
+|        |         | Driver: counter[23]   |
+| 2      | INT_NET | Net   : counter_Z[22] |
+|        |         | Driver: counter[22]   |
+| 2      | INT_NET | Net   : counter_Z[21] |
+|        |         | Driver: counter[21]   |
+| 2      | INT_NET | Net   : counter_Z[20] |
+|        |         | Driver: counter[20]   |
+| 2      | INT_NET | Net   : counter_Z[19] |
+|        |         | Driver: counter[19]   |
+| 2      | INT_NET | Net   : counter_Z[18] |
+|        |         | Driver: counter[18]   |
+| 2      | INT_NET | Net   : counter_Z[17] |
+|        |         | Driver: counter[17]   |
++--------+---------+-----------------------+
+

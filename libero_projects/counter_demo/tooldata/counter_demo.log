@@ -1,0 +1,16 @@
+Project Name: counter_demo
+Location: C:\tcl_monster\libero_projects\counter_demo
+Description: Auto-generated PolarFire project
+Preferred HDL Type: Verilog
+
+#-----------------------------------------------------
+                  Device Details
+#-----------------------------------------------------
+
+Part Number    : MPF300TS-1FCG1152I
+Family         : PolarFire
+Die            : MPF300TS
+Package        : FCG1152
+Speed          : -1
+Core Voltage   : 1.0
+Range          : IND

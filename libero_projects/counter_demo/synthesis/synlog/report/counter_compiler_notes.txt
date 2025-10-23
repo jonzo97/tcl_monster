@@ -1,0 +1,6 @@
+@N|Running in 64-bit mode
+@N|Running in 64-bit mode
+@N: CG1349 :	| Running Verilog Compiler in System Verilog mode
+@N: CG364 :"C:\tcl_monster\libero_projects\counter_demo\hdl\counter.v":6:7:6:13|Synthesizing module counter in library work.
+@N|Running in 64-bit mode
+

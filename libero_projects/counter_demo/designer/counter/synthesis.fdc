@@ -1,0 +1,14 @@
+# Microchip Technology Inc.
+# Date: 2025-Oct-22 21:52:16
+# This file was generated based on the following SDC source files:
+#   C:/tcl_monster/libero_projects/counter_demo/constraint/timing_constraints.sdc
+#
+
+create_clock -name {clk_50mhz} -period 20 -waveform {0 10 } [ get_ports { clk_50mhz } ]
+set_input_delay 5 -max  -clock { clk_50mhz } [ get_ports { reset_n } ]
+set_input_delay 0 -min  -clock { clk_50mhz } [ get_ports { reset_n } ]
+set_output_delay 10 -max  -clock { clk_50mhz } [ get_ports { leds[*] } ]
+set_output_delay 0 -min  -clock { clk_50mhz } [ get_ports { leds[*] } ]
+set_false_path -from [ get_ports { reset_n } ] -to [ all_registers ]
+set_clock_uncertainty -setup 0.2 [ get_clocks { clk_50mhz } ]
+set_clock_uncertainty -hold 0.1 [ get_clocks { clk_50mhz } ]

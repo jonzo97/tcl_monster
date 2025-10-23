@@ -1,0 +1,19 @@
+********************************************************************
+Delay Instance Report - Date: Wed Oct 22 21:53:29 2025
+Product: Designer
+Release: v2024.2
+Version: 2024.2.0.13
+Design Name: counter
+Family: PolarFire
+Die: MPF300TS
+Package: FCG1152
+********************************************************************
+
+Microchip Technology Inc. - Microchip Libero Software Release v2024.2 (Version 2024.2.0.13)
+
+
++------+---------------+------------+-------------+-----------------+-----------+
+| Type | Instance Name | Param Name | Delay Value | PDC Option Name | Editable? |
++------+---------------+------------+-------------+-----------------+-----------+
++------+---------------+------------+-------------+-----------------+-----------+
+

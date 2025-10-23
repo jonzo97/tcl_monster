@@ -1,0 +1,11 @@
+@P:  Worst Slack : 5.244
+@P:  clk_50mhz - Estimated Frequency : 67.8 MHz
+@P:  clk_50mhz - Requested Frequency : 50.0 MHz
+@P:  clk_50mhz - Estimated Period : 14.756
+@P:  clk_50mhz - Requested Period : 20.000
+@P:  clk_50mhz - Slack : 5.244
+@P: counter Part : mpf300tfcg1152-1
+@P: counter Register bits  : 32 
+@P: counter DSP Blocks  : 0
+@P: counter I/O primitives : 10
+@P:  CPU Time : 0h:00m:04s

@@ -1,0 +1,15 @@
+Software Version: 2024.2.0.13
+Opened 'C:\tcl_monster\libero_projects\counter_demo\designer\counter\counter_fp\counter.pro'
+PDB file 'C:\tcl_monster\libero_projects\counter_demo\designer\counter\counter.pdb' has been loaded successfully.
+DESIGN : counter;  CHECKSUM : 6C9F;  PDB_VERSION : 1.9
+Info: Programming Interface selected is JTAG.
+Info: Design version: 0
+File/Folder 'C:\tcl_monster\libero_projects\counter_demo\designer\counter\counter.ppd' will be overwritten.
+Successfully exported PPD file for currently secured device: 'C:\tcl_monster\libero_projects\counter_demo\designer\counter\counter.ppd'; file programs Fabric and sNVM.
+Fabric component bitstream digest: f25d234a5111e2c1cd15ea94704d98de87f4d1ea4227643a0740ea007a148f78
+sNVM component bitstream digest: 79dfc8f8733ab3227a151990d92f5f1338fe8053c53c26cc7616cd593c8fd566
+Entire bitstream digest: 18e16f253c0ae75ab68152807ca989c5b6f4b76626e7aeb626e2ef251489832c
+Finished: Wed Oct 22 21:56:46 2025 (Elapsed time 00:00:53)
+
+Project saved.
+Project closed.

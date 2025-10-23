@@ -1,0 +1,85 @@
+{
+"Synplify Pro (R) Job Log" : {
+	"Date" : "21:52:26    22-Oct-2025",
+	"Working Directory" : "C:/tcl_monster/libero_projects/counter_demo/synthesis",
+	"Install" : "C:/Microchip/Libero_SoC_v2024.2/SynplifyPro"
+},
+"synthesis" :{
+   "Job Flow" : "Sequential",
+   "Start Time" : "21:52:16",
+   "Runtime" : "10s",
+   "Executable Run Time" : "09s",
+   "synthesis" : {
+      "Job Flow" : "Sequential",
+      "Start Time" : "21:52:16",
+      "Runtime" : "10s",
+      "Executable Run Time" : "09s",
+      "compile" : {
+         "Job Flow" : "Sequential",
+         "Start Time" : "21:52:16",
+         "Runtime" : "06s",
+         "Executable Run Time" : "05s",
+         "compile_flow" : {
+            "Job Flow" : "Sequential",
+            "Start Time" : "21:52:16",
+            "Runtime" : "03s",
+            "Executable Run Time" : "02s",
+            "compiler" : {
+               "executable" : "bin64/c_hdl.exe",
+               "Run Directory" : "C:/tcl_monster/libero_projects/counter_demo/synthesis",
+               "Run State" : "Complete",
+               "Return Code" : "0",
+               "Has Errors" : "no",
+               "Run Start Time" : "21:52:16",
+               "Run Time" : "03s",
+               "Exe Run Time" : "02s",
+               "Memory Usage" : "-",
+               "Up-to-date (run skipped)" : "no"
+            },
+            "multi_srs_gen" : {
+               "executable" : "bin64/syn_nfilter.exe",
+               "Run Directory" : "C:/tcl_monster/libero_projects/counter_demo/synthesis",
+               "Run State" : "Complete",
+               "Return Code" : "0",
+               "Has Errors" : "no",
+               "Run Start Time" : "21:52:19",
+               "Run Time" : "00s",
+               "Exe Run Time" : "00s",
+               "Memory Usage" : "-",
+               "Up-to-date (run skipped)" : "no"
+            }
+         },
+         "premap" : {
+            "executable" : "bin64/m_generic.exe",
+            "Run Directory" : "C:/tcl_monster/libero_projects/counter_demo/synthesis",
+            "Run State" : "Complete",
+            "Return Code" : "0",
+            "Has Errors" : "no",
+            "Run Start Time" : "21:52:19",
+            "Run Time" : "03s",
+            "Exe Run Time" : "03s",
+            "Memory Usage" : "-",
+            "Up-to-date (run skipped)" : "no"
+         }
+      },
+      "map" : {
+         "Job Flow" : "Sequential",
+         "Start Time" : "21:52:22",
+         "Runtime" : "04s",
+         "Executable Run Time" : "04s",
+         "fpga_mapper" : {
+            "executable" : "bin64/m_generic.exe",
+            "Run Directory" : "C:/tcl_monster/libero_projects/counter_demo/synthesis",
+            "Run State" : "Complete",
+            "Return Code" : "0",
+            "Has Errors" : "no",
+            "Run Start Time" : "21:52:22",
+            "Run Time" : "04s",
+            "Exe Run Time" : "04s",
+            "Memory Usage" : "-",
+            "Up-to-date (run skipped)" : "no"
+         }
+      }
+   }
+}
+}

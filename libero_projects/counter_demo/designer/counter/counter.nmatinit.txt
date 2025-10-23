@@ -1,0 +1,79 @@
+# Microchip NMAT TXT File
+
+# Version: 2024.2 2024.2.0.13
+
+# Design Name: counter 
+
+# Input Netlist Format: EDIF 
+
+# Family: PolarFire , Die: MPF300TS , Package: FCG1152 , Speed grade: -1 
+
+# Date generated: Wed Oct 22 21:53:29 2025 
+
+
+#
+# I/O constraints
+#
+
+set_io clk_50mhz E25
+set_io leds[0] F22
+set_io leds[1] B26
+set_io leds[2] C26
+set_io leds[3] D25
+set_io leds[4] C27
+set_io leds[5] F23
+set_io leds[6] H22
+set_io leds[7] H21
+set_io reset_n B27
+
+#
+# Core cell constraints
+#
+
+set_location led_reg[1] 2348 4
+set_location counter[17] 2357 7
+set_location led_reg[5] 2345 4
+set_location counter[2] 2342 7
+set_location led_reg7_13 2355 3
+set_location counter[7] 2347 7
+set_location led_reg[0] 2341 4
+set_location counter_RNO[0] 2346 3
+set_location counter[6] 2346 7
+set_location counter[8] 2348 7
+set_location counter[22] 2362 7
+set_location led_reg[4] 2351 4
+set_location counter[16] 2356 7
+set_location counter[15] 2355 7
+set_location led_reg7_16 2347 3
+set_location counter[14] 2354 7
+set_location counter[21] 2361 7
+set_location counter[4] 2344 7
+set_location counter[5] 2345 7
+set_location led_reg7_12 2357 3
+set_location led_reg7_17 2352 3
+set_location counter[12] 2352 7
+set_location led_reg[2] 2350 4
+set_location counter[1] 2341 7
+set_location led_reg7_21 2354 3
+set_location counter[3] 2343 7
+set_location counter[23] 2363 7
+set_location counter[19] 2359 7
+set_location counter[20] 2360 7
+set_location led_reg[7] 2343 4
+set_location led_reg[6] 2349 4
+set_location counter[11] 2351 7
+set_location counter[18] 2358 7
+set_location led_reg[3] 2344 4
+set_location I_1/U0_RGB1 1747 14
+set_location I_1 1166 162
+set_location led_reg7_15 2353 3
+set_location led_reg7 2362 3
+set_location counter[13] 2353 7
+set_location counter[0] 2346 4
+set_location counter[10] 2350 7
+set_location led_reg7_14 2340 3
+set_location counter[9] 2349 7
+set_location counter_s_24 2340 6
+set_location I_1/U0_IOBA 1742 5
+set_location counter_s_24_CC_0 2340 8
+set_location counter_s_24_CC_1 2352 8

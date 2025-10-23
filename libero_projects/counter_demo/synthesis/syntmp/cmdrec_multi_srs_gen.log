@@ -1,0 +1,7 @@
+C:\Microchip\Libero_SoC_v2024.2\SynplifyPro\bin64\syn_nfilter.exe  -link  -top  counter  -multisrs  C:\tcl_monster\libero_projects\counter_demo\synthesis\synwork\counter_comp.srs  -osyn  C:\tcl_monster\libero_projects\counter_demo\synthesis\synwork\counter_mult.srs  -log  C:\tcl_monster\libero_projects\counter_demo\synthesis\synlog\counter_multi_srs_gen.srr 
+relcom:..\..\..\..\..\Microchip\Libero_SoC_v2024.2\SynplifyPro\bin64\syn_nfilter.exe -link -top counter -multisrs ..\synwork\counter_comp.srs -osyn ..\synwork\counter_mult.srs -log ..\synlog\counter_multi_srs_gen.srr
+rc:0 success:1 runtime:0
+file:..\synwork\counter_comp.srs|io:i|time:1761195137|size:2075|exec:0|csum:5C73A64E4FDFA4A8D752586F5B7DE7CF
+file:..\synwork\counter_mult.srs|io:o|time:1761195139|size:1820|exec:0|csum:
+file:..\synlog\counter_multi_srs_gen.srr|io:o|time:1761195139|size:1061|exec:0|csum:
+file:..\..\..\..\..\microchip\libero_soc_v2024.2\synplifypro\bin64\syn_nfilter.exe|io:i|time:1721921320|size:10549248|exec:1|csum:4A569E4032A00F41D43F579562C7696C

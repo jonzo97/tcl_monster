@@ -1,0 +1,101 @@
+
+                               Synplify Pro (R) 
+
+                 Version V-2023.09M-3 for win64 - Jul 25, 2024 
+
+                    Copyright (c) 1988 - 2024 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+
+Starting:    C:\Microchip\Libero_SoC_v2024.2\SynplifyPro\bin64\mbin\synbatch.exe
+Install:     C:\Microchip\Libero_SoC_v2024.2\SynplifyPro
+Hostname:    SVD-LT-C75683
+Date:        Wed Oct 22 21:52:16 2025
+Version:     V-2023.09M-3
+
+Arguments:   -product synplify_base -licensetype synplifypro_actel -batch -log synplify.log counter_syn.tcl
+ProductType: synplify_pro
+
+License checkout: synplifypro_actel
+License: synplifypro_actel node-locked 
+Licensed Vendor: actel
+License Option: actel_oem
+
+Running in Vendor Mode
+
+
+Implementation not found: synthesis
+log file: "C:\tcl_monster\libero_projects\counter_demo\synthesis\counter.srr"
+Running: synthesis in foreground
+
+Running counter_syn|synthesis
+
+Running Flow: compile (Compile) on counter_syn|synthesis
+# Wed Oct 22 21:52:16 2025
+
+Running Flow: compile_flow (Compile Process) on counter_syn|synthesis
+# Wed Oct 22 21:52:16 2025
+
+Running: compiler (Compile Input) on counter_syn|synthesis
+# Wed Oct 22 21:52:16 2025
+Copied C:\tcl_monster\libero_projects\counter_demo\synthesis\synwork\counter_comp.srs to C:\tcl_monster\libero_projects\counter_demo\synthesis\counter.srs
+
+compiler completed
+# Wed Oct 22 21:52:19 2025
+
+Return Code: 0
+Run Time:00h:00m:02s
+
+Running: multi_srs_gen (Multi-srs Generator) on counter_syn|synthesis
+# Wed Oct 22 21:52:19 2025
+
+multi_srs_gen completed
+# Wed Oct 22 21:52:19 2025
+
+Return Code: 0
+Run Time:00h:00m:00s
+Copied C:\tcl_monster\libero_projects\counter_demo\synthesis\synwork\counter_mult.srs to C:\tcl_monster\libero_projects\counter_demo\synthesis\counter.srs
+Complete: Compile Process on counter_syn|synthesis
+
+Running: premap (Premap) on counter_syn|synthesis
+# Wed Oct 22 21:52:19 2025
+
+premap completed
+# Wed Oct 22 21:52:22 2025
+
+Return Code: 0
+Run Time:00h:00m:03s
+Complete: Compile on counter_syn|synthesis
+
+Running Flow: map (Map) on counter_syn|synthesis
+# Wed Oct 22 21:52:22 2025
+License granted for 4 parallel jobs
+
+Running: fpga_mapper (Map & Optimize) on counter_syn|synthesis
+# Wed Oct 22 21:52:22 2025
+Copied C:\tcl_monster\libero_projects\counter_demo\synthesis\synwork\counter_m.srm to C:\tcl_monster\libero_projects\counter_demo\synthesis\counter.srm
+
+fpga_mapper completed
+# Wed Oct 22 21:52:26 2025
+
+Return Code: 0
+Run Time:00h:00m:04s
+Complete: Map on counter_syn|synthesis
+Complete: Logic Synthesis on counter_syn|synthesis
+Copied C:\tcl_monster\libero_projects\counter_demo\synthesis\counter.srr to C:\tcl_monster\libero_projects\counter_demo\synthesis\backup\counter.srr
+TCL script complete: "counter_syn.tcl"
+exit status=0
+exit status=0
+License checkin: synplifypro_actel

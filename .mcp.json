@@ -1,0 +1,211 @@
+{
+  "version": "1.0",
+  "project": "tcl_monster",
+  "last_updated": "2025-10-22",
+  "entities": [
+    {
+      "id": "tcl_monster_project",
+      "type": "project",
+      "name": "TCL Monster - FPGA Automation Toolkit",
+      "relations": {
+        "contains": ["tcl_scripts", "hdl", "constraint", "docs", "examples", "templates", "tools"],
+        "targets": ["MPF300TS-FCG1152", "PolarFire"]
+      },
+      "observations": [
+        "FPGA automation toolkit for Libero SoC v2024.2",
+        "Target: PolarFire MPF300 Eval Kit (MPF300TS-FCG1152)",
+        "Phase 0 complete: Counter design synthesized successfully (2025-10-22)",
+        "Current status: 33 LUTs, 32 FFs, 10 pins locked, bitstream generated",
+        "WSL2 environment with Windows-side Libero execution",
+        "User: FAE with Libero GUI experience, exploring CLI automation"
+      ]
+    },
+    {
+      "id": "create_project_tcl",
+      "type": "file",
+      "path": "tcl_scripts/create_project.tcl",
+      "relations": {
+        "part_of": "tcl_monster_project",
+        "imports": ["counter.v", "io_constraints.pdc", "timing_constraints.sdc"],
+        "implements": "project_creation_automation"
+      },
+      "observations": [
+        "Creates Libero project with new_project command",
+        "Imports HDL sources via import_files",
+        "Associates constraints with tools via organize_tool_files",
+        "Synthesis SDC: Works correctly (50 MHz clock period = 20ns)",
+        "P&R PDC: Works correctly (100% pins locked)",
+        "P&R SDC: Associated but timing-driven mode remains OFF (CLI limitation)"
+      ]
+    },
+    {
+      "id": "build_design_tcl",
+      "type": "file",
+      "path": "tcl_scripts/build_design.tcl",
+      "relations": {
+        "part_of": "tcl_monster_project",
+        "implements": "build_automation"
+      },
+      "observations": [
+        "Runs full build flow: synthesis → place & route → bitstream",
+        "Uses run_tool for SYNTHESIZE, PLACEROUTE, GENERATEPROGRAMMINGFILE",
+        "Build time: ~2 minutes for counter design",
+        "Generates programming file (.ppd) successfully"
+      ]
+    },
+    {
+      "id": "counter_design",
+      "type": "design",
+      "path": "hdl/counter.v",
+      "relations": {
+        "part_of": "tcl_monster_project",
+        "constrained_by": ["io_constraints.pdc", "timing_constraints.sdc"]
+      },
+      "observations": [
+        "Simple 24-bit counter with rotating LED pattern",
+        "50 MHz clock input from oscillator (pin E25)",
+        "Active-low reset from push button (pin B27)",
+        "8 LEDs output (pins D25, C26, B26, F22, H21, H22, F23, C27)",
+        "Resource usage: 33 LUTs, 32 FFs (0.01% of MPF300TS)",
+        "Design validated through synthesis and P&R"
+      ]
+    },
+    {
+      "id": "decision_constraint_association",
+      "type": "architecture_decision",
+      "date": "2025-10-22",
+      "relations": {
+        "affects": ["create_project.tcl", "build_design.tcl"]
+      },
+      "observations": [
+        "Decision: Use organize_tool_files to associate constraints with build tools",
+        "organize_tool_files -tool {SYNTHESIZE} -file <sdc> -input_type {constraint}",
+        "organize_tool_files -tool {PLACEROUTE} -file <pdc> -input_type {constraint}",
+        "Result: Synthesis uses correct 50 MHz clock (not auto-inferred 100 MHz)",
+        "Result: P&R locks all 10 pins correctly (100% locked)",
+        "Limitation: Timing-driven P&R not enabled despite SDC association"
+      ]
+    },
+    {
+      "id": "issue_timing_driven_pr",
+      "type": "known_issue",
+      "severity": "low",
+      "date": "2025-10-22",
+      "relations": {
+        "affects": ["build_design.tcl"],
+        "documented_in": ["docs/lessons_learned"]
+      },
+      "observations": [
+        "Issue: Timing-driven P&R shows 'OFF' despite SDC file association",
+        "Symptom: 'No timing constraint has been associated to the Place and Route tool'",
+        "Attempted: configure_tool -name {PLACEROUTE} -params {TDPR:true} (didn't persist)",
+        "Root cause: Likely Libero CLI limitation or requires different TCL approach",
+        "Impact: Design builds correctly, just without timing optimization during P&R",
+        "Workaround: For simple designs (0.01% usage), timing meets easily anyway",
+        "Future: Research alternative TCL commands or accept as GUI-only feature"
+      ]
+    },
+    {
+      "id": "comprehensive_documentation",
+      "type": "documentation_set",
+      "date": "2025-10-22",
+      "relations": {
+        "part_of": "tcl_monster_project",
+        "contains": ["ROADMAP.md", "DESIGN_LIBRARY.md", "DEBUGGING_FRAMEWORK.md", "SIMULATION_FRAMEWORK.md", "APP_NOTE_AUTOMATION.md", "CONTEXT_STRATEGY.md", "COLLEAGUE_GUIDE.md"]
+      },
+      "observations": [
+        "6 major planning documents created on 2025-10-22",
+        "Total development roadmap: ~22-27 hours over 6 phases",
+        "Phase 0: Complete (counter design)",
+        "Phase 1: Foundation & reporting (2-3 hours)",
+        "Phase 2: Complex designs (4-5 hours)",
+        "Phase 3: Simulation framework (3-4 hours)",
+        "Phase 4: Debugging automation (3-4 hours)",
+        "Phase 5: Application note recreation (5-6 hours)",
+        "Phase 6: Intelligent agents (4-5 hours)",
+        "All documentation in docs/ directory",
+        "Navigation guide in .claude/CLAUDE.md"
+      ]
+    },
+    {
+      "id": "mpf300_eval_kit",
+      "type": "hardware_platform",
+      "device": "MPF300TS-FCG1152",
+      "relations": {
+        "targeted_by": "tcl_monster_project",
+        "documented_in": ["docs/microsemi_polarfire_fpga_evaluation_kit_user_guide_ug0747_v5.pdf"]
+      },
+      "observations": [
+        "PolarFire MPF300 Evaluation Kit",
+        "Device: MPF300TS-FCG1152 package",
+        "50 MHz oscillator on pin E25",
+        "Reset button SW7 on pin B27 (active-low)",
+        "8 LEDs: D25, C26, B26, F22, H21, H22, F23, C27 (Bank-6, 1.8V LVCMOS)",
+        "User has hardware available for testing"
+      ]
+    },
+    {
+      "id": "future_riscv_design",
+      "type": "planned_feature",
+      "priority": "high",
+      "date": "2025-10-22",
+      "relations": {
+        "part_of": "tcl_monster_project",
+        "targets": "mpf300_eval_kit",
+        "documented_in": ["docs/RISCV_DDR_DESIGN.md"]
+      },
+      "observations": [
+        "Plan: RISC-V core + DDR/memory interface on MPF300",
+        "Target: Bare-metal embedded control",
+        "RISC-V core options: PicoRV32 (lightweight), VexRiscv (configurable)",
+        "Memory: DDR3/DDR4 controller or simpler SRAM interface",
+        "Estimated resources: ~5k-10k LUTs for RISC-V + memory controller",
+        "Next steps: Research available IP, acquire RISC-V RTL, create integration plan"
+      ]
+    }
+  ],
+  "session_history": [
+    {
+      "date": "2025-10-22",
+      "session": 1,
+      "accomplishments": [
+        "Phase 0 complete: Counter design synthesized and built successfully",
+        "Created 6 comprehensive planning documents (ROADMAP, DESIGN_LIBRARY, etc.)",
+        "Fixed constraint association (SDC to synthesis, PDC to P&R)",
+        "100% pins locked, correct clock timing (50 MHz)",
+        "Initialized Memory MCP for cross-session continuity",
+        "Created RISC-V + DDR design plan (docs/RISCV_DDR_DESIGN.md)",
+        "Documented constraint association lessons (docs/lessons_learned/)",
+        "Updated ROADMAP with Phase 2.2 (RISC-V SoC 12-16 hours)"
+      ],
+      "context_at_end": "~130k/200k tokens (65% used)",
+      "files_created_this_session": [
+        ".mcp.json",
+        "docs/RISCV_DDR_DESIGN.md",
+        "docs/lessons_learned/constraint_association.md",
+        "constraint/timing_constraints.sdc",
+        "tcl_scripts/generate_reports.tcl"
+      ],
+      "next_session_focus": [
+        "START RISC-V Phase 2.2.1: Acquire PicoRV32 RTL",
+        "Clone PicoRV32 from GitHub to hdl/riscv_picorv32/",
+        "Review PicoRV32 documentation and configuration options",
+        "Import into Libero and test compilation",
+        "Alternative: Test counter design on MPF300 hardware first"
+      ],
+      "critical_commands_next_session": [
+        "cd /mnt/c/tcl_monster/hdl && git clone https://github.com/YosysHQ/picorv32.git riscv_picorv32",
+        "mkdir -p examples/advanced/riscv_soc/{hdl,firmware,constraint}",
+        "Read docs/RISCV_DDR_DESIGN.md for complete plan"
+      ]
+    }
+  ],
+  "ready_for_compaction": true,
+  "compaction_notes": [
+    "All critical information stored in Memory MCP and documentation",
+    "Counter design working and validated",
+    "RISC-V design fully planned, ready to implement",
+    "Constraint association method documented and working",
+    "Next session can start RISC-V immediately after reading this file"
+  ]
+}

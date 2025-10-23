@@ -1,0 +1,12 @@
+Selecting top level module counter
+@N: CG364 :"C:\tcl_monster\libero_projects\counter_demo\hdl\counter.v":6:7:6:13|Synthesizing module counter in library work.
+Running optimization stage 1 on counter .......
+Finished optimization stage 1 on counter (CPU Time 0h:00m:00s, Memory Used current: 96MB peak: 97MB)
+Running optimization stage 2 on counter .......
+Finished optimization stage 2 on counter (CPU Time 0h:00m:00s, Memory Used current: 95MB peak: 97MB)
+
+For a summary of runtime per design unit, please see file:
+==========================================================
+@L: C:\tcl_monster\libero_projects\counter_demo\synthesis\synwork\layer0.duruntime
+
+

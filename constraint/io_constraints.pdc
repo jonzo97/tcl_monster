@@ -1,0 +1,77 @@
+# =============================================================================
+# I/O Constraint File for Counter Design
+# Target: PolarFire MPF300 Eval Kit
+# Device: MPF300TS-FCG1152
+# =============================================================================
+# Reference: UG0747 - PolarFire FPGA Evaluation Kit User Guide (Table 8, 9)
+# All pins are in Bank-6, 1.8V I/O standard
+# =============================================================================
+
+# =============================================================================
+# Clock Input - 50 MHz Oscillator
+# =============================================================================
+set_io -port_name {clk_50mhz} \
+       -pin_name {E25} \
+       -fixed true \
+       -io_std {LVCMOS18}
+
+# =============================================================================
+# Reset Input - Push Button SW7 (Active-Low)
+# =============================================================================
+set_io -port_name {reset_n} \
+       -pin_name {B27} \
+       -fixed true \
+       -io_std {LVCMOS18}
+
+# =============================================================================
+# LED Outputs - 8 LEDs (LED4-LED11)
+# Note: LED array in HDL is [7:0], mapped to hardware LEDs as follows:
+#   leds[0] -> LED4 (F22)
+#   leds[1] -> LED5 (B26)
+#   leds[2] -> LED6 (C26)
+#   leds[3] -> LED7 (D25)
+#   leds[4] -> LED8 (C27)
+#   leds[5] -> LED9 (F23)
+#   leds[6] -> LED10 (H22)
+#   leds[7] -> LED11 (H21)
+# =============================================================================
+
+set_io -port_name {leds[0]} \
+       -pin_name {F22} \
+       -fixed true \
+       -io_std {LVCMOS18}
+
+set_io -port_name {leds[1]} \
+       -pin_name {B26} \
+       -fixed true \
+       -io_std {LVCMOS18}
+
+set_io -port_name {leds[2]} \
+       -pin_name {C26} \
+       -fixed true \
+       -io_std {LVCMOS18}
+
+set_io -port_name {leds[3]} \
+       -pin_name {D25} \
+       -fixed true \
+       -io_std {LVCMOS18}
+
+set_io -port_name {leds[4]} \
+       -pin_name {C27} \
+       -fixed true \
+       -io_std {LVCMOS18}
+
+set_io -port_name {leds[5]} \
+       -pin_name {F23} \
+       -fixed true \
+       -io_std {LVCMOS18}
+
+set_io -port_name {leds[6]} \
+       -pin_name {H22} \
+       -fixed true \
+       -io_std {LVCMOS18}
+
+set_io -port_name {leds[7]} \
+       -pin_name {H21} \
+       -fixed true \
+       -io_std {LVCMOS18}
