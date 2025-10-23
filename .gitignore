@@ -1,0 +1,95 @@
+# Libero SoC Build Artifacts
+# These files are generated during synthesis, place & route, and bitstream generation
+
+# Synthesis outputs
+synthesis/
+*_syn.log
+*_syn.prj
+
+# Place & route outputs
+designer/*/
+!designer/*/*.tcl
+!designer/*/*.pdc
+!designer/*/*.sdc
+
+# Programming files (can be regenerated)
+*.stp
+*.pro
+*.job
+
+# Simulation outputs
+simulation/*/
+!simulation/*.tcl
+*.wlf
+*.vstf
+work/
+
+# Temporary and log files
+*.log
+*.rpt
+*.txt~
+*.bak
+*.tmp
+*_compile.log
+*_place.log
+*_route.log
+
+# SmartGen temporary files
+smartgen/*/
+!smartgen/*.tcl
+
+# Component work directories
+component/work/*/
+!component/work/*/*.tcl
+!component/work/*/*_manifest.txt
+
+# Tooldata (temporary Libero files)
+tooldata/
+viewdraw/viewdraw.ini
+
+# HDL generated files (regenerable)
+hdl/*_wrapper.v
+hdl/*_wrapper.vhd
+
+# Stimulus (simulation) generated files
+stimulus/
+
+# Constraint temporary files
+constraint/*.log
+
+# Project backup files
+*.prjx.bak
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+*~
+
+# IDE files
+.vscode/
+.idea/
+
+# User-specific Libero settings
+*.prjx.user
+
+# Firmware build artifacts (if applicable)
+*.elf
+*.hex
+*.bin
+*.map
+*.list
+
+# Ignore specific counter_demo artifacts
+libero_projects/counter_demo/designer/counter/counter_compile_*.html
+libero_projects/counter_demo/tooldata/
+
+# Ignore MI-V demo project (regenerable from TCL)
+libero_projects/miv_rv32_demo/
+
+# Keep README files in otherwise ignored directories
+!**/README.md
+
+# Keep constraint source files
+!constraint/*.pdc
+!constraint/*.sdc
+!constraint/*.ndc
