@@ -1,0 +1,9 @@
+[submodule "hdl/miv_documentation"]
+	path = hdl/miv_documentation
+	url = https://github.com/Mi-V-Soft-RISC-V/miv-rv32-documentation.git
+[submodule "hdl/miv_platform"]
+	path = hdl/miv_platform
+	url = https://github.com/Mi-V-Soft-RISC-V/platform.git
+[submodule "hdl/miv_polarfire_eval"]
+	path = hdl/miv_polarfire_eval
+	url = https://github.com/Mi-V-Soft-RISC-V/PolarFire-Eval-Kit.git
