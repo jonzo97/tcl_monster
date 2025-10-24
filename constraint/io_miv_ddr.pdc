@@ -1,0 +1,128 @@
+# ==============================================================================
+# MI-V RV32 + DDR4 I/O Constraints for MPF300 Eval Kit
+# ==============================================================================
+#
+# Device: MPF300TS-1FCG1152I
+# Board: MPF300 Evaluation Kit
+# Reference: UG0747 - PolarFire FPGA Evaluation Kit User Guide
+#
+# ==============================================================================
+
+# ==============================================================================
+# Clock Input (50 MHz Oscillator)
+# ==============================================================================
+
+set_io -port_name {CLK_50MHZ} \
+    -pin_name {N21} \
+    -fixed true \
+    -DIRECTION INPUT \
+    -iostd LVCMOS18
+
+# ==============================================================================
+# Reset Button (SW7)
+# ==============================================================================
+
+set_io -port_name {RESET_N} \
+    -pin_name {B27} \
+    -fixed true \
+    -DIRECTION INPUT \
+    -iostd LVCMOS18
+
+# ==============================================================================
+# UART0 (USB-UART via FTDI FT2232H)
+# ==============================================================================
+
+set_io -port_name {UART_TX} \
+    -pin_name {K26} \
+    -fixed true \
+    -DIRECTION OUTPUT \
+    -iostd LVCMOS18
+
+set_io -port_name {UART_RX} \
+    -pin_name {K27} \
+    -fixed true \
+    -DIRECTION INPUT \
+    -iostd LVCMOS18
+
+# ==============================================================================
+# GPIO - LEDs (D25-D32)
+# ==============================================================================
+
+set_io -port_name {GPIO_OUT[0]} \
+    -pin_name {D25} \
+    -fixed true \
+    -DIRECTION OUTPUT \
+    -iostd LVCMOS18
+
+set_io -port_name {GPIO_OUT[1]} \
+    -pin_name {C26} \
+    -fixed true \
+    -DIRECTION OUTPUT \
+    -iostd LVCMOS18
+
+set_io -port_name {GPIO_OUT[2]} \
+    -pin_name {B26} \
+    -fixed true \
+    -DIRECTION OUTPUT \
+    -iostd LVCMOS18
+
+set_io -port_name {GPIO_OUT[3]} \
+    -pin_name {F22} \
+    -fixed true \
+    -DIRECTION OUTPUT \
+    -iostd LVCMOS18
+
+set_io -port_name {GPIO_OUT[4]} \
+    -pin_name {H21} \
+    -fixed true \
+    -DIRECTION OUTPUT \
+    -iostd LVCMOS18
+
+set_io -port_name {GPIO_OUT[5]} \
+    -pin_name {H22} \
+    -fixed true \
+    -DIRECTION OUTPUT \
+    -iostd LVCMOS18
+
+set_io -port_name {GPIO_OUT[6]} \
+    -pin_name {F23} \
+    -fixed true \
+    -DIRECTION OUTPUT \
+    -iostd LVCMOS18
+
+set_io -port_name {GPIO_OUT[7]} \
+    -pin_name {C27} \
+    -fixed true \
+    -DIRECTION OUTPUT \
+    -iostd LVCMOS18
+
+# ==============================================================================
+# DDR4 Interface Pins
+# ==============================================================================
+# Note: DDR4 pins are configured by PF_DDR4 component and should be
+# auto-assigned by Libero. If manual assignment is needed, refer to:
+# - UG0747 Section 4.1.2 (DDR4 Interface)
+# - Schematic pages for exact pin mappings
+#
+# DDR4 signals include:
+# - A[15:0]        - Address bus
+# - BA[1:0]        - Bank address
+# - BG[1:0]        - Bank group
+# - CAS_N          - Column address strobe
+# - CKE, CK, CK_N  - Clock enable and differential clock
+# - CS_N           - Chip select
+# - DM_N[3:0]      - Data mask
+# - DQ[31:0]       - Data bus
+# - DQS[3:0]       - Data strobe positive
+# - DQS_N[3:0]     - Data strobe negative
+# - ODT            - On-die termination
+# - RAS_N          - Row address strobe
+# - RESET_N        - DDR reset
+# - WE_N           - Write enable
+#
+# These pins should be automatically configured by the PF_DDR4 IP core.
+# If errors occur during place & route regarding DDR pins, check the
+# Libero log for suggested pin assignments or refer to the eval kit
+# schematic for manual assignment.
+#
+# ==============================================================================
