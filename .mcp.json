@@ -1,184 +1,144 @@
 {
   "version": "1.0",
-  "project": "tcl_monster (libero_bot on GitHub)",
-  "last_updated": "2025-10-23T20:30:00Z",
-  "current_phase": "IP Generator Library Complete - Ready for App Note Ingestion Strategy",
+  "project": "tcl_monster + fpga_mcp RAG system",
+  "last_updated": "2025-10-27T12:08:00Z",
+  "current_phase": "RAG System Production Ready ✅",
 
-  "recent_accomplishments_this_session": [
-    "Created UART configuration generator with automatic baud rate calculation (180 lines)",
-    "Created GPIO configuration generator supporting 1-32 pins, input/output/bidir (140 lines)",
-    "Created PCIe configuration generator for EP/RP with x1/x2/x4 lanes, Gen1/Gen2 (280 lines)",
-    "Generated 14 new IP templates (5 UART, 5 GPIO, 4 PCIe)",
-    "All generators tested and validated - 100% pass rate",
-    "Updated tcl_scripts/lib/generators/README.md with comprehensive documentation (500+ lines)",
-    "Updated main README.md with features overview and quick start guide",
-    "Git commit 705d1f6: 42 files, 5693 insertions - complete IP generator library"
+  "session_accomplishments": [
+    "✅ Researched industry RAG best practices (400-500 tokens optimal for technical docs)",
+    "✅ Implemented token limit enforcement in embedder.py (_enforce_token_limits)",
+    "✅ Hardened token_counter.py to prevent oversized chunks",
+    "✅ Re-indexed with proper token limits (1,655 chunks, 400 tokens max)",
+    "✅ Created comprehensive recommendations doc for mchp-mcp-core maintainers",
+    "✅ Verified search quality (0.6-0.7 similarity scores)",
+    "✅ Created DEMO.md guide for coworker presentation",
+    "✅ Tested MCP server functionality successfully"
   ],
 
-  "previous_session_accomplishments": [
-    "Created DDR4 configuration generator with geometry/latency calculation (480 lines)",
-    "Created PF_CCC configuration generator with PLL calculation (280 lines)",
-    "Discovered Microchip's ddr_functions.tcl library (1850+ lines)",
-    "Analyzed 118 PF_DDR4 parameters, documented in docs/DDR_CONFIGURATION_ANALYSIS.md",
-    "Generated 6 DDR4/CCC templates",
-    "Session documented in docs/sessions/session_2025-10-23_ip_generators.md"
-  ],
+  "rag_system_final_state": {
+    "status": "✅ Production Ready",
+    "total_chunks": 1655,
+    "documents_indexed": 7,
+    "total_pages": 828,
+    "chunk_distribution": {
+      "User_IO_Guide": 294,
+      "Clocking_Guide": 147,
+      "Board_Design": 86,
+      "Datasheet": 265,
+      "Transceiver_Guide": 297,
+      "Fabric_Guide": 223,
+      "Memory_Controller": 343
+    },
+    "embedding_model": "BAAI/bge-small-en-v1.5",
+    "dimension": 384,
+    "max_tokens_per_chunk": 400,
+    "overlap_tokens": 60,
+    "chunking_strategy": "semantic + token enforcement",
+    "search_quality": "0.6-0.7 similarity scores",
+    "index_time": "~3min 41sec",
+    "location": "~/fpga_mcp"
+  },
 
-  "active_files": [
+  "token_limit_fix": {
+    "problem": "Character-based chunking created chunks exceeding 512 token model limit",
+    "solution": "Two-phase approach: semantic chunking + token enforcement",
+    "implementation": {
+      "phase_1": "Semantic chunking with character approximation (max_tokens * 4)",
+      "phase_2": "_enforce_token_limits() splits oversized chunks at sentence boundaries",
+      "validation": "chunk_by_tokens() with hard 400-token limit"
+    },
+    "results": {
+      "oversized_chunks_caught": "50% of semantic chunks exceeded 400 tokens",
+      "final_validation": "100% of chunks within 400-token limit",
+      "no_embedding_errors": true
+    },
+    "documentation": "~/mchp-mcp-core/docs/CHUNKING_TOKEN_LIMIT_RECOMMENDATIONS.md"
+  },
+
+  "files_created_today": [
     {
-      "path": "tcl_scripts/lib/generators/",
-      "purpose": "IP configuration generator library",
-      "generators": [
-        "ddr4_config_generator.tcl (480 lines) - DDR4 with geometry/latency calc",
-        "ccc_config_generator.tcl (280 lines) - Clock conditioning with PLL calc",
-        "uart_config_generator.tcl (180 lines) - UART with baud rate calc",
-        "gpio_config_generator.tcl (140 lines) - GPIO 1-32 pins, input/output/bidir",
-        "pcie_config_generator.tcl (280 lines) - PCIe EP/RP, template-based"
-      ],
-      "status": "5 generators complete, tested, documented"
+      "path": "~/fpga_mcp/src/fpga_rag/indexing/embedder.py",
+      "changes": [
+        "Added _split_chunk_by_tokens() - Split oversized chunks at sentence boundaries",
+        "Added _enforce_token_limits() - Validate and split all chunks post-semantic-chunking",
+        "Updated char-to-token ratio from 0.8 to 4 (more realistic for English)",
+        "Integrated token enforcement between semantic chunking and final output"
+      ]
     },
     {
-      "path": "tcl_scripts/lib/templates/",
-      "purpose": "Pre-generated IP configurations ready to use",
-      "count": "20+ templates (DDR4, CCC, UART, GPIO, PCIe)",
-      "status": "all validated via test scripts"
+      "path": "~/fpga_mcp/src/fpga_rag/utils/token_counter.py",
+      "changes": [
+        "Added safety check after sentence boundary splitting",
+        "Added hard truncation if chunk still exceeds max_tokens",
+        "Prevents re-tokenization edge cases where chunks grow"
+      ]
     },
     {
-      "path": "tcl_scripts/lib/generators/README.md",
-      "purpose": "Complete API reference for all IP generators",
-      "size": "500+ lines with usage examples, parameter tables, workflows",
-      "status": "comprehensive documentation complete"
+      "path": "~/fpga_mcp/DEMO.md",
+      "purpose": "Complete demo guide for coworker presentation",
+      "contents": [
+        "Quick test commands",
+        "System overview and stats",
+        "Example queries",
+        "Technical details",
+        "Troubleshooting",
+        "Quick demo script"
+      ]
     },
     {
-      "path": "tcl_scripts/test_uart_gpio_generators.tcl",
-      "purpose": "Test script for UART and GPIO generators",
-      "results": "All 10 tests passed - <0.5% baud error, all GPIO configs validated",
-      "status": "tested successfully"
-    },
-    {
-      "path": "tcl_scripts/test_pcie_generator.tcl",
-      "purpose": "Test script for PCIe generator",
-      "results": "4 configs validated, error handling working correctly",
-      "status": "tested successfully"
-    },
-    {
-      "path": "README.md",
-      "purpose": "Main project documentation",
-      "updates": "Added features section, quick start guide, status summary",
-      "status": "updated with IP generator library overview"
-    },
-    {
-      "path": "hdl/miv_polarfire_eval/",
-      "purpose": "MI-V RV32 reference designs for MPF300 Eval Kit (1.4GB submodule)",
-      "key_file": "Libero_Projects/PF_Eval_Kit_MIV_RV32_BaseDesign.tcl",
-      "status": "git submodule - used as reference for IP examples"
-    },
-    {
-      "path": "docs/sessions/session_2025-10-23_ip_generators.md",
-      "purpose": "Session documentation from previous DDR4/CCC work",
-      "size": "14KB with complete analysis and lessons learned",
-      "status": "archived"
+      "path": "~/mchp-mcp-core/docs/CHUNKING_TOKEN_LIMIT_RECOMMENDATIONS.md",
+      "purpose": "Handoff doc for mchp-mcp-core maintainers",
+      "contents": [
+        "Executive summary of token limit issue",
+        "3 implementation options (token-aware, validation, docs-only)",
+        "Real-world usage data from fpga_mcp",
+        "Test recommendations",
+        "References to industry best practices"
+      ]
     }
   ],
 
-  "architecture_decisions": [
-    {
-      "decision": "Use template-based approach for complex IP cores (PCIe 200+ params)",
-      "rationale": "PCIe has 200+ parameters with complex interdependencies. Full calculation would require replicating GUI's PLL tuning, BAR validation, etc. Template-based provides working configs for 80% of use cases, directs users to GUI for advanced features.",
-      "alternatives_considered": "Full calculation (too complex, error-prone), No generator (manual GUI work)",
-      "impact": "PCIe generator covers common cases (x1/x2/x4, Gen1/Gen2, EP/RP) in ~280 lines. Users can start from template and refine in GUI.",
-      "files_affected": "tcl_scripts/lib/generators/pcie_config_generator.tcl"
-    },
-    {
-      "decision": "Baud rate error validation with 2% threshold for UART generator",
-      "rationale": "System clock may not divide evenly for all baud rates. Calculate actual baud rate and warn if error > 2% to prevent silent communication failures.",
-      "example": "460800 baud @ 50 MHz = 13% error → WARNING issued correctly",
-      "alternatives_considered": "No validation (silent failures), Stricter threshold (too many false positives)",
-      "impact": "UART generator catches problematic configurations at generation time, not runtime.",
-      "files_affected": "tcl_scripts/lib/generators/uart_config_generator.tcl"
-    },
-    {
-      "decision": "Convenience functions pattern: generate_<ip>_<variant>",
-      "rationale": "Most users want standard configurations (115200 baud UART, 8 LED GPIOs). Convenience functions provide one-line generation for common cases while full API available for custom needs.",
-      "pattern": "generate_uart_115200, generate_gpio_leds, generate_pcie_ep_x1_gen1",
-      "alternatives_considered": "Full API only (too verbose), Templates only (not flexible)",
-      "impact": "All 5 generators follow same pattern - predictable API, easy to learn",
-      "files_affected": "All generators in tcl_scripts/lib/generators/"
-    },
-    {
-      "decision": "Use Microchip reference designs as IP configuration source",
-      "rationale": "SmartHLS MI-V SoC reference designs contain working IP configs from Microchip. These are known-good configurations tested on actual hardware.",
-      "sources": [
-        "/mnt/c/Microchip/Libero_SoC_v2024.2/SmartHLS-2024.2/SmartHLS/reference_designs/MiV_SoC/ref_design/base_project_setup_scripts/components/CoreUARTapb_C0.tcl",
-        "/mnt/c/Microchip/Libero_SoC_v2024.2/SmartHLS-2024.2/SmartHLS/reference_designs/MiV_SoC/ref_design/base_project_setup_scripts/components/CoreGPIO_OUT.tcl",
-        "/mnt/c/Microchip/Libero_SoC_v2024.2/SmartHLS-2024.2/SmartHLS/reference_designs/Icicle_SoC/ref_design/script_support/components/PF_PCIE_C0.tcl"
-      ],
-      "impact": "Generators based on proven configurations, not speculation. Reduces debugging time.",
-      "files_affected": "UART, GPIO, PCIe generators"
-    },
-    {
-      "decision": "Use Microchip MI-V cores instead of third-party RISC-V cores (PicoRV32)",
-      "rationale": "MI-V RV32 is a Libero IP catalog core (VLNV: Microsemi:MiV:MIV_RV32:3.1.200) that auto-downloads via create_and_configure_core -download_core. Complete reference designs available for MPF300 Eval Kit with peripherals.",
-      "alternatives_considered": "PicoRV32 (open-source, 750-2k LUTs, no official support)",
-      "impact": "All future RISC-V designs use MI-V cores. Reference at hdl/miv_polarfire_eval/Libero_Projects/",
-      "key_file": "hdl/miv_polarfire_eval/Libero_Projects/import/components/MIV_RV32_CFG1_C0.tcl"
-    }
-  ],
-
-  "mi_v_core_information": {
-    "core_type": "Libero IP Catalog Core",
-    "vlnv": "Microsemi:MiV:MIV_RV32:3.1.200",
-    "download_method": "create_and_configure_core -download_core",
-    "configurations": {
-      "CFG1": "RV32IMC - M+C extensions, 32kB TCM, JTAG debug",
-      "CFG2": "RV32IMC - Similar to CFG1, different memory map",
-      "CFG3": "RV32IMCF - Adds floating-point extension"
-    },
-    "reference_design": "hdl/miv_polarfire_eval/Libero_Projects/PF_Eval_Kit_MIV_RV32_BaseDesign.tcl",
-    "github_org": "https://github.com/Mi-V-Soft-RISC-V",
-    "app_note": "AN4997 - PolarFire FPGA Building a Mi-V Processor Subsystem"
+  "configuration_final": {
+    "max_tokens": 400,
+    "rationale": "Industry standard for technical docs, safely below 512 model limit",
+    "overlap_tokens": 60,
+    "overlap_rationale": "15% overlap - NVIDIA's optimal for technical content",
+    "chunking_strategy": "semantic",
+    "token_enforcement": "enabled",
+    "embedding_model": "BAAI/bge-small-en-v1.5"
   },
 
-  "known_issues": [
-    "PCIe Gen2 speed parameter shows '2.5 Gbps' in output (should be 5.0 Gbps) - cosmetic only, actual config is correct",
-    "GPIO generator only supports uniform direction (all input OR all output) - no per-pin mixed mode yet",
-    "UART generator doesn't support hardware flow control (RTS/CTS) - future enhancement",
-    "Memory MCP server not configured yet - using .mcp.json fallback",
-    "Timing-driven P&R mode doesn't persist via TCL (see docs/lessons_learned/constraint_association.md)"
-  ],
-
-  "next_steps": [
-    "IMMEDIATE (after compact): Develop app note/user guide ingestion strategy",
-    "List available app notes in ~/fpga_mcp/ and identify which cover common design patterns",
-    "Explore extraction strategy for design patterns from PDFs (manual vs automated)",
-    "Consider creating 'recipe' system for common architectures from user guides",
-    "Evaluate Memory MCP vs .mcp.json for persistent design pattern knowledge",
-    "FUTURE: Additional IP generators (SPI, I2C, SERDES/transceivers, Ethernet, CAN)",
-    "FUTURE: SmartDesign automation (interconnect generation)",
-    "FUTURE: Pin constraint automation from board files"
-  ],
-
-  "ip_generator_library_status": {
-    "total_generators": 5,
-    "total_templates": "20+",
-    "test_coverage": "100%",
-    "generators_by_complexity": {
-      "simple": ["UART (10 params)", "GPIO (32 params)"],
-      "moderate": ["CCC (50+ params with PLL calc)"],
-      "complex_calculated": ["DDR4 (118 params with geometry/timing calc)"],
-      "complex_template": ["PCIe (200+ params, template-based)"]
-    },
-    "time_savings": "Manual GUI config (20-30 min) → Generator (<5 sec) = 99%+ time savings",
-    "documentation_size": "~25KB across README files",
-    "lines_of_code": "~1360 lines in generators + test scripts"
+  "demo_ready_checklist": {
+    "search_working": true,
+    "all_docs_indexed": true,
+    "token_limits_enforced": true,
+    "demo_guide_created": true,
+    "quick_test_script": true,
+    "example_queries": true,
+    "troubleshooting_docs": true
   },
 
-  "reference_designs_used": {
-    "SmartHLS_MiV_SoC": "/mnt/c/Microchip/Libero_SoC_v2024.2/SmartHLS-2024.2/SmartHLS/reference_designs/MiV_SoC/",
-    "SmartHLS_Icicle_SoC": "/mnt/c/Microchip/Libero_SoC_v2024.2/SmartHLS-2024.2/SmartHLS/reference_designs/Icicle_SoC/",
-    "Microchip_DDR_functions": "/mnt/c/Microchip/Libero_SoC_v2024.2/Designer/data/aPA5M/cores/MSS/TCL/ddr_functions.tcl (1850+ lines)",
-    "MI-V_PolarFire_Eval": "hdl/miv_polarfire_eval/ (git submodule)"
+  "next_steps_optional": [
+    "Configure MCP server for Claude Code CLI (currently works with Claude Desktop)",
+    "Add hybrid search (BM25 + vector) for better keyword matching",
+    "Add query enhancement (auto-expand acronyms like DDR → DDR3/DDR4)",
+    "Index additional docs (TCL Command Reference, Application Notes)",
+    "Add metadata filtering (by doc type, FPGA family)"
+  ],
+
+  "key_learnings": [
+    "Industry standard: 400-500 tokens for technical docs (NOT 1000)",
+    "Character-to-token ratio varies: 2-5 chars/token for tech docs",
+    "Post-chunking validation essential when using character-based approximation",
+    "Semantic chunking at char level + token enforcement = best of both worlds",
+    "mchp-mcp-core needs token-aware chunking option (documented in recommendations)"
+  ],
+
+  "demo_commands": {
+    "quick_search_test": "cd ~/fpga_mcp && python scripts/test_indexing.py",
+    "custom_query": "cd ~/fpga_mcp && python -c 'import sys; sys.path.insert(0, \"src\"); from fpga_rag.indexing import DocumentEmbedder; from mchp_mcp_core.storage.schemas import SearchQuery; e=DocumentEmbedder(); r=e.vector_store.search(SearchQuery(query=\"YOUR QUERY\", top_k=5)); [print(f\"{i}. {x.title} (Page {x.slide_or_page}): {x.snippet[:100]}...\") for i,x in enumerate(r,1)]'",
+    "show_stats": "cd ~/fpga_mcp && python -c 'import sys; sys.path.insert(0, \"src\"); from fpga_rag.indexing import DocumentEmbedder; e=DocumentEmbedder(); info=e.vector_store.get_collection_info(); print(f\"Indexed: {info[\\\"points_count\\\"]:,} chunks\")'"
   },
 
-  "context_notes_for_next_session": "IP generator library is complete and production-ready. All 5 generators tested and documented. Next focus: Develop strategy for ingesting app notes and user guides to create design pattern library. Available resources in ~/fpga_mcp/ include Memory Controller UG, Clocking UG, Transceiver UG. User wants to explore better methods for reference and remembering design patterns beyond current generators. Consider recipe/template system for complete architectures (MI-V+DDR, MI-V+PCIe, etc.). Speech-to-text friendly approach needed (user said 'CIRTES' meaning SERDES)."
+  "context_notes": "RAG system is production-ready. All optimizations complete, token limits enforced, search tested and working. DEMO.md created for coworker presentation. System can be demoed with simple Python commands. MCP server functional but not yet configured for Claude Code (optional future work)."
 }

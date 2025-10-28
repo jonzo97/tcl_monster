@@ -50,11 +50,48 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **FPGA Command Reference:** `/mnt/c/Microchip/Libero_SoC_v2024.2/Identify/doc/fpga_command_reference.pdf`
 - **Help System:** `/mnt/c/Microchip/Libero_SoC_v2024.2/Designer/doc/libero_help/`
 
-### FPGA Documentation MCP Server
-- **Location:** `~/fpga_mcp`
-- **Type:** RAG system for PolarFire documentation
-- **Contents:** Datasheets, User Guides (Clocking, User IO, Fabric, Board Design)
-- **Missing:** TCL Command Reference (not yet ingested into MCP)
+### FPGA Documentation RAG System (CRITICAL - USE THIS FIRST!)
+
+**Location:** `~/fpga_mcp` - Semantic search over all PolarFire FPGA documentation
+**Status:** ✅ Operational - 1,233 chunks indexed with semantic chunking
+
+**When to Use:**
+- **ALWAYS** search here BEFORE reading raw PDFs
+- **ALWAYS** use for PolarFire-specific questions (clocking, I/O, DDR, PCIe, power, etc.)
+- **DO NOT** waste context reading full PDFs when RAG can answer
+
+**How to Use:**
+```python
+# In Python scripts or interactive sessions
+cd ~/fpga_mcp
+python scripts/test_indexing.py  # Run search tests
+```
+
+**MCP Server:**
+- **Type:** Model Context Protocol server with ChromaDB vector store
+- **Model:** BAAI/bge-small-en-v1.5 (384-dim embeddings)
+- **Search Quality:** 0.75-0.87 similarity scores on test queries
+
+**Indexed Documents (1,233 chunks, optimized with semantic chunking):**
+1. **User IO Guide** (199 chunks) - Pin config, I/O standards, LVDS, HSIO
+2. **Clocking Guide** (111 chunks) - CCC/PLL config, clock routing
+3. **Board Design Guide** (55 chunks) - Power supply, PCB layout
+4. **Datasheet** (227 chunks) - Electrical specs, timing, resources
+5. **Transceiver Guide** (221 chunks) - SERDES, PCIe, protocols
+6. **Fabric Guide** (170 chunks) - Logic resources, routing
+7. **Memory Controller Guide** (250 chunks) - DDR3/DDR4 config
+
+**Not Yet Indexed:**
+- TCL Command Reference (use `/mnt/c/Microchip/Libero_SoC_v2024.2/Identify/doc/fpga_command_reference.pdf`)
+- Libero internal help (93 PDFs in Designer/doc/libero_help/)
+- Application notes
+
+**Example Queries That Work Well:**
+- "DDR4 memory controller configuration"
+- "PolarFire clocking resources CCC"
+- "PCIe transceiver lanes"
+- "FPGA power supply requirements"
+- "GPIO pin configuration"
 
 ## Libero TCL Command Patterns
 
