@@ -1,38 +1,48 @@
 {
   "version": "1.0",
   "project": "tcl_monster - Libero FPGA Automation Toolkit",
-  "last_updated": "2025-10-29T21:30:00Z",
-  "current_phase": "Demo Package Complete - Ready for Complex Demo ✅",
+  "last_updated": "2025-10-30T04:30:00Z",
+  "current_phase": "MI-V Demo Preparation - DDR4 Debugging Session ⚠️",
 
-  "session_accomplishments": [
-    "✅ Built complete SmartDesign automation library (APB, clock/reset, templates)",
-    "✅ Created build diagnostics tools (log parser + build doctor)",
-    "✅ All unit tests passing for SmartDesign library",
-    "✅ Build Doctor tested on counter_demo - working perfectly",
-    "✅ Created comprehensive DEMO.md for coworker presentation",
-    "✅ All code committed and pushed to GitHub",
-    "✅ Identified need for complex demo (MI-V + DDR4)"
-  ],
+  "session_summary": {
+    "goal": "Create impressive MI-V + DDR4 demo for tomorrow morning presentation",
+    "time_invested": "~2 hours debugging DDR4 configuration",
+    "outcome": "DDR4 validation errors persist - no working MI-V + DDR4 app note found",
+    "decision": "Pivot to working MI-V + SRAM reference design for guaranteed demo"
+  },
 
-  "smartdesign_automation": {
-    "status": "✅ Code Complete, Unit Tested",
-    "components": {
-      "utilities": "tcl_scripts/lib/smartdesign/utilities/sd_helpers.tcl",
-      "apb_interconnect": "tcl_scripts/lib/smartdesign/interconnect/apb_interconnect.tcl",
-      "clock_reset_tree": "tcl_scripts/lib/smartdesign/interconnect/clock_reset_tree.tcl",
-      "miv_minimal_template": "tcl_scripts/lib/smartdesign/templates/miv_rv32_minimal.tcl",
-      "test_suite": "tcl_scripts/test_smartdesign_lib.tcl"
-    },
-    "features": [
-      "APB interconnect with auto-addressing",
-      "Clock/reset tree distribution automation",
-      "Component management with validation",
-      "MI-V minimal template (complete system generation)",
-      "Helper utilities for pin connection and validation"
+  "ddr4_debugging_summary": {
+    "attempts": [
+      "Created dual-output CCC (50MHz + 200MHz) - Working ✅",
+      "Tried using pre-exported MI-V component with AXI disabled - Failed (no AXI interface)",
+      "Created MI-V with AXI enabled inline - Failed (parameter validation error)",
+      "Error: 'Illegal configuration value 0x0 for Start Address: Upper 16bits'"
     ],
-    "test_status": "All tests passing ✅",
-    "integration_status": "Not yet tested with real Libero project",
-    "time_savings": "5-10 minutes manual → 30 seconds automated"
+    "root_cause_analysis": {
+      "issue": "MI-V RV32 core parameter validation rejects certain address configurations",
+      "app_notes_found": {
+        "AN4229": "MI-V + DDR3 (not DDR4) - uses different IP core",
+        "AN4597/DG0756": "PCIe + DDR4 (not MI-V) - different architecture",
+        "AN4997": "Referenced but not found - likely has MI-V + DDR4 config"
+      },
+      "problem": "No working MI-V + DDR4 reference design readily available"
+    },
+    "time_estimate_to_fix": "Unknown - need AN4997 or extensive trial-and-error"
+  },
+
+  "recommended_path_forward": {
+    "priority": "HIGH - Get working demo for tomorrow AM",
+    "approach": "Use official MI-V + SRAM reference design",
+    "design": "hdl/miv_polarfire_eval/Libero_Projects/PF_Eval_Kit_MIV_RV32_BaseDesign.tcl",
+    "benefits": [
+      "Full RISC-V RV32IMC processor (M+C extensions)",
+      "~3000-4000 LUTs (way more complex than 33-LUT counter)",
+      "Real peripherals: UART, GPIO, Timers, JTAG Debug",
+      "Official Microchip design - guaranteed to work",
+      "Can build and test tonight (~20-30 minutes)",
+      "Real timing challenges for Build Doctor to analyze"
+    ],
+    "demo_narrative": "From simple counter (33 LUTs) to full RISC-V processor (3000+ LUTs) - Build Doctor scales to any complexity"
   },
 
   "build_diagnostics": {
@@ -41,106 +51,81 @@
       "log_parser": "tools/diagnostics/log_parser.py",
       "build_doctor": "tools/diagnostics/build_doctor.py"
     },
-    "features": [
-      "Parse Synplify Pro synthesis logs",
-      "Parse Place & Route logs",
-      "Extract resource usage (LUTs, FFs, I/O, RAM, Math)",
-      "Detect configuration issues (timing-driven, constraints)",
-      "Intelligent recommendations with actionable fixes",
-      "Severity categorization (ERROR, WARNING, INFO)"
-    ],
     "tested_on": "libero_projects/counter_demo",
-    "test_results": {
-      "errors_found": 0,
-      "warnings_found": 1,
-      "recommendations_generated": 4,
-      "accuracy": "100% - all issues correctly identified"
-    }
+    "ready_for": "MI-V design analysis"
   },
 
-  "demo_ready": {
-    "build_doctor": {
-      "status": "✅ Ready",
-      "demo_command": "python tools/diagnostics/build_doctor.py libero_projects/counter_demo --verbose",
-      "design": "counter_demo (33 LUTs, 32 FFs)",
-      "wow_factor": "Intelligent recommendations from cryptic logs"
+  "smartdesign_automation": {
+    "status": "✅ Code Complete, Unit Tested",
+    "components": {
+      "utilities": "tcl_scripts/lib/smartdesign/utilities/sd_helpers.tcl",
+      "apb_interconnect": "tcl_scripts/lib/smartdesign/interconnect/apb_interconnect.tcl",
+      "clock_reset_tree": "tcl_scripts/lib/smartdesign/interconnect/clock_reset_tree.tcl",
+      "miv_minimal_template": "tcl_scripts/lib/smartdesign/templates/miv_rv32_minimal.tcl"
     },
-    "smartdesign": {
-      "status": "⚠️ Code Ready, Needs Integration Test",
-      "demo_command": "tclsh tcl_scripts/test_smartdesign_lib.tcl",
-      "caveat": "Unit tests pass, but not yet tested with real Libero project"
-    }
+    "test_status": "All tests passing ✅",
+    "integration_status": "Not yet tested with real Libero project"
   },
 
   "next_steps_after_compact": {
-    "priority": "HIGH - Create Complex Demo",
-    "goal": "Build MI-V + DDR4 system for impressive demo",
-    "plan": [
-      "1. Use tcl_scripts/create_miv_ddr_project.tcl to create RISC-V + DDR4 design",
-      "2. Run synthesis and Place & Route",
-      "3. Analyze with Build Doctor (will find real timing issues)",
-      "4. Show complex design with real challenges",
-      "5. Update DEMO.md with complex demo section"
+    "immediate": [
+      "1. Run official MI-V reference design script",
+      "2. Build MI-V + SRAM project (~20 min)",
+      "3. Run synthesis and Place & Route (~30 min)",
+      "4. Analyze with Build Doctor (~5 min)",
+      "5. Update DEMO.md with MI-V demo section (~10 min)",
+      "6. Test complete demo flow (~5 min)"
     ],
-    "alternative_designs": [
-      "MI-V + DDR4 (recommended - ~500+ LUTs, timing challenges)",
-      "PCIe Gen2 endpoint (high-speed serial, complex clocking)",
-      "MI-V + DDR4 + PCIe (kitchen sink, if time permits)"
-    ],
-    "time_estimate": "1-2 hours",
-    "why_needed": "Counter demo (33 LUTs) too simple - need complex design to impress coworkers"
+    "time_estimate": "~70 minutes total",
+    "deadline": "Tomorrow morning presentation"
   },
 
   "files_created_this_session": [
-    "tcl_scripts/lib/smartdesign/utilities/sd_helpers.tcl",
-    "tcl_scripts/lib/smartdesign/interconnect/apb_interconnect.tcl",
-    "tcl_scripts/lib/smartdesign/interconnect/clock_reset_tree.tcl",
-    "tcl_scripts/lib/smartdesign/templates/miv_rv32_minimal.tcl",
-    "tcl_scripts/lib/smartdesign/README.md",
-    "tcl_scripts/test_smartdesign_lib.tcl",
-    "tools/diagnostics/log_parser.py",
-    "tools/diagnostics/build_doctor.py",
-    "DEMO.md",
-    ".session_state.md"
+    "tcl_scripts/create_miv_ddr_simple.tcl",
+    "tcl_scripts/miv_components/PF_CCC_DUAL_BASE.tcl",
+    "tcl_scripts/miv_components/MIV_RV32_AXI_ENABLED.tcl",
+    "tcl_scripts/miv_components/PF_CCC_DUAL.tcl"
+  ],
+
+  "files_to_potentially_discard": [
+    "tcl_scripts/create_miv_ddr_simple.tcl (didn't work)",
+    "tcl_scripts/miv_components/PF_CCC_DUAL*.tcl (not needed for SRAM design)"
   ],
 
   "git_status": {
-    "commits_this_session": 2,
-    "last_commit": "Add comprehensive demo guide for coworker presentation",
-    "pushed_to_github": true,
     "branch": "main",
-    "clean_working_tree": false,
-    "notes": "Some Libero auto-generated files in working tree (ignored by .gitignore)"
-  },
-
-  "existing_tcl_scripts": {
-    "create_miv_ddr_project.tcl": "Creates MI-V RV32 + DDR4 system - ready to use",
-    "build_miv_ddr_project.tcl": "Runs synthesis/P&R for MI-V + DDR4",
-    "create_project.tcl": "Creates simple counter project (already used)",
-    "build_design.tcl": "Runs synthesis/P&R (already used for counter)",
-    "generate_reports.tcl": "Generates build reports"
+    "uncommitted_changes": true,
+    "notes": "Created several MI-V + DDR4 config files that didn't work. Should commit working tools only."
   },
 
   "context_management": {
-    "current_usage": "108k / 200k tokens (54%)",
-    "recommendation": "Compact now before building complex demo",
-    "session_state_saved": ".session_state.md and .mcp.json updated",
-    "recovery_after_compact": "Read .mcp.json and .session_state.md to restore context"
+    "current_usage": "113k / 200k tokens (56%)",
+    "recommendation": "Compact now before building MI-V demo",
+    "reason": "Clear the debugging context, start fresh with working design"
   },
 
   "key_learnings": [
-    "SmartDesign automation is feasible but needs real Libero integration testing",
-    "Build Doctor provides immediate value with zero dependencies",
-    "Simple counter demo insufficient - need complex design to impress",
-    "MI-V + DDR4 is best complex demo (real timing, resource challenges)",
-    "Code is solid, tests pass, ready to build on after compacting"
+    "MI-V + DDR4 is more complex than expected without proper app note",
+    "AN4229 has MI-V + DDR3 (not DDR4)",
+    "AN4597 has PCIe + DDR4 (not MI-V)",
+    "Official MI-V reference uses SRAM, not DDR",
+    "Always verify app note covers exact use case before committing time",
+    "For demos: working design > perfect design"
   ],
 
   "coworker_presentation": {
     "scheduled": "Tomorrow morning",
-    "current_demo": "Build Doctor on counter_demo (works perfectly)",
-    "desired_demo": "Build Doctor on MI-V + DDR4 (more impressive)",
+    "current_demo": "Build Doctor on counter_demo (working)",
+    "desired_demo": "Build Doctor on MI-V RV32 processor (achievable tonight)",
     "presentation_file": "DEMO.md",
     "github_repo": "https://github.com/jonzo97/libero_bot"
+  },
+
+  "future_enhancements": {
+    "ddr4_integration": {
+      "priority": "Medium",
+      "blocker": "Need AN4997 app note or working reference design",
+      "alternative": "Use DDR3 (AN4229 has this) if DDR4 not critical"
+    }
   }
 }

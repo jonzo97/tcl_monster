@@ -1,0 +1,40 @@
+# MI-V RV32 with AXI ENABLED for DDR4 connectivity
+# Exact copy from create_miv_ddr_project.tcl working configuration
+create_and_configure_core -core_vlnv {Microsemi:MiV:MIV_RV32:3.1.200} -download_core -component_name {MIV_RV32_AXI_ENABLED} -params {\
+"AHB_INITIATOR_TYPE:0" \
+"AHB_START_ADDR_0:0x0" \
+"AHB_START_ADDR_1:0x0" \
+"AHB_END_ADDR_0:0x0" \
+"AHB_END_ADDR_1:0x0" \
+"AHB_TARGET_MIRROR:false" \
+"APB_INITIATOR_TYPE:1" \
+"APB_START_ADDR_0:0x0" \
+"APB_START_ADDR_1:0x7000" \
+"APB_END_ADDR_0:0xffff" \
+"APB_END_ADDR_1:0x7000" \
+"APB_TARGET_MIRROR:false" \
+"AXI_INITIATOR_TYPE:1" \
+"AXI_START_ADDR_0:0x0" \
+"AXI_START_ADDR_1:0xC000" \
+"AXI_END_ADDR_0:0xffff" \
+"AXI_END_ADDR_1:0xFFFF" \
+"AXI_TARGET_MIRROR:false" \
+"BOOTROM_PRESENT:false" \
+"C_EXT:true" \
+"DEBUGGER:true" \
+"ECC_ENABLE:false" \
+"F_EXT:false" \
+"GPR_REGS:false" \
+"INTERNAL_MTIME:true" \
+"INTERNAL_MTIME_IRQ:true" \
+"M_EXT:true" \
+"MTIME_PRESCALER:100" \
+"NUM_EXT_IRQS:1" \
+"RESET_VECTOR_ADDR_0:0x0" \
+"RESET_VECTOR_ADDR_1:0x8000" \
+"TCM_PRESENT:true" \
+"TCM_START_ADDR_0:0x0" \
+"TCM_START_ADDR_1:0x8000" \
+"TCM_END_ADDR_0:0x7fff" \
+"TCM_END_ADDR_1:0x8000" \
+"VECTORED_INTERRUPTS:false"   }

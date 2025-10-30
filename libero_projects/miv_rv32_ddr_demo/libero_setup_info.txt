@@ -1,0 +1,71 @@
+# Microsemi Corp.
+# Date: 2025-Oct-30 08:42:17
+Libero Release : v2024.2
+Libero Version : 2024.2.0.13
+Operating System Name : Windows 8
+Ram Size : 31.35 GB (usable)
+OS Type : 64-bit
+
+Environment Variables : 
+---------------------
+	ALLUSERSPROFILE=C:\ProgramData
+	APPDATA=C:\Users\c75683\AppData\Roaming
+	COMPUTERNAME=SVD-LT-C75683
+	ComSpec=C:\WINDOWS\system32\cmd.exe
+	CommonProgramFiles=C:\Program Files (x86)\Common Files
+	CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files
+	CommonProgramW6432=C:\Program Files\Common Files
+	DriverData=C:\Windows\System32\Drivers\DriverData
+	FPGENPROG=C:\Microchip\Libero_SoC_v2023.2\Designer\bin64\fpgenprog.exe
+	HOMEDRIVE=C:
+	HOMEPATH=\Users\c75683
+	IGCCSVC_DB=AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAXxOKHOjkkk2YPdK2nep8XQQAAAACAAAAAAAQZgAAAAEAACAAAADPKnBGhnPYrQHQR9bl+4Jn9yfsMaj3n5XtPmFeLiANJwAAAAAOgAAAAAIAACAAAACj3swYAJwWEzWgCPA/6d1C2p4e6e5OpRPAaWkp51KWZWAAAAAdf1D5x+2Ejn2QJp9q4MIJeU69tuNXDG+MH2vtYxVWpCu50YGigIYFBLp+4k5+3n4efwI0GWoDLHhMUVVvf0NvMRAeIc11ujxKaI9fXX9cvG5BLBOmcRg0SFy/Kt41UUlAAAAA0HVXuCid+EqZhHVXXTb+VTGIqeic41jaVYFETpyhS+SrMXyixPn+tiSk6VFlicEQYGiom34lTSY8pXHaSd6wGg==
+	LDMS_LOCAL_DIR=C:\Program Files (x86)\LANDesk\LDClient\Data
+	LDMS_PREFERRED_SERVER=SJO-VM-LPS01.mchp-main.com
+	LM_LICENSE_FILE=C:\flexlm\License.dat
+	LOCALAPPDATA=C:\Users\c75683\AppData\Local
+	LOG4J_FORMAT_MSG_NO_LOOKUPS=true
+	LOGONSERVER=\\CHN-VM-AD01
+	NUMBER_OF_PROCESSORS=20
+	OS=Windows_NT
+	OneDrive=C:\Users\c75683\OneDrive - Microchip Technology Inc
+	OneDriveCommercial=C:\Users\c75683\OneDrive - Microchip Technology Inc
+	PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY;.PYW
+	PROCESSOR_ARCHITECTURE=x86
+	PROCESSOR_ARCHITEW6432=AMD64
+	PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 186 Stepping 2, GenuineIntel
+	PROCESSOR_LEVEL=6
+	PROCESSOR_REVISION=ba02
+	PSModulePath=C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+	PUBLIC=C:\Users\Public
+	Path=C:\Program Files\Python310\Scripts\;C:\Program Files\Python310\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;c:\Program Files (x86)\Webex\Plugins;C:\Program Files\TortoiseSVN\bin;C:\Program Files\Microsoft VS Code\bin;C:\Program Files (x86)\IVI Foundation\VISA\WinNT\Bin\;C:\Program Files\IVI Foundation\VISA\Win64\Bin\;C:\Program Files (x86)\IVI Foundation\VISA\WinNT\Bin;C:\Program Files\PuTTY\;C:\Program Files\dotnet\;C:\msys64\usr\bin;C:\Program Files (x86)\dotnet-core-uninstall\;c:\Users\c75683\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\nodejs\;C:\Program Files\Microchip\xc32\v4.60\bin;C:\Program Files\Git\cmd;C:\Users\c75683\AppData\Local\Microsoft\WindowsApps;C:\Users\c75683\AppData\Local\Programs\Windsurf\bin;C:\Users\c75683\AppData\Local\Programs\cursor\resources\app\bin;C:\Users\c75683\AppData\Local\Programs\Kiro\bin;C:\Users\c75683\AppData\Roaming\npm
+	ProgramData=C:\ProgramData
+	ProgramFiles=C:\Program Files (x86)
+	ProgramFiles(x86)=C:\Program Files (x86)
+	ProgramW6432=C:\Program Files
+	SC_INSTALL_DIR=C:\Microchip\SoftConsole-v2022.2-RISC-V-747
+	SESSIONNAME=Console
+	STTASKFOLDERPATH=Ivanti\PatchSDK\Deployments
+	SystemDrive=C:
+	SystemRoot=C:\WINDOWS
+	TEMP=C:\Users\c75683\AppData\Local\Temp
+	TMP=C:\Users\c75683\AppData\Local\Temp
+	USERDNSDOMAIN=MCHP-MAIN.COM
+	USERDOMAIN=MCHP-MAIN
+	USERDOMAIN_ROAMINGPROFILE=MCHP-MAIN
+	USERNAME=C75683
+	USERPROFILE=C:\Users\c75683
+	VBOX_MSI_INSTALL_PATH=C:\Program Files\Oracle\VirtualBox\
+	VXIPNPPATH=C:\Program Files (x86)\IVI Foundation\VISA\
+	VXIPNPPATH64=C:\Program Files\IVI Foundation\VISA\
+	WSLENV=WT_SESSION:WT_PROFILE_ID:
+	WT_PROFILE_ID={51855cb2-8cce-5362-8f54-464b92b32386}
+	WT_SESSION=ee261d01-67f0-4eef-b49c-1024bd75794b
+	ZES_ENABLE_SYSMAN=1
+	__PSLockDownPolicy=0
+	log4j2.formatMsgNoLookups=true
+	windir=C:\WINDOWS
+	ACTEL_SW_DIR=C:\Microchip\Libero_SoC_v2024.2\Designer
+	AMHOME=C:\Microchip\Libero_SoC_v2024.2\Designer/am
+	HOME=C:\Users\c75683
+	TCL_LIBRARY=C:\Microchip\Libero_SoC_v2024.2\Designer/lib/tcl8.5
