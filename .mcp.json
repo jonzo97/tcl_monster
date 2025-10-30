@@ -1,144 +1,146 @@
 {
   "version": "1.0",
-  "project": "tcl_monster + fpga_mcp RAG system",
-  "last_updated": "2025-10-27T12:08:00Z",
-  "current_phase": "RAG System Production Ready ✅",
+  "project": "tcl_monster - Libero FPGA Automation Toolkit",
+  "last_updated": "2025-10-29T21:30:00Z",
+  "current_phase": "Demo Package Complete - Ready for Complex Demo ✅",
 
   "session_accomplishments": [
-    "✅ Researched industry RAG best practices (400-500 tokens optimal for technical docs)",
-    "✅ Implemented token limit enforcement in embedder.py (_enforce_token_limits)",
-    "✅ Hardened token_counter.py to prevent oversized chunks",
-    "✅ Re-indexed with proper token limits (1,655 chunks, 400 tokens max)",
-    "✅ Created comprehensive recommendations doc for mchp-mcp-core maintainers",
-    "✅ Verified search quality (0.6-0.7 similarity scores)",
-    "✅ Created DEMO.md guide for coworker presentation",
-    "✅ Tested MCP server functionality successfully"
+    "✅ Built complete SmartDesign automation library (APB, clock/reset, templates)",
+    "✅ Created build diagnostics tools (log parser + build doctor)",
+    "✅ All unit tests passing for SmartDesign library",
+    "✅ Build Doctor tested on counter_demo - working perfectly",
+    "✅ Created comprehensive DEMO.md for coworker presentation",
+    "✅ All code committed and pushed to GitHub",
+    "✅ Identified need for complex demo (MI-V + DDR4)"
   ],
 
-  "rag_system_final_state": {
+  "smartdesign_automation": {
+    "status": "✅ Code Complete, Unit Tested",
+    "components": {
+      "utilities": "tcl_scripts/lib/smartdesign/utilities/sd_helpers.tcl",
+      "apb_interconnect": "tcl_scripts/lib/smartdesign/interconnect/apb_interconnect.tcl",
+      "clock_reset_tree": "tcl_scripts/lib/smartdesign/interconnect/clock_reset_tree.tcl",
+      "miv_minimal_template": "tcl_scripts/lib/smartdesign/templates/miv_rv32_minimal.tcl",
+      "test_suite": "tcl_scripts/test_smartdesign_lib.tcl"
+    },
+    "features": [
+      "APB interconnect with auto-addressing",
+      "Clock/reset tree distribution automation",
+      "Component management with validation",
+      "MI-V minimal template (complete system generation)",
+      "Helper utilities for pin connection and validation"
+    ],
+    "test_status": "All tests passing ✅",
+    "integration_status": "Not yet tested with real Libero project",
+    "time_savings": "5-10 minutes manual → 30 seconds automated"
+  },
+
+  "build_diagnostics": {
     "status": "✅ Production Ready",
-    "total_chunks": 1655,
-    "documents_indexed": 7,
-    "total_pages": 828,
-    "chunk_distribution": {
-      "User_IO_Guide": 294,
-      "Clocking_Guide": 147,
-      "Board_Design": 86,
-      "Datasheet": 265,
-      "Transceiver_Guide": 297,
-      "Fabric_Guide": 223,
-      "Memory_Controller": 343
+    "components": {
+      "log_parser": "tools/diagnostics/log_parser.py",
+      "build_doctor": "tools/diagnostics/build_doctor.py"
     },
-    "embedding_model": "BAAI/bge-small-en-v1.5",
-    "dimension": 384,
-    "max_tokens_per_chunk": 400,
-    "overlap_tokens": 60,
-    "chunking_strategy": "semantic + token enforcement",
-    "search_quality": "0.6-0.7 similarity scores",
-    "index_time": "~3min 41sec",
-    "location": "~/fpga_mcp"
-  },
-
-  "token_limit_fix": {
-    "problem": "Character-based chunking created chunks exceeding 512 token model limit",
-    "solution": "Two-phase approach: semantic chunking + token enforcement",
-    "implementation": {
-      "phase_1": "Semantic chunking with character approximation (max_tokens * 4)",
-      "phase_2": "_enforce_token_limits() splits oversized chunks at sentence boundaries",
-      "validation": "chunk_by_tokens() with hard 400-token limit"
-    },
-    "results": {
-      "oversized_chunks_caught": "50% of semantic chunks exceeded 400 tokens",
-      "final_validation": "100% of chunks within 400-token limit",
-      "no_embedding_errors": true
-    },
-    "documentation": "~/mchp-mcp-core/docs/CHUNKING_TOKEN_LIMIT_RECOMMENDATIONS.md"
-  },
-
-  "files_created_today": [
-    {
-      "path": "~/fpga_mcp/src/fpga_rag/indexing/embedder.py",
-      "changes": [
-        "Added _split_chunk_by_tokens() - Split oversized chunks at sentence boundaries",
-        "Added _enforce_token_limits() - Validate and split all chunks post-semantic-chunking",
-        "Updated char-to-token ratio from 0.8 to 4 (more realistic for English)",
-        "Integrated token enforcement between semantic chunking and final output"
-      ]
-    },
-    {
-      "path": "~/fpga_mcp/src/fpga_rag/utils/token_counter.py",
-      "changes": [
-        "Added safety check after sentence boundary splitting",
-        "Added hard truncation if chunk still exceeds max_tokens",
-        "Prevents re-tokenization edge cases where chunks grow"
-      ]
-    },
-    {
-      "path": "~/fpga_mcp/DEMO.md",
-      "purpose": "Complete demo guide for coworker presentation",
-      "contents": [
-        "Quick test commands",
-        "System overview and stats",
-        "Example queries",
-        "Technical details",
-        "Troubleshooting",
-        "Quick demo script"
-      ]
-    },
-    {
-      "path": "~/mchp-mcp-core/docs/CHUNKING_TOKEN_LIMIT_RECOMMENDATIONS.md",
-      "purpose": "Handoff doc for mchp-mcp-core maintainers",
-      "contents": [
-        "Executive summary of token limit issue",
-        "3 implementation options (token-aware, validation, docs-only)",
-        "Real-world usage data from fpga_mcp",
-        "Test recommendations",
-        "References to industry best practices"
-      ]
+    "features": [
+      "Parse Synplify Pro synthesis logs",
+      "Parse Place & Route logs",
+      "Extract resource usage (LUTs, FFs, I/O, RAM, Math)",
+      "Detect configuration issues (timing-driven, constraints)",
+      "Intelligent recommendations with actionable fixes",
+      "Severity categorization (ERROR, WARNING, INFO)"
+    ],
+    "tested_on": "libero_projects/counter_demo",
+    "test_results": {
+      "errors_found": 0,
+      "warnings_found": 1,
+      "recommendations_generated": 4,
+      "accuracy": "100% - all issues correctly identified"
     }
-  ],
-
-  "configuration_final": {
-    "max_tokens": 400,
-    "rationale": "Industry standard for technical docs, safely below 512 model limit",
-    "overlap_tokens": 60,
-    "overlap_rationale": "15% overlap - NVIDIA's optimal for technical content",
-    "chunking_strategy": "semantic",
-    "token_enforcement": "enabled",
-    "embedding_model": "BAAI/bge-small-en-v1.5"
   },
 
-  "demo_ready_checklist": {
-    "search_working": true,
-    "all_docs_indexed": true,
-    "token_limits_enforced": true,
-    "demo_guide_created": true,
-    "quick_test_script": true,
-    "example_queries": true,
-    "troubleshooting_docs": true
+  "demo_ready": {
+    "build_doctor": {
+      "status": "✅ Ready",
+      "demo_command": "python tools/diagnostics/build_doctor.py libero_projects/counter_demo --verbose",
+      "design": "counter_demo (33 LUTs, 32 FFs)",
+      "wow_factor": "Intelligent recommendations from cryptic logs"
+    },
+    "smartdesign": {
+      "status": "⚠️ Code Ready, Needs Integration Test",
+      "demo_command": "tclsh tcl_scripts/test_smartdesign_lib.tcl",
+      "caveat": "Unit tests pass, but not yet tested with real Libero project"
+    }
   },
 
-  "next_steps_optional": [
-    "Configure MCP server for Claude Code CLI (currently works with Claude Desktop)",
-    "Add hybrid search (BM25 + vector) for better keyword matching",
-    "Add query enhancement (auto-expand acronyms like DDR → DDR3/DDR4)",
-    "Index additional docs (TCL Command Reference, Application Notes)",
-    "Add metadata filtering (by doc type, FPGA family)"
+  "next_steps_after_compact": {
+    "priority": "HIGH - Create Complex Demo",
+    "goal": "Build MI-V + DDR4 system for impressive demo",
+    "plan": [
+      "1. Use tcl_scripts/create_miv_ddr_project.tcl to create RISC-V + DDR4 design",
+      "2. Run synthesis and Place & Route",
+      "3. Analyze with Build Doctor (will find real timing issues)",
+      "4. Show complex design with real challenges",
+      "5. Update DEMO.md with complex demo section"
+    ],
+    "alternative_designs": [
+      "MI-V + DDR4 (recommended - ~500+ LUTs, timing challenges)",
+      "PCIe Gen2 endpoint (high-speed serial, complex clocking)",
+      "MI-V + DDR4 + PCIe (kitchen sink, if time permits)"
+    ],
+    "time_estimate": "1-2 hours",
+    "why_needed": "Counter demo (33 LUTs) too simple - need complex design to impress coworkers"
+  },
+
+  "files_created_this_session": [
+    "tcl_scripts/lib/smartdesign/utilities/sd_helpers.tcl",
+    "tcl_scripts/lib/smartdesign/interconnect/apb_interconnect.tcl",
+    "tcl_scripts/lib/smartdesign/interconnect/clock_reset_tree.tcl",
+    "tcl_scripts/lib/smartdesign/templates/miv_rv32_minimal.tcl",
+    "tcl_scripts/lib/smartdesign/README.md",
+    "tcl_scripts/test_smartdesign_lib.tcl",
+    "tools/diagnostics/log_parser.py",
+    "tools/diagnostics/build_doctor.py",
+    "DEMO.md",
+    ".session_state.md"
   ],
+
+  "git_status": {
+    "commits_this_session": 2,
+    "last_commit": "Add comprehensive demo guide for coworker presentation",
+    "pushed_to_github": true,
+    "branch": "main",
+    "clean_working_tree": false,
+    "notes": "Some Libero auto-generated files in working tree (ignored by .gitignore)"
+  },
+
+  "existing_tcl_scripts": {
+    "create_miv_ddr_project.tcl": "Creates MI-V RV32 + DDR4 system - ready to use",
+    "build_miv_ddr_project.tcl": "Runs synthesis/P&R for MI-V + DDR4",
+    "create_project.tcl": "Creates simple counter project (already used)",
+    "build_design.tcl": "Runs synthesis/P&R (already used for counter)",
+    "generate_reports.tcl": "Generates build reports"
+  },
+
+  "context_management": {
+    "current_usage": "108k / 200k tokens (54%)",
+    "recommendation": "Compact now before building complex demo",
+    "session_state_saved": ".session_state.md and .mcp.json updated",
+    "recovery_after_compact": "Read .mcp.json and .session_state.md to restore context"
+  },
 
   "key_learnings": [
-    "Industry standard: 400-500 tokens for technical docs (NOT 1000)",
-    "Character-to-token ratio varies: 2-5 chars/token for tech docs",
-    "Post-chunking validation essential when using character-based approximation",
-    "Semantic chunking at char level + token enforcement = best of both worlds",
-    "mchp-mcp-core needs token-aware chunking option (documented in recommendations)"
+    "SmartDesign automation is feasible but needs real Libero integration testing",
+    "Build Doctor provides immediate value with zero dependencies",
+    "Simple counter demo insufficient - need complex design to impress",
+    "MI-V + DDR4 is best complex demo (real timing, resource challenges)",
+    "Code is solid, tests pass, ready to build on after compacting"
   ],
 
-  "demo_commands": {
-    "quick_search_test": "cd ~/fpga_mcp && python scripts/test_indexing.py",
-    "custom_query": "cd ~/fpga_mcp && python -c 'import sys; sys.path.insert(0, \"src\"); from fpga_rag.indexing import DocumentEmbedder; from mchp_mcp_core.storage.schemas import SearchQuery; e=DocumentEmbedder(); r=e.vector_store.search(SearchQuery(query=\"YOUR QUERY\", top_k=5)); [print(f\"{i}. {x.title} (Page {x.slide_or_page}): {x.snippet[:100]}...\") for i,x in enumerate(r,1)]'",
-    "show_stats": "cd ~/fpga_mcp && python -c 'import sys; sys.path.insert(0, \"src\"); from fpga_rag.indexing import DocumentEmbedder; e=DocumentEmbedder(); info=e.vector_store.get_collection_info(); print(f\"Indexed: {info[\\\"points_count\\\"]:,} chunks\")'"
-  },
-
-  "context_notes": "RAG system is production-ready. All optimizations complete, token limits enforced, search tested and working. DEMO.md created for coworker presentation. System can be demoed with simple Python commands. MCP server functional but not yet configured for Claude Code (optional future work)."
+  "coworker_presentation": {
+    "scheduled": "Tomorrow morning",
+    "current_demo": "Build Doctor on counter_demo (works perfectly)",
+    "desired_demo": "Build Doctor on MI-V + DDR4 (more impressive)",
+    "presentation_file": "DEMO.md",
+    "github_repo": "https://github.com/jonzo97/libero_bot"
+  }
 }
