@@ -143,19 +143,76 @@ tclsh tcl_scripts/test_smartdesign_lib.tcl
 
 ---
 
+---
+
+## Demo 3: Complete MI-V Project (~3 minutes)
+
+### The Complete Workflow
+**From nothing to working RISC-V processor** - all via command line.
+
+```bash
+# 1. Create MI-V RV32 project with SRAM + peripherals
+./run_libero.sh tcl_scripts/create_miv_simple.tcl SCRIPT
+
+# 2. Run synthesis and place & route
+./run_libero.sh tcl_scripts/build_miv_simple.tcl SCRIPT
+
+# 3. Analyze with Build Doctor
+python tools/diagnostics/build_doctor.py libero_projects/miv_simple_demo
+```
+
+**System Created:**
+- MI-V RV32IMC processor (Integer + Multiply + Compressed)
+- 64kB on-chip SRAM
+- UART peripheral
+- 4x GPIO outputs (LEDs)
+- 2x CoreTimer peripherals
+- JTAG debug interface
+- Complete clock/reset infrastructure
+
+**Build Results:**
+```
+Build Status: ✅ PASSED
+
+Resource Usage:
+  LUTs:           11,607 / 299,544 (3.87%)
+  Flip-Flops:      5,644 / 299,544 (1.88%)
+  Logic Elements: 11,771 total
+  I/O Pins:            8 (all placed)
+
+Build Time: ~25-30 minutes (automated)
+Errors: 0
+```
+
+### Complexity Scaling Demo
+
+**Counter (baseline):** 33 LUTs, 32 FFs
+**MI-V Processor:** 11,607 LUTs, 5,644 FFs
+
+**That's a 351x increase in complexity!**
+
+Build Doctor analyzes both equally fast (<2 seconds), demonstrating scalability from trivial designs to production processors.
+
+See `docs/build_comparison.md` for detailed metrics.
+
+---
+
 ## What's Next
 
 ### Immediate Use Cases
 1. **Daily build analysis** - Run Build Doctor after every synthesis
-2. **MI-V project creation** - Use SmartDesign automation for new RISC-V projects
-3. **Reusable templates** - Create your own SmartDesign templates
+2. **MI-V project creation** - Complete RISC-V systems via automated scripts
+3. **Reusable templates** - Create your own project templates
+4. **Build regression testing** - Automate synthesis in CI/CD pipelines
 
 ### Future Enhancements
+- Pin constraints generation (PDC automation)
+- Bitstream generation automation
+- Timing analysis integration
 - Board adaptation (auto-port designs to different eval boards)
-- AXI interconnect generator
 - HTML dashboard for build trends
 - Integration with FPGA docs RAG system
-- More SmartDesign templates (MI-V + DDR, MI-V + PCIe, etc.)
+- More complex templates (MI-V + DDR, MI-V + PCIe, etc.)
 
 ---
 

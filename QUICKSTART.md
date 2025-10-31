@@ -1,8 +1,10 @@
 # Quick Start Guide - TCL Monster
 
-## Current Status ✅ Phase 0 Complete!
+## Current Status ✅ MI-V RISC-V Demo Ready!
 
-Successfully synthesized first design from command line! Counter with rotating LEDs built and ready to program.
+**NEW (2025-10-30):** Complete MI-V RV32 RISC-V processor with SRAM and peripherals - fully automated build!
+**Phase 0:** Counter demo (33 LUTs) - ✅ Complete
+**Phase 1:** MI-V demo (11,607 LUTs) - ✅ Complete
 
 ### Project Structure
 ```
@@ -31,16 +33,40 @@ tcl_monster/
     └── CLAUDE.md              # Project documentation for Claude Code
 ```
 
-### 2. Running the Project Creation Script
+### 2. Quick Start: MI-V RISC-V Demo (Recommended)
+
+**Create and build complete RISC-V processor system:**
+```bash
+# 1. Create MI-V project (takes ~2 minutes)
+./run_libero.sh tcl_scripts/create_miv_simple.tcl SCRIPT
+
+# 2. Build (synthesis + P&R, takes ~25-30 minutes)
+./run_libero.sh tcl_scripts/build_miv_simple.tcl SCRIPT
+
+# 3. Analyze with Build Doctor
+python tools/diagnostics/build_doctor.py libero_projects/miv_simple_demo
+```
+
+**What you get:**
+- MI-V RV32IMC RISC-V processor
+- 64kB on-chip SRAM
+- UART + GPIO + Timers
+- JTAG debug
+- 11,607 LUTs, 5,644 FFs
+- Zero errors!
+
+### 3. Quick Start: Counter Demo (Simple Baseline)
 
 **Test the basic project creation:**
 ```bash
-./run_libero.sh tcl_scripts/create_project.tcl SCRIPT
+# Already built! Just analyze:
+python tools/diagnostics/build_doctor.py libero_projects/counter_demo
 ```
 
-This will create a new Libero project at `./libero_projects/counter_demo/` configured for:
+This creates a simple counter at `./libero_projects/counter_demo/` configured for:
 - Device: PolarFire MPF300TS-FCG1152
 - HDL: Verilog
+- 33 LUTs, 32 FFs
 - Enhanced constraint flow enabled
 
 ## What's Next (Tonight's Session)
