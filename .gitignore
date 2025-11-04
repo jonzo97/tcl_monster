@@ -89,6 +89,10 @@ libero_projects/miv_rv32_demo/
 !libero_projects/miv_rv32_demo/constraint/
 !libero_projects/miv_rv32_demo/constraint/*.pdc
 
+libero_projects/miv_simple_demo/
+!libero_projects/miv_simple_demo/constraint/
+!libero_projects/miv_simple_demo/constraint/*.pdc
+
 # Keep README files in otherwise ignored directories
 !**/README.md
 
