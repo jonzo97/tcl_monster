@@ -314,7 +314,7 @@ create_and_configure_core \
 
 **Every session MUST start with:**
 1. Check context usage with `/check-context` or `/compact-check`
-2. Read `.mcp.json` for last session state
+2. Read `PROJECT_STATE.json` for last session state
 3. Read relevant sections of THIS file (`.claude/CLAUDE.md`)
 4. Check `docs/ROADMAP.md` for current phase
 5. Confirm with user: "Resuming [phase X], last completed [task Y]?"
@@ -368,7 +368,7 @@ create_and_configure_core \
 ### Pre-Compact Checklist
 
 **Before every `/compact`, run `/save-state` to create:**
-1. **`.mcp.json`** - Updated project state, decisions, next steps
+1. **`PROJECT_STATE.json`** - Updated project state, decisions, next steps
 2. **`docs/sessions/session_[date].md`** - Session summary
 3. **`docs/lessons_learned/[topic].md`** - Any new patterns/learnings
 4. **Git commit** - If substantial work completed
@@ -393,7 +393,7 @@ create_and_configure_core \
 ### Post-Compact Recovery
 
 **After compacting:**
-1. Read `.mcp.json` to restore state
+1. Read `PROJECT_STATE.json` to restore state
 2. Read last session summary from `docs/sessions/`
 3. Check TodoWrite list for active tasks
 4. Confirm understanding with user before continuing

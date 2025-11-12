@@ -1,14 +1,15 @@
 {
   "version": "1.0",
   "project": "tcl_monster - Libero FPGA Automation Toolkit",
-  "last_updated": "2025-10-30T18:45:00Z",
-  "current_phase": "MI-V Demo Complete - Production Ready ✅",
+  "last_updated": "2025-11-12T15:30:00Z",
+  "current_phase": "Infrastructure Updated - Ready for BeagleV-Fire Work",
 
   "session_summary": {
-    "goal": "Create impressive MI-V + SRAM demo for tomorrow morning presentation",
-    "time_invested": "~3 hours total (DDR4 debugging + MI-V SRAM implementation)",
-    "outcome": "SUCCESS! Complete MI-V RV32 processor with SRAM, peripherals, and utility scripts",
-    "decision": "Delivered production-ready automation toolkit with comprehensive demos"
+    "date": "2025-11-12",
+    "goal": "Fix MCP configuration naming collision and prepare for BeagleV-Fire design",
+    "time_invested": "~1 hour (infrastructure cleanup and MCP setup)",
+    "outcome": "✅ Fixed .mcp.json collision, set up Memory MCP with conditional usage, created meta-project workspace",
+    "next_session": "Initialize BeagleV-Fire FPGA design for BeagleBoard"
   },
 
   "ddr4_debugging_summary": {
@@ -69,39 +70,70 @@
 
   "next_steps_after_compact": {
     "immediate": [
-      "1. Run official MI-V reference design script",
-      "2. Build MI-V + SRAM project (~20 min)",
-      "3. Run synthesis and Place & Route (~30 min)",
-      "4. Analyze with Build Doctor (~5 min)",
-      "5. Update DEMO.md with MI-V demo section (~10 min)",
-      "6. Test complete demo flow (~5 min)"
+      "1. Initialize BeagleV-Fire FPGA design (BeagleBoard project)",
+      "2. Review existing beaglev_fire_* directories and config",
+      "3. Determine design requirements and target device",
+      "4. Set up project structure and TCL automation",
+      "5. Create/configure Libero project for BeagleV-Fire"
     ],
-    "time_estimate": "~70 minutes total",
-    "deadline": "Tomorrow morning presentation"
+    "context": "User has beaglev-fire-gateware/, beaglev_fire_demo/, config/beaglev_fire_config.json, tcl_scripts/beaglev_fire/ already present (untracked)",
+    "priority": "HIGH - Active development work"
   },
 
-  "files_created_this_session": [
-    "tcl_scripts/create_miv_ddr_simple.tcl",
-    "tcl_scripts/miv_components/PF_CCC_DUAL_BASE.tcl",
-    "tcl_scripts/miv_components/MIV_RV32_AXI_ENABLED.tcl",
-    "tcl_scripts/miv_components/PF_CCC_DUAL.tcl"
-  ],
+  "infrastructure_updates_this_session": {
+    "date": "2025-11-12",
+    "changes": [
+      "Renamed .mcp.json → PROJECT_STATE.json (fixed naming collision with MCP server config)",
+      "Updated global ~/.claude/CLAUDE.md (removed non-existent Memory MCP references, added conditional usage guidance)",
+      "Updated local .claude/CLAUDE.md (all .mcp.json → PROJECT_STATE.json)",
+      "Created ~/meta-project workspace with auto-enabling Memory MCP",
+      "Created ~/.claude/skills/memory-mcp/ for semantic control ('enable/disable memory mcp')",
+      "Configured official Memory MCP server (knowledge graph: entities, relations, observations)",
+      "Documented token costs (~7k overhead when enabled, 0 when disabled)"
+    ],
+    "rationale": "MCP configuration (.mcp.json) was being used for session state, causing conflicts. Separated concerns: PROJECT_STATE.json for session state, .mcp.json for actual MCP server config."
+  },
 
-  "files_to_potentially_discard": [
-    "tcl_scripts/create_miv_ddr_simple.tcl (didn't work)",
-    "tcl_scripts/miv_components/PF_CCC_DUAL*.tcl (not needed for SRAM design)"
-  ],
+  "mcp_servers_configured": {
+    "fpga-docs": {
+      "status": "✅ Active in tcl_monster project",
+      "purpose": "FPGA documentation RAG system (27 PolarFire PDFs, ChromaDB)",
+      "command": "python /home/jorgill/fpga_mcp/src/fpga_rag/mcp_server/server.py",
+      "tools": ["search_fpga_docs", "query_ip_parameters", "explain_error", "get_timing_constraints"]
+    },
+    "memory": {
+      "status": "⚙️ Conditionally enabled (only in ~/meta-project)",
+      "purpose": "Cross-project knowledge graph (entities, relations, observations)",
+      "token_cost": "~7k baseline overhead when enabled, 0 when disabled",
+      "usage": "Enable for cross-project analysis, disable for siloed work",
+      "storage": "~/.claude/knowledge_graph.json"
+    }
+  },
+
+  "beaglev_fire_work": {
+    "status": "🔴 Not yet started",
+    "untracked_files": [
+      "beaglev-fire-gateware/",
+      "beaglev_fire_demo/",
+      "config/beaglev_fire_config.json",
+      "tcl_scripts/beaglev_fire/"
+    ],
+    "next_action": "Investigate existing BeagleV-Fire files and determine design requirements"
+  },
 
   "git_status": {
     "branch": "main",
     "uncommitted_changes": true,
-    "notes": "Created several MI-V + DDR4 config files that didn't work. Should commit working tools only."
+    "staged": [".mcp.json → PROJECT_STATE.json (rename)"],
+    "modified": [".claude/CLAUDE.md"],
+    "untracked": ["beaglev-fire-gateware/", "beaglev_fire_demo/", "config/beaglev_fire_config.json", "tcl_scripts/beaglev_fire/"],
+    "notes": "Infrastructure changes ready to commit. BeagleV-Fire files not yet committed."
   },
 
   "context_management": {
-    "current_usage": "113k / 200k tokens (56%)",
-    "recommendation": "Compact now before building MI-V demo",
-    "reason": "Clear the debugging context, start fresh with working design"
+    "current_usage": "81k / 200k tokens (40.5%)",
+    "recommendation": "Compact now before BeagleV-Fire work",
+    "reason": "Clear infrastructure setup context, start fresh with BeagleV-Fire design"
   },
 
   "key_learnings": [
@@ -110,7 +142,11 @@
     "AN4597 has PCIe + DDR4 (not MI-V)",
     "Official MI-V reference uses SRAM, not DDR",
     "Always verify app note covers exact use case before committing time",
-    "For demos: working design > perfect design"
+    "For demos: working design > perfect design",
+    ".mcp.json is ONLY for MCP server configuration - use PROJECT_STATE.json for session state",
+    "Memory MCP has ~7k token overhead - only enable for cross-project work",
+    "Official Memory MCP server exists and works (entities/relations/observations)",
+    "Project-scoped MCP config auto-enables when cd to directory (~/meta-project pattern)"
   ],
 
   "coworker_presentation": {
