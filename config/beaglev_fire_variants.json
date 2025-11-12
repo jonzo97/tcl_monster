@@ -1,0 +1,148 @@
+{
+  "version": "1.0",
+  "description": "BeagleV-Fire design configuration variants for tcl_monster automation",
+  "device": {
+    "family": "PolarFireSoC",
+    "die": "MPFS025T",
+    "package": "FCVG484",
+    "speed": "STD",
+    "die_voltage": "1.05",
+    "part_range": "EXT",
+    "io_standard": "LVCMOS 1.8V"
+  },
+
+  "variants": [
+    {
+      "name": "minimal",
+      "description": "Minimal design - MSS only, no FPGA fabric",
+      "cape": "NONE",
+      "m2": "NONE",
+      "apu": "NONE",
+      "syzygy": "NONE",
+      "mipi_csi": "NONE",
+      "custom_hdl": [],
+      "use_case": "Software-only development, Linux testing"
+    },
+    {
+      "name": "default",
+      "description": "Default configuration with basic GPIO cape and M.2 Wi-Fi",
+      "cape": "DEFAULT",
+      "m2": "DEFAULT",
+      "apu": "NONE",
+      "syzygy": "DEFAULT",
+      "mipi_csi": "DEFAULT",
+      "custom_hdl": [],
+      "use_case": "General purpose development with Wi-Fi"
+    },
+    {
+      "name": "custom_cape_gpio",
+      "description": "Maximum GPIO breakout on cape connectors",
+      "cape": "GPIOS",
+      "m2": "DEFAULT",
+      "apu": "NONE",
+      "syzygy": "DEFAULT",
+      "mipi_csi": "NONE",
+      "custom_hdl": [],
+      "use_case": "GPIO expansion, sensor interfacing"
+    },
+    {
+      "name": "picorv_demo",
+      "description": "PicoRV32 soft RISC-V core in fabric",
+      "cape": "DEFAULT",
+      "m2": "DEFAULT",
+      "apu": "PICO_RV",
+      "syzygy": "DEFAULT",
+      "mipi_csi": "NONE",
+      "custom_hdl": [],
+      "use_case": "Dual RISC-V (MSS + fabric soft core)"
+    },
+    {
+      "name": "robotics",
+      "description": "Robotics cape with encoders, servos, sensors",
+      "cape": "ROBOTICS",
+      "m2": "NONE",
+      "apu": "NONE",
+      "syzygy": "NONE",
+      "mipi_csi": "NONE",
+      "custom_hdl": [],
+      "use_case": "Robotics applications"
+    },
+    {
+      "name": "comms",
+      "description": "Communications-focused cape",
+      "cape": "COMMS_CAPE",
+      "m2": "NONE",
+      "apu": "NONE",
+      "syzygy": "DEFAULT",
+      "mipi_csi": "NONE",
+      "custom_hdl": [],
+      "use_case": "Communications protocols"
+    },
+    {
+      "name": "4_uarts",
+      "description": "4 serial UART ports on cape connectors",
+      "cape": "4_UARTS",
+      "m2": "DEFAULT",
+      "apu": "NONE",
+      "syzygy": "NONE",
+      "mipi_csi": "NONE",
+      "custom_hdl": [],
+      "use_case": "Multi-UART applications"
+    },
+    {
+      "name": "custom_fabric",
+      "description": "Custom FPGA fabric logic (template for user modifications)",
+      "cape": "VERILOG_TEMPLATE",
+      "m2": "DEFAULT",
+      "apu": "NONE",
+      "syzygy": "DEFAULT",
+      "mipi_csi": "NONE",
+      "custom_hdl": [
+        "hdl/beaglev_fire/my_custom_logic.v"
+      ],
+      "use_case": "Starting point for custom fabric designs"
+    }
+  ],
+
+  "mss_configuration": {
+    "source": "beaglev-fire-gateware/sources/FPGA-design/mss.bundle",
+    "extraction_method": "git bundle extract",
+    "peripherals": {
+      "ethernet": "2x GEM (Gigabit Ethernet MAC)",
+      "usb": "1x USB 2.0 OTG",
+      "uart": "5x UART (1 reserved for console)",
+      "spi": "2x SPI",
+      "i2c": "2x I2C",
+      "can": "2x CAN",
+      "gpio": "MSS GPIO pins"
+    },
+    "memory": {
+      "ddr_type": "LPDDR4",
+      "ddr_width": "32-bit",
+      "ddr_size": "2GB"
+    }
+  },
+
+  "build_options": {
+    "synthesis_tool": "Synplify Pro",
+    "place_route_effort": "standard",
+    "timing_driven_pr": true,
+    "multi_pass_layout": false,
+    "num_multi_passes": 5,
+    "repair_min_delay": true
+  },
+
+  "export_formats": {
+    "bitstream": true,
+    "flashpro_express": true,
+    "directc": true,
+    "stp_file": true
+  },
+
+  "notes": {
+    "cape_reference": "beaglev-fire-gateware/sources/FPGA-design/script_support/components/CAPE/",
+    "m2_reference": "beaglev-fire-gateware/sources/FPGA-design/script_support/components/M2/",
+    "apu_reference": "beaglev-fire-gateware/sources/FPGA-design/script_support/components/APU/",
+    "constraints_reference": "beaglev-fire-gateware/sources/FPGA-design/script_support/constraints/"
+  }
+}

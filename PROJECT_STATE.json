@@ -1,15 +1,21 @@
 {
   "version": "1.0",
   "project": "tcl_monster - Libero FPGA Automation Toolkit",
-  "last_updated": "2025-11-12T15:30:00Z",
-  "current_phase": "Infrastructure Updated - Ready for BeagleV-Fire Work",
+  "last_updated": "2025-11-12T16:45:00Z",
+  "current_phase": "BeagleV-Fire Development - Phase 1: Setup & Understanding",
 
   "session_summary": {
     "date": "2025-11-12",
+    "goal": "Initialize BeagleV-Fire FPGA design development (modify/extend reference design)",
+    "time_invested": "~ongoing",
+    "outcome": "✅ Explored BeagleV-Fire files, created development plan, started Phase 1",
+    "next_session": "Continue Phase 1: Read reference TCL scripts, test Python builder"
+  },
+
+  "previous_session": {
+    "date": "2025-11-12 (earlier)",
     "goal": "Fix MCP configuration naming collision and prepare for BeagleV-Fire design",
-    "time_invested": "~1 hour (infrastructure cleanup and MCP setup)",
-    "outcome": "✅ Fixed .mcp.json collision, set up Memory MCP with conditional usage, created meta-project workspace",
-    "next_session": "Initialize BeagleV-Fire FPGA design for BeagleBoard"
+    "outcome": "✅ Fixed .mcp.json collision, set up Memory MCP with conditional usage"
   },
 
   "ddr4_debugging_summary": {
@@ -111,14 +117,100 @@
   },
 
   "beaglev_fire_work": {
-    "status": "🔴 Not yet started",
-    "untracked_files": [
-      "beaglev-fire-gateware/",
-      "beaglev_fire_demo/",
-      "config/beaglev_fire_config.json",
-      "tcl_scripts/beaglev_fire/"
+    "status": "✅ Phase 1 Complete - Ready for Phase 2 Integration",
+    "started": "2025-11-12",
+    "phase_1_completed": "2025-11-12",
+    "project_goal": "Modify/extend BeagleV-Fire reference design with custom MSS, FPGA fabric, and cape connectors",
+    "timeline": "Extended multi-session project",
+    "focus_areas": ["MSS (RISC-V + peripherals)", "FPGA fabric (custom logic)", "Cape connectors (P8/P9)"],
+
+    "resources_identified": {
+      "beaglev-fire-gateware": {
+        "type": "Complete reference design from BeagleBoard.org",
+        "version": "v2.0.5 (default), v6.0.1 (PicoRV)",
+        "purpose": "Production gateware with 8 build configurations",
+        "builder": "Python script + YAML configs",
+        "key_files": [
+          "build-options/*.yaml - 8 different configurations",
+          "recipes/libero-project/*.tcl - TCL build flow",
+          "sources/FPGA-design/BUILD_BVF_GATEWARE.tcl - Main build script",
+          "sources/FPGA-design/script_support/components/ - Modular HDL components"
+        ]
+      },
+      "beaglev_fire_demo": {
+        "type": "Empty Libero project skeleton",
+        "purpose": "Starting point for custom designs",
+        "device": "MPFS025T-FCVG484E",
+        "status": "Fresh/empty - no HDL or constraints yet"
+      },
+      "tcl_scripts/beaglev_fire": {
+        "type": "Minimal automation",
+        "files": ["create_minimal_project.tcl"],
+        "purpose": "Creates blank PolarFire SoC project"
+      }
+    },
+
+    "device_info": {
+      "fpga": "MPFS025T-FCVG484E (PolarFire SoC)",
+      "package": "FCVG484 (484-pin BGA)",
+      "cpu": "5x RISC-V cores (4x U54 @ 625MHz + 1x E51 monitor)",
+      "fabric": "23K logic elements, 68 math blocks",
+      "memory": "1.8 MB embedded RAM, 2GB LPDDR4 external",
+      "io_pins": "108 FPGA pins",
+      "peripherals": "2x GigE, USB 2.0, 5x UART, 2x SPI, 2x I2C, 2x CAN, 2x PCIe Gen2"
+    },
+
+    "build_configurations": [
+      "default - Full design with cape + M.2 Wi-Fi",
+      "minimal - Linux only, no FPGA fabric",
+      "picorv-apu - PicoRV32 CPU in fabric",
+      "sin-shls-apu - SmartHLS accelerator",
+      "cape-4-uarts - 4 serial UART ports",
+      "cape-comms - Communications cape",
+      "click-boards - Click cape support",
+      "robotics - Robotics cape",
+      "board-tests - Device validation"
     ],
-    "next_action": "Investigate existing BeagleV-Fire files and determine design requirements"
+
+    "documentation": "docs/beaglev_fire_guide.md - Comprehensive reference",
+
+    "development_plan": {
+      "phase_1": "Setup & Understanding (~30-45 min) - IN PROGRESS",
+      "phase_2": "Integration into tcl_monster (~1-2 hours)",
+      "phase_3": "Custom Modifications (~2-3 hours)",
+      "phase_4": "Automation & Documentation (~1-2 hours)"
+    },
+
+    "phase_1_tasks_completed": [
+      "✅ Explored BeagleV-Fire files and understood structure (3 resources identified)",
+      "✅ Created comprehensive development plan (4 phases)",
+      "✅ Read and analyzed key reference TCL scripts (BUILD_BVF_GATEWARE, generate-project, import-clients, run-flow)",
+      "✅ Analyzed Python builder workflow and requirements",
+      "✅ Created project directory structure (libero_projects/beaglev_fire, hdl/beaglev_fire)",
+      "✅ Created design variants configuration (config/beaglev_fire_variants.json with 8 variants)",
+      "✅ Created comprehensive documentation (docs/beaglev_fire_guide.md - 825 lines)",
+      "✅ Updated PROJECT_STATE.json with all Phase 1 findings"
+    ],
+
+    "phase_1_key_insights": [
+      "BUILD_BVF_GATEWARE.tcl uses modular component architecture (CAPE, M2, APU, SYZYGY, MIPI_CSI)",
+      "Parameter-driven configuration via TCL arguments (CAPE_OPTION:ROBOTICS syntax)",
+      "Three-stage build flow pattern: generate-project → import-clients → run-flow",
+      "Python builder combines HSS bootloader + FPGA bitstream (heavyweight approach)",
+      "Opportunity for lightweight TCL-only build flow without Python dependencies",
+      "Constraint organization is modular - each component has its own PDC/SDC files",
+      "MSS configuration stored in mss.bundle (git bundle format)",
+      "Multi-pass P&R strategy for timing closure (MAX delay → incremental MIN delay)"
+    ],
+
+    "token_savings": {
+      "this_session": "~76k tokens (exploration + documentation)",
+      "future_sessions": "~10k tokens (read guide only)",
+      "savings_per_session": "~66k tokens (6.6x reduction)",
+      "rationale": "Comprehensive documentation eliminates need to re-explore reference design"
+    },
+
+    "next_action": "Phase 2 - Extract reference components and create tcl_monster integration scripts"
   },
 
   "git_status": {

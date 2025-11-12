@@ -1,0 +1,52 @@
+{
+  "project_name": "beaglev_fire_demo",
+  "project_description": "BeagleV-Fire demonstration project for PolarFire SoC",
+  "device": {
+    "family": "PolarFireSoC",
+    "die": "MPFS025T",
+    "package": "FCVG484",
+    "speed": "STD",
+    "die_voltage": "1.05",
+    "part_range": "EXT"
+  },
+  "hdl": "VERILOG",
+  "project_options": {
+    "block_mode": 0,
+    "standalone_peripheral_initialization": 0,
+    "instantiate_in_smartdesign": 1,
+    "ondemand_build_dh": 1,
+    "use_relative_path": 0
+  },
+  "advanced_options": {
+    "IO_DEFT_STD": "LVCMOS 1.8V",
+    "RESTRICTPROBEPINS": 1,
+    "RESTRICTSPIPINS": 0,
+    "SYSTEM_CONTROLLER_SUSPEND_MODE": 0,
+    "TEMPR": "EXT",
+    "VCCI_1.2_VOLTR": "EXT",
+    "VCCI_1.5_VOLTR": "EXT",
+    "VCCI_1.8_VOLTR": "EXT",
+    "VCCI_2.5_VOLTR": "EXT",
+    "VCCI_3.3_VOLTR": "EXT",
+    "VOLTR": "EXT"
+  },
+  "sources": {
+    "hdl_files": [],
+    "constraint_files": []
+  },
+  "build_flow": {
+    "synthesize": true,
+    "place_and_route": true,
+    "timing": true,
+    "generate_bitstream": true
+  },
+  "notes": [
+    "BeagleV-Fire board specifications:",
+    "- Device: MPFS025T-FCVG484E",
+    "- CPU: 4x RISC-V U54 cores + 1x E51 monitor core @ 625 MHz",
+    "- FPGA Fabric: 23K logic elements, 68 math blocks, 4 SerDes lanes",
+    "- Memory: 2GB LPDDR4, 16GB eMMC, 128Mbit SPI Flash",
+    "- Peripherals: 2x GigE, USB 2.0, 5x UART, 2x SPI, 2x I2C, 2x CAN, 2x PCIe Gen2",
+    "- Reference gateware: https://git.beagleboard.org/beaglev-fire/gateware"
+  ]
+}

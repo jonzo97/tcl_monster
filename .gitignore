@@ -100,3 +100,12 @@ libero_projects/miv_simple_demo/
 !constraint/*.pdc
 !constraint/*.sdc
 !constraint/*.ndc
+
+# BeagleV-Fire reference design (external, regenerable)
+beaglev-fire-gateware/
+beaglev_fire_demo/
+
+# Keep BeagleV-Fire project structure
+!libero_projects/beaglev_fire/
+!hdl/beaglev_fire/
+!tcl_scripts/beaglev_fire/
