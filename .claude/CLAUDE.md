@@ -11,6 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **Target Environment:**
 - **Libero Version:** SoC v2024.2
 - **Primary Device:** PolarFire MPF300TS (MPF300 Eval Kit - FCG1152 package)
+- **BeagleV-Fire:** MPFS025T PolarFire SoC (5x RISC-V cores + FPGA fabric) - for embedded + FPGA development
 - **Future Devices:** PolarFire SoC, Igloo2, SmartFusion2 families
 - **Development OS:** WSL2 on Windows (Libero runs on Windows side)
 - **User Role:** Field Applications Engineer (FAE) - experienced with Libero GUI, exploring CLI automation
@@ -296,6 +297,16 @@ create_and_configure_core \
   - Memory MCP usage, session protocols, compaction strategy
 - **`docs/COLLEAGUE_GUIDE.md`** - Getting started guide for other FAEs
   - Installation, quick start, troubleshooting
+- **`docs/beaglev_fire_guide.md`** - BeagleV-Fire FPGA development guide
+  - Complete reference design documentation (8 configurations)
+  - Device specifications (MPFS025T PolarFire SoC)
+  - TCL script analysis, Python builder workflow
+  - Phase 1 complete (setup & documentation), ready for Phase 2 (tcl_monster integration)
+- **`docs/beaglev_fire_hardware_setup.md`** - BeagleV-Fire hardware & embedded software guide
+  - Hardware connection and setup
+  - Programming reference designs and custom bitstreams
+  - Embedded development (bare-metal, RTOS, Linux)
+  - LED blink demo and peripheral examples
 
 ### When to Read What
 
@@ -309,6 +320,8 @@ create_and_configure_core \
 | Recreating app notes | `docs/APP_NOTE_AUTOMATION.md` |
 | Context near limit | `docs/CONTEXT_STRATEGY.md` |
 | Sharing with colleague | `docs/COLLEAGUE_GUIDE.md` |
+| Working on BeagleV-Fire FPGA | `docs/beaglev_fire_guide.md` |
+| Setting up BeagleV-Fire hardware | `docs/beaglev_fire_hardware_setup.md` |
 
 ### Session Start Protocol (MANDATORY)
 

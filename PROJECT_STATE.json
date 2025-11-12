@@ -6,10 +6,10 @@
 
   "session_summary": {
     "date": "2025-11-12",
-    "goal": "Initialize BeagleV-Fire FPGA design development (modify/extend reference design)",
-    "time_invested": "~ongoing",
-    "outcome": "✅ Explored BeagleV-Fire files, created development plan, started Phase 1",
-    "next_session": "Continue Phase 1: Read reference TCL scripts, test Python builder"
+    "goal": "Initialize BeagleV-Fire development: FPGA automation (Phase 1) + hardware setup workflow",
+    "time_invested": "~2.5 hours",
+    "outcome": "✅ Phase 1 complete, hardware setup guide created, CLAUDE.md updated, ready for hardware connection",
+    "next_session": "Connect BeagleV-Fire hardware, program reference design, create LED blink demo"
   },
 
   "previous_session": {
@@ -211,6 +211,64 @@
     },
 
     "next_action": "Phase 2 - Extract reference components and create tcl_monster integration scripts"
+  },
+
+  "beaglev_fire_hardware_setup": {
+    "status": "📝 Documentation Complete - Ready for Hardware Connection",
+    "documentation_created": "2025-11-12",
+    "board_available": true,
+    "goal": "Connect hardware, verify with reference design, create LED blink demo, explore embedded development",
+
+    "development_paths": {
+      "mss_bare_metal": "Direct C programming on 5x RISC-V cores (LED, UART, GPIO, timers, I2C, SPI)",
+      "mss_freertos": "Real-time OS for multi-threaded embedded applications",
+      "mss_linux": "Linux userspace applications (SSH, sysfs GPIO, kernel modules)",
+      "fpga_fabric": "Custom HDL peripherals in programmable fabric",
+      "combined": "MSS software + FPGA fabric integration (hardware accelerators)"
+    },
+
+    "current_focus": "Plan hardware connection workflow, then verify with reference design",
+
+    "documentation": {
+      "hardware_setup": "docs/beaglev_fire_hardware_setup.md",
+      "fpga_development": "docs/beaglev_fire_guide.md"
+    },
+
+    "workflow_stages": [
+      "1. Hardware connection & UART console setup",
+      "2. Program reference design bitstream (verify hardware works)",
+      "3. Verify boot sequence via serial console",
+      "4. Set up development environment (SoftConsole or bare-metal toolchain)",
+      "5. Create LED blink demo (bare-metal, Linux, or FPGA fabric)",
+      "6. Expand to UART, timers, I2C, SPI, etc."
+    ],
+
+    "reference_design_options": [
+      "Pre-built bitstream (fastest - download from BeagleBoard.org)",
+      "Build from source (Python builder - 30-45 min build time)",
+      "tcl_monster integration (Phase 2+ - lightweight TCL-only workflow)"
+    ],
+
+    "led_blink_paths": {
+      "path_1": "MSS GPIO bare-metal C (direct hardware access)",
+      "path_2": "Modify HSS bootloader or payload",
+      "path_3": "Linux userspace sysfs GPIO",
+      "path_4": "FPGA fabric GPIO (custom HDL)"
+    },
+
+    "next_steps": [
+      "Review docs/beaglev_fire_hardware_setup.md",
+      "Connect USB-C cable (power + UART)",
+      "Open serial console (115200 baud)",
+      "Program reference bitstream",
+      "Verify HSS boot sequence",
+      "Choose LED blink approach and create demo"
+    ],
+
+    "parallel_work": {
+      "fpga_automation": "Phase 2 continues independently (extract components, create TCL scripts)",
+      "embedded_development": "Hardware setup and software demos (this track)"
+    }
   },
 
   "git_status": {
