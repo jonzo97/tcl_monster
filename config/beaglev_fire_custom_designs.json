@@ -1,0 +1,93 @@
+{
+  "version": "1.1",
+  "description": "Custom FPGA fabric designs for BeagleV-Fire rapid prototyping",
+  "created": "2025-11-12",
+
+  "custom_designs": [
+    {
+      "name": "led_blinker_fabric",
+      "description": "Simple 1 Hz LED blink using FPGA fabric",
+      "hdl_files": ["hdl/beaglev_fire/led_blinker_fabric.v"],
+      "complexity": "minimal",
+      "resources_estimate": "~50 LUTs, 26 FFs",
+      "use_case": "Hardware verification, fabric functionality test",
+      "integration": "Standalone fabric logic, no MSS interaction"
+    },
+    {
+      "name": "gpio_controller_apb",
+      "description": "8-bit GPIO with APB interface to MSS",
+      "hdl_files": ["hdl/beaglev_fire/gpio_controller.v"],
+      "complexity": "low",
+      "resources_estimate": "~200 LUTs, 50 FFs",
+      "use_case": "MSS-fabric integration test, GPIO expansion",
+      "integration": "Connected to MSS via APB bus (FIC)",
+      "software_access": "Memory-mapped registers at custom base address"
+    },
+    {
+      "name": "pwm_led_dimmer",
+      "description": "PWM-based LED dimming controller",
+      "hdl_files": ["hdl/beaglev_fire/pwm_controller.v"],
+      "complexity": "minimal",
+      "resources_estimate": "~30 LUTs, 10 FFs",
+      "use_case": "Variable brightness LED control, PWM testing",
+      "integration": "Standalone or APB-connected"
+    },
+    {
+      "name": "multi_pattern_leds",
+      "description": "4-LED pattern generator with FSM",
+      "hdl_files": ["hdl/beaglev_fire/led_pattern_fsm.v"],
+      "complexity": "low",
+      "resources_estimate": "~100 LUTs, 20 FFs",
+      "use_case": "Finite state machine demo, visual debugging",
+      "integration": "Standalone fabric, optional button input"
+    },
+    {
+      "name": "uart_loopback_fabric",
+      "description": "UART echo/loopback in FPGA fabric",
+      "hdl_files": ["hdl/beaglev_fire/uart_loopback.v"],
+      "complexity": "medium",
+      "resources_estimate": "~300 LUTs, 100 FFs",
+      "use_case": "Serial communication test, fabric UART demo",
+      "integration": "Independent of MSS UART"
+    }
+  ],
+
+  "build_configurations": [
+    {
+      "variant": "led_blink_only",
+      "base": "minimal",
+      "custom_hdl": ["hdl/beaglev_fire/led_blinker_fabric.v"],
+      "constraints": ["constraint/beaglev_fire_led_blink.pdc"],
+      "description": "Minimal + LED blink fabric logic"
+    },
+    {
+      "variant": "gpio_expansion",
+      "base": "default",
+      "custom_hdl": ["hdl/beaglev_fire/gpio_controller.v"],
+      "mss_integration": "APB slave at 0x7000_0000",
+      "description": "Default + 8-bit GPIO controller via APB"
+    },
+    {
+      "variant": "pwm_demo",
+      "base": "default",
+      "custom_hdl": ["hdl/beaglev_fire/pwm_controller.v"],
+      "description": "Default + PWM LED dimming"
+    }
+  ],
+
+  "test_progression": [
+    "1. LED blink fabric (standalone) - verify FPGA fabric works",
+    "2. GPIO controller (APB) - verify MSS-fabric integration",
+    "3. PWM dimmer - verify clock management and timing",
+    "4. LED patterns (FSM) - verify state machine logic",
+    "5. UART loopback - verify serial communication"
+  ],
+
+  "next_designs_to_create": [
+    "SPI master controller",
+    "I2C master controller",
+    "Simple timer with interrupt to MSS",
+    "AXI4 memory-mapped peripheral",
+    "Hardware accelerator (multiply-accumulate)"
+  ]
+}

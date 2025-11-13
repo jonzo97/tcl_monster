@@ -1,0 +1,29 @@
+# BeagleV-Fire LED Blink Pin Constraints
+# Target: MPFS025T-FCVG484E
+# LED blinker fabric design
+
+# Clock from FIC (Fabric Interface Controller)
+# Assuming 50 MHz clock from MSS
+set_io clk_50mhz \
+    -pinname {PLACEHOLDER_CCC_OUT} \
+    -fixed yes \
+    -DIRECTION INPUT
+
+# Reset from MSS
+set_io rst_n \
+    -pinname {PLACEHOLDER_MSS_RESET} \
+    -fixed yes \
+    -DIRECTION INPUT
+
+# User LED (check BeagleV-Fire schematic for actual pin)
+# Example: Assuming LED on GPIO bank
+set_io led \
+    -pinname {AA12} \
+    -fixed yes \
+    -DIRECTION OUTPUT \
+    -OUT_DRIVE 12 \
+    -SLEW High \
+    -RES_PULL None
+
+# Timing constraints
+create_clock -name {clk_50mhz} -period 20 [get_ports {clk_50mhz}]
