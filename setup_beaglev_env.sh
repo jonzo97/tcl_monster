@@ -16,6 +16,7 @@ export LM_LICENSE_FILE="/mnt/c/Microchip/License.dat"
 
 # Add tools to PATH
 export PATH="$LIBERO_INSTALL_DIR/Designer/bin:$PATH"
+export PATH="$LIBERO_INSTALL_DIR/Designer/bin64:$PATH"
 export PATH="$SC_INSTALL_DIR/riscv-unknown-elf-gcc/bin:$PATH"
 
 echo "=== BeagleV-Fire Build Environment ==="
