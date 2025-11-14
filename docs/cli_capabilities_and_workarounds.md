@@ -11,9 +11,9 @@
 
 Through extensive testing, we've mapped out Libero/SoftConsole CLI capabilities and developed automation patterns to eliminate repetitive manual work. This guide shows:
 
-- ✅ **What's fully scriptable** - Complete automation possible
-- ⚠️ **What requires GUI but has workarounds** - Can be minimized
-- ❌ **What's GUI-only** - Must be done manually (rare)
+- [YES] **What's fully scriptable** - Complete automation possible
+- [WARN] **What requires GUI but has workarounds** - Can be minimized
+- [NO] **What's GUI-only** - Must be done manually (rare)
 
 **Key Innovation:** Serial console automation via file-based command queue eliminates repetitive SSH/serial terminal sessions.
 
@@ -21,7 +21,7 @@ Through extensive testing, we've mapped out Libero/SoftConsole CLI capabilities 
 
 ## Libero SoC: CLI vs GUI Capabilities
 
-### ✅ Fully Scriptable (100% CLI)
+### [YES] Fully Scriptable (100% CLI)
 
 These operations work perfectly via TCL scripts with NO GUI required:
 
@@ -37,7 +37,7 @@ save_project
 close_project
 ```
 
-**Verified:** ✅ Works in batch mode (`SCRIPT` mode)
+**Verified:** [YES] Works in batch mode (`SCRIPT` mode)
 
 #### HDL Import
 ```tcl
@@ -49,7 +49,7 @@ build_design_hierarchy
 set_root -module {top_module::work}
 ```
 
-**Verified:** ✅ Complete automation, no GUI needed
+**Verified:** [YES] Complete automation, no GUI needed
 
 #### Constraint Association
 ```tcl
@@ -63,7 +63,7 @@ create_links -sdc "./constraints/timing.sdc"
 create_links -fp_pdc "./constraints/floorplan.pdc"
 ```
 
-**Verified:** ✅ All constraint types can be associated via script
+**Verified:** [YES] All constraint types can be associated via script
 
 #### IP Core Configuration
 ```tcl
@@ -85,7 +85,7 @@ create_and_configure_core \
     }
 ```
 
-**Verified:** ✅ All Microchip IP cores configurable via TCL
+**Verified:** [YES] All Microchip IP cores configurable via TCL
 **Note:** Parameters must be exact strings from IP configurator
 
 #### SmartDesign Canvas
@@ -106,7 +106,7 @@ sd_create_scalar_port -sd_name "top" -port_name "RX" -port_direction "IN"
 sd_connect_pins -sd_name "top" -pin_names {"RX" "UART_0:RX"}
 ```
 
-**Verified:** ✅ Complete SmartDesign automation
+**Verified:** [YES] Complete SmartDesign automation
 **Limitation:** Complex hierarchies are tedious - use templates
 
 #### Build Flow
@@ -122,7 +122,7 @@ export_prog_job -job_file_name "program.job"
 export_bitstream_file -file_name "bitstream" -format {SPI}
 ```
 
-**Verified:** ✅ End-to-end automation from HDL to .spi file
+**Verified:** [YES] End-to-end automation from HDL to .spi file
 **Time Saved:** Hours per build (no GUI navigation)
 
 #### Error Checking
@@ -138,13 +138,13 @@ if {[catch {check_tool -name {SYNTHESIZE}} result]} {
 
 ---
 
-### ⚠️ Scriptable with Limitations
+### [WARN] Scriptable with Limitations
 
 These CAN be scripted but have caveats:
 
 #### Pin Assignment (PDC)
 
-**Scriptable:** ✅ Yes via PDC files
+**Scriptable:** [YES] Yes via PDC files
 **Limitation:** Pin names must be exact (case-sensitive)
 **Workaround:** Generate PDC from spreadsheet or reference design
 
@@ -160,7 +160,7 @@ set_io -port_name {LED[0]} -pin_name {V22} -fixed true -io_std LVCMOS33
 
 #### Timing Constraints (SDC)
 
-**Scriptable:** ✅ Yes, standard SDC syntax
+**Scriptable:** [YES] Yes, standard SDC syntax
 **Limitation:** Getting correct clock names can be tricky
 **Workaround:** Run synthesis once, check log for actual clock names
 
@@ -174,7 +174,7 @@ set_output_delay -clock {clk_50mhz} 5 [get_ports {led}]
 
 #### Programming File Export
 
-**Scriptable:** ✅ Multiple formats supported
+**Scriptable:** [YES] Multiple formats supported
 **Limitation:** Format names are specific strings
 
 ```tcl
@@ -188,7 +188,7 @@ export_prog_job -job_file_name "prog"    # Programming job
 
 ---
 
-### ❌ GUI-Only Operations
+### [NO] GUI-Only Operations
 
 Very few things REQUIRE the GUI:
 
@@ -197,7 +197,7 @@ Very few things REQUIRE the GUI:
 **GUI-Only:** Finding exact IP core VLNV strings
 **Workaround:**
 1. Configure once in GUI
-2. Export configuration to TCL: `File → Export Script`
+2. Export configuration to TCL: `File -> Export Script`
 3. Extract VLNV and parameters
 4. Use in future scripts
 
@@ -248,13 +248,13 @@ report_timing -max_paths 10 -output_file "timing.rpt"
 #### Architecture
 
 ```
-┌─────────────────┐         ┌──────────────────┐         ┌─────────────┐
-│ WSL/Linux       │         │ PowerShell       │         │ BeagleV-Fire│
-│                 │         │ serial_smart.ps1 │         │             │
-│ Echo command >  │────────▶│ Monitor queue ───│────────▶│ Execute     │
-│ queue file      │         │ Send to serial   │         │ Return output│
-│                 │◀────────│ Log to file      │◀────────│             │
-└─────────────────┘         └──────────────────┘         └─────────────┘
++-----------------┐         +------------------┐         +-------------┐
+| WSL/Linux       |         | PowerShell       |         | BeagleV-Fire|
+|                 |         | serial_smart.ps1 |         |             |
+| Echo command >  |--------▶| Monitor queue ---|--------▶| Execute     |
+| queue file      |         | Send to serial   |         | Return output|
+|                 |◀--------| Log to file      |◀--------|             |
++-----------------┘         +------------------┘         +-------------┘
 ```
 
 #### Implementation: `C:\Temp\serial_smart.ps1`
@@ -321,11 +321,11 @@ tail -20 /mnt/c/Temp/beaglev_serial.log
 
 #### Advantages
 
-✅ **No manual typing** - Commands sent programmatically
-✅ **Persistent log** - All output captured to file
-✅ **Non-blocking** - Can queue multiple commands
-✅ **Password automation** - Can send passwords via queue
-✅ **WSL integration** - Works seamlessly with automation scripts
+[YES] **No manual typing** - Commands sent programmatically
+[YES] **Persistent log** - All output captured to file
+[YES] **Non-blocking** - Can queue multiple commands
+[YES] **Password automation** - Can send passwords via queue
+[YES] **WSL integration** - Works seamlessly with automation scripts
 
 #### Real Example: FPGA Programming Automation
 
@@ -379,8 +379,8 @@ if {[catch {check_tool -name {SYNTHESIZE}} result]} {
 
 ```
 constraint/
-├── pins.pdc           # Physical pin assignments only
-└── timing.sdc         # Timing constraints only
++-- pins.pdc           # Physical pin assignments only
++-- timing.sdc         # Timing constraints only
 ```
 
 **Why:** PDC parser doesn't understand SDC commands like `get_nets`, `create_clock`
@@ -518,24 +518,24 @@ echo "✓ All configurations built successfully"
 
 | Tool/Operation | GUI Required? | Scriptable? | Notes |
 |----------------|---------------|-------------|-------|
-| **Libero Project Creation** | ❌ | ✅ | Fully automated via TCL |
-| **HDL Import** | ❌ | ✅ | `import_files` works perfectly |
-| **IP Core Config** | ⚠️ | ✅ | Need VLNV from GUI first |
-| **SmartDesign** | ⚠️ | ✅ | Tedious but scriptable |
-| **Constraints (PDC/SDC)** | ❌ | ✅ | Text files, fully scriptable |
-| **Synthesis** | ❌ | ✅ | `run_tool -name SYNTHESIZE` |
-| **Place & Route** | ❌ | ✅ | `run_tool -name PLACEROUTE` |
-| **Timing Analysis** | ⚠️ | ✅ | Reports scriptable, GUI better for debug |
-| **Bitstream Generation** | ❌ | ✅ | `export_bitstream_file` |
-| **FlashPro Programming** | ⚠️ | ✅ | Command-line tool exists |
-| **BeagleV Linux Programming** | ❌ | ✅ | Via serial automation! |
-| **SoftConsole Compile** | ❌ | ✅ | Standard make/gcc |
-| **SoftConsole Debug** | ✅ | ❌ | GUI debugger needed |
+| **Libero Project Creation** | [NO] | [YES] | Fully automated via TCL |
+| **HDL Import** | [NO] | [YES] | `import_files` works perfectly |
+| **IP Core Config** | [WARN] | [YES] | Need VLNV from GUI first |
+| **SmartDesign** | [WARN] | [YES] | Tedious but scriptable |
+| **Constraints (PDC/SDC)** | [NO] | [YES] | Text files, fully scriptable |
+| **Synthesis** | [NO] | [YES] | `run_tool -name SYNTHESIZE` |
+| **Place & Route** | [NO] | [YES] | `run_tool -name PLACEROUTE` |
+| **Timing Analysis** | [WARN] | [YES] | Reports scriptable, GUI better for debug |
+| **Bitstream Generation** | [NO] | [YES] | `export_bitstream_file` |
+| **FlashPro Programming** | [WARN] | [YES] | Command-line tool exists |
+| **BeagleV Linux Programming** | [NO] | [YES] | Via serial automation! |
+| **SoftConsole Compile** | [NO] | [YES] | Standard make/gcc |
+| **SoftConsole Debug** | [YES] | [NO] | GUI debugger needed |
 
 **Legend:**
-- ✅ Fully scriptable, no GUI needed
-- ⚠️ Scriptable with some GUI assistance
-- ❌ No scripting support
+- [YES] Fully scriptable, no GUI needed
+- [WARN] Scriptable with some GUI assistance
+- [NO] No scripting support
 
 ---
 
@@ -600,8 +600,8 @@ Almost the entire FPGA development flow can be scripted, from project creation t
 3. Complete BeagleV-Fire programming automation
 
 **Time Savings:**
-- Per build: 30-45 minutes → 15-20 minutes
-- Per programming cycle: 5-10 minutes → 30 seconds
+- Per build: 30-45 minutes -> 15-20 minutes
+- Per programming cycle: 5-10 minutes -> 30 seconds
 - Total: **~70% time reduction for iterative development**
 
 **Accessibility:**

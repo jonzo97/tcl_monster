@@ -27,29 +27,32 @@ Claude Code has a **200k token context window**. For complex projects:
    - Recent code changes
    - Immediate decisions and rationale
 
-2. **Memory MCP** (persistent knowledge graph)
+2. **PROJECT_STATE.json** (persistent project knowledge)
    - Architecture decisions
    - File locations and purposes
    - Design patterns and utilities
    - Known issues and workarounds
+   - Session summaries and learnings
 
 3. **Documentation** (searchable reference)
    - ROADMAP.md for long-term planning
    - CLAUDE.md for session startup
    - Specialized docs for deep dives
+   - PolarFire Atlas MCP for vendor documentation
 
 ---
 
-## Memory MCP Usage
+## PolarFire Atlas MCP - Vendor Documentation RAG
 
-### Knowledge Graph Structure
+### What It Is
 
-Memory MCP stores information as a graph:
-- **Entities:** Projects, files, modules, decisions, patterns
-- **Relations:** depends_on, implements, contains, part_of
-- **Observations:** Facts, states, notes about entities
+PolarFire Atlas is a custom MCP server providing semantic search over PolarFire FPGA documentation:
+- **ChromaDB vector database** with 1,233+ indexed doc chunks
+- **Embeddings:** BAAI/bge-small-en-v1.5 (384-dim vectors)
+- **Documents:** User guides, datasheets, app notes, design guides
+- **Search quality:** 0.75-0.87 similarity scores
 
-### What to Store in Memory MCP
+### When to Use It
 
 #### 1. Project Architecture
 ```
@@ -126,7 +129,7 @@ Observations:
 **Update before:**
 - Context compaction (when approaching token limits)
 - End of session (even if context remains)
-- Switching work locations (home → work or vice versa)
+- Switching work locations (home -> work or vice versa)
 
 ---
 
@@ -339,18 +342,18 @@ class ContextManager:
 ## Success Indicators
 
 **Context management is working well when:**
-- ✅ After compaction, work resumes immediately without user re-explaining
-- ✅ Cross-device work (home → work) is seamless
-- ✅ No duplicate utilities created in wrong locations
-- ✅ Architecture stays consistent across sessions
-- ✅ User rarely says "remember we put that in..."
+- [YES] After compaction, work resumes immediately without user re-explaining
+- [YES] Cross-device work (home -> work) is seamless
+- [YES] No duplicate utilities created in wrong locations
+- [YES] Architecture stays consistent across sessions
+- [YES] User rarely says "remember we put that in..."
 
 **Context management needs improvement when:**
-- ❌ After compaction, need to ask "where were we?"
-- ❌ Recreating files that already exist
-- ❌ Forgetting previous decisions
-- ❌ Architecture drift across sessions
-- ❌ User frequently needs to re-explain context
+- [NO] After compaction, need to ask "where were we?"
+- [NO] Recreating files that already exist
+- [NO] Forgetting previous decisions
+- [NO] Architecture drift across sessions
+- [NO] User frequently needs to re-explain context
 
 ---
 
@@ -373,20 +376,20 @@ class ContextManager:
 
 ## Anti-Patterns to Avoid
 
-❌ **Don't:** Rely only on conversation history
-✅ **Do:** Save to Memory MCP and docs
+[NO] **Don't:** Rely only on conversation history
+[YES] **Do:** Save to Memory MCP and docs
 
-❌ **Don't:** Wait until compaction to save context
-✅ **Do:** Update Memory MCP continuously
+[NO] **Don't:** Wait until compaction to save context
+[YES] **Do:** Update Memory MCP continuously
 
-❌ **Don't:** Assume file locations
-✅ **Do:** Query Memory MCP or check filesystem
+[NO] **Don't:** Assume file locations
+[YES] **Do:** Query Memory MCP or check filesystem
 
-❌ **Don't:** Skip session startup protocol
-✅ **Do:** Query Memory MCP every session start
+[NO] **Don't:** Skip session startup protocol
+[YES] **Do:** Query Memory MCP every session start
 
-❌ **Don't:** Create files without checking if they exist
-✅ **Do:** Search for existing files first
+[NO] **Don't:** Create files without checking if they exist
+[YES] **Do:** Search for existing files first
 
 ---
 
@@ -446,32 +449,32 @@ This section documents actual context management practices used during TCL Monst
 
 **Architecture:**
 ```
-┌─────────────────────────┐
-│ Claude Code Session     │
-│                         │
-│  "How do I configure    │──────┐
-│   DDR4 memory?"         │      │
-└─────────────────────────┘      │
-                                 │ MCP Query
-┌─────────────────────────┐      │
-│ fpga_mcp MCP Server     │◀─────┘
-│ ├── ChromaDB            │
-│ │   ├── Embeddings      │
-│ │   └── 1,233 chunks    │
-│ └── BAAI/bge-small-en   │
-│     (384-dim)           │
-└─────────────────────────┘
-          │
-          │ Semantic Search
++-------------------------┐
+| Claude Code Session     |
+|                         |
+|  "How do I configure    |------┐
+|   DDR4 memory?"         |      |
++-------------------------┘      |
+                                 | MCP Query
++-------------------------┐      |
+| fpga_mcp MCP Server     |◀-----┘
+| +-- ChromaDB            |
+| |   +-- Embeddings      |
+| |   +-- 1,233 chunks    |
+| +-- BAAI/bge-small-en   |
+|     (384-dim)           |
++-------------------------┘
+          |
+          | Semantic Search
           ▼
-┌─────────────────────────┐
-│ Indexed Documentation   │
-│ ├── User IO Guide       │
-│ ├── Clocking Guide      │
-│ ├── Memory Controller   │
-│ ├── Datasheet          │
-│ └── 7 core documents    │
-└─────────────────────────┘
++-------------------------┐
+| Indexed Documentation   |
+| +-- User IO Guide       |
+| +-- Clocking Guide      |
+| +-- Memory Controller   |
+| +-- Datasheet          |
+| +-- 7 core documents    |
++-------------------------┘
 ```
 
 **Implementation:**
@@ -509,13 +512,13 @@ queries = [
 **Usage Pattern:**
 ```
 Session Start
-    ↓
+    |
 Query fpga_mcp: "DDR4 memory controller parameters"
-    ↓
+    |
 Receive: Relevant excerpts (5k tokens)
-    ↓
+    |
 Generate TCL configuration
-    ↓
+    |
 Save to PROJECT_STATE.json
 ```
 
@@ -575,21 +578,21 @@ Save to PROJECT_STATE.json
 **Structure:**
 ```
 docs/
-├── ROADMAP.md              # Strategic overview (read at session start)
-├── CLAUDE.md               # Session startup checklist
-├── DESIGN_LIBRARY.md       # Design catalog (reference)
-│
-├── Topic-Specific/         # Deep dives (read on-demand)
-│   ├── beaglev_fire_guide.md
-│   ├── libero_softconsole_cli_guide.md
-│   └── cli_capabilities_and_workarounds.md
-│
-├── sessions/               # Session logs (for recovery)
-│   └── session_2025-11-13.md
-│
-└── lessons_learned/        # Extracted patterns
-    ├── constraint_association.md
-    └── error_handling_patterns.md
++-- ROADMAP.md              # Strategic overview (read at session start)
++-- CLAUDE.md               # Session startup checklist
++-- DESIGN_LIBRARY.md       # Design catalog (reference)
+|
++-- Topic-Specific/         # Deep dives (read on-demand)
+|   +-- beaglev_fire_guide.md
+|   +-- libero_softconsole_cli_guide.md
+|   +-- cli_capabilities_and_workarounds.md
+|
++-- sessions/               # Session logs (for recovery)
+|   +-- session_2025-11-13.md
+|
++-- lessons_learned/        # Extracted patterns
+    +-- constraint_association.md
+    +-- error_handling_patterns.md
 ```
 
 **Reading Strategy:**
@@ -611,20 +614,20 @@ docs/
 **Usage Policy:**
 ```
 Use fpga_mcp:
-  ✅ When querying PolarFire-specific documentation
-  ✅ For IP core parameter lookups
-  ✅ When troubleshooting hardware issues
+  [YES] When querying PolarFire-specific documentation
+  [YES] For IP core parameter lookups
+  [YES] When troubleshooting hardware issues
   
-  ❌ For general TCL syntax (use web search)
-  ❌ For already-known information
-  ❌ After information already retrieved this session
+  [NO] For general TCL syntax (use web search)
+  [NO] For already-known information
+  [NO] After information already retrieved this session
 
 Use Memory MCP:
-  ✅ For cross-project knowledge (mchp-mcp-core, fpga_mcp, tcl_monster relationships)
-  ✅ For meta-work organization
+  [YES] For cross-project knowledge (mchp-mcp-core, fpga_mcp, tcl_monster relationships)
+  [YES] For meta-work organization
   
-  ❌ For single-project work (use PROJECT_STATE.json instead)
-  ❌ When context budget is tight
+  [NO] For single-project work (use PROJECT_STATE.json instead)
+  [NO] When context budget is tight
 ```
 
 **Configuration Pattern:**
@@ -651,38 +654,38 @@ Use Memory MCP:
 
 **Context Management Flow:**
 
-**Tokens: 0k → 15k (Startup)**
+**Tokens: 0k -> 15k (Startup)**
 ```
 1. Read PROJECT_STATE.json (2k tokens)
-   └─ "Last session: Built counter demo, ready for BeagleV"
+   +- "Last session: Built counter demo, ready for BeagleV"
    
 2. Read CLAUDE.md (3k tokens)
-   └─ Device: MPFS025T, Libero path, BeagleV reference location
+   +- Device: MPFS025T, Libero path, BeagleV reference location
    
 3. Query fpga_mcp: "BeagleV-Fire pin assignments" (5k tokens)
-   └─ Returns: Cape connector pinout, LED on V22
+   +- Returns: Cape connector pinout, LED on V22
    
 4. Read beaglev_fire_guide.md header (5k tokens)
-   └─ Reference design locations, FIC clock info
+   +- Reference design locations, FIC clock info
 ```
 
-**Tokens: 15k → 50k (Development)**
+**Tokens: 15k -> 50k (Development)**
 ```
 5. Create TCL scripts (working code, no docs needed)
 6. Test build, encounter PDC error
 7. Query fpga_mcp: "PDC vs SDC file usage" (5k tokens)
-   └─ Returns: Separate files, parser limitations
+   +- Returns: Separate files, parser limitations
 8. Fix and rebuild
 ```
 
-**Tokens: 50k → 85k (Transfer & Programming)**
+**Tokens: 50k -> 85k (Transfer & Programming)**
 ```
 9. Research FPGA programming (grep docs, 10k tokens)
 10. Discover update-gateware.sh via serial exploration
 11. Implement serial automation (no external docs)
 ```
 
-**Tokens: 85k → 90k (Checkpoint)**
+**Tokens: 85k -> 90k (Checkpoint)**
 ```
 12. Update PROJECT_STATE.json with:
     - BeagleV-Fire LED blink complete
@@ -695,11 +698,11 @@ Use Memory MCP:
 **Without RAG/Structure:** Would have been 180k+ (90%)
 
 **Key Practices:**
-- ✅ fpga_mcp queried 3 times (15k tokens)
-- ✅ PROJECT_STATE.json updated continuously  
-- ✅ Topic docs read selectively
-- ❌ Did NOT read full PolarFire documentation
-- ❌ Did NOT use Memory MCP (single project focus)
+- [YES] fpga_mcp queried 3 times (15k tokens)
+- [YES] PROJECT_STATE.json updated continuously  
+- [YES] Topic docs read selectively
+- [NO] Did NOT read full PolarFire documentation
+- [NO] Did NOT use Memory MCP (single project focus)
 
 ### Lessons from Production Use
 
@@ -775,9 +778,9 @@ Use Memory MCP:
 - Safety buffer (for compaction): 50k
 
 **Red Flags:**
-- Startup >10k tokens → Documentation too large
-- Documentation >50k tokens → Need better RAG/indexing
-- Active development >150k → Risk of forced compaction
+- Startup >10k tokens -> Documentation too large
+- Documentation >50k tokens -> Need better RAG/indexing
+- Active development >150k -> Risk of forced compaction
 
 ### Tools Comparison
 
@@ -821,13 +824,13 @@ Use Memory MCP:
 - Topic-specific docs
 - Manual session summaries
 
-**Level 3: RAG-Assisted (20-50k tokens/session)** ← TCL Monster is here
+**Level 3: RAG-Assisted (20-50k tokens/session)** <- TCL Monster is here
 - Semantic document search
 - PROJECT_STATE.json for continuity
 - Selective MCP usage
 - Structured doc hierarchy
 
-**Level 4: Fully Autonomous (10-30k tokens/session)** ← Future goal
+**Level 4: Fully Autonomous (10-30k tokens/session)** <- Future goal
 - Auto-updating knowledge bases
 - Multi-project knowledge graphs
 - Context-aware documentation
@@ -838,3 +841,391 @@ Use Memory MCP:
 **Status:** Level 3 - Production-validated RAG and structured docs
 **Maintained by:** Jonathan Orgill (FAE) + Claude Code
 **Last Updated:** 2025-11-14
+
+---
+
+## CORRECTIONS (2025-11-14)
+
+### What We Actually Use
+
+**1. PolarFire Atlas MCP** (not Memory MCP)
+- Vendor documentation RAG system (~/fpga_mcp or similar)
+- 1,233+ document chunks indexed
+- Semantic search for IP parameters, timing, electrical specs
+- **Use for:** "How do I configure PF_CCC?" "What are DDR4 timing requirements?"
+
+**2. PROJECT_STATE.json** (not .mcp.json)
+- Project-specific state file (checked into git)
+- Session summaries, architecture decisions, learnings
+- **Update continuously** during development
+- **Commit with code changes**
+
+**3. High-Quality Code Generation**
+
+The real value isn't just context management - it's **how we produce production-quality code**:
+
+#### Verilog Best Practices
+- Parameterized modules for reusability
+- Descriptive signal names (not x, y, z)
+- Proper clock domain crossing handling
+- State machines with clear enum types
+
+#### TCL Script Patterns
+- Error checking with `catch {}` for lenient builds
+- Separate constraint files (PDC vs SDC)
+- Modular functions for reusable operations
+- Clear comments explaining Libero-specific quirks
+
+#### SmartDesign Automation
+- Scriptable canvas creation
+- Automated component instantiation
+- Connection validation before build
+- Export patterns for sharing designs
+
+**Example - Quality TCL:**
+```tcl
+# Create clock conditioning circuit with validation
+proc create_ccc {instance_name input_freq output_freq} {
+    set mult [expr {$output_freq / $input_freq}]
+    
+    # Validate PLL multiplier range
+    if {$mult < 1 || $mult > 128} {
+        error "Invalid PLL multiplier: $mult (range: 1-128)"
+    }
+    
+    create_and_configure_core \
+        -core_vlnv {Actel:SgCore:PF_CCC:*} \
+        -component_name $instance_name \
+        -params [list "PLL_MULT:$mult" ...]
+        
+    puts "\[INFO\] Created $instance_name: ${input_freq}MHz -> ${output_freq}MHz"
+}
+```
+
+**Example - Quality Verilog:**
+```verilog
+// Parameterized counter with clear naming
+module generic_counter #(
+    parameter WIDTH = 32,
+    parameter MAX_COUNT = 100_000_000  // 1 second at 100MHz
+) (
+    input  wire             clk,
+    input  wire             rst_n,
+    input  wire             enable,
+    output wire             pulse_out,
+    output wire [WIDTH-1:0] count_value
+);
+
+    reg [WIDTH-1:0] counter_reg;
+    
+    assign pulse_out = (counter_reg == MAX_COUNT - 1);
+    assign count_value = counter_reg;
+    
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            counter_reg <= {WIDTH{1'b0}};
+        end else if (enable) begin
+            if (counter_reg == MAX_COUNT - 1) begin
+                counter_reg <= {WIDTH{1'b0}};
+            end else begin
+                counter_reg <= counter_reg + 1'b1;
+            end
+        end
+    end
+
+endmodule
+```
+
+### Documentation That Matters
+
+**For Your Colleague:**
+1. **`cli_capabilities_and_workarounds.md`** - What's scriptable, what's not, how to work around it
+2. **`libero_softconsole_cli_guide.md`** - Complete CLI reference with WSL instructions
+3. **`ROADMAP.md`** - Where the project is going
+4. **`PROJECT_STATE.json`** - Current state, recent decisions
+
+**Don't focus on:**
+- .mcp.json files (outdated pattern)
+- Memory MCP (not used for this project)
+- Token counting minutiae (interesting but not actionable)
+
+**Do focus on:**
+- Real automation examples that save time
+- Code quality patterns that prevent bugs
+- CLI capabilities matrix (what's possible)
+- Serial automation pattern (hands-free board programming)
+
+
+---
+
+## Handling Vendor Documentation at Scale
+
+### The Challenge
+
+PolarFire SoC has **extensive** documentation:
+- 10+ user guides (200-400 pages each)
+- Multiple datasheets (300+ pages)
+- 50+ application notes
+- Design guides, errata sheets, programming guides
+- **Total: 2,000+ pages of technical content**
+
+**Traditional approach:** Open PDFs, Ctrl+F, read pages, copy parameters
+**Problem:** Each PDF read consumes 30k-80k tokens, searches are slow, context fills up fast
+
+### Our Solution: PolarFire Atlas MCP
+
+**What it is:** Custom MCP server wrapping a RAG (Retrieval-Augmented Generation) system
+
+**Architecture:**
+```
+Query: "DDR4 memory controller timing parameters"
+    |
+PolarFire Atlas MCP Server
+    |
+Semantic Search (BAAI/bge-small-en-v1.5 embeddings)
+    |
+ChromaDB Vector Database
+    +-- Memory Controller Guide (250 chunks)
+    +-- Datasheet (227 chunks)
+    +-- User IO Guide (199 chunks)
+    +-- 4 more docs...
+    |
+Returns: Top 5 relevant chunks with context
+    +-- Chunk 1: DDR4 timing requirements table
+    +-- Chunk 2: Configuration parameter descriptions
+    +-- Chunk 3: Example timing constraints
+```
+
+**Token cost:** ~5k tokens per query (vs 50k+ reading full PDF)
+
+### How We Use It
+
+**Typical Workflow:**
+1. Start design task: "Configure DDR4 for BeagleV-Fire"
+2. Query PolarFire Atlas: "PF_DDR4 configuration parameters"
+3. Receive: Relevant excerpts + page references
+4. Generate TCL with correct parameters
+5. Save parameters to PROJECT_STATE.json
+
+**What We Query For:**
+- IP core parameter names and valid ranges
+- Pin assignment conventions
+- Timing constraint examples
+- Electrical specifications (voltage, current)
+- Clock frequency limits
+- Resource usage estimates
+
+**What We DON'T Query For:**
+- Already-known information (cached in PROJECT_STATE.json)
+- General TCL syntax (use web search)
+- Non-vendor topics (use regular documentation)
+
+### Indexing Strategy
+
+**Document Selection** (what we indexed):
+[YES] User IO Guide - Pin configuration, standards, LVDS
+[YES] Clocking Guide - CCC/PLL configuration
+[YES] Memory Controller Guide - DDR3/DDR4 parameters
+[YES] Datasheet - Electrical specs, resource counts
+[YES] Transceiver Guide - SERDES, PCIe configuration
+[YES] Fabric User Guide - Logic resources, routing
+
+[NO] Marketing materials
+[NO] Quick start guides (covered in our docs)
+[NO] Legacy device documentation
+
+**Chunking Strategy:**
+- Semantic chunking (respect section boundaries)
+- 500-1000 tokens per chunk
+- 100-token overlap between chunks
+- Preserve tables and code blocks intact
+
+**Metadata Preserved:**
+- Document name
+- Page number
+- Section title
+- Figure/table numbers
+
+### Query Quality
+
+**Search Similarity Scores:**
+- Excellent match: 0.85-0.95
+- Good match: 0.75-0.84
+- Acceptable: 0.65-0.74
+- Poor: <0.65 (try rephrasing)
+
+**Example Queries and Results:**
+```python
+Query: "DDR4 memory controller configuration"
+Top Result: Memory Controller Guide, p.47
+Similarity: 0.87
+Content: "PF_DDR4 Configuration Parameters table..."
+
+Query: "PCIe transceiver lanes"
+Top Result: Transceiver Guide, p.112
+Similarity: 0.82
+Content: "PolarFire supports up to 12 PCIe lanes..."
+```
+
+### When RAG Isn't Enough
+
+**Limitations:**
+- Can't answer "Why?" questions (design philosophy)
+- Won't find info across multiple disconnected sections
+- May miss very specific errata or corner cases
+
+**Fallback strategies:**
+1. Read the actual section (use page reference from RAG result)
+2. Search Microchip forums/knowledge base
+3. Ask FAE or support engineer
+4. Experiment and validate in hardware
+
+### Building Your Own
+
+**If you want to replicate this:**
+
+1. **Collect PDFs** - Download vendor documentation
+2. **Extract text** - Use PyPDF2 or similar
+3. **Chunk intelligently** - Semantic chunking library (LangChain, LlamaIndex)
+4. **Generate embeddings** - Use sentence-transformers (BAAI/bge-small-en-v1.5)
+5. **Store in vector DB** - ChromaDB, Pinecone, or Weaviate
+6. **Wrap in MCP server** - Expose via Model Context Protocol
+7. **Configure Claude Code** - Add to .mcp.json
+
+**Estimated effort:** 1-2 days for initial setup, ongoing updates as docs change
+
+**Benefits:**
+- 90%+ reduction in documentation token cost
+- Faster information retrieval
+- More accurate (vendor-specific vs web search)
+- Works offline (local vector DB)
+
+### Integration Example
+
+```python
+# In your MCP server
+from sentence_transformers import SentenceTransformer
+import chromadb
+
+model = SentenceTransformer('BAAI/bge-small-en-v1.5')
+chroma_client = chromadb.Client()
+collection = chroma_client.get_collection("polarfire_docs")
+
+def search_docs(query: str, top_k: int = 5):
+    # Generate query embedding
+    query_embedding = model.encode(query)
+    
+    # Search vector database
+    results = collection.query(
+        query_embeddings=[query_embedding],
+        n_results=top_k
+    )
+    
+    # Return formatted results
+    return {
+        "query": query,
+        "results": [
+            {
+                "document": r["metadata"]["document"],
+                "page": r["metadata"]["page"],
+                "content": r["document"],
+                "similarity": r["distance"]
+            }
+            for r in results
+        ]
+    }
+```
+
+### Real Impact
+
+**Session token usage comparison:**
+
+**Without RAG (traditional):**
+```
+Open datasheet PDF: 80k tokens
+Search for DDR parameters: manual
+Open user guide: 60k tokens
+Find pin assignments: manual
+Open memory controller guide: 70k tokens
+Total: 210k tokens (exceeds context limit!)
+```
+
+**With PolarFire Atlas RAG:**
+```
+Query 1 "DDR4 parameters": 5k tokens
+Query 2 "Pin assignments": 5k tokens  
+Query 3 "Memory timing": 5k tokens
+Total: 15k tokens (14x reduction!)
+```
+
+**Time savings:**
+- Finding info: 10 minutes -> 30 seconds
+- Context preservation: 180k tokens saved
+- Can stay in flow state (no PDF switching)
+
+### Lessons Learned
+
+1. **Quality over quantity** - Index the RIGHT docs, not ALL docs
+2. **Chunk size matters** - Too small loses context, too large reduces precision
+3. **Metadata is crucial** - Page numbers let you verify sources
+4. **Update regularly** - Re-index when vendor releases new docs
+5. **Validate results** - Always check page references for critical parameters
+
+---
+
+**Bottom Line:** RAG systems for vendor docs are the most impactful context optimization we've implemented. If you work with large technical documentation regularly, build one.
+
+
+### Application Note Recreation Pattern
+
+See `docs/APP_NOTE_AUTOMATION.md` for the complete strategy, but key points:
+
+1. **Parse existing Libero projects** - Extract IP configs, constraints, HDL
+2. **Catalog vendor app notes** - Searchable database of reference designs
+3. **Adapt to different boards** - Automatically retarget pin assignments
+4. **One-command deployment** - `./deploy_appnote.sh AC469 BeagleV-Fire`
+
+This is the logical extension of our automation - not just building our own designs, but recreating and adapting vendor reference designs for any target board.
+
+**Benefits:**
+- Instant access to proven designs
+- Cross-board portability
+- Learning from vendor best practices
+- Rapid prototyping baseline
+
+
+### BeagleV-Fire Documentation Pattern
+
+**Challenge:** BeagleV-Fire docs scattered across multiple sources:
+- BeagleBoard.org GitHub repository
+- Microchip reference designs
+- Community wiki pages
+- Hardware schematics (PDF)
+
+**Our approach:**
+1. **WebFetch for online docs** - Pull markdown/HTML directly into context
+2. **Local clone of reference design** - `beaglev-fire-gateware/` for TCL examples
+3. **Extract patterns** - Read TCL scripts to understand configurations
+4. **Document locally** - Create `docs/beaglev_fire_guide.md` with distilled info
+
+**Why this worked:**
+- BeagleBoard docs are markdown (easy to fetch/parse)
+- Reference TCL scripts are self-documenting
+- One-time fetch, save to PROJECT_STATE.json
+- No need for RAG (docs are well-structured and findable)
+
+**Typical workflow:**
+```bash
+# Fetch once
+WebFetch("https://docs.beagleboard.org/latest/boards/beaglev-fire/demos-and-tutorials.html")
+
+# Extract key info -> beaglev_fire_guide.md
+# Save pin mappings -> PROJECT_STATE.json
+
+# Never fetch again (use local docs)
+```
+
+**Token cost:** ~10k one-time vs 5k per query with RAG
+
+**Lesson:** For well-organized, searchable online docs, WebFetch + local caching beats RAG
+

@@ -109,3 +109,6 @@ beaglev_fire_demo/
 !libero_projects/beaglev_fire/
 !hdl/beaglev_fire/
 !tcl_scripts/beaglev_fire/
+
+# Generated PDF documentation
+*.pdf
