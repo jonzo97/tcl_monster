@@ -2,6 +2,79 @@
 
 Command-line driven TCL automation for Microchip Libero SoC projects, targeting PolarFire and PolarFire SoC FPGAs. Complete workflow automation from project creation through bitstream generation and FPGA programming.
 
+
+---
+
+## Important Disclaimers
+
+**Community Project - Not Official Microchip Software**
+
+This is an unofficial, community-developed automation toolkit created by a Field Applications Engineer to improve FPGA development workflows. It is NOT an official Microchip product and is NOT supported by Microchip Technology Inc.
+
+**Use at Your Own Risk**
+- This software is provided "AS IS" without warranty of any kind
+- Always validate designs and generated code before deployment
+- Test thoroughly on your specific hardware configuration
+- Not intended for safety-critical or production applications without proper validation
+
+**AI-Assisted Development**
+- This project was developed with assistance from Claude Code (Anthropic)
+- Code quality patterns and automation approaches have been validated on real hardware
+- Documentation includes lessons learned from actual development sessions
+
+**Intellectual Property**
+- Automation scripts and documentation are original work
+- No proprietary Microchip IP cores or RTL included
+- References to Microchip products are factual and for compatibility documentation
+- BeagleV-Fire integration uses open-source BeagleBoard.org designs (MIT/BSD licensed)
+
+**Support**
+- Community support via GitHub Issues
+- For official Microchip FPGA support, contact Microchip directly or your local FAE
+- Contributions welcome! See Contributing section below
+
+**Trademarks**
+- Libero, PolarFire, SoftConsole are trademarks of Microchip Technology Inc.
+- BeagleV-Fire is a trademark of BeagleBoard.org Foundation
+
+---
+
+---
+
+## Important Disclaimers
+
+**Community Project - Not Official Microchip Software**
+
+This is an unofficial, community-developed automation toolkit created by a Field Applications Engineer to improve FPGA development workflows. It is NOT an official Microchip product and is NOT supported by Microchip Technology Inc.
+
+**Use at Your Own Risk**
+- This software is provided "AS IS" without warranty of any kind
+- Always validate designs and generated code before deployment
+- Test thoroughly on your specific hardware configuration
+- Not intended for safety-critical or production applications without proper validation
+
+**AI-Assisted Development**
+- This project was developed with assistance from Claude Code (Anthropic)
+- Code quality patterns and automation approaches have been validated on real hardware
+- Documentation includes lessons learned from actual development sessions
+
+**Intellectual Property**
+- Automation scripts and documentation are original work
+- No proprietary Microchip IP cores or RTL included
+- References to Microchip products are factual and for compatibility documentation
+- BeagleV-Fire integration uses open-source BeagleBoard.org designs (MIT/BSD licensed)
+
+**Support**
+- Community support via GitHub Issues
+- For official Microchip FPGA support, contact Microchip directly or your local FAE
+- Contributions welcome! See Contributing section below
+
+**Trademarks**
+- Libero, PolarFire, SoftConsole are trademarks of Microchip Technology Inc.
+- BeagleV-Fire is a trademark of BeagleBoard.org Foundation
+
+---
+
 ## Supported Platforms
 - **Libero Version:** SoC v2024.2
 - **PolarFire MPF300 Eval Kit** - Development board automation
