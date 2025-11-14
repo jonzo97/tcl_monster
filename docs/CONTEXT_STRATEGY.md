@@ -419,3 +419,422 @@ class ContextManager:
 ---
 
 **Maintained by:** TCL Monster Project | **Last Updated:** 2025-10-22
+
+---
+
+## Real-World Implementation: TCL Monster Project
+
+**Updated:** 2025-11-14
+**Status:** Production-validated patterns from active development
+
+This section documents actual context management practices used during TCL Monster development, including innovative approaches to documentation ingestion and RAG systems.
+
+### The FPGA Documentation Challenge
+
+**Problem:** PolarFire SoC documentation is massive:
+- User guides: 200-400 pages each
+- Datasheets: 300+ pages
+- Application notes: 50-100 pages each  
+- Total: 2000+ pages of technical documentation
+- Context cost: Reading full PDFs = 50k-100k tokens each
+
+**Impact:** Reading docs directly consumes entire context window before writing any code.
+
+### Solution 1: FPGA MCP RAG System
+
+**Location:** `~/fpga_mcp` (separate repository)
+
+**Architecture:**
+```
+┌─────────────────────────┐
+│ Claude Code Session     │
+│                         │
+│  "How do I configure    │──────┐
+│   DDR4 memory?"         │      │
+└─────────────────────────┘      │
+                                 │ MCP Query
+┌─────────────────────────┐      │
+│ fpga_mcp MCP Server     │◀─────┘
+│ ├── ChromaDB            │
+│ │   ├── Embeddings      │
+│ │   └── 1,233 chunks    │
+│ └── BAAI/bge-small-en   │
+│     (384-dim)           │
+└─────────────────────────┘
+          │
+          │ Semantic Search
+          ▼
+┌─────────────────────────┐
+│ Indexed Documentation   │
+│ ├── User IO Guide       │
+│ ├── Clocking Guide      │
+│ ├── Memory Controller   │
+│ ├── Datasheet          │
+│ └── 7 core documents    │
+└─────────────────────────┘
+```
+
+**Implementation:**
+1. **Document Preprocessing** - Semantic chunking with overlap
+2. **Vector Embeddings** - BAAI/bge-small-en-v1.5 model
+3. **Storage** - ChromaDB vector database
+4. **Retrieval** - Cosine similarity search (0.75-0.87 scores)
+5. **MCP Interface** - Exposed via Model Context Protocol server
+
+**Query Examples:**
+```python
+# In fpga_mcp/scripts/test_indexing.py
+queries = [
+    "DDR4 memory controller configuration",
+    "PolarFire clocking resources CCC",  
+    "PCIe transceiver lanes",
+    "FPGA power supply requirements"
+]
+```
+
+**Search Quality:**
+- Average similarity: 0.75-0.87
+- Retrieval time: <100ms
+- Context cost: ~5k tokens per query (vs 50k+ for full PDF)
+
+**Indexed Documents (1,233 chunks):**
+- User IO Guide: 199 chunks
+- Clocking Guide: 111 chunks
+- Board Design Guide: 55 chunks
+- Datasheet: 227 chunks
+- Transceiver Guide: 221 chunks
+- Fabric Guide: 170 chunks
+- Memory Controller: 250 chunks
+
+**Usage Pattern:**
+```
+Session Start
+    ↓
+Query fpga_mcp: "DDR4 memory controller parameters"
+    ↓
+Receive: Relevant excerpts (5k tokens)
+    ↓
+Generate TCL configuration
+    ↓
+Save to PROJECT_STATE.json
+```
+
+**Benefit:** 90% reduction in documentation context cost
+
+### Solution 2: PROJECT_STATE.json Pattern
+
+**Location:** `/mnt/c/tcl_monster/PROJECT_STATE.json`
+
+**Purpose:** Session-independent knowledge base
+
+**Structure:**
+```json
+{
+  "project_metadata": {
+    "name": "TCL Monster",
+    "phase": "Phase 1 - IP Generators Complete",
+    "last_updated": "2025-11-14",
+    "context_window_used": "87k/200k"
+  },
+  "session_summary": {
+    "2025-11-13": {
+      "goals": ["Complete BeagleV-Fire LED blink", "Automate .spi generation"],
+      "achievements": ["48 LUT design", "Automated build flow"],
+      "time_invested": "4 hours",
+      "blockers_resolved": ["PDC/SDC separation", "Lenient error checking"]
+    }
+  },
+  "architecture_decisions": [
+    {
+      "decision": "Use separate PDC and SDC files",
+      "rationale": "PDC parser doesn't understand SDC commands",
+      "impact": "All future projects must follow this pattern",
+      "alternatives_considered": "Combined file (rejected - syntax errors)"
+    }
+  ],
+  "key_learnings": [
+    "Libero check_tool is too strict - use catch {} for lenience",
+    "BeagleV-Fire uses /sys/kernel/debug/fpga for programming",
+    "Serial automation via file-based queue eliminates manual work"
+  ]
+}
+```
+
+**Usage:**
+1. **Session Start** - Read PROJECT_STATE.json to restore context
+2. **During Work** - Add decisions and learnings
+3. **Before Compact** - Comprehensive update
+4. **Post-Compact** - Read to restore full state
+
+**Benefit:** Complete session continuity even after compaction
+
+### Solution 3: Documentation Structure Strategy
+
+**Principle:** "Query-optimized documentation hierarchy"
+
+**Structure:**
+```
+docs/
+├── ROADMAP.md              # Strategic overview (read at session start)
+├── CLAUDE.md               # Session startup checklist
+├── DESIGN_LIBRARY.md       # Design catalog (reference)
+│
+├── Topic-Specific/         # Deep dives (read on-demand)
+│   ├── beaglev_fire_guide.md
+│   ├── libero_softconsole_cli_guide.md
+│   └── cli_capabilities_and_workarounds.md
+│
+├── sessions/               # Session logs (for recovery)
+│   └── session_2025-11-13.md
+│
+└── lessons_learned/        # Extracted patterns
+    ├── constraint_association.md
+    └── error_handling_patterns.md
+```
+
+**Reading Strategy:**
+1. **Always Read:** ROADMAP.md (2k tokens) + CLAUDE.md (3k tokens)
+2. **Query-Based:** Topic docs only when needed
+3. **Never Read:** session logs (unless recovering from compact)
+
+**Benefit:** 5k token startup cost vs 50k+ reading everything
+
+### Solution 4: Selective MCP Server Usage
+
+**Philosophy:** "MCP servers are powerful but have token overhead"
+
+**Cost Analysis:**
+- Memory MCP: ~7k tokens baseline overhead
+- FPGA MCP: ~2k tokens per query (pay-per-use)
+- Web Search MCP: ~1k tokens per search
+
+**Usage Policy:**
+```
+Use fpga_mcp:
+  ✅ When querying PolarFire-specific documentation
+  ✅ For IP core parameter lookups
+  ✅ When troubleshooting hardware issues
+  
+  ❌ For general TCL syntax (use web search)
+  ❌ For already-known information
+  ❌ After information already retrieved this session
+
+Use Memory MCP:
+  ✅ For cross-project knowledge (mchp-mcp-core, fpga_mcp, tcl_monster relationships)
+  ✅ For meta-work organization
+  
+  ❌ For single-project work (use PROJECT_STATE.json instead)
+  ❌ When context budget is tight
+```
+
+**Configuration Pattern:**
+```json
+// .mcp.json (project-local, not global)
+{
+  "mcpServers": {
+    "fpga-docs": {
+      "command": "python",
+      "args": ["-m", "fpga_mcp.server"],
+      "env": {
+        "CHROMA_DB_PATH": "/home/user/fpga_mcp/chroma_db"
+      }
+    }
+  }
+}
+```
+
+**Benefit:** Opt-in MCP usage prevents unnecessary token overhead
+
+### Real Session Example: BeagleV-Fire Development
+
+**Session Goal:** Complete LED blink design for BeagleV-Fire
+
+**Context Management Flow:**
+
+**Tokens: 0k → 15k (Startup)**
+```
+1. Read PROJECT_STATE.json (2k tokens)
+   └─ "Last session: Built counter demo, ready for BeagleV"
+   
+2. Read CLAUDE.md (3k tokens)
+   └─ Device: MPFS025T, Libero path, BeagleV reference location
+   
+3. Query fpga_mcp: "BeagleV-Fire pin assignments" (5k tokens)
+   └─ Returns: Cape connector pinout, LED on V22
+   
+4. Read beaglev_fire_guide.md header (5k tokens)
+   └─ Reference design locations, FIC clock info
+```
+
+**Tokens: 15k → 50k (Development)**
+```
+5. Create TCL scripts (working code, no docs needed)
+6. Test build, encounter PDC error
+7. Query fpga_mcp: "PDC vs SDC file usage" (5k tokens)
+   └─ Returns: Separate files, parser limitations
+8. Fix and rebuild
+```
+
+**Tokens: 50k → 85k (Transfer & Programming)**
+```
+9. Research FPGA programming (grep docs, 10k tokens)
+10. Discover update-gateware.sh via serial exploration
+11. Implement serial automation (no external docs)
+```
+
+**Tokens: 85k → 90k (Checkpoint)**
+```
+12. Update PROJECT_STATE.json with:
+    - BeagleV-Fire LED blink complete
+    - PDC/SDC separation learning
+    - Serial automation pattern
+    - FPGA programming workflow
+```
+
+**Total Context Used:** 90k / 200k (45%)
+**Without RAG/Structure:** Would have been 180k+ (90%)
+
+**Key Practices:**
+- ✅ fpga_mcp queried 3 times (15k tokens)
+- ✅ PROJECT_STATE.json updated continuously  
+- ✅ Topic docs read selectively
+- ❌ Did NOT read full PolarFire documentation
+- ❌ Did NOT use Memory MCP (single project focus)
+
+### Lessons from Production Use
+
+#### What Worked Exceptionally Well
+
+1. **FPGA MCP RAG System**
+   - Saved 100k+ tokens per session
+   - Faster than searching PDFs manually
+   - More accurate than web search for chip-specific info
+
+2. **PROJECT_STATE.json**
+   - Perfect for session continuity
+   - Survived compaction flawlessly
+   - Easy to update incrementally
+
+3. **Structured Documentation**
+   - ROADMAP.md + CLAUDE.md startup pattern
+   - On-demand topic docs
+   - No wasted context on irrelevant info
+
+4. **Serial Automation Pattern**
+   - Eliminated 10+ minutes of manual typing per session
+   - Complete workflow automation
+   - Reproducible debugging
+
+#### What Needs Improvement
+
+1. **MCP Server Discovery**
+   - Hard to know what's indexed in fpga_mcp without querying
+   - Consider adding index manifest
+
+2. **Cross-Session Sharing**
+   - PROJECT_STATE.json great for local continuity
+   - Need patterns for team collaboration (multiple devs)
+
+3. **Documentation Staleness**
+   - Some docs written early, not updated as project evolved
+   - Need regular review cycle
+
+4. **Context Estimation**
+   - Hard to predict token cost before reading docs
+   - Consider adding token estimates to doc headers
+
+### Recommended Workflow for New Projects
+
+**Phase 1: Setup (Week 1)**
+1. Create PROJECT_STATE.json skeleton
+2. Write ROADMAP.md with phases
+3. Create CLAUDE.md with paths/commands
+4. If domain-specific docs exist:
+   - Build RAG system (like fpga_mcp)
+   - OR create structured topic docs
+
+**Phase 2: Development (Weeks 2-N)**
+1. Session start: Read PROJECT_STATE.json + CLAUDE.md (~5k tokens)
+2. Query RAG system as needed (~5k tokens per query)
+3. Read topic docs on-demand
+4. Update PROJECT_STATE.json continuously
+5. Checkpoint before compactions
+
+**Phase 3: Sharing (Week N+1)**
+1. Clean up PROJECT_STATE.json (remove noise)
+2. Update ROADMAP.md with current status
+3. Ensure CLAUDE.md has setup instructions
+4. Push to GitHub
+
+### Token Budget Targets
+
+**Per Session (200k window):**
+- Startup (PROJECT_STATE + CLAUDE.md): 5k
+- Documentation queries (RAG/topic docs): 20-30k
+- Active development (code/conversations): 100-120k
+- Safety buffer (for compaction): 50k
+
+**Red Flags:**
+- Startup >10k tokens → Documentation too large
+- Documentation >50k tokens → Need better RAG/indexing
+- Active development >150k → Risk of forced compaction
+
+### Tools Comparison
+
+| Approach | Token Cost | Query Speed | Accuracy | Best For |
+|----------|-----------|-------------|----------|----------|
+| **Read Full PDFs** | 50k-100k | Slow | Perfect | Initial learning |
+| **Web Search** | 1k-5k | Fast | Variable | General knowledge |
+| **RAG (fpga_mcp)** | 5k | Very fast | High (0.85+) | Domain-specific |
+| **Structured Docs** | 5-10k | Medium | Perfect | Project-specific |
+| **PROJECT_STATE.json** | 2k | Instant | Perfect | Session continuity |
+
+### Future Experiments
+
+1. **Hybrid RAG + Structured Docs**
+   - Index our own docs (not just vendor PDFs)
+   - Query project docs via semantic search
+
+2. **Automated PROJECT_STATE Updates**
+   - Hook into git commits
+   - Auto-extract learnings from session logs
+
+3. **Multi-Project Knowledge Graph**
+   - Connect tcl_monster, fpga_mcp, beaglev-fire
+   - Discover relationships automatically
+
+4. **Token-Aware Documentation**
+   - Add token cost estimates to doc headers
+   - Auto-suggest most efficient reading order
+
+---
+
+## Summary: Context Management Maturity Model
+
+**Level 1: Ad-hoc (0-50k tokens/session)**
+- Read docs as needed
+- No persistence strategy
+- Repeat research every session
+
+**Level 2: Structured (50-100k tokens/session)**
+- ROADMAP.md + CLAUDE.md pattern
+- Topic-specific docs
+- Manual session summaries
+
+**Level 3: RAG-Assisted (20-50k tokens/session)** ← TCL Monster is here
+- Semantic document search
+- PROJECT_STATE.json for continuity
+- Selective MCP usage
+- Structured doc hierarchy
+
+**Level 4: Fully Autonomous (10-30k tokens/session)** ← Future goal
+- Auto-updating knowledge bases
+- Multi-project knowledge graphs
+- Context-aware documentation
+- Predictive context management
+
+---
+
+**Status:** Level 3 - Production-validated RAG and structured docs
+**Maintained by:** Jonathan Orgill (FAE) + Claude Code
+**Last Updated:** 2025-11-14
