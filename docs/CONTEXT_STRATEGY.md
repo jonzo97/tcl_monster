@@ -52,77 +52,89 @@ PolarFire Atlas is a custom MCP server providing semantic search over PolarFire 
 - **Documents:** User guides, datasheets, app notes, design guides
 - **Search quality:** 0.75-0.87 similarity scores
 
-### When to Use It
+### When to Use PolarFire Atlas MCP
 
-#### 1. Project Architecture
-```
-Entity: tcl_monster_project
-Relations:
-  - contains: tcl_scripts, hdl, constraint, docs
-Observations:
-  - "FPGA automation toolkit for Libero SoC"
-  - "Target: PolarFire MPF300 Eval Kit"
-  - "WSL2 environment, Windows-side Libero"
-```
+**Query for:**
+- IP core parameter names and valid ranges
+- Pin assignment conventions
+- Timing constraint examples
+- Electrical specifications (voltage, current)
+- Clock frequency limits
+- Resource usage estimates
+- DDR4/PCIe/SERDES configuration details
 
-#### 2. File Locations and Purposes
+**Example Queries:**
 ```
-Entity: create_project.tcl
-Relations:
-  - part_of: tcl_monster_project
-  - located_in: tcl_scripts/
-  - implements: project_creation_automation
-Observations:
-  - "Creates Libero project for MPF300TS"
-  - "Imports HDL and constraints"
-  - "Sets design hierarchy and top module"
-  - "Key commands: new_project, import_files, build_design_hierarchy"
+Query: "DDR4 memory controller configuration parameters"
+Returns: Memory Controller Guide excerpts with PF_DDR4 parameter table
+
+Query: "PolarFire clocking resources CCC PLL"
+Returns: Clocking Guide sections about Clock Conditioning Circuit
+
+Query: "PCIe transceiver lane configuration"
+Returns: Transceiver Guide with PCIe lane setup examples
 ```
 
-#### 3. Design Decisions
-```
-Entity: decision_wsl_path_conversion
-Relations:
-  - part_of: tcl_monster_project
-  - affects: run_libero.sh
-Observations:
-  - "Decision: Use wslpath to convert paths for Libero on Windows"
-  - "Rationale: Libero.exe expects Windows-style paths"
-  - "Alternatives considered: Run everything on Windows (rejected - prefer Unix tools)"
-  - "Date: 2025-10-22"
+**Search Quality:**
+- Excellent match: 0.85-0.95 similarity
+- Good match: 0.75-0.84 similarity
+- Results include: Document name, page number, relevant content
+
+**Token Cost:** ~5k tokens per query (vs 50k+ reading full PDF)
+
+---
+
+## PROJECT_STATE.json - Session Persistence
+
+### Purpose
+Session-independent knowledge base that survives compaction and cross-device sync.
+
+### What to Track
+
+**1. Architecture Decisions**
+```json
+{
+  "architecture_decisions": [
+    {
+      "decision": "Use separate PDC and SDC files",
+      "rationale": "PDC parser doesn't understand SDC commands",
+      "impact": "All future projects must follow this pattern",
+      "alternatives_considered": "Combined file (rejected - syntax errors)"
+    }
+  ]
+}
 ```
 
-#### 4. Known Issues and Workarounds
-```
-Entity: issue_tcl_bracket_syntax
-Relations:
-  - part_of: tcl_monster_project
-  - affects: build_design.tcl
-Observations:
-  - "Issue: TCL interprets [1] as command, not list item"
-  - "Workaround: Use (1) instead of [1] in puts statements"
-  - "Fix applied: build_design.tcl line 92"
-  - "Date: 2025-10-22"
+**2. Key Learnings**
+```json
+{
+  "key_learnings": [
+    "Libero check_tool is too strict - use catch {} for lenience",
+    "BeagleV-Fire uses /sys/kernel/debug/fpga for programming",
+    "Serial automation via file-based queue eliminates manual work"
+  ]
+}
 ```
 
-#### 5. Reusable Patterns
-```
-Entity: pattern_libero_error_handling
-Relations:
-  - part_of: tcl_monster_project
-  - used_in: create_project.tcl, build_design.tcl
-Observations:
-  - "Pattern: Use catch {} to handle Libero tool failures"
-  - "Example: if {[catch {run_tool -name SYNTHESIZE}]} { ... }"
-  - "Returns: 0 on success, 1 on failure"
+**3. File Locations and Purposes**
+```json
+{
+  "files_created_this_session": [
+    {
+      "path": "tcl_scripts/beaglev_fire/led_blink_standalone.tcl",
+      "purpose": "Create BeagleV-Fire LED blink project",
+      "key_features": ["Automated HDL import", "Constraint association", "Pin assignments"]
+    }
+  ]
+}
 ```
 
-### When to Update Memory MCP
+### When to Update PROJECT_STATE.json
 
 **Update immediately when:**
 - Creating new files or directories
 - Making architecture decisions
-- Discovering Libero limitations or workarounds
+- Discovering tool limitations or workarounds
 - Establishing patterns or utilities
 - Completing major milestones
 
@@ -130,6 +142,7 @@ Observations:
 - Context compaction (when approaching token limits)
 - End of session (even if context remains)
 - Switching work locations (home -> work or vice versa)
+- Pushing to Git (keeps state synchronized)
 
 ---
 
@@ -137,12 +150,12 @@ Observations:
 
 ### Mandatory First Steps in Every Session
 
-1. **Query Memory MCP** for project context:
-   ```
-   "What entities exist for tcl_monster_project?"
-   "What was the last work done on this project?"
-   "What architecture decisions have been made?"
-   ```
+1. **Read PROJECT_STATE.json** for complete project context:
+   - Last session summary and achievements
+   - Architecture decisions made
+   - Key learnings and patterns discovered
+   - Files created and their purposes
+   - Current phase and next steps
 
 2. **Read CLAUDE.md** for project overview and key paths
 
@@ -176,7 +189,7 @@ Observations:
 
 ### Pre-Compaction Checklist
 
-**Before compacting, save to Memory MCP:**
+**Before compacting, update PROJECT_STATE.json:**
 
 1. **All Created Files**
    - File paths, purposes, key functions
@@ -207,9 +220,11 @@ Observations:
 
 **After compacting:**
 
-1. **Restore from Memory MCP**
-   - Query all tcl_monster_project entities
-   - Rebuild mental model from observations
+1. **Restore from PROJECT_STATE.json**
+   - Read complete session history
+   - Review architecture decisions
+   - Check key learnings
+   - Identify next steps
 
 2. **Verify File System**
    - Confirm critical files still exist
@@ -225,16 +240,16 @@ Observations:
 
 ### Scenario: Working on Home and Work Computers
 
-**Challenge:** Memory MCP data is stored locally in project (`.mcp.json`), needs Git sync
+**Challenge:** Project state needs to sync across devices
 
 **Solution:**
 
 1. **Before leaving device:**
-   - Update Memory MCP with all recent work
-   - Commit changes including `.mcp.json`:
+   - Update PROJECT_STATE.json with all recent work
+   - Commit changes:
      ```bash
-     git add .mcp.json
-     git commit -m "Update Memory MCP with recent work"
+     git add PROJECT_STATE.json
+     git commit -m "Update project state with session summary"
      git push
      ```
 
@@ -243,8 +258,8 @@ Observations:
      ```bash
      git pull
      ```
-   - Claude Code will automatically load `.mcp.json`
-   - Query Memory MCP to restore context
+   - Read PROJECT_STATE.json to restore context
+   - Review session summaries and architecture decisions
 
 3. **Global Settings Sync:**
    - User's global Claude settings in `~/.claude/`
@@ -276,9 +291,9 @@ Observations:
 
 - Raw conversation: ~1000 tokens per minute of work
 - Compressed doc: ~100 tokens per minute of work
-- Memory MCP entity: ~10 tokens per minute of work
+- PROJECT_STATE.json entry: ~10 tokens per minute of work
 
-**Strategy:** Continuously summarize work into docs and Memory MCP to keep active context small
+**Strategy:** Continuously summarize work into docs and PROJECT_STATE.json to keep active context small
 
 ---
 
@@ -290,7 +305,7 @@ Observations:
 
 **Responsibilities:**
 - Monitor token usage
-- Auto-save to Memory MCP every N minutes
+- Auto-save to PROJECT_STATE.json every N minutes
 - Suggest compaction when nearing limits
 - Pre-compact critical information
 - Post-compact validation
@@ -325,16 +340,15 @@ class ContextManager:
         recent_files = get_files_created_in_session()
         recent_decisions = get_decisions_made_in_session()
 
-        # Save to Memory MCP
-        for file in recent_files:
-            memory_mcp.create_entity(file)
-
-        for decision in recent_decisions:
-            memory_mcp.create_entity(decision)
+        # Save to PROJECT_STATE.json
+        project_state = read_project_state()
+        project_state["files_created_this_session"].extend(recent_files)
+        project_state["architecture_decisions"].extend(recent_decisions)
+        write_project_state(project_state)
 
     def save_checkpoint(self):
         """Periodic checkpoint saves"""
-        memory_mcp.save_snapshot()
+        update_project_state_json()
 ```
 
 ---
@@ -342,18 +356,18 @@ class ContextManager:
 ## Success Indicators
 
 **Context management is working well when:**
-- [YES] After compaction, work resumes immediately without user re-explaining
-- [YES] Cross-device work (home -> work) is seamless
-- [YES] No duplicate utilities created in wrong locations
-- [YES] Architecture stays consistent across sessions
-- [YES] User rarely says "remember we put that in..."
+- ✅ After compaction, work resumes immediately without user re-explaining
+- ✅ Cross-device work (home -> work) is seamless
+- ✅ No duplicate utilities created in wrong locations
+- ✅ Architecture stays consistent across sessions
+- ✅ User rarely says "remember we put that in..."
 
 **Context management needs improvement when:**
-- [NO] After compaction, need to ask "where were we?"
-- [NO] Recreating files that already exist
-- [NO] Forgetting previous decisions
-- [NO] Architecture drift across sessions
-- [NO] User frequently needs to re-explain context
+- ❌ After compaction, need to ask "where were we?"
+- ❌ Recreating files that already exist
+- ❌ Forgetting previous decisions
+- ❌ Architecture drift across sessions
+- ❌ User frequently needs to re-explain context
 
 ---
 
@@ -361,63 +375,63 @@ class ContextManager:
 
 ### For User:
 1. **Start sessions with context:** "Last time we completed Phase 1, let's continue with Phase 2"
-2. **Commit often:** Include `.mcp.json` in Git commits
+2. **Commit often:** Include PROJECT_STATE.json in Git commits
 3. **Document decisions:** When making choices, add to ROADMAP or CLAUDE.md
 4. **Test cross-device:** Periodically verify sync works between home/work
 
 ### For Claude Code:
-1. **Query Memory MCP first thing every session**
-2. **Update Memory MCP frequently** (not just before compaction)
+1. **Read PROJECT_STATE.json first thing every session**
+2. **Update PROJECT_STATE.json frequently** (not just before compaction)
 3. **Reference ROADMAP.md** for current phase and next steps
 4. **Summarize work** into documentation continuously
-5. **Never guess file locations** - query Memory MCP or read filesystem
+5. **Never guess file locations** - check PROJECT_STATE.json or read filesystem
 
 ---
 
 ## Anti-Patterns to Avoid
 
-[NO] **Don't:** Rely only on conversation history
-[YES] **Do:** Save to Memory MCP and docs
+❌ **Don't:** Rely only on conversation history
+✅ **Do:** Save to PROJECT_STATE.json and docs
 
-[NO] **Don't:** Wait until compaction to save context
-[YES] **Do:** Update Memory MCP continuously
+❌ **Don't:** Wait until compaction to save context
+✅ **Do:** Update PROJECT_STATE.json continuously
 
-[NO] **Don't:** Assume file locations
-[YES] **Do:** Query Memory MCP or check filesystem
+❌ **Don't:** Assume file locations
+✅ **Do:** Check PROJECT_STATE.json or read filesystem
 
-[NO] **Don't:** Skip session startup protocol
-[YES] **Do:** Query Memory MCP every session start
+❌ **Don't:** Skip session startup protocol
+✅ **Do:** Read PROJECT_STATE.json every session start
 
-[NO] **Don't:** Create files without checking if they exist
-[YES] **Do:** Search for existing files first
+❌ **Don't:** Create files without checking if they exist
+✅ **Do:** Search for existing files first
 
 ---
 
 ## Example Session Timeline
 
 ### Session Start (0 tokens)
-1. Query Memory MCP: "tcl_monster_project status?"
+1. Read PROJECT_STATE.json: review last session and current phase
 2. Read CLAUDE.md and ROADMAP.md
 3. Confirm with user: "Resuming Phase 1 work?"
 
 ### During Work (50k tokens)
 - Create timing constraints file
-- Update Memory MCP with file location and purpose
+- Update PROJECT_STATE.json with file location and purpose
 - Update ROADMAP.md to mark task complete
 
 ### Mid-Session Checkpoint (100k tokens)
-- Save comprehensive checkpoint to Memory MCP
+- Save comprehensive checkpoint to PROJECT_STATE.json
 - Update CLAUDE.md if any key paths changed
 
 ### Approaching Limit (150k tokens)
 - Pre-compaction checklist (save all recent work)
 - Compact conversation
-- Post-compaction: verify Memory MCP has all info
+- Post-compaction: verify PROJECT_STATE.json has all info
 
 ### Session End (175k tokens)
-- Final Memory MCP update
+- Final PROJECT_STATE.json update
 - Update ROADMAP.md with progress
-- User commits including `.mcp.json`
+- User commits including PROJECT_STATE.json
 
 ---
 
@@ -614,20 +628,20 @@ docs/
 **Usage Policy:**
 ```
 Use fpga_mcp:
-  [YES] When querying PolarFire-specific documentation
-  [YES] For IP core parameter lookups
-  [YES] When troubleshooting hardware issues
-  
-  [NO] For general TCL syntax (use web search)
-  [NO] For already-known information
-  [NO] After information already retrieved this session
+  ✅ When querying PolarFire-specific documentation
+  ✅ For IP core parameter lookups
+  ✅ When troubleshooting hardware issues
+
+  ❌ For general TCL syntax (use web search)
+  ❌ For already-known information
+  ❌ After information already retrieved this session
 
 Use Memory MCP:
-  [YES] For cross-project knowledge (mchp-mcp-core, fpga_mcp, tcl_monster relationships)
-  [YES] For meta-work organization
-  
-  [NO] For single-project work (use PROJECT_STATE.json instead)
-  [NO] When context budget is tight
+  ✅ For cross-project knowledge (mchp-mcp-core, fpga_mcp, tcl_monster relationships)
+  ✅ For meta-work organization
+
+  ❌ For single-project work (use PROJECT_STATE.json instead)
+  ❌ When context budget is tight
 ```
 
 **Configuration Pattern:**
@@ -698,11 +712,11 @@ Use Memory MCP:
 **Without RAG/Structure:** Would have been 180k+ (90%)
 
 **Key Practices:**
-- [YES] fpga_mcp queried 3 times (15k tokens)
-- [YES] PROJECT_STATE.json updated continuously  
-- [YES] Topic docs read selectively
-- [NO] Did NOT read full PolarFire documentation
-- [NO] Did NOT use Memory MCP (single project focus)
+- ✅ fpga_mcp queried 3 times (15k tokens)
+- ✅ PROJECT_STATE.json updated continuously  
+- ✅ Topic docs read selectively
+- ❌ Did NOT read full PolarFire documentation
+- ❌ Did NOT use Memory MCP (single project focus)
 
 ### Lessons from Production Use
 
@@ -1023,16 +1037,16 @@ Returns: Top 5 relevant chunks with context
 ### Indexing Strategy
 
 **Document Selection** (what we indexed):
-[YES] User IO Guide - Pin configuration, standards, LVDS
-[YES] Clocking Guide - CCC/PLL configuration
-[YES] Memory Controller Guide - DDR3/DDR4 parameters
-[YES] Datasheet - Electrical specs, resource counts
-[YES] Transceiver Guide - SERDES, PCIe configuration
-[YES] Fabric User Guide - Logic resources, routing
+✅ User IO Guide - Pin configuration, standards, LVDS
+✅ Clocking Guide - CCC/PLL configuration
+✅ Memory Controller Guide - DDR3/DDR4 parameters
+✅ Datasheet - Electrical specs, resource counts
+✅ Transceiver Guide - SERDES, PCIe configuration
+✅ Fabric User Guide - Logic resources, routing
 
-[NO] Marketing materials
-[NO] Quick start guides (covered in our docs)
-[NO] Legacy device documentation
+❌ Marketing materials
+❌ Quick start guides (covered in our docs)
+❌ Legacy device documentation
 
 **Chunking Strategy:**
 - Semantic chunking (respect section boundaries)
