@@ -2,28 +2,33 @@
 # Target: MPFS025T-FCVG484E
 # LED blinker fabric design
 
-# Clock from FIC (Fabric Interface Controller)
-# Assuming 50 MHz clock from MSS
-set_io clk_50mhz \
-    -pinname {PLACEHOLDER_CCC_OUT} \
-    -fixed yes \
+# TEMPORARY: For RTL-only testing, assign clock and reset to cape pins
+# TODO: In SmartDesign version, these will be internal from MSS/CLOCKS_AND_RESETS
+
+# Clock input - TEMPORARY using P9[19] for testing
+# In final design, this will come from FIC_3_PCLK internally
+set_io -port_name {clk_50mhz} \
+    -pin_name A10 \
+    -fixed true \
+    -io_std LVCMOS33 \
     -DIRECTION INPUT
 
-# Reset from MSS
-set_io rst_n \
-    -pinname {PLACEHOLDER_MSS_RESET} \
-    -fixed yes \
+# Reset input - TEMPORARY using P9[20] for testing
+# In final design, this will come from FIC_3_FABRIC_RESET_N internally
+set_io -port_name {rst_n} \
+    -pin_name A11 \
+    -fixed true \
+    -io_std LVCMOS33 \
     -DIRECTION INPUT
 
-# User LED (check BeagleV-Fire schematic for actual pin)
-# Example: Assuming LED on GPIO bank
-set_io led \
-    -pinname {AA12} \
-    -fixed yes \
+# User LED 0 - Cape connector P8[3]
+# Drives LED via BeagleBone cape connector
+set_io -port_name {led} \
+    -pin_name V22 \
+    -fixed true \
+    -io_std LVCMOS33 \
     -DIRECTION OUTPUT \
     -OUT_DRIVE 12 \
-    -SLEW High \
     -RES_PULL None
 
-# Timing constraints
-create_clock -name {clk_50mhz} -period 20 [get_ports {clk_50mhz}]
+# NOTE: Timing constraints are in beaglev_fire_led_blink.sdc
