@@ -200,11 +200,19 @@ Write-Host "  Using Libero: $LiberoPath"
 $LiberoLog = Join-Path $TempDir "libero.log"
 & $LiberoPath "SCRIPT:$TclWrapper" > $LiberoLog 2>&1
 
-# Wait for Libero to complete and file system to sync
-Start-Sleep -Seconds 2
+# Wait for Libero to complete and file to appear (poll with timeout)
+$timeout = 60  # seconds
+$elapsed = 0
+while (-not (Test-Path $MemoryMapJson) -and ($elapsed -lt $timeout)) {
+    Start-Sleep -Seconds 1
+    $elapsed++
+    if (($elapsed % 10) -eq 0) {
+        Write-Host "  Waiting for Libero... ($elapsed s)" -ForegroundColor Yellow
+    }
+}
 
 if (-not (Test-Path $MemoryMapJson)) {
-    Write-Host "ERROR: Memory map export failed" -ForegroundColor Red
+    Write-Host "ERROR: Memory map export failed (timeout after $timeout seconds)" -ForegroundColor Red
     Write-Host "Check log: $LiberoLog"
     Get-Content $LiberoLog
     exit 1
