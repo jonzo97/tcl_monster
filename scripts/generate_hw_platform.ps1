@@ -200,6 +200,9 @@ Write-Host "  Using Libero: $LiberoPath"
 $LiberoLog = Join-Path $TempDir "libero.log"
 & $LiberoPath "SCRIPT:$TclWrapper" > $LiberoLog 2>&1
 
+# Wait for Libero to complete and file system to sync
+Start-Sleep -Seconds 2
+
 if (-not (Test-Path $MemoryMapJson)) {
     Write-Host "ERROR: Memory map export failed" -ForegroundColor Red
     Write-Host "Check log: $LiberoLog"
