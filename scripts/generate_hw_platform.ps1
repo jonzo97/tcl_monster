@@ -1,13 +1,18 @@
 ###############################################################################
 # TCL Monster: Hardware Platform Header Generator (Windows PowerShell)
 #
-# Usage: .\generate_hw_platform.ps1 <project_file> <smartdesign_name> [output_dir]
+# Usage: .\generate_hw_platform.ps1 <project_file> <smartdesign_name> [output_dir] [sys_clk_freq_hz]
 #
-# Example:
-#   .\generate_hw_platform.ps1 `
-#       "C:\Projects\my_project\my_project.prjx" `
-#       "MIV_RV32" `
-#       ".\output"
+# Arguments:
+#   project_file     - Libero project file (.prjx)
+#   smartdesign_name - SmartDesign component name
+#   output_dir       - Output directory (default: current directory)
+#   sys_clk_freq_hz  - System clock frequency in Hz (default: 50000000)
+#
+# Examples:
+#   .\generate_hw_platform.ps1 "C:\Projects\my_project.prjx" "MIV_RV32"
+#   .\generate_hw_platform.ps1 "C:\Projects\my_project.prjx" "MIV_RV32" ".\output"
+#   .\generate_hw_platform.ps1 "C:\Projects\my_project.prjx" "MIV_RV32" ".\output" 100000000
 #
 # Description:
 #   Windows native version of hw_platform.h automation workflow:
@@ -24,7 +29,10 @@ param(
     [string]$SmartDesignName,
 
     [Parameter(Mandatory=$false, Position=2)]
-    [string]$OutputDir = "."
+    [string]$OutputDir = ".",
+
+    [Parameter(Mandatory=$false, Position=3)]
+    [int]$SysClkFreqHz = 50000000
 )
 
 ###############################################################################
@@ -90,6 +98,7 @@ Write-Host "========================================"
 Write-Host "Project: $ProjectFile"
 Write-Host "SmartDesign: $SmartDesignName"
 Write-Host "Output Directory: $OutputDir"
+Write-Host "System Clock: $SysClkFreqHz Hz ($($SysClkFreqHz / 1000000) MHz)"
 Write-Host ""
 
 ###############################################################################
@@ -226,7 +235,7 @@ Write-Host "  Success: Memory map exported" -ForegroundColor Green
 
 Write-Host "[2/3] Generating hw_platform.h..." -ForegroundColor Yellow
 
-& $Python $PythonScript $MemoryMapJson $HwPlatformH
+& $Python $PythonScript $MemoryMapJson $HwPlatformH $SysClkFreqHz
 
 if (-not (Test-Path $HwPlatformH)) {
     Write-Host "ERROR: Header generation failed" -ForegroundColor Red
@@ -247,9 +256,11 @@ Write-Host "SUCCESS!" -ForegroundColor Green
 Write-Host ""
 Write-Host "Next steps:"
 Write-Host "  1. Review $HwPlatformH"
-Write-Host "  2. Update SYS_CLK_FREQ if needed"
-Write-Host "  3. Copy to firmware project:"
+Write-Host "  2. Copy to firmware project:"
 Write-Host "     Copy-Item $HwPlatformH <project>\boards\<board>\"
+Write-Host ""
+Write-Host "Note: SYS_CLK_FREQ is configured to $SysClkFreqHz Hz"
+Write-Host "      To change, re-run with: .\generate_hw_platform.ps1 ... $($SysClkFreqHz + 1000000)"
 Write-Host ""
 
 # Cleanup temp directory

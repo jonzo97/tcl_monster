@@ -112,3 +112,5 @@ beaglev_fire_demo/
 
 # Generated PDF documentation
 *.pdf
+test_clk/
+hw_platform.h

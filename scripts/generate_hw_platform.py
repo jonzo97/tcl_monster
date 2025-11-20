@@ -3,7 +3,12 @@
 Generate hw_platform.h from Libero Memory Map JSON Export
 
 Usage:
-    python3 generate_hw_platform.py <memory_map.json> [output.h]
+    python3 generate_hw_platform.py <memory_map.json> [output.h] [sys_clk_freq_hz]
+
+Arguments:
+    memory_map.json    - Input JSON from Libero memory map export
+    output.h           - Output C header file (default: hw_platform.h)
+    sys_clk_freq_hz    - System clock frequency in Hz (default: 50000000)
 
 Description:
     Parses Libero's exported memory map JSON and generates a C header file
@@ -69,8 +74,14 @@ def parse_memory_map(json_file):
     }
 
 
-def generate_header(memory_map, output_file):
-    """Generate hw_platform.h C header file."""
+def generate_header(memory_map, output_file, sys_clk_freq=50000000):
+    """Generate hw_platform.h C header file.
+
+    Args:
+        memory_map: Parsed memory map dictionary
+        output_file: Output header file path
+        sys_clk_freq: System clock frequency in Hz (default: 50MHz)
+    """
 
     project_name = memory_map['project_name']
     smartdesign_name = memory_map['smartdesign_name']
@@ -117,14 +128,15 @@ def generate_header(memory_map, output_file):
     else:
         header += "/* No peripherals found in memory map */\n"
 
-    header += """
+    header += f"""
 /******************************************************************************
  * System Clock Frequency
  *
- * TODO: Update this value based on your design's clock configuration
+ * This value is configured during header generation.
+ * Adjust via command line if your design uses a different clock.
  *****************************************************************************/
 #ifndef SYS_CLK_FREQ
-#define SYS_CLK_FREQ                            50000000UL
+#define SYS_CLK_FREQ                            {sys_clk_freq}UL
 #endif
 
 /******************************************************************************
@@ -157,14 +169,21 @@ def main():
         print("ERROR: Missing required argument")
         print("")
         print("Usage:")
-        print("  python3 generate_hw_platform.py <memory_map.json> [output.h]")
+        print("  python3 generate_hw_platform.py <memory_map.json> [output.h] [sys_clk_freq_hz]")
         print("")
-        print("Example:")
+        print("Arguments:")
+        print("  memory_map.json    - Input JSON from Libero memory map export")
+        print("  output.h           - Output C header file (default: hw_platform.h)")
+        print("  sys_clk_freq_hz    - System clock frequency in Hz (default: 50000000)")
+        print("")
+        print("Examples:")
         print("  python3 generate_hw_platform.py memory_map.json hw_platform.h")
+        print("  python3 generate_hw_platform.py memory_map.json hw_platform.h 100000000")
         sys.exit(1)
 
     json_file = sys.argv[1]
     output_file = sys.argv[2] if len(sys.argv) > 2 else "hw_platform.h"
+    sys_clk_freq = int(sys.argv[3]) if len(sys.argv) > 3 else 50000000
 
     if not Path(json_file).exists():
         print(f"ERROR: Input file not found: {json_file}")
@@ -175,6 +194,7 @@ def main():
     print("=" * 60)
     print(f"Input:  {json_file}")
     print(f"Output: {output_file}")
+    print(f"System Clock: {sys_clk_freq} Hz ({sys_clk_freq/1000000:.1f} MHz)")
     print("")
 
     try:
@@ -189,7 +209,7 @@ def main():
 
         # Generate header
         print("Generating header file...")
-        output_path = generate_header(memory_map, output_file)
+        output_path = generate_header(memory_map, output_file, sys_clk_freq)
 
         print("")
         print(f"SUCCESS: Generated {output_path}")

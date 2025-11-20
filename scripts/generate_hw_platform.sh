@@ -66,10 +66,18 @@ if [ $# -lt 2 ]; then
     echo -e "${RED}ERROR: Missing required arguments${NC}"
     echo ""
     echo "Usage:"
-    echo "  $0 <project_file> <smartdesign_name> [output_dir]"
+    echo "  $0 <project_file> <smartdesign_name> [output_dir] [sys_clk_freq_hz]"
     echo ""
-    echo "Example:"
-    echo "  $0 ./projects/my_project/my_project.prjx MIV_RV32"
+    echo "Arguments:"
+    echo "  project_file      - Libero project file (.prjx)"
+    echo "  smartdesign_name  - SmartDesign component name"
+    echo "  output_dir        - Output directory (default: current directory)"
+    echo "  sys_clk_freq_hz   - System clock frequency in Hz (default: 50000000)"
+    echo ""
+    echo "Examples:"
+    echo "  $0 ./my_project.prjx MIV_RV32"
+    echo "  $0 ./my_project.prjx MIV_RV32 ./output"
+    echo "  $0 ./my_project.prjx MIV_RV32 ./output 100000000"
     echo ""
     exit 1
 fi
@@ -77,6 +85,7 @@ fi
 PROJECT_FILE="$1"
 SMARTDESIGN_NAME="$2"
 OUTPUT_DIR="${3:-.}"  # Default to current directory
+SYS_CLK_FREQ="${4:-50000000}"  # Default to 50MHz
 
 # Check if project file exists
 if [ ! -f "$PROJECT_FILE" ]; then
@@ -93,6 +102,7 @@ echo "========================================"
 echo "Project: $PROJECT_FILE"
 echo "SmartDesign: $SMARTDESIGN_NAME"
 echo "Output Directory: $OUTPUT_DIR"
+echo "System Clock: $SYS_CLK_FREQ Hz ($((SYS_CLK_FREQ / 1000000)) MHz)"
 echo ""
 
 # Create temporary directory for intermediate files
@@ -220,7 +230,7 @@ else
     exit 1
 fi
 
-"$PYTHON" "$PYTHON_SCRIPT" "$MEMORY_MAP_JSON" "$HW_PLATFORM_H"
+"$PYTHON" "$PYTHON_SCRIPT" "$MEMORY_MAP_JSON" "$HW_PLATFORM_H" "$SYS_CLK_FREQ"
 
 if [ ! -f "$HW_PLATFORM_H" ]; then
     echo -e "${RED}ERROR: Header generation failed${NC}"
@@ -238,7 +248,9 @@ echo -e "${GREEN}SUCCESS!${NC}"
 echo ""
 echo "Next steps:"
 echo "  1. Review $HW_PLATFORM_H"
-echo "  2. Update SYS_CLK_FREQ if needed"
-echo "  3. Copy to firmware project:"
+echo "  2. Copy to firmware project:"
 echo "     cp $HW_PLATFORM_H <project>/boards/<board>/"
+echo ""
+echo "Note: SYS_CLK_FREQ is configured to $SYS_CLK_FREQ Hz"
+echo "      To change, re-run with: $0 ... $((SYS_CLK_FREQ + 1000000))"
 echo ""
