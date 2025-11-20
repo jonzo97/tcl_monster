@@ -1,0 +1,103 @@
+# Requirements for hw_platform.h Auto-Generation
+# ================================================
+
+## Software Requirements
+
+### Required
+- Python 3.6 or later (uses standard library only - NO pip install needed!)
+- Bash shell (Git Bash on Windows, native on Linux/WSL/macOS)
+- Libero SoC v2024.x (or compatible version)
+
+### Optional
+- Git (for cloning tcl_monster repository)
+
+## Python Packages
+**NONE!** All scripts use Python standard library only:
+- json
+- sys
+- pathlib
+- datetime
+
+No `pip install` or virtual environment required.
+
+## Environment Setup
+
+### On Windows (WSL):
+```bash
+# Python 3 should already be installed
+python3 --version  # Should show 3.6+
+
+# If missing:
+sudo apt update
+sudo apt install python3
+```
+
+### On Windows (Git Bash):
+```bash
+# Python 3 from python.org or Anaconda
+python --version  # Should show 3.6+
+```
+
+### On Linux:
+```bash
+# Usually pre-installed
+python3 --version
+```
+
+## Libero Path Configuration
+
+The script will auto-detect Libero in these locations:
+
+**WSL:**
+- `/mnt/c/Microchip/Libero_SoC_v2024.2/Designer/bin/libero.exe`
+- `/mnt/c/Microchip/Libero_SoC_v2024.1/Designer/bin/libero.exe`
+
+**Linux:**
+- `$HOME/Microchip/Libero_SoC_v2024.2/Designer/bin/libero`
+
+**Custom path:**
+```bash
+export LIBERO_PATH="/your/custom/path/to/libero.exe"
+./scripts/generate_hw_platform.sh project.prjx DESIGN
+```
+
+## Quick Verification
+
+```bash
+# Check Python
+python3 --version
+
+# Check Bash
+bash --version
+
+# Check Libero (WSL example)
+ls /mnt/c/Microchip/Libero_SoC_v*/Designer/bin/libero.exe
+
+# Test the script
+./scripts/generate_hw_platform.sh --help
+```
+
+## Troubleshooting
+
+### "python3: command not found"
+- Install Python 3 from python.org
+- Or create alias: `alias python3=python`
+
+### "Could not find Libero installation"
+- Set LIBERO_PATH environment variable
+- Or edit `generate_hw_platform.sh` line 29
+
+### "Permission denied"
+```bash
+chmod +x scripts/generate_hw_platform.sh
+```
+
+## For Your Colleague
+
+**Minimum setup:**
+1. Install Python 3 (if not already installed)
+2. Have Libero SoC installed
+3. Clone/copy the scripts
+4. Run!
+
+That's it - no virtual environments, no pip installs, no configuration files.
