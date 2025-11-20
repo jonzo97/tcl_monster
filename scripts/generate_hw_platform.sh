@@ -85,7 +85,7 @@ fi
 PROJECT_FILE="$1"
 SMARTDESIGN_NAME="$2"
 OUTPUT_DIR="${3:-.}"  # Default to current directory
-SYS_CLK_FREQ="${4:-50000000}"  # Default to 50MHz
+SYS_CLK_FREQ_MANUAL="${4:-}"  # Optional manual override
 
 # Check if project file exists
 if [ ! -f "$PROJECT_FILE" ]; then
@@ -95,6 +95,19 @@ fi
 
 # Create output directory if it doesn't exist
 mkdir -p "$OUTPUT_DIR"
+
+# Determine clock frequency
+if [ -z "$SYS_CLK_FREQ_MANUAL" ]; then
+    # No clock specified - use 50 MHz default with warning
+    SYS_CLK_FREQ=50000000
+    echo -e "${YELLOW}WARNING: Using default 50 MHz clock frequency${NC}"
+    echo -e "${YELLOW}         Verify this matches your design!${NC}"
+    echo -e "${YELLOW}         Override: $0 ... <output_dir> <clock_hz>${NC}"
+    echo ""
+else
+    # User specified clock frequency
+    SYS_CLK_FREQ="$SYS_CLK_FREQ_MANUAL"
+fi
 
 echo "========================================"
 echo "TCL Monster: hw_platform.h Generator"

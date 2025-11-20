@@ -34,6 +34,9 @@ def parse_memory_map(json_file):
     project_name = data.get('project_name', 'Unknown')
     smartdesign_name = data.get('SmartDesign name', 'Unknown')
 
+    # Extract system clock frequency if present (added by enhanced export script)
+    system_clock_hz = data.get('system_clock_hz', None)
+
     # Recursive function to walk the tree and find all peripherals (Type == "Target")
     def extract_targets(nodes):
         """Recursively extract all peripheral targets from nested structure."""
@@ -70,7 +73,8 @@ def parse_memory_map(json_file):
     return {
         'project_name': project_name,
         'smartdesign_name': smartdesign_name,
-        'peripherals': peripherals
+        'peripherals': peripherals,
+        'system_clock_hz': system_clock_hz
     }
 
 
@@ -183,7 +187,7 @@ def main():
 
     json_file = sys.argv[1]
     output_file = sys.argv[2] if len(sys.argv) > 2 else "hw_platform.h"
-    sys_clk_freq = int(sys.argv[3]) if len(sys.argv) > 3 else 50000000
+    sys_clk_freq_cmdline = int(sys.argv[3]) if len(sys.argv) > 3 else None
 
     if not Path(json_file).exists():
         print(f"ERROR: Input file not found: {json_file}")
@@ -194,13 +198,25 @@ def main():
     print("=" * 60)
     print(f"Input:  {json_file}")
     print(f"Output: {output_file}")
-    print(f"System Clock: {sys_clk_freq} Hz ({sys_clk_freq/1000000:.1f} MHz)")
-    print("")
 
     try:
         # Parse memory map
+        print("")
         print("Parsing memory map...")
         memory_map = parse_memory_map(json_file)
+
+        # Determine system clock frequency (priority: cmdline > JSON > default)
+        if sys_clk_freq_cmdline:
+            sys_clk_freq = sys_clk_freq_cmdline
+            clock_source = "command-line"
+        elif memory_map['system_clock_hz']:
+            sys_clk_freq = memory_map['system_clock_hz']
+            clock_source = "auto-detected from design"
+        else:
+            sys_clk_freq = 50000000
+            clock_source = "default (50 MHz)"
+
+        print(f"  System Clock: {sys_clk_freq} Hz ({sys_clk_freq/1000000:.1f} MHz) [{clock_source}]")
 
         print(f"  Project: {memory_map['project_name']}")
         print(f"  SmartDesign: {memory_map['smartdesign_name']}")
