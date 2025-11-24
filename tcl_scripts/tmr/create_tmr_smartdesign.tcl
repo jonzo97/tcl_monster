@@ -21,15 +21,16 @@ puts "Project opened: $project_name"
 puts ""
 
 # ============================================================================
-# Step 1: Import Triple Voter HDL
+# Step 1: Import TMR HDL Modules
 # ============================================================================
 
-puts "\[Step 1/8\] Importing triple voter HDL..."
+puts "\[Step 1/9\] Importing TMR HDL modules..."
 
-# Import the voter Verilog module
+# Import the voter and functional outputs modules
 import_files -convert_EDN_to_HDL 0 -library {work} -hdl_source {C:/tcl_monster/hdl/tmr/triple_voter.v}
+import_files -convert_EDN_to_HDL 0 -library {work} -hdl_source {C:/tcl_monster/hdl/tmr/tmr_functional_outputs.v}
 
-puts "✓ Triple voter HDL imported"
+puts "✓ TMR HDL modules imported (voter + functional outputs)"
 puts ""
 
 # ============================================================================
@@ -76,7 +77,7 @@ puts ""
 # Step 5: Create External Interfaces (Ports)
 # ============================================================================
 
-puts "\[Step 5/8\] Creating external interfaces..."
+puts "\[Step 5/9\] Creating external interfaces..."
 
 # Clock input
 sd_create_scalar_port -sd_name {TMR_TOP} -port_name {CLK_IN} -port_direction {IN}
@@ -84,21 +85,22 @@ sd_create_scalar_port -sd_name {TMR_TOP} -port_name {CLK_IN} -port_direction {IN
 # Reset input
 sd_create_scalar_port -sd_name {TMR_TOP} -port_name {RST_N_IN} -port_direction {IN}
 
-# Heartbeat LED (shows clock is running)
+# Heartbeat LED (shows clock is running - direct clock connection)
 sd_create_scalar_port -sd_name {TMR_TOP} -port_name {HEARTBEAT_LED} -port_direction {OUT}
 
-# TMR Status LED (shows voted output from 3x cores)
-sd_create_scalar_port -sd_name {TMR_TOP} -port_name {TMR_STATUS_LED} -port_direction {OUT}
+# LED Pattern (8-bit animated pattern driven by functional block)
+sd_create_bus_port -sd_name {TMR_TOP} -port_name {LED_PATTERN} -port_direction {OUT} -port_range {[7:0]}
 
-# Fault indicators (3 LEDs showing which cores have faults)
-sd_create_scalar_port -sd_name {TMR_TOP} -port_name {FAULT_LED_A} -port_direction {OUT}
-sd_create_scalar_port -sd_name {TMR_TOP} -port_name {FAULT_LED_B} -port_direction {OUT}
-sd_create_scalar_port -sd_name {TMR_TOP} -port_name {FAULT_LED_C} -port_direction {OUT}
+# Status LED (blinks at 1 Hz when TMR system active)
+sd_create_scalar_port -sd_name {TMR_TOP} -port_name {STATUS_LED} -port_direction {OUT}
 
-# Disagreement indicator (high if any cores disagree)
+# Disagreement LED (high when cores disagree)
 sd_create_scalar_port -sd_name {TMR_TOP} -port_name {DISAGREE_LED} -port_direction {OUT}
 
-puts "✓ External interfaces created (8 ports total)"
+# Fault LEDs (3 bits - one per core)
+sd_create_bus_port -sd_name {TMR_TOP} -port_name {FAULT_LEDS} -port_direction {OUT} -port_range {[2:0]}
+
+puts "✓ External interfaces created (6 ports, 13 pins total)"
 puts ""
 
 # ============================================================================
@@ -140,25 +142,58 @@ sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_A:EXT_RESETN" "VOTER_EX
 sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_B:EXT_RESETN" "VOTER_EXT_RESETN:input_b"}
 sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_C:EXT_RESETN" "VOTER_EXT_RESETN:input_c"}
 
-# Connect voted output to LED
-sd_connect_pins -sd_name {TMR_TOP} -pin_names {"VOTER_EXT_RESETN:voted_output" "TMR_STATUS_LED"}
-
-# Connect fault flags to LEDs
-sd_connect_pins -sd_name {TMR_TOP} -pin_names {"VOTER_EXT_RESETN:fault_flags[2]" "FAULT_LED_A"}
-sd_connect_pins -sd_name {TMR_TOP} -pin_names {"VOTER_EXT_RESETN:fault_flags[1]" "FAULT_LED_B"}
-sd_connect_pins -sd_name {TMR_TOP} -pin_names {"VOTER_EXT_RESETN:fault_flags[0]" "FAULT_LED_C"}
-
-# Connect disagreement flag to LED
-sd_connect_pins -sd_name {TMR_TOP} -pin_names {"VOTER_EXT_RESETN:disagreement" "DISAGREE_LED"}
+# Voter outputs will be connected to functional outputs module (not directly to LEDs)
+# This creates the data path: Cores → Voter → Functional Outputs → LEDs → Pins
 
 puts "✓ MI-V cores connected through voter"
 puts ""
 
 # ============================================================================
-# Step 8: Save, Generate, and Set as Root
+# Step 8: Instantiate Functional Outputs Module
 # ============================================================================
 
-puts "\[Step 8/8\] Saving SmartDesign..."
+puts "\[Step 8/9\] Instantiating functional outputs module..."
+
+# Instantiate the functional outputs HDL module
+sd_instantiate_hdl_module -sd_name {TMR_TOP} -hdl_module_name {tmr_functional_outputs} -hdl_file {C:/tcl_monster/hdl/tmr/tmr_functional_outputs.v} -instance_name {FUNCTIONAL_OUTPUTS}
+
+puts "✓ Functional outputs module instantiated"
+puts ""
+
+# ============================================================================
+# Step 9: Connect Functional Outputs
+# ============================================================================
+
+puts "\[Step 9/9\] Connecting functional outputs..."
+
+# Connect clock and reset to functional outputs
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"CLK_IN" "FUNCTIONAL_OUTPUTS:clk"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"RST_N_IN" "FUNCTIONAL_OUTPUTS:rst_n"}
+
+# Connect voted EXT_RESETN to functional outputs (KEY CONNECTION!)
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"VOTER_EXT_RESETN:voted_output" "FUNCTIONAL_OUTPUTS:voted_resetn"}
+
+# Connect disagreement and fault flags to functional outputs
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"VOTER_EXT_RESETN:disagreement" "FUNCTIONAL_OUTPUTS:disagreement"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"VOTER_EXT_RESETN:fault_flags" "FUNCTIONAL_OUTPUTS:fault_flags"}
+
+# Connect functional outputs to external LED ports
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"FUNCTIONAL_OUTPUTS:led_pattern" "LED_PATTERN"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"FUNCTIONAL_OUTPUTS:status_led" "STATUS_LED"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"FUNCTIONAL_OUTPUTS:disagree_led" "DISAGREE_LED"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"FUNCTIONAL_OUTPUTS:fault_leds" "FAULT_LEDS"}
+
+# Heartbeat LED (direct clock connection)
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"HEARTBEAT_LED" "CLK_IN"}
+
+puts "✓ Functional outputs connected to voted signals and LED pins"
+puts ""
+
+# ============================================================================
+# Step 10: Save, Generate, and Set as Root
+# ============================================================================
+
+puts "\[Step 10/10\] Saving SmartDesign..."
 
 # Save SmartDesign
 save_smartdesign -sd_name {TMR_TOP}
@@ -183,24 +218,36 @@ puts ""
 # ============================================================================
 
 puts "╔════════════════════════════════════════════════════════════════════╗"
-puts "║              TMR SmartDesign Integration Complete                  ║"
+puts "║        TMR SmartDesign with Functional Connectivity Complete       ║"
 puts "╚════════════════════════════════════════════════════════════════════╝"
 puts ""
 puts "TMR Architecture:"
 puts "  ✓ 3x MI-V RV32IMC cores (synchronized clock/reset)"
 puts "  ✓ Triple voter (2-of-3 majority voting on EXT_RESETN)"
+puts "  ✓ Functional outputs module (counter + LED patterns)"
 puts "  ✓ Fault detection and disagreement monitoring"
 puts ""
-puts "Output Signals:"
-puts "  HEARTBEAT_LED   - Clock indicator (blinks at clock rate)"
-puts "  TMR_STATUS_LED  - Voted output from 3x cores"
-puts "  FAULT_LED_A/B/C - Individual core fault indicators"
-puts "  DISAGREE_LED    - High if any cores disagree"
+puts "Data Flow Path (KEY - prevents optimization):"
+puts "  Cores → Voter → Functional Block → Counter → LEDs → I/O Pins"
 puts ""
-puts "This is IP-level TMR:"
-puts "  - 3x processor instances (not register-level triplication)"
-puts "  - Voter logic in fabric"
-puts "  - Observable outputs force synthesis to keep all cores"
+puts "Output Signals (13 pins total):"
+puts "  HEARTBEAT_LED - Clock indicator"
+puts "  LED_PATTERN\[7:0\] - Animated pattern (changes every ~2.7s)"
+puts "  STATUS_LED    - Blinks at 1 Hz (proves voted signal functional)"
+puts "  DISAGREE_LED  - High when cores disagree"
+puts "  FAULT_LEDS\[2:0\] - Individual core fault flags"
+puts ""
+puts "Why This Works:"
+puts "  - Voted EXT_RESETN ENABLES counter (functional use, not static!)"
+puts "  - Counter drives LED pattern (observable behavior)"
+puts "  - Multiple outputs (13 pins) create fanout"
+puts "  - Real data path prevents synthesis optimization"
+puts ""
+puts "Expected Synthesis Results:"
+puts "  - ~35,000 LUTs (3x MI-V cores + voter + counter)"
+puts "  - All 3 cores preserved in netlist"
+puts "  - Voter logic synthesized"
+puts "  - Functional outputs working"
 puts ""
 puts "Next Step:"
 puts "  ./run_libero.sh tcl_scripts/tmr/build_tmr_project.tcl SCRIPT"

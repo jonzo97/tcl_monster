@@ -1,0 +1,98 @@
+# TMR Synthesis Directives - PolarFire FPGA
+# Prevents synthesis optimization of triplicated cores and voter logic
+#
+# CRITICAL: These directives are HINTS to synthesis, not guarantees.
+# Functional connectivity (cores → memory/peripherals → I/O) is the
+# primary defense against optimization.
+
+puts "Applying TMR synthesis preservation directives..."
+
+# ==============================================================================
+# Preserve MI-V Core Instances
+# ==============================================================================
+
+# Prevent optimization of core instances
+# syn_preserve = 1 tells Synplify Pro to keep the instance hierarchy
+define_attribute {i:MIV_RV32_A} {syn_preserve} {1}
+define_attribute {i:MIV_RV32_B} {syn_preserve} {1}
+define_attribute {i:MIV_RV32_C} {syn_preserve} {1}
+
+puts "  ✓ Core instance preservation attributes applied"
+
+# ==============================================================================
+# Register-Level TMR for Voter Logic
+# ==============================================================================
+
+# Apply register-level TMR to voter modules
+# syn_radhardlevel = tmr triplicates all registers and adds voting
+define_attribute {v:work.triple_voter} {syn_radhardlevel} {tmr}
+define_attribute {v:work.memory_voter} {syn_radhardlevel} {tmr}
+define_attribute {v:work.peripheral_voter} {syn_radhardlevel} {tmr}
+
+puts "  ✓ Register-level TMR applied to voter modules"
+
+# ==============================================================================
+# Preserve Voter Instances
+# ==============================================================================
+
+# Keep voter instances (if they exist in design)
+# Note: These may not all be instantiated yet
+define_attribute {i:VOTER_EXT_RESETN} {syn_preserve} {1}
+define_attribute {i:MEMORY_VOTER} {syn_preserve} {1}
+define_attribute {i:PERIPHERAL_VOTER} {1}
+
+puts "  ✓ Voter instance preservation attributes applied"
+
+# ==============================================================================
+# Preserve TMR Support Blocks
+# ==============================================================================
+
+# Preserve sync controller and fault monitor
+define_attribute {v:work.tmr_sync_controller} {syn_preserve} {1}
+define_attribute {v:work.tmr_fault_monitor} {syn_preserve} {1}
+
+puts "  ✓ TMR support block attributes applied"
+
+# ==============================================================================
+# Core-Level Preservation (Aggressive)
+# ==============================================================================
+
+# Additional preservation at module level
+# This tells synthesis to keep the entire module hierarchy
+define_attribute {v:work.MIV_RV32_CORE_A} {syn_hier} {hard}
+define_attribute {v:work.MIV_RV32_CORE_B} {syn_hier} {hard}
+define_attribute {v:work.MIV_RV32_CORE_C} {syn_hier} {hard}
+
+puts "  ✓ Core module hierarchy preservation (hard) applied"
+
+# ==============================================================================
+# Disable Retiming Across TMR Boundaries
+# ==============================================================================
+
+# Prevent register retiming from moving logic across voter boundaries
+define_attribute {i:VOTER_EXT_RESETN} {syn_maxfan} {1000}
+
+puts "  ✓ Voter fanout preservation applied"
+
+# ==============================================================================
+# Summary
+# ==============================================================================
+
+puts ""
+puts "TMR Synthesis Directives Applied:"
+puts "  - Core instance preservation (syn_preserve)"
+puts "  - Hard hierarchy preservation (syn_hier hard)"
+puts "  - Register-level TMR for voters (syn_radhardlevel tmr)"
+puts "  - Voter instance preservation"
+puts "  - TMR support block preservation"
+puts ""
+puts "⚠  IMPORTANT:"
+puts "  These directives are SECONDARY defense against optimization."
+puts "  PRIMARY defense is functional connectivity:"
+puts "    - Cores must connect to memory/peripherals"
+puts "    - Voted outputs must drive I/O pins"
+puts "    - Real data paths prevent optimization"
+puts ""
+puts "  If synthesis still removes cores (0 LUTs), the problem is"
+puts "  lack of functional connectivity, not synthesis directives."
+puts ""

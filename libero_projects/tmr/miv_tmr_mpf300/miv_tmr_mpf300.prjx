@@ -44,7 +44,6 @@ KEY LossOfDataDRCSeverity "TRUE"
 KEY IdWidthMismatchDRCSeverity "TRUE"
 KEY SimulationType "VERILOG"
 KEY Vendor "Actel"
-KEY ActiveRoot "tmr_top::work"
 LIST REVISIONS
 VALUE="Impl1",NUM=1
 CURREV=1
@@ -75,7 +74,7 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Microsemi\MiV\MIV_RV32\3.1.200\MIV_RV32.cxf,actgen_cxf"
 STATE="utd"
-TIME="1763971247"
+TIME="1764012223"
 SIZE="1084"
 PARENT="<project>\component\work\MIV_RV32_CORE_A\MIV_RV32_CORE_A.cxf"
 PARENT="<project>\component\work\MIV_RV32_CORE_B\MIV_RV32_CORE_B.cxf"
@@ -111,151 +110,118 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_A\MIV_RV32_CORE_A.cxf,actgen_cxf"
 STATE="utd"
-TIME="1763971247"
+TIME="1764012222"
 SIZE="14235"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_A\MIV_RV32_CORE_A.v,hdl"
 STATE="utd"
-TIME="1763971247"
+TIME="1764012222"
 SIZE="17264"
 PARENT="<project>\component\work\MIV_RV32_CORE_A\MIV_RV32_CORE_A.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_A\MIV_RV32_CORE_A_0\MIV_RV32_CORE_A_MIV_RV32_CORE_A_0_MIV_RV32.cxf,actgen_cxf"
 STATE="utd"
-TIME="1763971247"
+TIME="1764012222"
 SIZE="500"
 PARENT="<project>\component\work\MIV_RV32_CORE_A\MIV_RV32_CORE_A.cxf"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_A\MIV_RV32_CORE_A_0\rtl\miv_rv32.v,hdl"
 STATE="utd"
-TIME="1763971247"
+TIME="1764012221"
 SIZE="33267"
 PARENT="<project>\component\work\MIV_RV32_CORE_A\MIV_RV32_CORE_A_0\MIV_RV32_CORE_A_MIV_RV32_CORE_A_0_MIV_RV32.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_B\MIV_RV32_CORE_B.cxf,actgen_cxf"
 STATE="utd"
-TIME="1763971247"
+TIME="1764012222"
 SIZE="14235"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_B\MIV_RV32_CORE_B.v,hdl"
 STATE="utd"
-TIME="1763971247"
+TIME="1764012222"
 SIZE="17264"
 PARENT="<project>\component\work\MIV_RV32_CORE_B\MIV_RV32_CORE_B.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_B\MIV_RV32_CORE_B_0\MIV_RV32_CORE_B_MIV_RV32_CORE_B_0_MIV_RV32.cxf,actgen_cxf"
 STATE="utd"
-TIME="1763971247"
+TIME="1764012222"
 SIZE="500"
 PARENT="<project>\component\work\MIV_RV32_CORE_B\MIV_RV32_CORE_B.cxf"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_B\MIV_RV32_CORE_B_0\rtl\miv_rv32.v,hdl"
 STATE="utd"
-TIME="1763971247"
+TIME="1764012222"
 SIZE="33267"
 PARENT="<project>\component\work\MIV_RV32_CORE_B\MIV_RV32_CORE_B_0\MIV_RV32_CORE_B_MIV_RV32_CORE_B_0_MIV_RV32.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_C\MIV_RV32_CORE_C.cxf,actgen_cxf"
 STATE="utd"
-TIME="1763971248"
+TIME="1764012223"
 SIZE="14235"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_C\MIV_RV32_CORE_C.v,hdl"
 STATE="utd"
-TIME="1763971247"
+TIME="1764012223"
 SIZE="17264"
 PARENT="<project>\component\work\MIV_RV32_CORE_C\MIV_RV32_CORE_C.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_C\MIV_RV32_CORE_C_0\MIV_RV32_CORE_C_MIV_RV32_CORE_C_0_MIV_RV32.cxf,actgen_cxf"
 STATE="utd"
-TIME="1763971247"
+TIME="1764012223"
 SIZE="500"
 PARENT="<project>\component\work\MIV_RV32_CORE_C\MIV_RV32_CORE_C.cxf"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_C\MIV_RV32_CORE_C_0\rtl\miv_rv32.v,hdl"
 STATE="utd"
-TIME="1763971247"
+TIME="1764012223"
 SIZE="33267"
 PARENT="<project>\component\work\MIV_RV32_CORE_C\MIV_RV32_CORE_C_0\MIV_RV32_CORE_C_MIV_RV32_CORE_C_0_MIV_RV32.cxf"
 IS_READONLY="TRUE"
 ENDFILE
+VALUE "<project>\component\work\TMR_TOP\TMR_TOP.cxf,actgen_cxf"
+STATE="utd"
+TIME="1764012254"
+SIZE="1146"
+ENDFILE
 VALUE "<project>\hdl\memory_voter.v,hdl"
 STATE="utd"
-TIME="1763971247"
+TIME="1764012221"
 SIZE="4725"
 ENDFILE
 VALUE "<project>\hdl\peripheral_voter.v,hdl"
 STATE="utd"
-TIME="1763971247"
+TIME="1764012221"
 SIZE="3714"
 ENDFILE
 VALUE "<project>\hdl\tmr_fault_monitor.v,hdl"
 STATE="utd"
-TIME="1763971247"
+TIME="1764012221"
 SIZE="4661"
+ENDFILE
+VALUE "<project>\hdl\tmr_functional_outputs.v,hdl"
+STATE="utd"
+TIME="1764012254"
+SIZE="4609"
 ENDFILE
 VALUE "<project>\hdl\tmr_sync_controller.v,hdl"
 STATE="utd"
-TIME="1763971247"
+TIME="1764012221"
 SIZE="1931"
-ENDFILE
-VALUE "<project>\hdl\tmr_top.v,hdl"
-STATE="utd"
-TIME="1763971263"
-SIZE="6603"
 ENDFILE
 VALUE "<project>\hdl\triple_voter.v,hdl"
 STATE="utd"
-TIME="1763971263"
+TIME="1764012254"
 SIZE="2235"
-ENDFILE
-VALUE "<project>\synthesis\tmr_top.so,so"
-STATE="utd"
-TIME="1763971416"
-SIZE="238"
-ENDFILE
-VALUE "<project>\synthesis\tmr_top.vm,syn_vm"
-STATE="utd"
-TIME="1763971415"
-SIZE="4916"
-ENDFILE
-VALUE "<project>\synthesis\tmr_top_syn.prj,prj"
-STATE="utd"
-TIME="1763971417"
-SIZE="4868"
-ENDFILE
-VALUE "<project>\synthesis\tmr_top_vm.sdc,syn_sdc"
-STATE="utd"
-TIME="1763971415"
-SIZE="974"
 ENDFILE
 ENDLIST
 LIST UsedFile
 ENDLIST
 LIST NewModulesInfo
-LIST "tmr_top::work"
-FILE "<project>\hdl\tmr_top.v,hdl"
-LIST ProjectState5.1
-LIST Impl1
-ideSYNTHESIS(<project>\synthesis\tmr_top.vm,syn_vm)=StateSuccess
-LIST FlowOptions
-UsePhySynth=FALSE
-UseSynth=TRUE
-UseFhbAutoInst=FALSE
-ENDLIST
-Used_File_List
-ENDUsed_File_List
-ENDLIST
-ENDLIST
-LIST synthesis_implementations
-VALUE "synthesis"
-ENDLIST
-ENDLIST
 ENDLIST
 LIST AssociatedStimulus
 ENDLIST
@@ -332,8 +298,8 @@ NAME="Synplify Pro ME"
 FUNCTION="Synthesis"
 TOOL="Synplify Pro ME"
 LOCATION="C:\Microchip\Libero_SoC_v2024.2\SynplifyPro\bin\synplify_pro.exe"
-PARAM="-licensetype synplifypro_actel -batch -log synplify.log"
-BATCH=1
+PARAM=""
+BATCH=0
 LICENSE=""
 IS32BIT="1"
 EndProfile
@@ -357,18 +323,6 @@ IS32BIT="1"
 EndProfile
 ENDLIST
 LIST ProjectState5.1
-LIST "tmr_top::work"
-LIST Impl1
-ideSYNTHESIS(<project>\synthesis\tmr_top.vm,syn_vm)=StateSuccess
-LIST FlowOptions
-UsePhySynth=FALSE
-UseSynth=TRUE
-UseFhbAutoInst=FALSE
-ENDLIST
-Used_File_List
-ENDUsed_File_List
-ENDLIST
-ENDLIST
 ENDLIST
 LIST ExcludePackageForSimulation
 ENDLIST
@@ -381,12 +335,6 @@ ENDLIST
 LIST UserCustomizedFileList
 ENDLIST
 LIST OpenedFileList
-ORIENTATION;HORIZONTAL
-Reports;Reports;0
-ReportsCurrentItem;synthesis:tmr_top.srr
-HDL;hdl\tmr_top.v;0
-StartPage;StartPage;0
-ACTIVEVIEW;Reports
 ENDLIST
 LIST ModuleSubBlockList
 LIST "miv_rv32_axi_xaddr_buffer_slot::work","component\Microsemi\MiV\MIV_RV32\3.1.200\subsys_merged\miv_rv32_subsys_merged.v","FALSE","FALSE"
@@ -488,8 +436,6 @@ ENDLIST
 LIST "miv_rv32_csr_gpr_state_reg::work","component\Microsemi\MiV\MIV_RV32\3.1.200\hart_merged\miv_rv32_hart_merged.v","FALSE","FALSE"
 ENDLIST
 LIST "miv_rv32_debug_fifo::work","component\Microsemi\MiV\MIV_RV32\3.1.200\subsys_merged\miv_rv32_subsys_merged.v","FALSE","FALSE"
-ENDLIST
-LIST "triple_voter::work","hdl\triple_voter.v","FALSE","FALSE"
 ENDLIST
 LIST "miv_rv32_buffer::work","component\Microsemi\MiV\MIV_RV32\3.1.200\subsys_merged\miv_rv32_subsys_merged.v","FALSE","FALSE"
 ENDLIST
@@ -865,13 +811,14 @@ LIST "RAM_BIST_ERROR:ASIC_view_does_not_exist_in_miv_rv32_dpr_hqa_dual_storage_r
 ENDLIST
 LIST "tmr_fault_monitor::work","hdl\tmr_fault_monitor.v","FALSE","FALSE"
 ENDLIST
+LIST "tmr_functional_outputs::work","hdl\tmr_functional_outputs.v","FALSE","FALSE"
+ENDLIST
 LIST "tmr_sync_controller::work","hdl\tmr_sync_controller.v","FALSE","FALSE"
 ENDLIST
-LIST "tmr_top::work","hdl\tmr_top.v","FALSE","FALSE"
+LIST "TMR_TOP::work","component\work\TMR_TOP\TMR_TOP.cxf","TRUE","FALSE"
 SUBBLOCK "MIV_RV32_CORE_A::work","component\work\MIV_RV32_CORE_A\MIV_RV32_CORE_A.v","TRUE","FALSE"
 SUBBLOCK "MIV_RV32_CORE_B::work","component\work\MIV_RV32_CORE_B\MIV_RV32_CORE_B.v","TRUE","FALSE"
 SUBBLOCK "MIV_RV32_CORE_C::work","component\work\MIV_RV32_CORE_C\MIV_RV32_CORE_C.v","TRUE","FALSE"
-SUBBLOCK "triple_voter::work","hdl\triple_voter.v","FALSE","FALSE"
 ENDLIST
 LIST "triple_voter::work","hdl\triple_voter.v","FALSE","FALSE"
 ENDLIST

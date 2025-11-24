@@ -56,6 +56,7 @@ set hdl_files [list \
     "C:/tcl_monster/hdl/tmr/peripheral_voter.v" \
     "C:/tcl_monster/hdl/tmr/tmr_sync_controller.v" \
     "C:/tcl_monster/hdl/tmr/tmr_fault_monitor.v" \
+    "C:/tcl_monster/hdl/tmr/tmr_functional_outputs.v" \
 ]
 
 foreach hdl_file $hdl_files {
