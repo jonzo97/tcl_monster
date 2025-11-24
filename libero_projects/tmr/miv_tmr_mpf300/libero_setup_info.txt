@@ -1,5 +1,5 @@
 # Microsemi Corp.
-# Date: 2025-Nov-24 11:24:43
+# Date: 2025-Nov-24 12:48:53
 Libero Release : v2024.2
 Libero Version : 2024.2.0.13
 Operating System Name : Windows 8
@@ -60,7 +60,7 @@ Environment Variables :
 	VXIPNPPATH64=C:\Program Files\IVI Foundation\VISA\
 	WSLENV=WT_SESSION:WT_PROFILE_ID:
 	WT_PROFILE_ID={51855cb2-8cce-5362-8f54-464b92b32386}
-	WT_SESSION=a5c6947e-29a0-41f0-9bda-d32f4a312fb8
+	WT_SESSION=745efe74-9cdd-49de-85ae-81405824fc4c
 	ZES_ENABLE_SYSMAN=1
 	__PSLockDownPolicy=0
 	log4j2.formatMsgNoLookups=true
@@ -69,3 +69,4 @@ Environment Variables :
 	AMHOME=C:\Microchip\Libero_SoC_v2024.2\Designer/am
 	HOME=C:\Users\c75683
 	TCL_LIBRARY=C:\Microchip\Libero_SoC_v2024.2\Designer/lib/tcl8.5
+	SYN_WRXML=1

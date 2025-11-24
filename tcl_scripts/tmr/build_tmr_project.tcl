@@ -22,7 +22,8 @@ puts ""
 puts "\[1/5\] Importing constraints..."
 
 # Synthesis directives (FDC) - CRITICAL for TMR preservation
-create_links -fdc {C:/tcl_monster/constraint/tmr_synthesis_directives.fdc}
+# Link the FDC file using -net_fdc (works for synthesis constraint files)
+create_links -net_fdc {C:/tcl_monster/constraint/tmr_synthesis_directives.fdc}
 organize_tool_files -tool {SYNTHESIZE} \
     -file {C:/tcl_monster/constraint/tmr_synthesis_directives.fdc} \
     -module {TMR_TOP} \

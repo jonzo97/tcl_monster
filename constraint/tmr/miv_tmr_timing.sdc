@@ -27,12 +27,12 @@ set_false_path -from [get_ports {RST_N_IN}]
 # ==============================================================================
 
 # LED outputs (10ns setup time relative to clock)
+# Port names must match exactly what's in TMR_TOP SmartDesign
 set_output_delay -clock {CLK_IN} -max 10 [get_ports {HEARTBEAT_LED}]
-set_output_delay -clock {CLK_IN} -max 10 [get_ports {TMR_STATUS_LED}]
-set_output_delay -clock {CLK_IN} -max 10 [get_ports {FAULT_LED_A}]
-set_output_delay -clock {CLK_IN} -max 10 [get_ports {FAULT_LED_B}]
-set_output_delay -clock {CLK_IN} -max 10 [get_ports {FAULT_LED_C}]
+set_output_delay -clock {CLK_IN} -max 10 [get_ports {STATUS_LED}]
 set_output_delay -clock {CLK_IN} -max 10 [get_ports {DISAGREE_LED}]
+set_output_delay -clock {CLK_IN} -max 10 [get_ports {LED_PATTERN[*]}]
+set_output_delay -clock {CLK_IN} -max 10 [get_ports {FAULT_LEDS[*]}]
 
 # ==============================================================================
 # Multi-Cycle Paths (if needed for voter logic)

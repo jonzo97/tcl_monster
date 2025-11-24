@@ -50,12 +50,21 @@ puts ""
 
 puts "\[2/7\] Importing custom HDL voter modules..."
 
+# CRITICAL LESSON: Only import modules that will be used as TOP-LEVEL instantiations
+# in SmartDesign. Do NOT import modules that instantiate other modules we want to use
+# with sd_instantiate_hdl_module, as this creates sub-module relationships that prevent
+# SmartDesign instantiation.
+#
+# Excluded files (create sub-module relationships):
+#   - memory_voter.v (instantiates triple_voter)
+#   - peripheral_voter.v (instantiates triple_voter)
+#   - tmr_top.v (HDL top-level, instantiates triple_voter)
+#
+# See docs/libero_build_flow_lessons.md for details
+
 set hdl_files [list \
-    "C:/tcl_monster/hdl/tmr/triple_voter.v" \
-    "C:/tcl_monster/hdl/tmr/memory_voter.v" \
-    "C:/tcl_monster/hdl/tmr/peripheral_voter.v" \
-    "C:/tcl_monster/hdl/tmr/tmr_sync_controller.v" \
-    "C:/tcl_monster/hdl/tmr/tmr_fault_monitor.v" \
+    "C:/tcl_monster/hdl/tmr/triple_voter_1bit.v" \
+    "C:/tcl_monster/hdl/tmr/triple_voter_64bit.v" \
     "C:/tcl_monster/hdl/tmr/tmr_functional_outputs.v" \
 ]
 

@@ -40,6 +40,82 @@ import_files -convert_EDN_to_HDL 0 -library {work} -hdl_source {C:/path/to/file.
 - Always use Windows path format
 - Import custom HDL before creating SmartDesign components
 
+### 2b. CRITICAL: HDL Module Hierarchy and sd_instantiate_hdl_module
+
+**Error:** "You cannot instantiate a sub-module 'module_name' of HDL module."
+
+**Root Cause:** When you use `sd_instantiate_hdl_module`, Libero checks if the module is a "top-level" module. If any OTHER imported HDL file instantiates that module, it becomes a "sub-module" and CANNOT be used with `sd_instantiate_hdl_module`.
+
+**Example Scenario:**
+```
+triple_voter.v          <- Module we want to instantiate in SmartDesign
+peripheral_voter.v      <- Instantiates triple_voter (uses it as sub-module!)
+```
+
+If both files are imported, `triple_voter` becomes a sub-module and SmartDesign instantiation fails!
+
+**SOLUTION:**
+1. **Only import HDL modules you will use as TOP-LEVEL in SmartDesign**
+2. **Do NOT import any HDL files that instantiate modules you want to use with `sd_instantiate_hdl_module`**
+
+**Correct Import Strategy:**
+```tcl
+# Import ONLY leaf modules for SmartDesign instantiation
+set hdl_files [list \
+    "C:/tcl_monster/hdl/tmr/triple_voter.v" \
+    "C:/tcl_monster/hdl/tmr/tmr_functional_outputs.v" \
+]
+
+# DO NOT IMPORT these (they create sub-module relationships):
+#   - peripheral_voter.v (instantiates triple_voter)
+#   - memory_voter.v (instantiates triple_voter)
+#   - tmr_top.v (HDL top-level that instantiates triple_voter)
+```
+
+**Alternative Approaches (when you need both):**
+1. Use separate project variants (SmartDesign vs HDL-only)
+2. Create wrapper SmartDesign components around HDL modules
+3. Use `sd_instantiate_component` with pre-generated Libero components instead
+
+**Key Insight:** This is why the MI-V reference designs ONLY use `sd_instantiate_component` (for Libero IP) and NEVER use `sd_instantiate_hdl_module` - they avoid the sub-module issue entirely by using pre-configured components.
+
+### 2c. CRITICAL: HDL Module Parameter Configuration
+
+**Error:** "Cannot configure instance 'INSTANCE_NAME'" with `sd_configure_core_instance`
+
+**Root Cause:** The `sd_configure_core_instance` command ONLY works with IP cores (created via `create_and_configure_core`), NOT with raw HDL modules instantiated via `sd_instantiate_hdl_module`.
+
+**Symptoms:**
+- HDL module instantiates successfully
+- Attempting to configure parameters with `sd_configure_core_instance` fails
+- Error provides no indication that the command doesn't apply to HDL modules
+
+**SOLUTION:**
+For HDL modules with parameters, you have two options:
+
+1. **Create fixed-width module variants** (recommended for small number of widths)
+   ```verilog
+   // triple_voter_1bit.v - Fixed 1-bit width voter
+   module triple_voter_1bit (
+       input wire input_a,
+       input wire input_b,
+       input wire input_c,
+       output reg voted_output,
+       ...
+   );
+   ```
+
+2. **Use default parameters** if they match your needs
+   ```tcl
+   # Just instantiate without trying to configure
+   sd_instantiate_hdl_module -sd_name {TOP} -hdl_module_name {module} -hdl_file {hdl/module.v} -instance_name {INST}
+   # DON'T call sd_configure_core_instance - it won't work!
+   ```
+
+**Key Insight:** Libero's SmartDesign treats IP cores and HDL modules very differently:
+- **IP cores** (sd_instantiate_component): Full GUI/TCL configuration support
+- **HDL modules** (sd_instantiate_hdl_module): Instantiate-only, parameters fixed at Verilog level
+
 ### 3. Create SmartDesign Component
 
 ```tcl

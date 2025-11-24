@@ -1,0 +1,133 @@
+# Microchip Physical design constraints file
+
+# Version: 2024.2 2024.2.0.13
+
+# Design Name: TMR_TOP 
+
+# Input Netlist Format: EDIF 
+
+# Family: PolarFire , Die: MPF300TS , Package: FCG1152 , Speed grade: -1 
+
+# Date generated: Mon Nov 24 12:47:39 2025 
+
+
+#
+# I/O constraints
+#
+
+set_io -port_name CLK_IN -DIRECTION INPUT -pin_name D13 -fixed false
+set_io -port_name DISAGREE_LED -DIRECTION OUTPUT -pin_name AD11 -fixed false
+set_io -port_name FAULT_LEDS\[0\] -DIRECTION OUTPUT -pin_name AM5 -fixed false
+set_io -port_name FAULT_LEDS\[1\] -DIRECTION OUTPUT -pin_name T9 -fixed false
+set_io -port_name FAULT_LEDS\[2\] -DIRECTION OUTPUT -pin_name T3 -fixed false
+set_io -port_name HEARTBEAT_LED -DIRECTION OUTPUT -pin_name F23 -fixed false
+set_io -port_name LED_PATTERN\[0\] -DIRECTION OUTPUT -pin_name AB6 -fixed false
+set_io -port_name LED_PATTERN\[1\] -DIRECTION OUTPUT -pin_name AB1 -fixed false
+set_io -port_name LED_PATTERN\[2\] -DIRECTION OUTPUT -pin_name AB2 -fixed false
+set_io -port_name LED_PATTERN\[3\] -DIRECTION OUTPUT -pin_name AB4 -fixed false
+set_io -port_name LED_PATTERN\[4\] -DIRECTION OUTPUT -pin_name AD5 -fixed false
+set_io -port_name LED_PATTERN\[5\] -DIRECTION OUTPUT -pin_name AB7 -fixed false
+set_io -port_name LED_PATTERN\[6\] -DIRECTION OUTPUT -pin_name AC6 -fixed false
+set_io -port_name LED_PATTERN\[7\] -DIRECTION OUTPUT -pin_name AC7 -fixed false
+set_io -port_name RST_N_IN -DIRECTION INPUT -pin_name AC8 -fixed false
+set_io -port_name STATUS_LED -DIRECTION OUTPUT -pin_name AD4 -fixed false
+
+#
+# Core cell constraints
+#
+
+set_location -inst_name FUNCTIONAL_OUTPUTS/led_pattern_2_7_0_.m10 -fixed false -x 21 -y 354
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[1\] -fixed false -x 17 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[27\] -fixed false -x 43 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/pattern_select\[0\] -fixed false -x 45 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/led_pattern_2_7_0_.m12 -fixed false -x 23 -y 345
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[11\] -fixed false -x 27 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[4\] -fixed false -x 20 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[7\] -fixed false -x 23 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[5\] -fixed false -x 26 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/led_pattern\[7\] -fixed false -x 31 -y 346
+set_location -inst_name FUNCTIONAL_OUTPUTS/led_pattern\[1\] -fixed false -x 26 -y 355
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[21\] -fixed false -x 42 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[9\] -fixed false -x 30 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[26\] -fixed false -x 42 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[20\] -fixed false -x 41 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[11\] -fixed false -x 32 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/led_pattern_2_7_0_.m13 -fixed false -x 17 -y 351
+set_location -inst_name FUNCTIONAL_OUTPUTS/pattern_select_0_sqmuxa -fixed false -x 44 -y 342
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[10\] -fixed false -x 31 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[21\] -fixed false -x 37 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/led_pattern\[2\] -fixed false -x 23 -y 355
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[0\] -fixed false -x 16 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[3\] -fixed false -x 24 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[23\] -fixed false -x 44 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[18\] -fixed false -x 39 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/pattern_select\[1\] -fixed false -x 46 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[13\] -fixed false -x 34 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/led_pattern\[0\] -fixed false -x 21 -y 346
+set_location -inst_name I_1 -fixed false -x 1158 -y 162
+set_location -inst_name FUNCTIONAL_OUTPUTS/led_pattern\[6\] -fixed false -x 17 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/pattern_select\[3\] -fixed false -x 44 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/un1_pattern_select_NE_0 -fixed false -x 46 -y 342
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[12\] -fixed false -x 28 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[16\] -fixed false -x 37 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/un1_pattern_select_NE_1 -fixed false -x 45 -y 342
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[1\] -fixed false -x 22 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[14\] -fixed false -x 30 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[7\] -fixed false -x 28 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[2\] -fixed false -x 23 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/led_pattern_2_7_0_.m11 -fixed false -x 19 -y 345
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[22\] -fixed false -x 43 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[6\] -fixed false -x 22 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[25\] -fixed false -x 46 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[12\] -fixed false -x 33 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[15\] -fixed false -x 36 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[9\] -fixed false -x 25 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/led_pattern_2_7_0_.m8 -fixed false -x 23 -y 354
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[13\] -fixed false -x 29 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/led_pattern\[5\] -fixed false -x 23 -y 346
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[22\] -fixed false -x 38 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/status_led_3 -fixed false -x 14 -y 342
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[8\] -fixed false -x 24 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[10\] -fixed false -x 26 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[24\] -fixed false -x 40 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[15\] -fixed false -x 31 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/led_pattern_2_7_0_.m6 -fixed false -x 20 -y 351
+set_location -inst_name FUNCTIONAL_OUTPUTS/led_pattern\[3\] -fixed false -x 21 -y 355
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[0\] -fixed false -x 12 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/led_pattern_2_7_0_.m14 -fixed false -x 31 -y 345
+set_location -inst_name FUNCTIONAL_OUTPUTS/pattern_select\[2\] -fixed false -x 47 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[23\] -fixed false -x 39 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[20\] -fixed false -x 36 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[24\] -fixed false -x 45 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[25\] -fixed false -x 41 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[6\] -fixed false -x 27 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[19\] -fixed false -x 35 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[17\] -fixed false -x 33 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[5\] -fixed false -x 21 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[14\] -fixed false -x 35 -y 352
+set_location -inst_name I_1/U0_RGB1 -fixed false -x 578 -y 366
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[17\] -fixed false -x 38 -y 352
+set_location -inst_name VOTER_EXT_RESETN/voted_output -fixed false -x 15 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/led_pattern_2_7_0_.N_4_i -fixed false -x 21 -y 345
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[19\] -fixed false -x 40 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[3\] -fixed false -x 19 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/led_pattern\[4\] -fixed false -x 19 -y 346
+set_location -inst_name FUNCTIONAL_OUTPUTS/status_led -fixed false -x 14 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[2\] -fixed false -x 18 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[4\] -fixed false -x 25 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter\[8\] -fixed false -x 29 -y 352
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[16\] -fixed false -x 32 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter_RNO\[0\] -fixed false -x 12 -y 351
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter\[18\] -fixed false -x 34 -y 343
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter_s_2 -fixed false -x 15 -y 342
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter_s_1 -fixed false -x 21 -y 351
+set_location -inst_name I_1/U0_IOBA -fixed false -x 1746 -y 5
+set_location -inst_name I_1/U0_RGB1_RGB0 -fixed false -x 578 -y 339
+set_location -inst_name I_1/U0_RGB1_RGB1 -fixed false -x 1750 -y 13
+set_location -inst_name I_1/U0_GB0 -fixed false -x 1170 -y 163
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter_s_1_CC_0 -fixed false -x 21 -y 353
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter_s_1_CC_1 -fixed false -x 24 -y 353
+set_location -inst_name FUNCTIONAL_OUTPUTS/blink_counter_s_1_CC_2 -fixed false -x 36 -y 353
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter_s_2_CC_0 -fixed false -x 15 -y 344
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter_s_2_CC_1 -fixed false -x 24 -y 344
+set_location -inst_name FUNCTIONAL_OUTPUTS/counter_s_2_CC_2 -fixed false -x 36 -y 344

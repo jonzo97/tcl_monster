@@ -24,13 +24,18 @@ puts ""
 # Step 1: Import TMR HDL Modules
 # ============================================================================
 
-puts "\[Step 1/9\] Importing TMR HDL modules..."
+puts "\[Step 1/9\] Verifying HDL modules..."
 
-# Import the voter and functional outputs modules
-import_files -convert_EDN_to_HDL 0 -library {work} -hdl_source {C:/tcl_monster/hdl/tmr/triple_voter.v}
-import_files -convert_EDN_to_HDL 0 -library {work} -hdl_source {C:/tcl_monster/hdl/tmr/tmr_functional_outputs.v}
+# NOTE: HDL modules were imported in create_miv_tmr_project.tcl
+# We DON'T re-import here to avoid file conflicts warnings
+# We also DON'T import any files that instantiate our voter modules
+# (like peripheral_voter.v, memory_voter.v) because that would make
+# triple_voter a "sub-module" and break sd_instantiate_hdl_module
 
-puts "✓ TMR HDL modules imported (voter + functional outputs)"
+# Build hierarchy - this confirms modules are available as top-level
+build_design_hierarchy
+
+puts "✓ TMR HDL modules verified (imported in project creation)"
 puts ""
 
 # ============================================================================
@@ -64,11 +69,15 @@ puts ""
 
 puts "\[Step 4/8\] Instantiating triple voter..."
 
-# Instantiate the voter HDL module in SmartDesign
-sd_instantiate_hdl_module -sd_name {TMR_TOP} -hdl_module_name {triple_voter} -hdl_file {C:/tcl_monster/hdl/tmr/triple_voter.v} -instance_name {VOTER_EXT_RESETN}
-
-# Configure voter parameters (1-bit width for EXT_RESETN)
-sd_configure_core_instance -sd_name {TMR_TOP} -instance_name {VOTER_EXT_RESETN} -params {"WIDTH:1"}
+# Instantiate the 1-bit voter HDL module in SmartDesign
+# CRITICAL: Use the PROJECT's copy of the file, NOT the source directory
+# The source directory contains other files that instantiate triple_voter,
+# which would make it a sub-module and break instantiation!
+#
+# NOTE: Using triple_voter_1bit instead of parameterized triple_voter because
+# sd_configure_core_instance only works with IP cores, NOT raw HDL modules.
+# See docs/libero_build_flow_lessons.md for details.
+sd_instantiate_hdl_module -sd_name {TMR_TOP} -hdl_module_name {triple_voter_1bit} -hdl_file {hdl/triple_voter_1bit.v} -instance_name {VOTER_EXT_RESETN}
 
 puts "✓ Triple voter instantiated (1-bit for EXT_RESETN)"
 puts ""
@@ -155,7 +164,8 @@ puts ""
 puts "\[Step 8/9\] Instantiating functional outputs module..."
 
 # Instantiate the functional outputs HDL module
-sd_instantiate_hdl_module -sd_name {TMR_TOP} -hdl_module_name {tmr_functional_outputs} -hdl_file {C:/tcl_monster/hdl/tmr/tmr_functional_outputs.v} -instance_name {FUNCTIONAL_OUTPUTS}
+# Use PROJECT's copy (relative path from project folder)
+sd_instantiate_hdl_module -sd_name {TMR_TOP} -hdl_module_name {tmr_functional_outputs} -hdl_file {hdl/tmr_functional_outputs.v} -instance_name {FUNCTIONAL_OUTPUTS}
 
 puts "✓ Functional outputs module instantiated"
 puts ""
@@ -183,8 +193,8 @@ sd_connect_pins -sd_name {TMR_TOP} -pin_names {"FUNCTIONAL_OUTPUTS:status_led" "
 sd_connect_pins -sd_name {TMR_TOP} -pin_names {"FUNCTIONAL_OUTPUTS:disagree_led" "DISAGREE_LED"}
 sd_connect_pins -sd_name {TMR_TOP} -pin_names {"FUNCTIONAL_OUTPUTS:fault_leds" "FAULT_LEDS"}
 
-# Heartbeat LED (direct clock connection)
-sd_connect_pins -sd_name {TMR_TOP} -pin_names {"HEARTBEAT_LED" "CLK_IN"}
+# NOTE: HEARTBEAT_LED is already connected to CLK_IN in Step 6 (line 138)
+# Do NOT duplicate the connection here
 
 puts "✓ Functional outputs connected to voted signals and LED pins"
 puts ""

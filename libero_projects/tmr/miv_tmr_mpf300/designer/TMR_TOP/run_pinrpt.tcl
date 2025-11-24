@@ -1,0 +1,11 @@
+DESIGN=TMR_TOP
+DESDIR=C:\tcl_monster\libero_projects\tmr\miv_tmr_mpf300\designer\TMR_TOP
+TARGET_DIR=C:\tcl_monster\libero_projects\tmr\miv_tmr_mpf300\designer\TMR_TOP
+FAM=PolarFire
+DIE=PA5M300TS
+PACKAGE=fcg1152
+PINRPT_BY_NAME=1
+PINRPT_BY_NUMBER=1
+PINRPT_BOARDLAYOUT=1
+BANK_REPORT=1
+IOREG_REPORT=1

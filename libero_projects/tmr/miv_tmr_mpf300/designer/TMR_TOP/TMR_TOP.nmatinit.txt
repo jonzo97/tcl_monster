@@ -1,0 +1,133 @@
+# Microchip NMAT TXT File
+
+# Version: 2024.2 2024.2.0.13
+
+# Design Name: TMR_TOP 
+
+# Input Netlist Format: EDIF 
+
+# Family: PolarFire , Die: MPF300TS , Package: FCG1152 , Speed grade: -1 
+
+# Date generated: Mon Nov 24 12:47:39 2025 
+
+
+#
+# I/O constraints
+#
+
+set_io CLK_IN D13
+set_io DISAGREE_LED AD11
+set_io FAULT_LEDS[0] AM5
+set_io FAULT_LEDS[1] T9
+set_io FAULT_LEDS[2] T3
+set_io HEARTBEAT_LED F23
+set_io LED_PATTERN[0] AB6
+set_io LED_PATTERN[1] AB1
+set_io LED_PATTERN[2] AB2
+set_io LED_PATTERN[3] AB4
+set_io LED_PATTERN[4] AD5
+set_io LED_PATTERN[5] AB7
+set_io LED_PATTERN[6] AC6
+set_io LED_PATTERN[7] AC7
+set_io RST_N_IN AC8
+set_io STATUS_LED AD4
+
+#
+# Core cell constraints
+#
+
+set_location FUNCTIONAL_OUTPUTS/led_pattern_2_7_0_.m10 21 354
+set_location FUNCTIONAL_OUTPUTS/counter[1] 17 343
+set_location FUNCTIONAL_OUTPUTS/counter[27] 43 343
+set_location FUNCTIONAL_OUTPUTS/pattern_select[0] 45 343
+set_location FUNCTIONAL_OUTPUTS/led_pattern_2_7_0_.m12 23 345
+set_location FUNCTIONAL_OUTPUTS/counter[11] 27 343
+set_location FUNCTIONAL_OUTPUTS/counter[4] 20 343
+set_location FUNCTIONAL_OUTPUTS/counter[7] 23 343
+set_location FUNCTIONAL_OUTPUTS/blink_counter[5] 26 352
+set_location FUNCTIONAL_OUTPUTS/led_pattern[7] 31 346
+set_location FUNCTIONAL_OUTPUTS/led_pattern[1] 26 355
+set_location FUNCTIONAL_OUTPUTS/blink_counter[21] 42 352
+set_location FUNCTIONAL_OUTPUTS/blink_counter[9] 30 352
+set_location FUNCTIONAL_OUTPUTS/counter[26] 42 343
+set_location FUNCTIONAL_OUTPUTS/blink_counter[20] 41 352
+set_location FUNCTIONAL_OUTPUTS/blink_counter[11] 32 352
+set_location FUNCTIONAL_OUTPUTS/led_pattern_2_7_0_.m13 17 351
+set_location FUNCTIONAL_OUTPUTS/pattern_select_0_sqmuxa 44 342
+set_location FUNCTIONAL_OUTPUTS/blink_counter[10] 31 352
+set_location FUNCTIONAL_OUTPUTS/counter[21] 37 343
+set_location FUNCTIONAL_OUTPUTS/led_pattern[2] 23 355
+set_location FUNCTIONAL_OUTPUTS/counter[0] 16 343
+set_location FUNCTIONAL_OUTPUTS/blink_counter[3] 24 352
+set_location FUNCTIONAL_OUTPUTS/blink_counter[23] 44 352
+set_location FUNCTIONAL_OUTPUTS/blink_counter[18] 39 352
+set_location FUNCTIONAL_OUTPUTS/pattern_select[1] 46 343
+set_location FUNCTIONAL_OUTPUTS/blink_counter[13] 34 352
+set_location FUNCTIONAL_OUTPUTS/led_pattern[0] 21 346
+set_location I_1 1158 162
+set_location FUNCTIONAL_OUTPUTS/led_pattern[6] 17 352
+set_location FUNCTIONAL_OUTPUTS/pattern_select[3] 44 343
+set_location FUNCTIONAL_OUTPUTS/un1_pattern_select_NE_0 46 342
+set_location FUNCTIONAL_OUTPUTS/counter[12] 28 343
+set_location FUNCTIONAL_OUTPUTS/blink_counter[16] 37 352
+set_location FUNCTIONAL_OUTPUTS/un1_pattern_select_NE_1 45 342
+set_location FUNCTIONAL_OUTPUTS/blink_counter[1] 22 352
+set_location FUNCTIONAL_OUTPUTS/counter[14] 30 343
+set_location FUNCTIONAL_OUTPUTS/blink_counter[7] 28 352
+set_location FUNCTIONAL_OUTPUTS/blink_counter[2] 23 352
+set_location FUNCTIONAL_OUTPUTS/led_pattern_2_7_0_.m11 19 345
+set_location FUNCTIONAL_OUTPUTS/blink_counter[22] 43 352
+set_location FUNCTIONAL_OUTPUTS/counter[6] 22 343
+set_location FUNCTIONAL_OUTPUTS/blink_counter[25] 46 352
+set_location FUNCTIONAL_OUTPUTS/blink_counter[12] 33 352
+set_location FUNCTIONAL_OUTPUTS/blink_counter[15] 36 352
+set_location FUNCTIONAL_OUTPUTS/counter[9] 25 343
+set_location FUNCTIONAL_OUTPUTS/led_pattern_2_7_0_.m8 23 354
+set_location FUNCTIONAL_OUTPUTS/counter[13] 29 343
+set_location FUNCTIONAL_OUTPUTS/led_pattern[5] 23 346
+set_location FUNCTIONAL_OUTPUTS/counter[22] 38 343
+set_location FUNCTIONAL_OUTPUTS/status_led_3 14 342
+set_location FUNCTIONAL_OUTPUTS/counter[8] 24 343
+set_location FUNCTIONAL_OUTPUTS/counter[10] 26 343
+set_location FUNCTIONAL_OUTPUTS/counter[24] 40 343
+set_location FUNCTIONAL_OUTPUTS/counter[15] 31 343
+set_location FUNCTIONAL_OUTPUTS/led_pattern_2_7_0_.m6 20 351
+set_location FUNCTIONAL_OUTPUTS/led_pattern[3] 21 355
+set_location FUNCTIONAL_OUTPUTS/blink_counter[0] 12 352
+set_location FUNCTIONAL_OUTPUTS/led_pattern_2_7_0_.m14 31 345
+set_location FUNCTIONAL_OUTPUTS/pattern_select[2] 47 343
+set_location FUNCTIONAL_OUTPUTS/counter[23] 39 343
+set_location FUNCTIONAL_OUTPUTS/counter[20] 36 343
+set_location FUNCTIONAL_OUTPUTS/blink_counter[24] 45 352
+set_location FUNCTIONAL_OUTPUTS/counter[25] 41 343
+set_location FUNCTIONAL_OUTPUTS/blink_counter[6] 27 352
+set_location FUNCTIONAL_OUTPUTS/counter[19] 35 343
+set_location FUNCTIONAL_OUTPUTS/counter[17] 33 343
+set_location FUNCTIONAL_OUTPUTS/counter[5] 21 343
+set_location FUNCTIONAL_OUTPUTS/blink_counter[14] 35 352
+set_location I_1/U0_RGB1 578 366
+set_location FUNCTIONAL_OUTPUTS/blink_counter[17] 38 352
+set_location VOTER_EXT_RESETN/voted_output 15 343
+set_location FUNCTIONAL_OUTPUTS/led_pattern_2_7_0_.N_4_i 21 345
+set_location FUNCTIONAL_OUTPUTS/blink_counter[19] 40 352
+set_location FUNCTIONAL_OUTPUTS/counter[3] 19 343
+set_location FUNCTIONAL_OUTPUTS/led_pattern[4] 19 346
+set_location FUNCTIONAL_OUTPUTS/status_led 14 343
+set_location FUNCTIONAL_OUTPUTS/counter[2] 18 343
+set_location FUNCTIONAL_OUTPUTS/blink_counter[4] 25 352
+set_location FUNCTIONAL_OUTPUTS/blink_counter[8] 29 352
+set_location FUNCTIONAL_OUTPUTS/counter[16] 32 343
+set_location FUNCTIONAL_OUTPUTS/blink_counter_RNO[0] 12 351
+set_location FUNCTIONAL_OUTPUTS/counter[18] 34 343
+set_location FUNCTIONAL_OUTPUTS/counter_s_2 15 342
+set_location FUNCTIONAL_OUTPUTS/blink_counter_s_1 21 351
+set_location I_1/U0_IOBA 1746 5
+set_location I_1/U0_RGB1_RGB0 578 339
+set_location I_1/U0_RGB1_RGB1 1750 13
+set_location I_1/U0_GB0 1170 163
+set_location FUNCTIONAL_OUTPUTS/blink_counter_s_1_CC_0 21 353
+set_location FUNCTIONAL_OUTPUTS/blink_counter_s_1_CC_1 24 353
+set_location FUNCTIONAL_OUTPUTS/blink_counter_s_1_CC_2 36 353
+set_location FUNCTIONAL_OUTPUTS/counter_s_2_CC_0 15 344
+set_location FUNCTIONAL_OUTPUTS/counter_s_2_CC_1 24 344
+set_location FUNCTIONAL_OUTPUTS/counter_s_2_CC_2 36 344

@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<?xml-stylesheet href="rptstyle.xsl" type="text/xsl" ?>
+<doc>
+<text>SmartTime Version 2024.2.0.13</text>
+<text>Microchip Technology Inc. - Microchip Libero Software Release v2024.2 (Version 2024.2.0.13)
+Date: Mon Nov 24 12:48:53 2025 </text>
+<table>
+<header>
+</header>
+<row>
+ <cell>Design</cell>
+ <cell>TMR_TOP</cell>
+</row>
+<row>
+ <cell>Family</cell>
+ <cell>PolarFire</cell>
+</row>
+<row>
+ <cell>Die</cell>
+ <cell>MPF300TS</cell>
+</row>
+<row>
+ <cell>Package</cell>
+ <cell>FCG1152</cell>
+</row>
+<row>
+ <cell>Temperature Range</cell>
+ <cell>-40 - 100 C</cell>
+</row>
+<row>
+ <cell>Voltage Range</cell>
+ <cell>0.97 - 1.03 V</cell>
+</row>
+<row>
+ <cell>Speed Grade</cell>
+ <cell>-1</cell>
+</row>
+</table>
+<text></text>
+<text></text>
+<section>
+<name>Coverage Summary</name>
+<text></text>
+<table>
+<header>
+ <cell>Type of check</cell>
+ <cell>Constrained</cell>
+ <cell>UnConstrained</cell>
+ <cell>Total</cell>
+</header>
+<row>
+ <cell>Setup</cell>
+ <cell>            0</cell>
+ <cell>           98</cell>
+ <cell>           98</cell>
+</row>
+<row>
+ <cell>Recovery</cell>
+ <cell>            0</cell>
+ <cell>           68</cell>
+ <cell>           68</cell>
+</row>
+<row>
+ <cell>Output Setup</cell>
+ <cell>            0</cell>
+ <cell>           11</cell>
+ <cell>           11</cell>
+</row>
+<row>
+ <cell>Total Setup</cell>
+ <cell>            0</cell>
+ <cell>          177</cell>
+ <cell>          177</cell>
+</row>
+<separator/>
+<row>
+ <cell>Hold</cell>
+ <cell>            0</cell>
+ <cell>           98</cell>
+ <cell>           98</cell>
+</row>
+<row>
+ <cell>Removal</cell>
+ <cell>            0</cell>
+ <cell>           68</cell>
+ <cell>           68</cell>
+</row>
+<row>
+ <cell>Output Hold</cell>
+ <cell>            0</cell>
+ <cell>           11</cell>
+ <cell>           11</cell>
+</row>
+<row>
+ <cell>Total Hold</cell>
+ <cell>            0</cell>
+ <cell>          177</cell>
+ <cell>          177</cell>
+</row>
+</table>
+<section>
+<name>Clock domain: </name>
+<text>CLK_IN</text>
+<text></text>
+<table>
+<header>
+ <cell>Type of check</cell>
+ <cell>Constrained</cell>
+ <cell>UnConstrained</cell>
+ <cell>Total</cell>
+</header>
+<row>
+ <cell>Setup</cell>
+ <cell>            0</cell>
+ <cell>           98</cell>
+ <cell>           98</cell>
+</row>
+<row>
+ <cell>Recovery</cell>
+ <cell>            0</cell>
+ <cell>           68</cell>
+ <cell>           68</cell>
+</row>
+<row>
+ <cell>Output Setup</cell>
+ <cell>            0</cell>
+ <cell>           10</cell>
+ <cell>           10</cell>
+</row>
+<row>
+ <cell>Total Setup</cell>
+ <cell>            0</cell>
+ <cell>          176</cell>
+ <cell>          176</cell>
+</row>
+<separator/>
+<row>
+ <cell>Hold</cell>
+ <cell>            0</cell>
+ <cell>           98</cell>
+ <cell>           98</cell>
+</row>
+<row>
+ <cell>Removal</cell>
+ <cell>            0</cell>
+ <cell>           68</cell>
+ <cell>           68</cell>
+</row>
+<row>
+ <cell>Output Hold</cell>
+ <cell>            0</cell>
+ <cell>           10</cell>
+ <cell>           10</cell>
+</row>
+<row>
+ <cell>Total Hold</cell>
+ <cell>            0</cell>
+ <cell>          176</cell>
+ <cell>          176</cell>
+</row>
+</table>
+<section>
+<name>Enhancement Suggestions</name>
+<text></text>
+<text> - Clock constraint is missing </text>
+<text> - Max input delay constraint missing on port:</text>
+<text>   </text>
+<list>
+ <item>RST_N_IN</item>
+</list>
+<text></text>
+<text> - Min input delay constraint missing on port:</text>
+<text>   </text>
+<list>
+ <item>RST_N_IN</item>
+</list>
+<text></text>
+<text></text>
+<text> - Max output delay constraint missing on ports:</text>
+<text>   </text>
+<list>
+ <item>HEARTBEAT_LED</item>
+ <item>LED_PATTERN[0]</item>
+ <item>LED_PATTERN[1]</item>
+ <item>LED_PATTERN[2]</item>
+ <item>LED_PATTERN[3]</item>
+ <item>LED_PATTERN[4]</item>
+ <item>LED_PATTERN[5]</item>
+ <item>LED_PATTERN[6]</item>
+ <item>LED_PATTERN[7]</item>
+ <item>STATUS_LED</item>
+</list>
+<text></text>
+<text> - Min output delay constraint missing on ports:</text>
+<text>   </text>
+<list>
+ <item>HEARTBEAT_LED</item>
+ <item>LED_PATTERN[0]</item>
+ <item>LED_PATTERN[1]</item>
+ <item>LED_PATTERN[2]</item>
+ <item>LED_PATTERN[3]</item>
+ <item>LED_PATTERN[4]</item>
+ <item>LED_PATTERN[5]</item>
+ <item>LED_PATTERN[6]</item>
+ <item>LED_PATTERN[7]</item>
+ <item>STATUS_LED</item>
+</list>
+<text></text>
+<text></text>
+<text> - Setup unconstrained for the following pins:</text>
+<text>   </text>
+<list>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[0]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[0]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[10]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[10]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[11]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[11]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[12]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[12]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[13]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[13]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[14]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[14]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[15]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[15]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[16]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[16]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[17]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[17]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[18]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[18]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[19]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[19]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[1]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[1]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[20]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[20]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[21]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[21]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[22]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[22]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[23]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[23]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[24]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[24]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[25]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[25]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[2]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[2]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[3]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[3]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[4]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[4]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[5]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[5]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[6]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[6]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[7]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[7]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[8]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[8]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[9]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[9]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[0]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[10]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[11]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[12]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[13]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[14]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[15]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[16]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[17]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[18]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[19]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[1]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[20]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[21]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[22]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[23]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[24]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[25]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[26]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[27]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[2]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[3]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[4]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[5]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[6]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[7]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[8]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[9]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[0]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[1]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[2]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[3]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[4]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[5]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[6]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[7]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[0]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[0]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[1]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[1]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[2]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[2]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[3]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[3]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/status_led:D</item>
+ <item>VOTER_EXT_RESETN/voted_output:D</item>
+</list>
+<text></text>
+<text> - Recovery unconstrained for the following pins:</text>
+<text>   </text>
+<list>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[0]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[10]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[11]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[12]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[13]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[14]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[15]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[16]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[17]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[18]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[19]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[1]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[20]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[21]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[22]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[23]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[24]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[25]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[2]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[3]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[4]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[5]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[6]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[7]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[8]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[9]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[0]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[10]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[11]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[12]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[13]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[14]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[15]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[16]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[17]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[18]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[19]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[1]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[20]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[21]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[22]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[23]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[24]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[25]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[26]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[27]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[2]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[3]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[4]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[5]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[6]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[7]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[8]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[9]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[0]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[1]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[2]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[3]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[4]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[5]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[6]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[7]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[0]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[1]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[2]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[3]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/status_led:ALn</item>
+ <item>VOTER_EXT_RESETN/voted_output:ALn</item>
+</list>
+<text></text>
+<text> - Hold unconstrained for the following pins:</text>
+<text>   </text>
+<list>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[0]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[0]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[10]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[10]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[11]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[11]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[12]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[12]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[13]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[13]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[14]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[14]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[15]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[15]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[16]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[16]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[17]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[17]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[18]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[18]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[19]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[19]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[1]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[1]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[20]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[20]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[21]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[21]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[22]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[22]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[23]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[23]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[24]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[24]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[25]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[25]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[2]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[2]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[3]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[3]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[4]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[4]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[5]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[5]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[6]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[6]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[7]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[7]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[8]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[8]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[9]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[9]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[0]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[10]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[11]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[12]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[13]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[14]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[15]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[16]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[17]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[18]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[19]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[1]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[20]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[21]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[22]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[23]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[24]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[25]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[26]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[27]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[2]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[3]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[4]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[5]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[6]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[7]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[8]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[9]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[0]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[1]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[2]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[3]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[4]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[5]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[6]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[7]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[0]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[0]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[1]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[1]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[2]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[2]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[3]:D</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[3]:EN</item>
+ <item>FUNCTIONAL_OUTPUTS/status_led:D</item>
+ <item>VOTER_EXT_RESETN/voted_output:D</item>
+</list>
+<text></text>
+<text> - Removal unconstrained for the following pins:</text>
+<text>   </text>
+<list>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[0]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[10]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[11]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[12]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[13]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[14]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[15]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[16]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[17]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[18]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[19]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[1]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[20]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[21]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[22]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[23]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[24]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[25]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[2]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[3]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[4]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[5]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[6]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[7]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[8]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/blink_counter[9]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[0]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[10]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[11]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[12]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[13]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[14]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[15]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[16]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[17]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[18]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[19]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[1]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[20]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[21]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[22]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[23]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[24]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[25]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[26]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[27]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[2]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[3]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[4]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[5]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[6]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[7]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[8]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/counter[9]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[0]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[1]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[2]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[3]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[4]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[5]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[6]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/led_pattern[7]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[0]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[1]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[2]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/pattern_select[3]:ALn</item>
+ <item>FUNCTIONAL_OUTPUTS/status_led:ALn</item>
+ <item>VOTER_EXT_RESETN/voted_output:ALn</item>
+</list>
+<text></text>
+</section>
+</section>
+<section>
+<name>Input to Output</name>
+<table>
+<header>
+ <cell>Type of check</cell>
+ <cell>Constrained</cell>
+ <cell>UnConstrained</cell>
+ <cell>Total</cell>
+</header>
+<row>
+ <cell>Output Setup</cell>
+ <cell>            0</cell>
+ <cell>            1</cell>
+ <cell>            1</cell>
+</row>
+<separator/>
+<row>
+ <cell>Output Hold</cell>
+ <cell>            0</cell>
+ <cell>            1</cell>
+ <cell>            1</cell>
+</row>
+</table>
+<section>
+<name>Enhancement Suggestions</name>
+<text></text>
+<text> - Max delay constraint missing on input port:</text>
+<text>   </text>
+<list>
+ <item>CLK_IN</item>
+</list>
+<text></text>
+<text> - Min delay constraint missing on input port:</text>
+<text>   </text>
+<list>
+ <item>CLK_IN</item>
+</list>
+<text></text>
+<text></text>
+<text> - Max delay constraint missing on output port:</text>
+<text>   </text>
+<list>
+ <item>HEARTBEAT_LED</item>
+</list>
+<text></text>
+<text> - Min delay constraint missing on output port:</text>
+<text>   </text>
+<list>
+ <item>HEARTBEAT_LED</item>
+</list>
+<text></text>
+<text></text>
+</section>
+</section>
+</section>
+</doc>

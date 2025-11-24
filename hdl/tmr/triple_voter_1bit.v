@@ -1,42 +1,40 @@
-// Generic Triple Voter for TMR Systems
+// 1-bit Triple Voter for TMR Systems
 // Implements 2-of-3 majority voting with disagreement detection
-// Parameterized for any data width
+// Fixed 1-bit width - for scalar signals like EXT_RESETN
+//
+// NOTE: This is a non-parameterized version because Libero's
+// sd_configure_core_instance only works with IP cores, not HDL modules.
+// For different widths, use the parameterized triple_voter.v and
+// create a wrapper component, or create additional fixed-width versions.
 
-module triple_voter #(
-    parameter WIDTH = 32  // Data width (1 to 512)
-) (
-    // Clock and reset (for optional registered output)
+module triple_voter_1bit (
+    // Clock and reset (for registered output)
     input  wire clk,
     input  wire rst_n,
 
     // Three inputs to vote on
-    input  wire [WIDTH-1:0] input_a,
-    input  wire [WIDTH-1:0] input_b,
-    input  wire [WIDTH-1:0] input_c,
+    input  wire input_a,
+    input  wire input_b,
+    input  wire input_c,
 
     // Voted output (majority result)
-    output reg  [WIDTH-1:0] voted_output,
+    output reg  voted_output,
 
     // Disagreement detection
     output reg  disagreement,      // High if any inputs disagree
-    output reg  [2:0] fault_flags   // [2]=A bad, [1]=B bad, [0]=C bad
+    output reg  [2:0] fault_flags  // [2]=A bad, [1]=B bad, [0]=C bad
 );
 
     // Internal signals for combinational voting
-    wire [WIDTH-1:0] voted_comb;
+    wire voted_comb;
     wire disagreement_comb;
     wire [2:0] fault_flags_comb;
 
     // Majority voting logic (2-of-3)
-    // Result is 1 if at least 2 inputs agree
-    genvar i;
-    generate
-        for (i = 0; i < WIDTH; i = i + 1) begin : vote_bits
-            assign voted_comb[i] = (input_a[i] & input_b[i]) |
-                                   (input_b[i] & input_c[i]) |
-                                   (input_a[i] & input_c[i]);
-        end
-    endgenerate
+    // Result is 1 if at least 2 inputs are 1
+    assign voted_comb = (input_a & input_b) |
+                        (input_b & input_c) |
+                        (input_a & input_c);
 
     // Disagreement detection
     // High if any two inputs differ
@@ -53,7 +51,7 @@ module triple_voter #(
     // Register outputs (1 cycle latency, improves timing)
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            voted_output <= {WIDTH{1'b0}};
+            voted_output <= 1'b0;
             disagreement <= 1'b0;
             fault_flags  <= 3'b000;
         end else begin

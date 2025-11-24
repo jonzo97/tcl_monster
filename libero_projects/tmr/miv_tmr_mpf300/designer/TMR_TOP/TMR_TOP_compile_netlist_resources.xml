@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<?xml-stylesheet href="rptstyle.xsl" type="text/xsl" ?>
+<doc>
+<title>Compile Report</title>
+<text>Microchip Technology Inc. - Microchip Libero Software Release v2024.2 (Version 2024.2.0.13)</text>
+<text>Date: Mon Nov 24 12:43:56 2025
+</text>
+<section><name>Device Selection</name></section>
+<table>
+<header>
+</header>
+<row>
+ <cell>Family</cell>
+ <cell>PolarFire</cell>
+</row>
+<row>
+ <cell>Device</cell>
+ <cell>MPF300TS</cell>
+</row>
+<row>
+ <cell>Package</cell>
+ <cell>FCG1152</cell>
+</row>
+<row>
+ <cell>Speed Grade</cell>
+ <cell>-1</cell>
+</row>
+<row>
+ <cell>Core Voltage</cell>
+ <cell>1.0V</cell>
+</row>
+<row>
+ <cell>Part Range</cell>
+ <cell>IND</cell>
+</row>
+<row>
+ <cell>Default I/O technology</cell>
+ <cell>LVCMOS 1.8V</cell>
+</row>
+</table>
+<section><name>Source Files</name></section>
+<table>
+<header>
+</header>
+<row>
+ <cell>Topcell</cell>
+ <cell>TMR_TOP</cell>
+</row>
+<row>
+ <cell>Format</cell>
+ <cell>Verilog</cell>
+</row>
+<row>
+ <cell>Source</cell>
+ <cell>C:\tcl_monster\libero_projects\tmr\miv_tmr_mpf300\synthesis\TMR_TOP.vm</cell>
+</row>
+</table>
+<section><name>Options</name></section>
+<table>
+<header>
+</header>
+<row>
+ <cell>Limit the number of high fanout nets to display to</cell>
+ <cell>10</cell>
+</row>
+</table>
+<section><name>Resource Usage</name></section>
+<table>
+<header>
+ <cell>Type</cell>
+ <cell>Used</cell>
+ <cell>Total</cell>
+ <cell>Percentage</cell>
+</header>
+<row>
+ <cell>4LUT</cell>
+ <cell>68</cell>
+ <cell>299544</cell>
+ <cell>0.02</cell>
+</row>
+<row>
+ <cell>DFF</cell>
+ <cell>68</cell>
+ <cell>299544</cell>
+ <cell>0.02</cell>
+</row>
+<row>
+ <cell>I/O Register</cell>
+ <cell>0</cell>
+ <cell>1536</cell>
+ <cell>0.00</cell>
+</row>
+<row>
+ <cell>User I/O</cell>
+ <cell>16</cell>
+ <cell>512</cell>
+ <cell>3.12</cell>
+</row>
+<row>
+ <cell>-- Single-ended I/O</cell>
+ <cell>16</cell>
+ <cell>512</cell>
+ <cell>3.12</cell>
+</row>
+<row>
+ <cell>-- Differential I/O Pairs</cell>
+ <cell>0</cell>
+ <cell>256</cell>
+ <cell>0.00</cell>
+</row>
+<row>
+ <cell>uSRAM</cell>
+ <cell>0</cell>
+ <cell>2772</cell>
+ <cell>0.00</cell>
+</row>
+<row>
+ <cell>LSRAM</cell>
+ <cell>0</cell>
+ <cell>952</cell>
+ <cell>0.00</cell>
+</row>
+<row>
+ <cell>Math</cell>
+ <cell>0</cell>
+ <cell>924</cell>
+ <cell>0.00</cell>
+</row>
+<row>
+ <cell>H-Chip Global</cell>
+ <cell>1</cell>
+ <cell>48</cell>
+ <cell>2.08</cell>
+</row>
+<row>
+ <cell>PLL</cell>
+ <cell>0</cell>
+ <cell>8</cell>
+ <cell>0.00</cell>
+</row>
+<row>
+ <cell>DLL</cell>
+ <cell>0</cell>
+ <cell>8</cell>
+ <cell>0.00</cell>
+</row>
+<row>
+ <cell>Transceiver Lanes</cell>
+ <cell>0</cell>
+ <cell>16</cell>
+ <cell>0.00</cell>
+</row>
+<row>
+ <cell>Transceiver PCIe</cell>
+ <cell>0</cell>
+ <cell>2</cell>
+ <cell>0.00</cell>
+</row>
+</table>
+<section><name>Detailed Logic Resource Usage</name></section>
+<table>
+<header>
+ <cell>Type</cell>
+ <cell>4LUT</cell>
+ <cell>DFF</cell>
+</header>
+<row>
+ <cell>Fabric Logic</cell>
+ <cell>68</cell>
+ <cell>68</cell>
+</row>
+<row>
+ <cell>uSRAM Interface Logic</cell>
+ <cell>0</cell>
+ <cell>0</cell>
+</row>
+<row>
+ <cell>LSRAM Interface Logic</cell>
+ <cell>0</cell>
+ <cell>0</cell>
+</row>
+<row>
+ <cell>Math Interface Logic</cell>
+ <cell>0</cell>
+ <cell>0</cell>
+</row>
+<row>
+ <cell>Total Used</cell>
+ <cell>68</cell>
+ <cell>68</cell>
+</row>
+</table>
+<section><name>Detailed Carry Chains Resource Usage</name></section>
+<table>
+<header>
+</header>
+<row>
+ <cell>Length</cell>
+ <cell>Used</cell>
+</row>
+<row>
+ <cell>26</cell>
+ <cell>1</cell>
+</row>
+<row>
+ <cell>29</cell>
+ <cell>1</cell>
+</row>
+<row>
+ <cell>Total</cell>
+ <cell>2</cell>
+</row>
+</table>
+<section><name>I/O Function</name></section>
+<table>
+<header>
+ <cell>Type</cell>
+ <cell>w/o register</cell>
+ <cell>w/ register</cell>
+ <cell>w/ DDR register</cell>
+</header>
+<row>
+ <cell>Input I/O</cell>
+ <cell>2</cell>
+ <cell>0</cell>
+ <cell>0</cell>
+</row>
+<row>
+ <cell>Output I/O</cell>
+ <cell>14</cell>
+ <cell>0</cell>
+ <cell>0</cell>
+</row>
+<row>
+ <cell>Bidirectional I/O</cell>
+ <cell>0</cell>
+ <cell>0</cell>
+ <cell>0</cell>
+</row>
+<row>
+ <cell>Differential Input I/O Pairs</cell>
+ <cell>0</cell>
+ <cell>0</cell>
+ <cell>0</cell>
+</row>
+<row>
+ <cell>Differential Output I/O Pairs</cell>
+ <cell>0</cell>
+ <cell>0</cell>
+ <cell>0</cell>
+</row>
+</table>
+<section><name>Nets assigned to chip global resources</name></section>
+<table>
+<header>
+ <cell>Fanout</cell>
+ <cell>Type</cell>
+ <cell>Name</cell>
+</header>
+<row>
+ <cell>69</cell>
+ <cell>INT_NET</cell>
+ <cell>Net   : NN_1</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Driver: I_1/U0_RGB1</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Source: NETLIST</cell>
+</row>
+</table>
+<section><name>Nets assigned to row global resources</name></section>
+<table>
+<header>
+ <cell>Fanout</cell>
+ <cell>Type</cell>
+ <cell>Name</cell>
+</header>
+</table>
+<section><name>High fanout nets</name></section>
+<table>
+<header>
+ <cell>Fanout</cell>
+ <cell>Type</cell>
+ <cell>Name</cell>
+</header>
+<row>
+ <cell>69</cell>
+ <cell>INT_NET</cell>
+ <cell>Net   : RST_N_IN_c</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Driver: RST_N_IN_ibuf</cell>
+</row>
+<row>
+ <cell>57</cell>
+ <cell>INT_NET</cell>
+ <cell>Net   : voted_output</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Driver: VOTER_EXT_RESETN/voted_output</cell>
+</row>
+<row>
+ <cell>9</cell>
+ <cell>INT_NET</cell>
+ <cell>Net   : FUNCTIONAL_OUTPUTS/pattern_select_Z[3]</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Driver: FUNCTIONAL_OUTPUTS/pattern_select[3]</cell>
+</row>
+<row>
+ <cell>9</cell>
+ <cell>INT_NET</cell>
+ <cell>Net   : FUNCTIONAL_OUTPUTS/pattern_select_Z[2]</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Driver: FUNCTIONAL_OUTPUTS/pattern_select[2]</cell>
+</row>
+<row>
+ <cell>9</cell>
+ <cell>INT_NET</cell>
+ <cell>Net   : FUNCTIONAL_OUTPUTS/pattern_select_Z[1]</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Driver: FUNCTIONAL_OUTPUTS/pattern_select[1]</cell>
+</row>
+<row>
+ <cell>9</cell>
+ <cell>INT_NET</cell>
+ <cell>Net   : FUNCTIONAL_OUTPUTS/pattern_select_Z[0]</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Driver: FUNCTIONAL_OUTPUTS/pattern_select[0]</cell>
+</row>
+<row>
+ <cell>4</cell>
+ <cell>INT_NET</cell>
+ <cell>Net   : FUNCTIONAL_OUTPUTS/pattern_select_0_sqmuxa_Z</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Driver: FUNCTIONAL_OUTPUTS/pattern_select_0_sqmuxa</cell>
+</row>
+<row>
+ <cell>3</cell>
+ <cell>INT_NET</cell>
+ <cell>Net   : FUNCTIONAL_OUTPUTS/counter_Z[27]</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Driver: FUNCTIONAL_OUTPUTS/counter[27]</cell>
+</row>
+<row>
+ <cell>3</cell>
+ <cell>INT_NET</cell>
+ <cell>Net   : FUNCTIONAL_OUTPUTS/counter_Z[26]</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Driver: FUNCTIONAL_OUTPUTS/counter[26]</cell>
+</row>
+<row>
+ <cell>3</cell>
+ <cell>INT_NET</cell>
+ <cell>Net   : FUNCTIONAL_OUTPUTS/counter_Z[25]</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Driver: FUNCTIONAL_OUTPUTS/counter[25]</cell>
+</row>
+</table>
+<section><name>High fanout nets (through buffer trees)</name></section>
+<table>
+<header>
+ <cell>Fanout</cell>
+ <cell>Type</cell>
+ <cell>Name</cell>
+</header>
+<row>
+ <cell>69</cell>
+ <cell>INT_NET</cell>
+ <cell>Net   : RST_N_IN_c</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Driver: RST_N_IN_ibuf</cell>
+</row>
+<row>
+ <cell>57</cell>
+ <cell>INT_NET</cell>
+ <cell>Net   : voted_output</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Driver: VOTER_EXT_RESETN/voted_output</cell>
+</row>
+<row>
+ <cell>9</cell>
+ <cell>INT_NET</cell>
+ <cell>Net   : FUNCTIONAL_OUTPUTS/pattern_select_Z[3]</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Driver: FUNCTIONAL_OUTPUTS/pattern_select[3]</cell>
+</row>
+<row>
+ <cell>9</cell>
+ <cell>INT_NET</cell>
+ <cell>Net   : FUNCTIONAL_OUTPUTS/pattern_select_Z[2]</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Driver: FUNCTIONAL_OUTPUTS/pattern_select[2]</cell>
+</row>
+<row>
+ <cell>9</cell>
+ <cell>INT_NET</cell>
+ <cell>Net   : FUNCTIONAL_OUTPUTS/pattern_select_Z[1]</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Driver: FUNCTIONAL_OUTPUTS/pattern_select[1]</cell>
+</row>
+<row>
+ <cell>9</cell>
+ <cell>INT_NET</cell>
+ <cell>Net   : FUNCTIONAL_OUTPUTS/pattern_select_Z[0]</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Driver: FUNCTIONAL_OUTPUTS/pattern_select[0]</cell>
+</row>
+<row>
+ <cell>4</cell>
+ <cell>INT_NET</cell>
+ <cell>Net   : FUNCTIONAL_OUTPUTS/pattern_select_0_sqmuxa_Z</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Driver: FUNCTIONAL_OUTPUTS/pattern_select_0_sqmuxa</cell>
+</row>
+<row>
+ <cell>3</cell>
+ <cell>INT_NET</cell>
+ <cell>Net   : FUNCTIONAL_OUTPUTS/counter_Z[27]</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Driver: FUNCTIONAL_OUTPUTS/counter[27]</cell>
+</row>
+<row>
+ <cell>3</cell>
+ <cell>INT_NET</cell>
+ <cell>Net   : FUNCTIONAL_OUTPUTS/counter_Z[26]</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Driver: FUNCTIONAL_OUTPUTS/counter[26]</cell>
+</row>
+<row>
+ <cell>3</cell>
+ <cell>INT_NET</cell>
+ <cell>Net   : FUNCTIONAL_OUTPUTS/counter_Z[25]</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Driver: FUNCTIONAL_OUTPUTS/counter[25]</cell>
+</row>
+</table>
+</doc>

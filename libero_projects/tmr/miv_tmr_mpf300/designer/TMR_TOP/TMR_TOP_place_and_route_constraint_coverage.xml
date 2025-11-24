@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<?xml-stylesheet href="rptstyle.xsl" type="text/xsl" ?>
+<doc>
+<text>SmartTime Version 2024.2.0.13</text>
+<text>Microchip Technology Inc. - Microchip Libero Software Release v2024.2 (Version 2024.2.0.13)
+Date: Mon Nov 24 12:44:19 2025 </text>
+<table>
+<header>
+</header>
+<row>
+ <cell>Design</cell>
+ <cell>TMR_TOP</cell>
+</row>
+<row>
+ <cell>Family</cell>
+ <cell>PolarFire</cell>
+</row>
+<row>
+ <cell>Die</cell>
+ <cell>MPF300TS</cell>
+</row>
+<row>
+ <cell>Package</cell>
+ <cell>FCG1152</cell>
+</row>
+<row>
+ <cell>Temperature Range</cell>
+ <cell>-40 - 100 C</cell>
+</row>
+<row>
+ <cell>Voltage Range</cell>
+ <cell>0.97 - 1.03 V</cell>
+</row>
+<row>
+ <cell>Speed Grade</cell>
+ <cell>-1</cell>
+</row>
+</table>
+<text></text>
+<text></text>
+<section>
+<name>Coverage Summary</name>
+<text></text>
+<table>
+<header>
+ <cell>Type of check</cell>
+ <cell>Constrained</cell>
+ <cell>UnConstrained</cell>
+ <cell>Total</cell>
+</header>
+<row>
+ <cell>Setup</cell>
+ <cell>           98</cell>
+ <cell>            0</cell>
+ <cell>           98</cell>
+</row>
+<row>
+ <cell>Recovery</cell>
+ <cell>           68</cell>
+ <cell>            0</cell>
+ <cell>           68</cell>
+</row>
+<row>
+ <cell>Output Setup</cell>
+ <cell>           11</cell>
+ <cell>            0</cell>
+ <cell>           11</cell>
+</row>
+<row>
+ <cell>Total Setup</cell>
+ <cell>          177</cell>
+ <cell>            0</cell>
+ <cell>          177</cell>
+</row>
+<separator/>
+<row>
+ <cell>Hold</cell>
+ <cell>           98</cell>
+ <cell>            0</cell>
+ <cell>           98</cell>
+</row>
+<row>
+ <cell>Removal</cell>
+ <cell>           68</cell>
+ <cell>            0</cell>
+ <cell>           68</cell>
+</row>
+<row>
+ <cell>Output Hold</cell>
+ <cell>            0</cell>
+ <cell>           11</cell>
+ <cell>           11</cell>
+</row>
+<row>
+ <cell>Total Hold</cell>
+ <cell>          166</cell>
+ <cell>           11</cell>
+ <cell>          177</cell>
+</row>
+</table>
+<section>
+<name>Clock domain: </name>
+<text>CLK_IN</text>
+<text></text>
+<table>
+<header>
+ <cell>Type of check</cell>
+ <cell>Constrained</cell>
+ <cell>UnConstrained</cell>
+ <cell>Total</cell>
+</header>
+<row>
+ <cell>Setup</cell>
+ <cell>           98</cell>
+ <cell>            0</cell>
+ <cell>           98</cell>
+</row>
+<row>
+ <cell>Recovery</cell>
+ <cell>           68</cell>
+ <cell>            0</cell>
+ <cell>           68</cell>
+</row>
+<row>
+ <cell>Output Setup</cell>
+ <cell>           10</cell>
+ <cell>            0</cell>
+ <cell>           10</cell>
+</row>
+<row>
+ <cell>Total Setup</cell>
+ <cell>          176</cell>
+ <cell>            0</cell>
+ <cell>          176</cell>
+</row>
+<separator/>
+<row>
+ <cell>Hold</cell>
+ <cell>           98</cell>
+ <cell>            0</cell>
+ <cell>           98</cell>
+</row>
+<row>
+ <cell>Removal</cell>
+ <cell>           68</cell>
+ <cell>            0</cell>
+ <cell>           68</cell>
+</row>
+<row>
+ <cell>Output Hold</cell>
+ <cell>            0</cell>
+ <cell>           10</cell>
+ <cell>           10</cell>
+</row>
+<row>
+ <cell>Total Hold</cell>
+ <cell>          166</cell>
+ <cell>           10</cell>
+ <cell>          176</cell>
+</row>
+</table>
+<section>
+<name>Enhancement Suggestions</name>
+<text></text>
+<text></text>
+<text> - Min output delay constraint missing on ports:</text>
+<text>   </text>
+<list>
+ <item>HEARTBEAT_LED</item>
+ <item>LED_PATTERN[0]</item>
+ <item>LED_PATTERN[1]</item>
+ <item>LED_PATTERN[2]</item>
+ <item>LED_PATTERN[3]</item>
+ <item>LED_PATTERN[4]</item>
+ <item>LED_PATTERN[5]</item>
+ <item>LED_PATTERN[6]</item>
+ <item>LED_PATTERN[7]</item>
+ <item>STATUS_LED</item>
+</list>
+<text></text>
+<text></text>
+</section>
+</section>
+<section>
+<name>Input to Output</name>
+<table>
+<header>
+ <cell>Type of check</cell>
+ <cell>Constrained</cell>
+ <cell>UnConstrained</cell>
+ <cell>Total</cell>
+</header>
+<row>
+ <cell>Output Setup</cell>
+ <cell>            1</cell>
+ <cell>            0</cell>
+ <cell>            1</cell>
+</row>
+<separator/>
+<row>
+ <cell>Output Hold</cell>
+ <cell>            0</cell>
+ <cell>            1</cell>
+ <cell>            1</cell>
+</row>
+</table>
+<section>
+<name>Enhancement Suggestions</name>
+<text></text>
+<text> - Max delay constraint missing on input port:</text>
+<text>   </text>
+<list>
+ <item>CLK_IN</item>
+</list>
+<text></text>
+<text> - Min delay constraint missing on input port:</text>
+<text>   </text>
+<list>
+ <item>CLK_IN</item>
+</list>
+<text></text>
+<text></text>
+<text> - Min delay constraint missing on output port:</text>
+<text>   </text>
+<list>
+ <item>HEARTBEAT_LED</item>
+</list>
+<text></text>
+<text></text>
+</section>
+</section>
+</section>
+</doc>
