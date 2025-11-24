@@ -125,3 +125,10 @@ test_clk/
 # Generated firmware integration files (regenerate as needed)
 hw_platform.h
 .continue/
+
+# Claude Code session files (local development only)
+.claude_sessions/
+
+# Generated synthesis component files (regenerable)
+*_syn_comps.v
+component/polarfire_syn_comps.v
