@@ -547,10 +547,28 @@
 **Impact:** Low (design builds correctly, just without timing optimization)
 **Workaround:** Use GUI for one-time config, or accept for simple designs
 
+### SmartDesign HDL Module Instantiation (2025-11-24)
+**Issue:** `sd_instantiate_hdl_module` cannot instantiate arbitrary Verilog modules in SmartDesign
+**Error:** "You cannot instantiate a sub-module of HDL module. You need to instantiate top module."
+**Status:** Known TCL API limitation
+**Impact:** Medium (requires workaround for designs that need HDL + IP integration)
+**Workaround:** Use direct HDL top-level instantiation instead of SmartDesign canvas
+**Example:** TMR design (hdl/tmr/tmr_top.v) - instantiates 3x MI-V cores + voter in Verilog
+**Future Work:** Investigate SmartDesign component wrapper approach or pre-configure HDL modules as reusable components
+
 ---
 
-See `docs/lessons_learned/` for detailed discoveries and solutions.
+### Reference Documentation
+
+For comprehensive CLI limitations and workarounds, see:
+- **`docs/core/cli_capabilities_and_workarounds.md`** - Complete matrix of scriptable vs GUI-only operations
+- **`docs/lessons_learned/`** - Detailed discoveries and solutions from real development
+
+**Additional Future Work Items (from archived explorations):**
+- DDR4 configuration patterns (from DDR_CONFIGURATION_ANALYSIS)
+- MI-V + DDR4 system integration (from RISCV_DDR_DESIGN)
+- Application note automation framework (see docs/specialized/APP_NOTE_AUTOMATION.md)
 
 ---
 
-**Last Updated:** 2025-10-22 | **Status:** Phase 0 Complete, Phase 1 In Progress
+**Last Updated:** 2025-11-24 | **Status:** Phase 0 Complete, TMR Demo Complete, BeagleV-Fire Automation Complete

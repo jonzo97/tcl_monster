@@ -1,0 +1,56 @@
+# Synthesis Constraints for MI-V TMR System
+# FDC (FPGA Design Constraints) for Synplify Pro
+#
+# This file applies TMR attributes to the voter logic for additional protection.
+# The 3x MI-V cores are manually replicated (IP-level TMR), but we can apply
+# register-level TMR to the voter logic itself for enhanced reliability.
+
+# ==============================================================================
+# TMR Attributes for Voter Logic
+# ==============================================================================
+
+# Apply register-level TMR to voter output registers
+# This triplicates the voter's internal flip-flops and adds voting
+define_attribute {v:work.triple_voter} {syn_radhardlevel} {tmr}
+
+# Alternative: Apply globally to entire design (more aggressive)
+# define_global_attribute {syn_radhardlevel} {tmr}
+
+# ==============================================================================
+# Synthesis Optimization Control
+# ==============================================================================
+
+# Preserve MI-V core instances (don't optimize away)
+# Note: This may not be needed if cores are properly connected to outputs
+define_attribute {i:MIV_RV32_A} {syn_preserve} {1}
+define_attribute {i:MIV_RV32_B} {syn_preserve} {1}
+define_attribute {i:MIV_RV32_C} {syn_preserve} {1}
+
+# Preserve voter instance
+define_attribute {i:VOTER_EXT_RESETN} {syn_preserve} {1}
+
+# ==============================================================================
+# Clock Definitions (from SDC)
+# ==============================================================================
+
+# 50 MHz input clock (20ns period)
+create_clock -name {CLK_IN} -period 20 -waveform {0 10} [get_ports {p:CLK_IN}]
+
+# ==============================================================================
+# Notes
+# ==============================================================================
+
+# IP-Level TMR (Manual):
+#   - 3x MI-V cores instantiated manually
+#   - Triple voter for EXT_RESETN outputs
+#   - Voter connects cores to output LEDs
+#
+# Register-Level TMR (Synthesis):
+#   - Applied to voter internal registers (syn_radhardlevel)
+#   - Synplify Pro triplicates voter flip-flops
+#   - Adds additional voting for enhanced reliability
+#
+# Combined Approach:
+#   - IP-level TMR for processors
+#   - Register-level TMR for voter logic
+#   - Maximum fault tolerance for demonstration

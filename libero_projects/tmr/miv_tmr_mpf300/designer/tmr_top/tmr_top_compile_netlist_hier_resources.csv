@@ -1,0 +1,4 @@
+Detailed Resource Usage
+Module Name,Fabric DFF,Single-Ended I/O,Chip Globals
+Primitives/Primitives,0,8,1
+voter_inst/Primitives,1,0,0

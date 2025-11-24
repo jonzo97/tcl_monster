@@ -1,182 +1,0 @@
-==============================================
-Running Libero TCL Script
-Script: tcl_scripts/build_design.tcl
-Windows Path: C:\tcl_monster\tcl_scripts\build_design.tcl
-Mode: SCRIPT
-==============================================
-Console Mode = ==============================================
-Opening Libero Project: counter_demo
-==============================================
-Reading file 'C:\tcl_monster\libero_projects\counter_demo\hdl\counter.v'.
-The counter_demo project was opened.
-Project opened successfully!
-==============================================
-Starting Synthesis (Synplify Pro)...
-==============================================
-INFO: The option "Abort flow if errors are found in SDC" is turned ON in Project Settings> Design flow page. The Synthesis tool will fail if errors are found in associated SDC files. Please uncheck the option to ignore the errors and continue running the tool
-
-Info: Active implementation is 'synthesis'
-Starting Synplify Pro ME...
-
-===============================================================================.
-
-Info: Global design data: 
-      Total globals:                       1 
-      Globals that cannot be demoted:      0 
-      Globals considered for demotion:     1 
-
-
-Info: List of globals considered for demotion: 
-    CLK    ASYN   DATA   Instance Name 
-    ---    ----   ----   ------------- 
-    32     0      0      'I_1' 
-
-Info: Demotion information: 
-Info: [127205381]:  CMPPF_302: Added 0 row global instances.
-Info: [127205382]:  CMPPF_303: Deleted 0 global instances.
-
-===============================================================================.
-
-Synthesis completed.
-WARNING: Synthesis completed with warnings/errors
-==============================================
-Starting Place and Route...
-==============================================
-Info:  No timing constraint has been associated to the 'Place and Route' tool. 'Place and Route' will be run in non Timing Driven mode.
-INFO: The option "Abort flow if errors are found in PDC" is turned ON in Project Settings> Design flow page. The Place & Route tool will fail if errors are found in associated PDC files. Please uncheck the option to ignore the errors and continue running the tool
-TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
-***** Place and Route Configurations *****
-Timing-driven            : OFF
-Power-driven             : OFF
-I/O Register Combining   : OFF
-Global Pins Demotion     : OFF
-Driver Replication       : OFF
-High-effort              : OFF
-Repair min-delay         : OFF
-Incremental              : OFF
-
-INFO: Reading User PDC file C:\tcl_monster\libero_projects\counter_demo\constraint\io\io_constraints.pdc. 0 error(s) and 0 warning(s)
-
-Running the I/O Bank and Globals Assigner.
-Info:  Globals Assigner found no global involed in the problem.
-Info:  I/O Bank and Globals Assigner identified 10 fixed I/O macros, 0 unfixed I/O macros
-
-I/O Bank and Globals Assigner completed successfully.
-Total time spent in I/O Bank and Globals Assigner: 0 seconds
-TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
-
-Placer V5.0 - 2024.2.0 
-Design: counter                         Started: Wed Oct 22 21:41:44 2025
-
-Initializing Normal-Effort Standard Placement ...
-Clustering ...
-Placing ...
-Improving placement ...
-End of placement.
-
-Placer Runtime Summary   :
-Clustering (1 pass)      : 0 seconds
-Placement                : 3 seconds
-Improvement              : 0 seconds
-
-Placer completed successfully.
-
-Design: counter                         
-Finished: Wed Oct 22 21:42:00 2025
-Total CPU Time:     00:00:13            Total Elapsed Time: 00:00:16
-Total Memory Usage: 1180.6 Mbytes
-                        o - o - o - o - o - o
-
-TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
-TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
-
-Router 
-Design: C:\tcl_monster\libero_projects\counter_demo\designer\counter\counterStarted: Wed Oct 22 21:42:06 2025
-
-
-Router completed successfully.
-
-Design: C:\tcl_monster\libero_projects\counter_demo\designer\counter\counter
-Finished: Wed Oct 22 21:42:32 2025
-Total CPU Time:     00:00:21            Total Elapsed Time: 00:00:26
-Total Memory Usage: 5368.6 Mbytes
-                        o - o - o - o - o - o
-
-Resource Usage
-+---------------+------+--------+------------+
-| Type          | Used | Total  | Percentage |
-+---------------+------+--------+------------+
-| 4LUT          | 33   | 299544 | 0.01       |
-| DFF           | 32   | 299544 | 0.01       |
-| I/O Register  | 0    | 510    | 0.00       |
-| Logic Element | 41   | 299544 | 0.01       |
-+---------------+------+--------+------------+
-
-I/O Placement
-+--------+-------+------------+
-| Type   | Count | Percentage |
-+--------+-------+------------+
-| Locked |  10   | 100.00%    |
-| Placed |  0    | 0.00%      |
-+--------+-------+------------+
-
-TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
-Completed writing pin report files.
-Place and Route Elapsed Time: 1.03 minutes.
-WARNING: Place and Route completed with warnings/errors
-==============================================
-Generating Programming File...
-==============================================
-TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
-Generating FPGA array data. 
-INFO: Writing PCBIT information for Lock Bits in file: C:\tcl_monster\libero_projects\counter_demo\designer\counter\counter_init_config_lock_bits.txt ...
-INFO: PCBIT information used for generating Design_Initialization_Data_Report file.
-Info: Generated map file C:\tcl_monster\libero_projects\counter_demo\designer\counter\counter.map
-FPGA array data completed successfully. 
-Info:  Memory files have been generated successfully
-Info:  'Generate design initialization data' has completed successfully.
-Info:  Stage 1 initialization client has been added to sNVM.
-Info:  Bitstream not generated for uPROM. The configuration file:  is either absent, unreadable, or empty. Use the Design and Memory Initialization tool in the design flow to configure uPROM if needed.
-Info:  Found sNVM configuration file: C:\tcl_monster\libero_projects\counter_demo\designer\counter\SNVM.cfg
-TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
-Info: Generated dca file C:\tcl_monster\libero_projects\counter_demo\designer\counter\counter.dca
-Generating Bitstream File to program Fabric and sNVM...
-Software Version: 2024.2.0.13
-Opened 'C:\tcl_monster\libero_projects\counter_demo\designer\counter\counter_fp\counter.pro'
-PDB file 'C:\tcl_monster\libero_projects\counter_demo\designer\counter\counter.pdb' has been loaded successfully.
-DESIGN : counter;  CHECKSUM : 6C9F;  PDB_VERSION : 1.9
-Load Programming Data(s) Finished : Wed Oct 22 21:44:57 2025 (Elapsed time 00:00:00)
-Info:  Programming Interface selected is JTAG.
-Info:  Design version: 0
-File/Folder 'C:\tcl_monster\libero_projects\counter_demo\designer\counter\counter.ppd' will be overwritten.
-Successfully exported PPD file for currently secured device: 'C:\tcl_monster\libero_projects\counter_demo\designer\counter\counter.ppd'; file programs Fabric and sNVM.
-Fabric component bitstream digest: f25d234a5111e2c1cd15ea94704d98de87f4d1ea4227643a0740ea007a148f78
-sNVM component bitstream digest: 79dfc8f8733ab3227a151990d92f5f1338fe8053c53c26cc7616cd593c8fd566
-Entire bitstream digest: 18e16f253c0ae75ab68152807ca989c5b6f4b76626e7aeb626e2ef251489832c
-Finished: Wed Oct 22 21:45:52 2025 (Elapsed time 00:00:55)
-
-creating folder: C:\tcl_monster\libero_projects\counter_demo\designer\counter\counter_fp\projectData
-Project saved.
-Project closed.
-Info:  Exported log file: C:\tcl_monster\libero_projects\counter_demo\designer\counter\counter_fp\counter_generateBitstream.log
-Generating Bitstream File Finished: Wed Oct 22 21:46:10 2025 (Elapsed time 00:01:19)
-
-WARNING: Programming file generation completed with warnings/errors
-==============================================
-Build Summary
-==============================================
-Project: counter_demo
-Location: ./libero_projects/counter_demo
-
-Build stages completed:
-  (1) Synthesis
-  (2) Place and Route
-  (3) Programming File Generation
-
-Programming file location:
-  ./libero_projects/counter_demo/designer/counter/counter_demo.ppd
-==============================================
-Project saved!
-The counter_demo project was closed.
-Build complete!
-The Execute Script command succeeded.

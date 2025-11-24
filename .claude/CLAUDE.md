@@ -46,6 +46,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Key Documentation Locations
 
+### Build Flow Lessons (CRITICAL - READ FIRST!)
+- **Libero Build Flow Lessons:** `docs/libero_build_flow_lessons.md`
+  - Complete synthesis/P&R workflow
+  - Common errors and fixes
+  - Design methodology (incremental builds)
+  - Path handling, constraint syntax
+  - **Created:** 2025-11-23 during TMR project debugging
+
 ### Local Libero Documentation
 - **Sample TCL Scripts:** `/mnt/c/Microchip/Libero_SoC_v2024.2/Designer/scripts/sample/run.tcl`
 - **FPGA Command Reference:** `/mnt/c/Microchip/Libero_SoC_v2024.2/Identify/doc/fpga_command_reference.pdf`
@@ -282,6 +290,8 @@ create_and_configure_core \
   - Current Status: Phase 0 complete (counter design synthesized!)
   - Next: Phase 1 (timing constraints, reporting, templates)
   - Phases 2-6 detailed with time estimates
+  - **Contains:** Known CLI limitations, workarounds, and future work items
+  - **Use this for:** Long-term todos, discovered limitations, lessons learned
 
 **For Specific Topics:**
 - **`docs/DESIGN_LIBRARY.md`** - Catalog of all designs (basic → advanced)
@@ -310,18 +320,27 @@ create_and_configure_core \
 
 ### When to Read What
 
+**Documentation Organization:**
+- `docs/core/` - Framework docs (read regularly)
+- `docs/reference/` - Technical reference (read as needed)
+- `docs/specialized/` - Tool-specific frameworks
+- `docs/archive/` - Historical docs (sessions, old projects)
+
 | Situation | Read This |
 |-----------|-----------|
-| Starting ANY session | `.claude/CLAUDE.md` (this file) + query Memory MCP |
+| Starting ANY session | `.claude/CLAUDE.md` (this file) |
 | Planning next phase | `docs/ROADMAP.md` |
-| Choosing/creating design | `docs/DESIGN_LIBRARY.md` |
-| Debugging issues | `docs/DEBUGGING_FRAMEWORK.md` |
-| Setting up simulation | `docs/SIMULATION_FRAMEWORK.md` |
-| Recreating app notes | `docs/APP_NOTE_AUTOMATION.md` |
-| Context near limit | `docs/CONTEXT_STRATEGY.md` |
-| Sharing with colleague | `docs/COLLEAGUE_GUIDE.md` |
-| Working on BeagleV-Fire FPGA | `docs/beaglev_fire_guide.md` |
-| Setting up BeagleV-Fire hardware | `docs/beaglev_fire_hardware_setup.md` |
+| Discovering CLI limitations | `docs/core/cli_capabilities_and_workarounds.md` or `docs/ROADMAP.md` (Notes section) |
+| Choosing/creating design | `docs/reference/DESIGN_LIBRARY.md` |
+| Debugging issues | `docs/core/DEBUGGING_FRAMEWORK.md` |
+| Setting up simulation | `docs/core/SIMULATION_FRAMEWORK.md` |
+| Recreating app notes | `docs/specialized/APP_NOTE_AUTOMATION.md` |
+| Context near limit | `docs/core/CONTEXT_STRATEGY.md` |
+| Sharing with colleague | `docs/core/COLLEAGUE_GUIDE.md` |
+| Working on BeagleV-Fire FPGA | `docs/reference/beaglev_fire_guide.md` |
+| Setting up BeagleV-Fire hardware | `docs/reference/beaglev_fire_hardware_setup.md` |
+| Build flow lessons | `docs/reference/libero_build_flow_lessons.md` |
+| Historical sessions | `docs/archive/sessions/` |
 
 ### Session Start Protocol (MANDATORY)
 

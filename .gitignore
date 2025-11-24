@@ -110,7 +110,17 @@ beaglev_fire_demo/
 !hdl/beaglev_fire/
 !tcl_scripts/beaglev_fire/
 
-# Generated PDF documentation
+# Generated documentation (regenerate from markdown)
 *.pdf
+*.html
+
+# Office temporary files (Word/PowerPoint)
+~$*
+
+# Test output directories (empty or minimal test artifacts)
+test_output*/
+output/
 test_clk/
+
+# Generated firmware integration files (regenerate as needed)
 hw_platform.h

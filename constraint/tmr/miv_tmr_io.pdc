@@ -1,0 +1,57 @@
+# I/O Constraints for MI-V TMR System with Voter Logic
+# Target: MPF300 Eval Kit (FCG1152 package)
+
+# ==============================================================================
+# Clock and Reset
+# ==============================================================================
+
+# 50 MHz oscillator (from eval kit)
+set_io -port_name {CLK_IN} -pin_name {H12} -fixed true -DIRECTION INPUT
+
+# Reset button (active-low)
+set_io -port_name {RST_N_IN} -pin_name {K14} -fixed true -DIRECTION INPUT
+
+# ==============================================================================
+# Status LEDs (TMR Demonstration)
+# ==============================================================================
+
+# Heartbeat LED (shows clock is running)
+set_io -port_name {HEARTBEAT_LED} -pin_name {J19} -fixed true -DIRECTION OUTPUT
+
+# TMR Status LED (voted output from 3x cores)
+set_io -port_name {TMR_STATUS_LED} -pin_name {K19} -fixed true -DIRECTION OUTPUT
+
+# Fault Indicator LEDs (show which cores have faults)
+set_io -port_name {FAULT_LED_A} -pin_name {L19} -fixed true -DIRECTION OUTPUT
+set_io -port_name {FAULT_LED_B} -pin_name {M19} -fixed true -DIRECTION OUTPUT
+set_io -port_name {FAULT_LED_C} -pin_name {N19} -fixed true -DIRECTION OUTPUT
+
+# Disagreement LED (high if any cores disagree)
+set_io -port_name {DISAGREE_LED} -pin_name {P19} -fixed true -DIRECTION OUTPUT
+
+# ==============================================================================
+# I/O Standards
+# ==============================================================================
+
+set_io -port_name {CLK_IN}          -io_std {LVCMOS33} -fixed true
+set_io -port_name {RST_N_IN}        -io_std {LVCMOS33} -fixed true
+set_io -port_name {HEARTBEAT_LED}   -io_std {LVCMOS33} -fixed true
+set_io -port_name {TMR_STATUS_LED}  -io_std {LVCMOS33} -fixed true
+set_io -port_name {FAULT_LED_A}     -io_std {LVCMOS33} -fixed true
+set_io -port_name {FAULT_LED_B}     -io_std {LVCMOS33} -fixed true
+set_io -port_name {FAULT_LED_C}     -io_std {LVCMOS33} -fixed true
+set_io -port_name {DISAGREE_LED}    -io_std {LVCMOS33} -fixed true
+
+# ==============================================================================
+# Notes
+# ==============================================================================
+
+# LED Mapping for MPF300 Eval Kit:
+#   J19 - HEARTBEAT_LED   (blinks at clock rate)
+#   K19 - TMR_STATUS_LED  (voted output from 3x cores)
+#   L19 - FAULT_LED_A     (core A fault indicator)
+#   M19 - FAULT_LED_B     (core B fault indicator)
+#   N19 - FAULT_LED_C     (core C fault indicator)
+#   P19 - DISAGREE_LED    (disagreement indicator)
+#
+# All LEDs are active-high (1 = LED on, 0 = LED off)

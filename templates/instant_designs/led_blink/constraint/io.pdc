@@ -1,0 +1,53 @@
+# I/O Constraints for LED Blinker
+# Supports multiple boards - board-specific sections marked with comments
+
+# ==============================================================================
+# Board: mpf300_eval (PolarFire MPF300 Evaluation Kit - FCG1152)
+# ==============================================================================
+
+# Clock input (50 MHz oscillator)
+# set_io -port_name {clk} -pin_name {H12} -fixed true
+
+# Reset (active-low, from push button)
+# set_io -port_name {rst_n} -pin_name {K14} -fixed true
+
+# LEDs (8 LEDs on eval board)
+# set_io -port_name {leds[0]} -pin_name {N20} -fixed true
+# set_io -port_name {leds[1]} -pin_name {N19} -fixed true
+# set_io -port_name {leds[2]} -pin_name {M18} -fixed true
+# set_io -port_name {leds[3]} -pin_name {M17} -fixed true
+# set_io -port_name {leds[4]} -pin_name {N16} -fixed true
+# set_io -port_name {leds[5]} -pin_name {M16} -fixed true
+# set_io -port_name {leds[6]} -pin_name {M15} -fixed true
+# set_io -port_name {leds[7]} -pin_name {M14} -fixed true
+
+# ==============================================================================
+# Board: beaglev_fire (BeagleV-Fire - MPFS025T FCVG484)
+# ==============================================================================
+
+# Clock input (50 MHz from MSS or external source)
+# For now, use cape connector pin - replace with MSS clock in SmartDesign version
+set_io -port_name {clk} -pin_name {A10} -fixed true
+
+# Reset (active-low, from cape connector)
+set_io -port_name {rst_n} -pin_name {A11} -fixed true
+
+# LEDs (using cape connector P8 pins)
+set_io -port_name {leds[0]} -pin_name {V22} -fixed true  # P8[3]
+set_io -port_name {leds[1]} -pin_name {W21} -fixed true  # P8[4]
+set_io -port_name {leds[2]} -pin_name {Y22} -fixed true  # P8[5]
+set_io -port_name {leds[3]} -pin_name {Y21} -fixed true  # P8[6]
+set_io -port_name {leds[4]} -pin_name {U19} -fixed true  # P8[7]
+set_io -port_name {leds[5]} -pin_name {V19} -fixed true  # P8[8]
+set_io -port_name {leds[6]} -pin_name {Y20} -fixed true  # P8[9]
+set_io -port_name {leds[7]} -pin_name {AA20} -fixed true # P8[10]
+
+# I/O standards
+set_io -port_name {clk}    -iostd {LVCMOS33} -fixed true
+set_io -port_name {rst_n}  -iostd {LVCMOS33} -fixed true
+set_io -port_name {leds[*]} -iostd {LVCMOS33} -fixed true
+
+# Notes:
+# - For mpf300_eval: Uncomment lines 8-21, comment lines 27-44
+# - For beaglev_fire: Keep lines 27-44 uncommented (default)
+# - This file is auto-processed by create_instant_fpga.sh based on board selection
