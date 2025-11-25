@@ -66,6 +66,9 @@ set hdl_files [list \
     "C:/tcl_monster/hdl/tmr/triple_voter_1bit.v" \
     "C:/tcl_monster/hdl/tmr/triple_voter_64bit.v" \
     "C:/tcl_monster/hdl/tmr/tmr_functional_outputs.v" \
+    "C:/tcl_monster/hdl/tmr/uart_tx_voter.v" \
+    "C:/tcl_monster/hdl/tmr/gpio_voter.v" \
+    "C:/tcl_monster/hdl/tmr/memory_read_voter.v" \
 ]
 
 foreach hdl_file $hdl_files {
@@ -107,12 +110,11 @@ puts ""
 # Step 5: Create Triplicated Peripherals
 # ============================================================================
 
-puts "\[5/7\] Skipping peripherals for initial build..."
+puts "\[5/7\] Creating triplicated peripherals..."
 
-# NOTE: Focusing on 3x MI-V cores for initial synthesis
-# Peripherals (UART, GPIO, Timer) can be added after successful build
+source C:/tcl_monster/tcl_scripts/tmr/create_tmr_peripherals.tcl
 
-puts "✓ Skipping peripherals (initial build)"
+puts "✓ Peripherals created"
 puts ""
 
 # ============================================================================

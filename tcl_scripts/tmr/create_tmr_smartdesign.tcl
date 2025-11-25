@@ -170,6 +170,128 @@ puts "✓ MI-V cores connected through voter"
 puts ""
 
 # ============================================================================
+# Step 7a: Instantiate Peripheral IP Cores (3x UART, 3x GPIO)
+# ============================================================================
+
+puts "\[Step 7a/12\] Instantiating peripheral IP cores..."
+
+# Instantiate 3x CoreUARTapb
+sd_instantiate_component -sd_name {TMR_TOP} -component_name {CoreUARTapb_A} -instance_name {UART_A}
+sd_instantiate_component -sd_name {TMR_TOP} -component_name {CoreUARTapb_B} -instance_name {UART_B}
+sd_instantiate_component -sd_name {TMR_TOP} -component_name {CoreUARTapb_C} -instance_name {UART_C}
+
+# Instantiate 3x CoreGPIO
+sd_instantiate_component -sd_name {TMR_TOP} -component_name {CoreGPIO_A} -instance_name {GPIO_A}
+sd_instantiate_component -sd_name {TMR_TOP} -component_name {CoreGPIO_B} -instance_name {GPIO_B}
+sd_instantiate_component -sd_name {TMR_TOP} -component_name {CoreGPIO_C} -instance_name {GPIO_C}
+
+puts "✓ Peripheral IP cores instantiated (3x UART, 3x GPIO)"
+puts ""
+
+# ============================================================================
+# Step 7b: Instantiate Peripheral Voters
+# ============================================================================
+
+puts "\[Step 7b/12\] Instantiating peripheral voters..."
+
+# Instantiate UART TX voter (single-bit)
+sd_instantiate_hdl_module -sd_name {TMR_TOP} -hdl_module_name {uart_tx_voter} -hdl_file {hdl/uart_tx_voter.v} -instance_name {VOTER_UART_TX}
+
+# Instantiate GPIO voter (8-bit)
+sd_instantiate_hdl_module -sd_name {TMR_TOP} -hdl_module_name {gpio_voter} -hdl_file {hdl/gpio_voter.v} -instance_name {VOTER_GPIO_OUT}
+
+puts "✓ Peripheral voters instantiated (UART TX, GPIO)"
+puts ""
+
+# ============================================================================
+# Step 7c: Create External I/O Ports for Peripherals
+# ============================================================================
+
+puts "\[Step 7c/12\] Creating peripheral I/O ports..."
+
+# UART I/O ports
+sd_create_scalar_port -sd_name {TMR_TOP} -port_name {UART_RX} -port_direction {IN}
+sd_create_scalar_port -sd_name {TMR_TOP} -port_name {UART_TX} -port_direction {OUT}
+
+# GPIO I/O ports (8-bit bus)
+sd_create_bus_port -sd_name {TMR_TOP} -port_name {GPIO_OUT} -port_direction {OUT} -port_range {[7:0]}
+sd_create_bus_port -sd_name {TMR_TOP} -port_name {GPIO_IN} -port_direction {IN} -port_range {[7:0]}
+
+puts "✓ Peripheral I/O ports created"
+puts ""
+
+# ============================================================================
+# Step 7d: Connect Peripherals (Clock, Reset, Bus)
+# ============================================================================
+
+puts "\[Step 7d/12\] Connecting peripherals..."
+
+# Connect clock and reset to all UARTs
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"CLK_IN" "UART_A:PCLK"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"CLK_IN" "UART_B:PCLK"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"CLK_IN" "UART_C:PCLK"}
+
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"RST_N_IN" "UART_A:PRESETN"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"RST_N_IN" "UART_B:PRESETN"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"RST_N_IN" "UART_C:PRESETN"}
+
+# Connect clock and reset to all GPIOs
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"CLK_IN" "GPIO_A:PCLK"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"CLK_IN" "GPIO_B:PCLK"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"CLK_IN" "GPIO_C:PCLK"}
+
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"RST_N_IN" "GPIO_A:PRESETN"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"RST_N_IN" "GPIO_B:PRESETN"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"RST_N_IN" "GPIO_C:PRESETN"}
+
+# Broadcast UART RX to all 3 UARTs (no voting on input)
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"UART_RX" "UART_A:RX"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"UART_RX" "UART_B:RX"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"UART_RX" "UART_C:RX"}
+
+# Broadcast GPIO inputs to all 3 GPIOs (no voting on inputs)
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"GPIO_IN" "GPIO_A:GPIO_IN"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"GPIO_IN" "GPIO_B:GPIO_IN"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"GPIO_IN" "GPIO_C:GPIO_IN"}
+
+puts "✓ Peripherals connected (clock, reset, inputs)"
+puts ""
+
+# ============================================================================
+# Step 7e: Connect UART TX Through Voter
+# ============================================================================
+
+puts "\[Step 7e/12\] Wiring UART TX voter..."
+
+# Connect UART TX outputs to voter inputs
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"UART_A:TX" "VOTER_UART_TX:tx_a"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"UART_B:TX" "VOTER_UART_TX:tx_b"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"UART_C:TX" "VOTER_UART_TX:tx_c"}
+
+# Connect voter output to external UART TX port
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"VOTER_UART_TX:tx_voted" "UART_TX"}
+
+puts "✓ UART TX voter wired (3 TX → voter → external TX)"
+puts ""
+
+# ============================================================================
+# Step 7f: Connect GPIO Through Voter
+# ============================================================================
+
+puts "\[Step 7f/12\] Wiring GPIO voter..."
+
+# Connect GPIO outputs to voter inputs
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"GPIO_A:GPIO_OUT" "VOTER_GPIO_OUT:gpio_a"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"GPIO_B:GPIO_OUT" "VOTER_GPIO_OUT:gpio_b"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"GPIO_C:GPIO_OUT" "VOTER_GPIO_OUT:gpio_c"}
+
+# Connect voter output to external GPIO port
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"VOTER_GPIO_OUT:gpio_voted" "GPIO_OUT"}
+
+puts "✓ GPIO voter wired (3 GPIO → voter → external GPIO)"
+puts ""
+
+# ============================================================================
 # Step 8: Instantiate Functional Outputs Module
 # ============================================================================
 
@@ -243,36 +365,43 @@ puts ""
 # ============================================================================
 
 puts "╔════════════════════════════════════════════════════════════════════╗"
-puts "║        TMR SmartDesign with Functional Connectivity Complete       ║"
+puts "║     TMR SmartDesign with Peripherals & Voters Complete            ║"
 puts "╚════════════════════════════════════════════════════════════════════╝"
 puts ""
 puts "TMR Architecture:"
 puts "  ✓ 3x MI-V RV32IMC cores (synchronized clock/reset)"
-puts "  ✓ Triple voter (2-of-3 majority voting on EXT_RESETN)"
+puts "  ✓ 3x CoreUARTapb (115200 baud) with TX voter"
+puts "  ✓ 3x CoreGPIO (8-bit) with output voter"
+puts "  ✓ Triple voters (cores, UART TX, GPIO outputs)"
 puts "  ✓ Functional outputs module (counter + LED patterns)"
 puts "  ✓ Fault detection and disagreement monitoring"
 puts ""
-puts "Data Flow Path (KEY - prevents optimization):"
-puts "  Cores → Voter → Functional Block → Counter → LEDs → I/O Pins"
+puts "Data Flow Paths:"
+puts "  Cores → Voter → Functional Block → Counter → LEDs"
+puts "  UART 3x TX → UART Voter → External TX"
+puts "  GPIO 3x Out → GPIO Voter → External GPIO"
+puts "  External RX → Broadcast to 3x UART RX"
+puts "  External GPIO In → Broadcast to 3x GPIO In"
 puts ""
-puts "Output Signals (13 pins total):"
-puts "  HEARTBEAT_LED - Clock indicator"
-puts "  LED_PATTERN\[7:0\] - Animated pattern (changes every ~2.7s)"
-puts "  STATUS_LED    - Blinks at 1 Hz (proves voted signal functional)"
-puts "  DISAGREE_LED  - High when cores disagree"
-puts "  FAULT_LEDS\[2:0\] - Individual core fault flags"
+puts "I/O Signals (24 pins total):"
+puts "  Clock/Reset:"
+puts "    CLK_IN, RST_N_IN"
+puts "  LED Status (13 pins):"
+puts "    HEARTBEAT_LED, LED_PATTERN\[7:0\], STATUS_LED, DISAGREE_LED, FAULT_LEDS\[2:0\]"
+puts "  Peripherals (10 pins):"
+puts "    UART_RX, UART_TX, GPIO_IN\[7:0\], GPIO_OUT\[7:0\]"
 puts ""
-puts "Why This Works:"
-puts "  - Voted EXT_RESETN ENABLES counter (functional use, not static!)"
-puts "  - Counter drives LED pattern (observable behavior)"
-puts "  - Multiple outputs (13 pins) create fanout"
-puts "  - Real data path prevents synthesis optimization"
+puts "Voting Strategy:"
+puts "  Outputs: Voted (2-of-3 majority)"
+puts "    - UART TX, GPIO outputs"
+puts "  Inputs: Broadcast (no voting)"
+puts "    - UART RX, GPIO inputs"
 puts ""
 puts "Expected Synthesis Results:"
-puts "  - ~35,000 LUTs (3x MI-V cores + voter + counter)"
+puts "  - ~36,000 LUTs (3x MI-V cores + peripherals + voters)"
 puts "  - All 3 cores preserved in netlist"
-puts "  - Voter logic synthesized"
-puts "  - Functional outputs working"
+puts "  - All voter logic synthesized"
+puts "  - Peripherals functional with fault masking"
 puts ""
 puts "Next Step:"
 puts "  ./run_libero.sh tcl_scripts/tmr/build_tmr_project.tcl SCRIPT"
