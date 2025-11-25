@@ -1,5 +1,5 @@
 # Microsemi Corp.
-# Date: 2025-Nov-24 14:02:30
+# Date: 2025-Nov-25 13:17:27
 Libero Release : v2024.2
 Libero Version : 2024.2.0.13
 Operating System Name : Windows 8
@@ -67,3 +67,4 @@ Environment Variables :
 	AMHOME=C:\Microchip\Libero_SoC_v2024.2\Designer/am
 	HOME=C:\Users\c75683
 	TCL_LIBRARY=C:\Microchip\Libero_SoC_v2024.2\Designer/lib/tcl8.5
+	SYN_WRXML=1

@@ -257,9 +257,14 @@ LIST "TMR_TOP::work"
 FILE "<project>\component\work\TMR_TOP\TMR_TOP.v,hdl"
 LIST SynthesisConstraints
 VALUE "C:\tcl_monster\constraint\tmr\miv_tmr_timing.sdc,sdc"
+VALUE "C:\tcl_monster\constraint\tmr_synthesis_directives.fdc,net_fdc"
+ENDLIST
+LIST TimingConstraints
+VALUE "C:\tcl_monster\constraint\tmr\miv_tmr_timing.sdc,sdc"
 ENDLIST
 LIST PNRConstraints
 VALUE "C:\tcl_monster\constraint\tmr\miv_tmr_timing.sdc,sdc"
+VALUE "C:\tcl_monster\constraint\tmr\miv_tmr_io.pdc,io_pdc"
 ENDLIST
 LIST ProjectState5.1
 LIST Impl1
@@ -353,8 +358,8 @@ NAME="Synplify Pro ME"
 FUNCTION="Synthesis"
 TOOL="Synplify Pro ME"
 LOCATION="C:\Microchip\Libero_SoC_v2024.2\SynplifyPro\bin\synplify_pro.exe"
-PARAM=""
-BATCH=0
+PARAM="-licensetype synplifypro_actel -batch -log synplify.log"
+BATCH=1
 LICENSE=""
 IS32BIT="1"
 EndProfile
@@ -403,8 +408,12 @@ LIST UserCustomizedFileList
 ENDLIST
 LIST OpenedFileList
 ORIENTATION;HORIZONTAL
+Reports;Reports;0
+ReportsCurrentItem;Synthesize:TMR_TOP_compile_netlist_resources.xml
+Constraint Manager;Constraint Manager;0
 StartPage;StartPage;0
-ACTIVEVIEW;StartPage
+SmartDesign;TMR_TOP;0
+ACTIVEVIEW;TMR_TOP
 ENDLIST
 LIST ModuleSubBlockList
 LIST "miv_rv32_axi_xaddr_buffer_slot::work","component\Microsemi\MiV\MIV_RV32\3.1.200\subsys_merged\miv_rv32_subsys_merged.v","FALSE","FALSE"

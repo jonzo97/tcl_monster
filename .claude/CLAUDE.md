@@ -46,13 +46,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Key Documentation Locations
 
-### Build Flow Lessons (CRITICAL - READ FIRST!)
-- **Libero Build Flow Lessons:** `docs/libero_build_flow_lessons.md`
-  - Complete synthesis/P&R workflow
-  - Common errors and fixes
-  - Design methodology (incremental builds)
-  - Path handling, constraint syntax
-  - **Created:** 2025-11-23 during TMR project debugging
+### TCL Documentation (CRITICAL - READ FIRST!)
+- **TCL Mastery Guide:** `docs/TCL_MASTERY.md` (comprehensive guide from 64-design corpus)
+- **TCL Quick Reference:** `docs/TCL_QUICK_REFERENCE.md` (1-page cheat sheet)
+- **Build Flow Lessons:** `docs/reference/libero_build_flow_lessons.md` (synthesis/P&R workflow)
 
 ### Local Libero Documentation
 - **Sample TCL Scripts:** `/mnt/c/Microchip/Libero_SoC_v2024.2/Designer/scripts/sample/run.tcl`
@@ -102,54 +99,14 @@ python scripts/test_indexing.py  # Run search tests
 - "FPGA power supply requirements"
 - "GPIO pin configuration"
 
-## Libero TCL Command Patterns
+## TCL Reference & Best Practices
 
-Based on analysis of `/mnt/c/Microchip/Libero_SoC_v2024.2/Designer/scripts/sample/run.tcl`:
+**For TCL scripting, see consolidated documentation:**
+- **Quick syntax:** `docs/TCL_QUICK_REFERENCE.md` (1-page cheat sheet)
+- **Comprehensive guide:** `docs/TCL_MASTERY.md` (complete reference with all lessons from 64-design corpus)
+- **Reference designs:** `docs/REFERENCE_DESIGNS.md` (guide to mining 64-design corpus)
 
-### Project Creation
-```tcl
-new_project \
-    -location "./path/to/project" \
-    -name "project_name" \
-    -hdl VERILOG \
-    -family PolarFire \
-    -die MPF300TS \
-    -package FCG1152 \
-    -speed -1 \
-    -die_voltage 1.0 \
-    -instantiate_in_smartdesign 1 \
-    -ondemand_build_dh 1 \
-    -use_enhanced_constraint_flow 1
-```
-
-### Adding HDL Sources
-```tcl
-import_files \
-    -convert_EDN_to_HDL 0 \
-    -library {work} \
-    -hdl_source {./path/to/source.v}
-```
-
-### Design Hierarchy
-```tcl
-build_design_hierarchy
-set_root -module {module_name::work}
-```
-
-### Build Stages
-```tcl
-run_tool -name SYNTHESIZE       # Synthesis with Synplify Pro
-run_tool -name PLACEROUTE       # Place and Route
-run_tool -name VERIFYTIMING     # Timing verification
-run_tool -name SIM_PRESYNTH     # Pre-synthesis simulation
-run_tool -name SIM_POSTSYNTH    # Post-synthesis simulation
-```
-
-### Project Management
-```tcl
-save_project
-close_project
-```
+**Critical patterns documented below in "Standard TCL Script Structure"**
 
 ## Standard TCL Script Structure
 
@@ -256,65 +213,20 @@ export_prog_job \
 - `docs/REFERENCE_DESIGNS.md` - How to use 64-design corpus for pattern mining
 - `docs/ref_designs/tcl_deep_dive.md` - Statistical analysis and patterns
 
-## Architecture and Design Philosophy
+## Project Architecture
 
-### Modular Structure
-- **tcl_scripts/** - Libero TCL automation scripts (project creation, build, constraints)
-- **hdl/** - HDL source files (Verilog/VHDL modules)
-- **config/** - Project configuration files (JSON templates for project parameters)
-- **docs/** - Documentation, examples, and notes
+**Directory Structure:**
+- `tcl_scripts/` - Libero TCL automation (numbered scripts: 1_create, 2_constrain, 4_implement, 5_program)
+- `tcl_scripts/lib/` - Shared libraries (common.tcl for IP versions)
+- `hdl/` - HDL source files (Verilog/VHDL)
+- `constraint/` - Constraint files (PDC/SDC)
+- `docs/` - Documentation (guides, references, lessons learned)
 
-### Configuration-Driven Approach
-Projects are defined in JSON configuration files (`config/project_template.json`) that specify:
-- Device family, die, package, speed grade
-- HDL sources and hierarchy
-- Constraint files
-- Build flow options
+**Design Philosophy:**
+- **Component-first:** Prefer IP cores over raw HDL (9.6:1 ratio from reference designs)
+- **Numbered scripts:** Standard topology (1_create, 2_constrain, 4_implement, 5_program)
+- **Version pinning:** Centralize IP versions in `tcl_scripts/lib/common.tcl`
 
-TCL scripts read these configurations to enable parameterized project generation.
-
-### Scalability Strategy
-1. **Template-based:** Reusable TCL functions for common tasks
-2. **Device-agnostic:** Parameterize device selection through config files
-3. **Modular scripts:** Separate TCL files for creation, build, constraints, debugging
-4. **Future Python wrapper:** Higher-level orchestration and intelligent feedback loops (aspirational)
-
-## Development Workflow
-
-### Current Capabilities (v0.1)
-1. Create Libero project from command line
-2. Configure for MPF300 Eval Kit
-3. *(In progress)* Add HDL sources
-4. *(In progress)* Run synthesis/P&R
-5. *(Future)* Constraint generation
-6. *(Future)* Debugging and feedback loops
-
-### Testing Approach
-User will manually execute TCL scripts in Libero (initially via GUI TCL console if needed, transitioning to pure CLI). Feedback loop:
-1. Claude Code generates TCL script
-2. User runs script via `./run_libero.sh`
-3. User reports errors/results
-4. Claude Code debugs and iterates
-
-### Next Immediate Tasks (Tonight's Session)
-1. Create simple counter HDL module (`hdl/counter.v`)
-2. Extend `create_project.tcl` to import HDL sources
-3. Create `build_design.tcl` for synthesis/place & route
-4. Test complete flow: create project → add design → build → bitstream
-5. Document any CLI limitations discovered
-
-## Known Constraints and Unknowns
-
-### Unknowns (to be explored)
-- **CLI limitations:** What can/cannot be done via `libero.exe` command line vs. GUI?
-- **Feedback mechanisms:** Can we capture build logs programmatically for debugging?
-- **Constraint automation:** Can we generate PDC/SDC files from pin assignments?
-- **Python integration:** Is there a Libero Python API, or must we wrap TCL?
-
-### Constraints
-- Libero runs on Windows; automation runs in WSL (path translation required)
-- User is experienced FAE - can validate results, but needs time savings from automation
-- Real hardware available (MPF300 Eval Kit) for validation
 
 ## Integration with User's Global Preferences
 
@@ -379,181 +291,66 @@ create_and_configure_core \
 
 **DO NOT** use third-party RISC-V cores (PicoRV32, VexRiscv, etc.) unless specifically required.
 
-## Comprehensive Documentation Structure
+## Documentation Quick Reference
 
-**NEW (2025-10-22):** Extensive planning documents created for long-term development
+**Session Startup (READ EVERY TIME):**
+- THIS FILE (`.claude/CLAUDE.md`) - Paths, commands, critical patterns
+- `docs/TCL_MASTERY.md` - Complete TCL reference guide
+- `docs/TCL_QUICK_REFERENCE.md` - 1-page TCL cheat sheet
 
-### Primary Documentation
+**Technical References:**
+- `docs/REFERENCE_DESIGNS.md` - 64-design corpus guide
+- `docs/reference/libero_build_flow_lessons.md` - Build flow lessons learned
+- `docs/core/cli_capabilities_and_workarounds.md` - CLI limitations & workarounds
+- `docs/reference/beaglev_fire_guide.md` - BeagleV-Fire FPGA development
 
-**For Session Startup:**
-- **THIS FILE** (`.claude/CLAUDE.md`) - Read first every session for paths, commands, and project overview
-- `QUICKSTART.md` - Quick reference for immediate tasks
-- `README.md` - Project overview and introduction
+**Quick Lookups:**
 
-**For Planning and Roadmap:**
-- **`docs/ROADMAP.md`** - **MASTER PLAN** - Multi-phase development strategy with time estimates
-  - Current Status: Phase 0 complete (counter design synthesized!)
-  - Next: Phase 1 (timing constraints, reporting, templates)
-  - Phases 2-6 detailed with time estimates
-  - **Contains:** Known CLI limitations, workarounds, and future work items
-  - **Use this for:** Long-term todos, discovered limitations, lessons learned
+| Need to... | Read this |
+|------------|-----------|
+| Write TCL scripts | `docs/TCL_MASTERY.md` or `docs/TCL_QUICK_REFERENCE.md` |
+| Use reference designs | `docs/REFERENCE_DESIGNS.md` |
+| Work with BeagleV-Fire | `docs/reference/beaglev_fire_guide.md` |
+| Understand CLI limits | `docs/core/cli_capabilities_and_workarounds.md` |
 
-**For Specific Topics:**
-- **`docs/DESIGN_LIBRARY.md`** - Catalog of all designs (basic → advanced)
-  - Counter design: ✅ Complete (33 LUTs, 32 FFs)
-  - Planned: UART, SPI, I2C, DDR, PCIe, RISC-V
-- **`docs/DEBUGGING_FRAMEWORK.md`** - Identify & SmartDebug automation strategy
-  - Probe insertion, waveform capture, device programming
-- **`docs/SIMULATION_FRAMEWORK.md`** - ModelSim/QuestaSim integration
-  - Testbench generation, regression testing, waveform analysis
-- **`docs/APP_NOTE_AUTOMATION.md`** - Application note recreation strategy
-  - Parse Libero projects, adapt to different boards
-- **`docs/CONTEXT_STRATEGY.md`** - Context window management
-  - Memory MCP usage, session protocols, compaction strategy
-- **`docs/COLLEAGUE_GUIDE.md`** - Getting started guide for other FAEs
-  - Installation, quick start, troubleshooting
-- **`docs/beaglev_fire_guide.md`** - BeagleV-Fire FPGA development guide
-  - Complete reference design documentation (8 configurations)
-  - Device specifications (MPFS025T PolarFire SoC)
-  - TCL script analysis, Python builder workflow
-  - Phase 1 complete (setup & documentation), ready for Phase 2 (tcl_monster integration)
-- **`docs/beaglev_fire_hardware_setup.md`** - BeagleV-Fire hardware & embedded software guide
-  - Hardware connection and setup
-  - Programming reference designs and custom bitstreams
-  - Embedded development (bare-metal, RTOS, Linux)
-  - LED blink demo and peripheral examples
+### Session Start Protocol
 
-### When to Read What
+**Every session:**
+1. Read THIS FILE (`.claude/CLAUDE.md`) for project overview
+2. Check `docs/TCL_MASTERY.md` for TCL patterns
+3. Review recent work via `git log` or TodoWrite list
 
-**Documentation Organization:**
-- `docs/core/` - Framework docs (read regularly)
-- `docs/reference/` - Technical reference (read as needed)
-- `docs/specialized/` - Tool-specific frameworks
-- `docs/archive/` - Historical docs (sessions, old projects)
-
-| Situation | Read This |
-|-----------|-----------|
-| Starting ANY session | `.claude/CLAUDE.md` (this file) |
-| Planning next phase | `docs/ROADMAP.md` |
-| Discovering CLI limitations | `docs/core/cli_capabilities_and_workarounds.md` or `docs/ROADMAP.md` (Notes section) |
-| Choosing/creating design | `docs/reference/DESIGN_LIBRARY.md` |
-| Debugging issues | `docs/core/DEBUGGING_FRAMEWORK.md` |
-| Setting up simulation | `docs/core/SIMULATION_FRAMEWORK.md` |
-| Recreating app notes | `docs/specialized/APP_NOTE_AUTOMATION.md` |
-| Context near limit | `docs/core/CONTEXT_STRATEGY.md` |
-| Sharing with colleague | `docs/core/COLLEAGUE_GUIDE.md` |
-| Working on BeagleV-Fire FPGA | `docs/reference/beaglev_fire_guide.md` |
-| Setting up BeagleV-Fire hardware | `docs/reference/beaglev_fire_hardware_setup.md` |
-| Build flow lessons | `docs/reference/libero_build_flow_lessons.md` |
-| Historical sessions | `docs/archive/sessions/` |
-
-### Session Start Protocol (MANDATORY)
-
-**Every session MUST start with:**
-1. Check context usage with `/check-context` or `/compact-check`
-2. Read `PROJECT_STATE.json` for last session state
-3. Read relevant sections of THIS file (`.claude/CLAUDE.md`)
-4. Check `docs/ROADMAP.md` for current phase
-5. Confirm with user: "Resuming [phase X], last completed [task Y]?"
-
-## Autonomous Context Compaction (CRITICAL)
+## Context Management
 
 **Philosophy:** Treat context like precious RAM. Compact proactively before quality degrades.
 
-### When to Check Context (Proactive Monitoring)
+**Protocol:** See user's global preferences (`~/.claude/CLAUDE.md`) for complete context management strategy.
 
-**ALWAYS check context before:**
-- Starting large research tasks (WebSearch, reading multiple files)
-- Beginning new feature/phase
-- After completing 5-7 conversational turns
+**Quick reference:**
+- Check context: `/check-context`
+- Save state: `/prep-compact`
+- Full automation: `/compact` (auto-prep, compact, restore)
 
-**Use `/compact-check` to:**
-- Get current context percentage
-- Receive intelligent recommendations
-- Plan compaction timing
+## Project Status & Next Steps
 
-### Compaction Thresholds
+**Completed:**
+- ✅ CLI project creation and build automation
+- ✅ Counter design synthesized (33 LUTs, 32 FFs)
+- ✅ TCL knowledge consolidated (TCL_MASTERY.md, QUICK_REFERENCE.md, REFERENCE_DESIGNS.md)
+- ✅ BeagleV-Fire documentation complete
+- ✅ LED blink standalone design for BeagleV-Fire
 
-**< 75% (Safe Zone)** ✅
-- Continue working normally
-- Check again after completing current task
+**Active Work:**
+- ⏳ TMR (Triple Modular Redundancy) project with MI-V RISC-V
 
-**75-85% (Planning Zone)** ⚠️
-- Start planning compaction
-- Run `/save-state` to preserve context
-- Complete current task, then evaluate
-- **Recommendation:** Compact after current task
+**Future:**
+- Complex designs (DDR, PCIe, high-speed interfaces)
+- Simulation frameworks (ModelSim/QuestaSim integration)
+- Debugging frameworks (Identify/SmartDebug automation)
 
-**85-90% (Warning Zone)** 🟠
-- Compact within 1-2 tasks
-- MUST save state before continuing major work
-- No new large research tasks
-- **Recommendation:** Complete current task, compact immediately
+**See `docs/ROADMAP.md` for detailed development roadmap**
 
-**90-95% (Urgent Zone)** 🔴
-- COMPACT NOW before starting new work
-- Run `/save-state` immediately
-- Don't start new features or research
-- **Recommendation:** Save and compact now
-
-**> 95% (Critical Zone)** 🚨
-- EMERGENCY COMPACT
-- Auto-compact will trigger imminently
-- Loss of control over what gets summarized
-- **Action:** Immediate save-state and compact
-
-### Pre-Compact Checklist
-
-**Before every `/compact`, run `/save-state` to create:**
-1. **`PROJECT_STATE.json`** - Updated project state, decisions, next steps
-2. **`docs/sessions/session_[date].md`** - Session summary
-3. **`docs/lessons_learned/[topic].md`** - Any new patterns/learnings
-4. **Git commit** - If substantial work completed
-
-### Compaction Best Practices
-
-**Compact proactively when:**
-- Finishing a feature/phase (even if < 75%)
-- Pivoting to new work direction
-- Session ending soon
-- Every 5-7 deep conversational turns
-
-**DON'T wait for:**
-- 95% auto-compact threshold
-- User to manually trigger
-- Context quality to degrade
-
-**Philosophy from experts:**
-> "Curate the smallest high-signal set of tokens" - Anthropic
-> "Compact every 5-7 turns to prevent context rot" - BinaryVerseAI
-
-### Post-Compact Recovery
-
-**After compacting:**
-1. Read `PROJECT_STATE.json` to restore state
-2. Read last session summary from `docs/sessions/`
-3. Check TodoWrite list for active tasks
-4. Confirm understanding with user before continuing
-
-## Success Metrics
-
-**Short-term (this week):**
-- ✅ Successfully create projects via CLI - **DONE!**
-- ✅ Generate bitstream for simple counter design - **DONE!**
-- ⏳ Complete Phase 1 (timing constraints, reporting)
-
-**Medium-term (3-4 weeks):**
-- Parameterized project templates for multiple devices
-- Complex design examples (UART, SPI, DDR)
-- Simulation and debugging frameworks
-- Application note recreation
-
-**Long-term (future):**
-- Agent-based intelligent automation
-- Self-improving toolkit with learned patterns
-- Comprehensive design library
-- Integration with version control and CI/CD workflows
-
-**See `docs/ROADMAP.md` for detailed timeline and estimates**
-- PolarFire ref design mining: see docs/ref_designs/claude_passoff.md for TCL/HDL/IP indices, recipes, and reuse snippets.
+**Reference Design Resources:**
+- **64-Design Corpus Guide:** `docs/REFERENCE_DESIGNS.md` (top-10 designs, patterns, mining guide)
+- **IP Version Pinning:** `tcl_scripts/lib/common.tcl` (centralized version definitions)
 

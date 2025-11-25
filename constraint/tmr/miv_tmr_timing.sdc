@@ -1,5 +1,8 @@
-# Timing Constraints for MI-V TMR System with Voter Logic
+# Timing Constraints for MI-V TMR System
 # Target: 50 MHz operation
+#
+# NOTE: Minimal constraints for initial synthesis
+# Output port constraints will be added when outputs are created in SmartDesign
 
 # ==============================================================================
 # Clock Definition
@@ -23,23 +26,15 @@ set_clock_uncertainty 0.5 [get_clocks {CLK_IN}]
 set_false_path -from [get_ports {RST_N_IN}]
 
 # ==============================================================================
-# Output Delays
+# Output Delays (TO BE ADDED)
 # ==============================================================================
 
-# LED outputs (10ns setup time relative to clock)
-# Port names must match exactly what's in TMR_TOP SmartDesign
-set_output_delay -clock {CLK_IN} -max 10 [get_ports {HEARTBEAT_LED}]
-set_output_delay -clock {CLK_IN} -max 10 [get_ports {STATUS_LED}]
-set_output_delay -clock {CLK_IN} -max 10 [get_ports {DISAGREE_LED}]
-set_output_delay -clock {CLK_IN} -max 10 [get_ports {LED_PATTERN[*]}]
-set_output_delay -clock {CLK_IN} -max 10 [get_ports {FAULT_LEDS[*]}]
-
-# ==============================================================================
-# Multi-Cycle Paths (if needed for voter logic)
-# ==============================================================================
-
-# Voter logic has 1-cycle latency, which is acceptable for status LEDs
-# No multi-cycle constraints needed
+# LED output constraints will be added once SmartDesign ports are created:
+#   - HEARTBEAT_LED, STATUS_LED, DISAGREE_LED
+#   - LED_PATTERN[*], FAULT_LEDS[*]
+#
+# Example (uncomment when ports exist):
+# set_output_delay -clock {CLK_IN} -max 10 [get_ports {HEARTBEAT_LED}]
 
 # ==============================================================================
 # Notes
