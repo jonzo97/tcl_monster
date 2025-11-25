@@ -98,12 +98,11 @@ puts ""
 # Step 4: Create Triplicated Memory (3x 64KB LSRAM)
 # ============================================================================
 
-puts "\[4/7\] Skipping external memory (using built-in TCM)..."
+puts "\[4/7\] Creating triplicated memory (3x 64KB LSRAM)..."
 
-# NOTE: Using MI-V built-in TCM (64KB per core @ 0x80000000)
-# External SRAM can be added later if needed
+source C:/tcl_monster/tcl_scripts/tmr/create_tmr_memory.tcl
 
-puts "✓ Using built-in TCM (64KB per core)"
+puts "✓ Triplicated memory created (3x 64KB PF_SRAM)"
 puts ""
 
 # ============================================================================
@@ -155,13 +154,10 @@ puts "  Location: $project_location"
 puts ""
 puts "Components Created:"
 puts "  • 3x MI-V RV32IMC cores"
-puts "  • 3x 64KB LSRAM banks (192KB total)"
+puts "  • 3x 64KB PF_SRAM banks (192KB total)"
 puts "  • 3x CoreUARTapb (115200 baud)"
 puts "  • 3x CoreGPIO (8 pins)"
-puts "  • 3x CoreTimer (32-bit)"
-puts "  • 1x PF_CCC (50 MHz clock)"
-puts "  • 1x CORERESET_PF"
-puts "  • 5x Custom voter modules (Verilog)"
+puts "  • 6x Custom voter modules (Verilog)"
 puts ""
 puts "Next Steps:"
 puts "  1. Create SmartDesign canvas (tmr_top)"
