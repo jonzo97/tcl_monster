@@ -75,7 +75,7 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Microsemi\MiV\MIV_RV32\3.1.200\MIV_RV32.cxf,actgen_cxf"
 STATE="utd"
-TIME="1764014961"
+TIME="1764017874"
 SIZE="1084"
 PARENT="<project>\component\work\MIV_RV32_CORE_A\MIV_RV32_CORE_A.cxf"
 PARENT="<project>\component\work\MIV_RV32_CORE_B\MIV_RV32_CORE_B.cxf"
@@ -111,119 +111,124 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_A\MIV_RV32_CORE_A.cxf,actgen_cxf"
 STATE="utd"
-TIME="1764014956"
+TIME="1764017866"
 SIZE="14235"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_A\MIV_RV32_CORE_A.v,hdl"
 STATE="utd"
-TIME="1764014954"
+TIME="1764017863"
 SIZE="17264"
 PARENT="<project>\component\work\MIV_RV32_CORE_A\MIV_RV32_CORE_A.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_A\MIV_RV32_CORE_A_0\MIV_RV32_CORE_A_MIV_RV32_CORE_A_0_MIV_RV32.cxf,actgen_cxf"
 STATE="utd"
-TIME="1764014954"
+TIME="1764017863"
 SIZE="500"
 PARENT="<project>\component\work\MIV_RV32_CORE_A\MIV_RV32_CORE_A.cxf"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_A\MIV_RV32_CORE_A_0\rtl\miv_rv32.v,hdl"
 STATE="utd"
-TIME="1764014954"
+TIME="1764017863"
 SIZE="33267"
 PARENT="<project>\component\work\MIV_RV32_CORE_A\MIV_RV32_CORE_A_0\MIV_RV32_CORE_A_MIV_RV32_CORE_A_0_MIV_RV32.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_B\MIV_RV32_CORE_B.cxf,actgen_cxf"
 STATE="utd"
-TIME="1764014959"
+TIME="1764017872"
 SIZE="14235"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_B\MIV_RV32_CORE_B.v,hdl"
 STATE="utd"
-TIME="1764014958"
+TIME="1764017871"
 SIZE="17264"
 PARENT="<project>\component\work\MIV_RV32_CORE_B\MIV_RV32_CORE_B.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_B\MIV_RV32_CORE_B_0\MIV_RV32_CORE_B_MIV_RV32_CORE_B_0_MIV_RV32.cxf,actgen_cxf"
 STATE="utd"
-TIME="1764014958"
+TIME="1764017871"
 SIZE="500"
 PARENT="<project>\component\work\MIV_RV32_CORE_B\MIV_RV32_CORE_B.cxf"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_B\MIV_RV32_CORE_B_0\rtl\miv_rv32.v,hdl"
 STATE="utd"
-TIME="1764014958"
+TIME="1764017871"
 SIZE="33267"
 PARENT="<project>\component\work\MIV_RV32_CORE_B\MIV_RV32_CORE_B_0\MIV_RV32_CORE_B_MIV_RV32_CORE_B_0_MIV_RV32.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_C\MIV_RV32_CORE_C.cxf,actgen_cxf"
 STATE="utd"
-TIME="1764014963"
+TIME="1764017874"
 SIZE="14235"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_C\MIV_RV32_CORE_C.v,hdl"
 STATE="utd"
-TIME="1764014961"
+TIME="1764017874"
 SIZE="17264"
 PARENT="<project>\component\work\MIV_RV32_CORE_C\MIV_RV32_CORE_C.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_C\MIV_RV32_CORE_C_0\MIV_RV32_CORE_C_MIV_RV32_CORE_C_0_MIV_RV32.cxf,actgen_cxf"
 STATE="utd"
-TIME="1764014961"
+TIME="1764017874"
 SIZE="500"
 PARENT="<project>\component\work\MIV_RV32_CORE_C\MIV_RV32_CORE_C.cxf"
 ENDFILE
 VALUE "<project>\component\work\MIV_RV32_CORE_C\MIV_RV32_CORE_C_0\rtl\miv_rv32.v,hdl"
 STATE="utd"
-TIME="1764014961"
+TIME="1764017874"
 SIZE="33267"
 PARENT="<project>\component\work\MIV_RV32_CORE_C\MIV_RV32_CORE_C_0\MIV_RV32_CORE_C_MIV_RV32_CORE_C_0_MIV_RV32.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\work\TMR_TOP\TMR_TOP.cxf,actgen_cxf"
 STATE="utd"
-TIME="1764015311"
-SIZE="2949"
+TIME="1764018012"
+SIZE="3063"
 ENDFILE
 VALUE "<project>\component\work\TMR_TOP\TMR_TOP.v,hdl"
 STATE="utd"
-TIME="1764015310"
-SIZE="9174"
+TIME="1764018012"
+SIZE="10015"
 PARENT="<project>\component\work\TMR_TOP\TMR_TOP.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\hdl\tmr_functional_outputs.v,hdl"
 STATE="utd"
-TIME="1764014953"
-SIZE="4609"
+TIME="1764017861"
+SIZE="3466"
 ENDFILE
 VALUE "<project>\hdl\triple_voter_1bit.v,hdl"
 STATE="utd"
-TIME="1764014953"
+TIME="1764017861"
 SIZE="2237"
+ENDFILE
+VALUE "<project>\hdl\triple_voter_64bit.v,hdl"
+STATE="utd"
+TIME="1764017861"
+SIZE="2145"
 ENDFILE
 VALUE "<project>\synthesis\TMR_TOP.so,so"
 STATE="utd"
-TIME="1764017014"
+TIME="1764020424"
 SIZE="238"
 ENDFILE
 VALUE "<project>\synthesis\TMR_TOP.vm,syn_vm"
 STATE="utd"
-TIME="1764017010"
-SIZE="37137"
+TIME="1764020423"
+SIZE="2070107"
 ENDFILE
 VALUE "<project>\synthesis\TMR_TOP_syn.prj,prj"
 STATE="utd"
-TIME="1764017017"
-SIZE="4992"
+TIME="1764020425"
+SIZE="5088"
 ENDFILE
 VALUE "<project>\synthesis\TMR_TOP_vm.sdc,syn_sdc"
 STATE="utd"
-TIME="1764017010"
+TIME="1764020423"
 SIZE="1419"
 ENDFILE
 VALUE "C:\tcl_monster\constraint\tmr\miv_tmr_io.pdc,io_pdc"
@@ -240,8 +245,8 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "C:\tcl_monster\constraint\tmr_synthesis_directives.fdc,net_fdc"
 STATE="utd"
-TIME="1764011362"
-SIZE="4218"
+TIME="1764020133"
+SIZE="2495"
 IS_READONLY="TRUE"
 ENDFILE
 ENDLIST
@@ -348,8 +353,8 @@ NAME="Synplify Pro ME"
 FUNCTION="Synthesis"
 TOOL="Synplify Pro ME"
 LOCATION="C:\Microchip\Libero_SoC_v2024.2\SynplifyPro\bin\synplify_pro.exe"
-PARAM="-licensetype synplifypro_actel -batch -log synplify.log"
-BATCH=1
+PARAM=""
+BATCH=0
 LICENSE=""
 IS32BIT="1"
 EndProfile
@@ -397,6 +402,9 @@ ENDLIST
 LIST UserCustomizedFileList
 ENDLIST
 LIST OpenedFileList
+ORIENTATION;HORIZONTAL
+StartPage;StartPage;0
+ACTIVEVIEW;StartPage
 ENDLIST
 LIST ModuleSubBlockList
 LIST "miv_rv32_axi_xaddr_buffer_slot::work","component\Microsemi\MiV\MIV_RV32\3.1.200\subsys_merged\miv_rv32_subsys_merged.v","FALSE","FALSE"
@@ -871,8 +879,11 @@ SUBBLOCK "MIV_RV32_CORE_B::work","component\work\MIV_RV32_CORE_B\MIV_RV32_CORE_B
 SUBBLOCK "MIV_RV32_CORE_C::work","component\work\MIV_RV32_CORE_C\MIV_RV32_CORE_C.v","TRUE","FALSE"
 SUBBLOCK "tmr_functional_outputs::work","hdl\tmr_functional_outputs.v","FALSE","FALSE"
 SUBBLOCK "triple_voter_1bit::work","hdl\triple_voter_1bit.v","FALSE","FALSE"
+SUBBLOCK "triple_voter_64bit::work","hdl\triple_voter_64bit.v","FALSE","FALSE"
 ENDLIST
 LIST "triple_voter_1bit::work","hdl\triple_voter_1bit.v","FALSE","FALSE"
+ENDLIST
+LIST "triple_voter_64bit::work","hdl\triple_voter_64bit.v","FALSE","FALSE"
 ENDLIST
 ENDLIST
 LIST ActiveTestBenchList

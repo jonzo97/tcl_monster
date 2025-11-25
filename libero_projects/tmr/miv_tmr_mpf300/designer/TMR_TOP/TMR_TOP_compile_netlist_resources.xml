@@ -3,7 +3,7 @@
 <doc>
 <title>Compile Report</title>
 <text>Microchip Technology Inc. - Microchip Libero Software Release v2024.2 (Version 2024.2.0.13)</text>
-<text>Date: Mon Nov 24 12:43:56 2025
+<text>Date: Mon Nov 24 14:07:17 2025
 </text>
 <section><name>Device Selection</name></section>
 <table>
@@ -74,15 +74,15 @@
 </header>
 <row>
  <cell>4LUT</cell>
- <cell>68</cell>
+ <cell>25071</cell>
  <cell>299544</cell>
- <cell>0.02</cell>
+ <cell>8.37</cell>
 </row>
 <row>
  <cell>DFF</cell>
- <cell>68</cell>
+ <cell>12405</cell>
  <cell>299544</cell>
- <cell>0.02</cell>
+ <cell>4.14</cell>
 </row>
 <row>
  <cell>I/O Register</cell>
@@ -110,9 +110,9 @@
 </row>
 <row>
  <cell>uSRAM</cell>
- <cell>0</cell>
+ <cell>21</cell>
  <cell>2772</cell>
- <cell>0.00</cell>
+ <cell>0.76</cell>
 </row>
 <row>
  <cell>LSRAM</cell>
@@ -128,9 +128,9 @@
 </row>
 <row>
  <cell>H-Chip Global</cell>
- <cell>1</cell>
+ <cell>2</cell>
  <cell>48</cell>
- <cell>2.08</cell>
+ <cell>4.17</cell>
 </row>
 <row>
  <cell>PLL</cell>
@@ -166,13 +166,13 @@
 </header>
 <row>
  <cell>Fabric Logic</cell>
- <cell>68</cell>
- <cell>68</cell>
+ <cell>24819</cell>
+ <cell>12153</cell>
 </row>
 <row>
  <cell>uSRAM Interface Logic</cell>
- <cell>0</cell>
- <cell>0</cell>
+ <cell>252</cell>
+ <cell>252</cell>
 </row>
 <row>
  <cell>LSRAM Interface Logic</cell>
@@ -186,8 +186,8 @@
 </row>
 <row>
  <cell>Total Used</cell>
- <cell>68</cell>
- <cell>68</cell>
+ <cell>25071</cell>
+ <cell>12405</cell>
 </row>
 </table>
 <section><name>Detailed Carry Chains Resource Usage</name></section>
@@ -199,16 +199,61 @@
  <cell>Used</cell>
 </row>
 <row>
- <cell>26</cell>
- <cell>1</cell>
+ <cell>9</cell>
+ <cell>24</cell>
 </row>
 <row>
- <cell>29</cell>
- <cell>1</cell>
+ <cell>17</cell>
+ <cell>12</cell>
+</row>
+<row>
+ <cell>30</cell>
+ <cell>3</cell>
+</row>
+<row>
+ <cell>31</cell>
+ <cell>3</cell>
+</row>
+<row>
+ <cell>32</cell>
+ <cell>12</cell>
+</row>
+<row>
+ <cell>33</cell>
+ <cell>12</cell>
+</row>
+<row>
+ <cell>64</cell>
+ <cell>3</cell>
+</row>
+<row>
+ <cell>65</cell>
+ <cell>6</cell>
 </row>
 <row>
  <cell>Total</cell>
+ <cell>75</cell>
+</row>
+</table>
+<section><name>Detailed 4LUT Groups Resource Usage</name></section>
+<table>
+<header>
+</header>
+<row>
+ <cell>Length</cell>
+ <cell>Used</cell>
+</row>
+<row>
  <cell>2</cell>
+ <cell>90</cell>
+</row>
+<row>
+ <cell>22</cell>
+ <cell>3</cell>
+</row>
+<row>
+ <cell>Total</cell>
+ <cell>93</cell>
 </row>
 </table>
 <section><name>I/O Function</name></section>
@@ -258,7 +303,7 @@
  <cell>Name</cell>
 </header>
 <row>
- <cell>69</cell>
+ <cell>12367</cell>
  <cell>INT_NET</cell>
  <cell>Net   : NN_1</cell>
 </row>
@@ -266,6 +311,21 @@
  <cell></cell>
  <cell></cell>
  <cell>Driver: I_1/U0_RGB1</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Source: NETLIST</cell>
+</row>
+<row>
+ <cell>2019</cell>
+ <cell>INT_NET</cell>
+ <cell>Net   : RST_N_IN_arst</cell>
+</row>
+<row>
+ <cell></cell>
+ <cell></cell>
+ <cell>Driver: I_2/U0_RGB1</cell>
 </row>
 <row>
  <cell></cell>
@@ -289,7 +349,7 @@
  <cell>Name</cell>
 </header>
 <row>
- <cell>69</cell>
+ <cell>2491</cell>
  <cell>INT_NET</cell>
  <cell>Net   : RST_N_IN_c</cell>
 </row>
@@ -299,94 +359,94 @@
  <cell>Driver: RST_N_IN_ibuf</cell>
 </row>
 <row>
- <cell>57</cell>
+ <cell>246</cell>
  <cell>INT_NET</cell>
- <cell>Net   : voted_output</cell>
+ <cell>Net   : MIV_RV32_A/MIV_RV32_CORE_A_0/u_ipcore_0/cpu_debug_mode_net</cell>
 </row>
 <row>
  <cell></cell>
  <cell></cell>
- <cell>Driver: VOTER_EXT_RESETN/voted_output</cell>
+ <cell>Driver: MIV_RV32_A/MIV_RV32_CORE_A_0/u_ipcore_0/u_hart_0/u_expipe_0/u_csr_privarch_0/gen_debug.debug_mode_1_voter_SYN_VL</cell>
 </row>
 <row>
- <cell>9</cell>
+ <cell>245</cell>
  <cell>INT_NET</cell>
- <cell>Net   : FUNCTIONAL_OUTPUTS/pattern_select_Z[3]</cell>
+ <cell>Net   : MIV_RV32_C/MIV_RV32_CORE_C_0/u_ipcore_0/cpu_debug_mode_net</cell>
 </row>
 <row>
  <cell></cell>
  <cell></cell>
- <cell>Driver: FUNCTIONAL_OUTPUTS/pattern_select[3]</cell>
+ <cell>Driver: MIV_RV32_C/MIV_RV32_CORE_C_0/u_ipcore_0/u_hart_0/u_expipe_0/u_csr_privarch_0/gen_debug.debug_mode_1_voter_SYN_VL</cell>
 </row>
 <row>
- <cell>9</cell>
+ <cell>244</cell>
  <cell>INT_NET</cell>
- <cell>Net   : FUNCTIONAL_OUTPUTS/pattern_select_Z[2]</cell>
+ <cell>Net   : MIV_RV32_B/MIV_RV32_CORE_B_0/u_ipcore_0/cpu_debug_mode_net</cell>
 </row>
 <row>
  <cell></cell>
  <cell></cell>
- <cell>Driver: FUNCTIONAL_OUTPUTS/pattern_select[2]</cell>
+ <cell>Driver: MIV_RV32_B/MIV_RV32_CORE_B_0/u_ipcore_0/u_hart_0/u_expipe_0/u_csr_privarch_0/gen_debug.debug_mode_1_voter_SYN_VL</cell>
 </row>
 <row>
- <cell>9</cell>
+ <cell>195</cell>
  <cell>INT_NET</cell>
- <cell>Net   : FUNCTIONAL_OUTPUTS/pattern_select_Z[1]</cell>
+ <cell>Net   : MIV_RV32_B/MIV_RV32_CORE_B_0/u_ipcore_0/u_hart_0/u_expipe_0/u_exu_0/next_mul_cnt_0_sqmuxa_i</cell>
 </row>
 <row>
  <cell></cell>
  <cell></cell>
- <cell>Driver: FUNCTIONAL_OUTPUTS/pattern_select[1]</cell>
+ <cell>Driver: MIV_RV32_B/MIV_RV32_CORE_B_0/u_ipcore_0/u_hart_0/u_expipe_0/u_exu_0/next_mul_cnt_0_sqmuxa</cell>
 </row>
 <row>
- <cell>9</cell>
+ <cell>195</cell>
  <cell>INT_NET</cell>
- <cell>Net   : FUNCTIONAL_OUTPUTS/pattern_select_Z[0]</cell>
+ <cell>Net   : MIV_RV32_C/MIV_RV32_CORE_C_0/u_ipcore_0/u_hart_0/u_expipe_0/u_exu_0/next_mul_cnt_0_sqmuxa_i</cell>
 </row>
 <row>
  <cell></cell>
  <cell></cell>
- <cell>Driver: FUNCTIONAL_OUTPUTS/pattern_select[0]</cell>
+ <cell>Driver: MIV_RV32_C/MIV_RV32_CORE_C_0/u_ipcore_0/u_hart_0/u_expipe_0/u_exu_0/next_mul_cnt_0_sqmuxa</cell>
 </row>
 <row>
- <cell>4</cell>
+ <cell>195</cell>
  <cell>INT_NET</cell>
- <cell>Net   : FUNCTIONAL_OUTPUTS/pattern_select_0_sqmuxa_Z</cell>
+ <cell>Net   : MIV_RV32_A/MIV_RV32_CORE_A_0/u_ipcore_0/u_hart_0/u_expipe_0/u_exu_0/next_mul_cnt_0_sqmuxa_i</cell>
 </row>
 <row>
  <cell></cell>
  <cell></cell>
- <cell>Driver: FUNCTIONAL_OUTPUTS/pattern_select_0_sqmuxa</cell>
+ <cell>Driver: MIV_RV32_A/MIV_RV32_CORE_A_0/u_ipcore_0/u_hart_0/u_expipe_0/u_exu_0/next_mul_cnt_0_sqmuxa</cell>
 </row>
 <row>
- <cell>3</cell>
+ <cell>192</cell>
  <cell>INT_NET</cell>
- <cell>Net   : FUNCTIONAL_OUTPUTS/counter_Z[27]</cell>
+ <cell>Net   : MIV_RV32_B/MIV_RV32_CORE_B_0/u_ipcore_0/gen_mtime.u_mtime_irq/un23_rtc_tick_RNI5Q1IR_Z</cell>
 </row>
 <row>
  <cell></cell>
  <cell></cell>
- <cell>Driver: FUNCTIONAL_OUTPUTS/counter[27]</cell>
+ <cell>Driver: MIV_RV32_B/MIV_RV32_CORE_B_0/u_ipcore_0/gen_mtime.u_mtime_irq/un23_rtc_tick_RNI5Q1IR</cell>
 </row>
 <row>
- <cell>3</cell>
+ <cell>192</cell>
  <cell>INT_NET</cell>
- <cell>Net   : FUNCTIONAL_OUTPUTS/counter_Z[26]</cell>
+ <cell>Net   : MIV_RV32_C/MIV_RV32_CORE_C_0/u_ipcore_0/gen_mtime.u_mtime_irq/un23_rtc_tick_RNIFETFQ_Z</cell>
 </row>
 <row>
  <cell></cell>
  <cell></cell>
- <cell>Driver: FUNCTIONAL_OUTPUTS/counter[26]</cell>
+ <cell>Driver: MIV_RV32_C/MIV_RV32_CORE_C_0/u_ipcore_0/gen_mtime.u_mtime_irq/un23_rtc_tick_RNIFETFQ</cell>
 </row>
 <row>
- <cell>3</cell>
+ <cell>192</cell>
  <cell>INT_NET</cell>
- <cell>Net   : FUNCTIONAL_OUTPUTS/counter_Z[25]</cell>
+ <cell>Net   : MIV_RV32_A/MIV_RV32_CORE_A_0/u_ipcore_0/gen_mtime.u_mtime_irq/un23_rtc_tick_RNIR56K41_Z</cell>
 </row>
 <row>
  <cell></cell>
  <cell></cell>
- <cell>Driver: FUNCTIONAL_OUTPUTS/counter[25]</cell>
+ <cell>Driver: MIV_RV32_A/MIV_RV32_CORE_A_0/u_ipcore_0/gen_mtime.u_mtime_irq/un23_rtc_tick_RNIR56K41</cell>
 </row>
 </table>
 <section><name>High fanout nets (through buffer trees)</name></section>
@@ -397,7 +457,7 @@
  <cell>Name</cell>
 </header>
 <row>
- <cell>69</cell>
+ <cell>2491</cell>
  <cell>INT_NET</cell>
  <cell>Net   : RST_N_IN_c</cell>
 </row>
@@ -407,94 +467,94 @@
  <cell>Driver: RST_N_IN_ibuf</cell>
 </row>
 <row>
- <cell>57</cell>
+ <cell>246</cell>
  <cell>INT_NET</cell>
- <cell>Net   : voted_output</cell>
+ <cell>Net   : MIV_RV32_A/MIV_RV32_CORE_A_0/u_ipcore_0/cpu_debug_mode_net</cell>
 </row>
 <row>
  <cell></cell>
  <cell></cell>
- <cell>Driver: VOTER_EXT_RESETN/voted_output</cell>
+ <cell>Driver: MIV_RV32_A/MIV_RV32_CORE_A_0/u_ipcore_0/u_hart_0/u_expipe_0/u_csr_privarch_0/gen_debug.debug_mode_1_voter_SYN_VL</cell>
 </row>
 <row>
- <cell>9</cell>
+ <cell>245</cell>
  <cell>INT_NET</cell>
- <cell>Net   : FUNCTIONAL_OUTPUTS/pattern_select_Z[3]</cell>
+ <cell>Net   : MIV_RV32_C/MIV_RV32_CORE_C_0/u_ipcore_0/cpu_debug_mode_net</cell>
 </row>
 <row>
  <cell></cell>
  <cell></cell>
- <cell>Driver: FUNCTIONAL_OUTPUTS/pattern_select[3]</cell>
+ <cell>Driver: MIV_RV32_C/MIV_RV32_CORE_C_0/u_ipcore_0/u_hart_0/u_expipe_0/u_csr_privarch_0/gen_debug.debug_mode_1_voter_SYN_VL</cell>
 </row>
 <row>
- <cell>9</cell>
+ <cell>244</cell>
  <cell>INT_NET</cell>
- <cell>Net   : FUNCTIONAL_OUTPUTS/pattern_select_Z[2]</cell>
+ <cell>Net   : MIV_RV32_B/MIV_RV32_CORE_B_0/u_ipcore_0/cpu_debug_mode_net</cell>
 </row>
 <row>
  <cell></cell>
  <cell></cell>
- <cell>Driver: FUNCTIONAL_OUTPUTS/pattern_select[2]</cell>
+ <cell>Driver: MIV_RV32_B/MIV_RV32_CORE_B_0/u_ipcore_0/u_hart_0/u_expipe_0/u_csr_privarch_0/gen_debug.debug_mode_1_voter_SYN_VL</cell>
 </row>
 <row>
- <cell>9</cell>
+ <cell>195</cell>
  <cell>INT_NET</cell>
- <cell>Net   : FUNCTIONAL_OUTPUTS/pattern_select_Z[1]</cell>
+ <cell>Net   : MIV_RV32_B/MIV_RV32_CORE_B_0/u_ipcore_0/u_hart_0/u_expipe_0/u_exu_0/next_mul_cnt_0_sqmuxa_i</cell>
 </row>
 <row>
  <cell></cell>
  <cell></cell>
- <cell>Driver: FUNCTIONAL_OUTPUTS/pattern_select[1]</cell>
+ <cell>Driver: MIV_RV32_B/MIV_RV32_CORE_B_0/u_ipcore_0/u_hart_0/u_expipe_0/u_exu_0/next_mul_cnt_0_sqmuxa</cell>
 </row>
 <row>
- <cell>9</cell>
+ <cell>195</cell>
  <cell>INT_NET</cell>
- <cell>Net   : FUNCTIONAL_OUTPUTS/pattern_select_Z[0]</cell>
+ <cell>Net   : MIV_RV32_C/MIV_RV32_CORE_C_0/u_ipcore_0/u_hart_0/u_expipe_0/u_exu_0/next_mul_cnt_0_sqmuxa_i</cell>
 </row>
 <row>
  <cell></cell>
  <cell></cell>
- <cell>Driver: FUNCTIONAL_OUTPUTS/pattern_select[0]</cell>
+ <cell>Driver: MIV_RV32_C/MIV_RV32_CORE_C_0/u_ipcore_0/u_hart_0/u_expipe_0/u_exu_0/next_mul_cnt_0_sqmuxa</cell>
 </row>
 <row>
- <cell>4</cell>
+ <cell>195</cell>
  <cell>INT_NET</cell>
- <cell>Net   : FUNCTIONAL_OUTPUTS/pattern_select_0_sqmuxa_Z</cell>
+ <cell>Net   : MIV_RV32_A/MIV_RV32_CORE_A_0/u_ipcore_0/u_hart_0/u_expipe_0/u_exu_0/next_mul_cnt_0_sqmuxa_i</cell>
 </row>
 <row>
  <cell></cell>
  <cell></cell>
- <cell>Driver: FUNCTIONAL_OUTPUTS/pattern_select_0_sqmuxa</cell>
+ <cell>Driver: MIV_RV32_A/MIV_RV32_CORE_A_0/u_ipcore_0/u_hart_0/u_expipe_0/u_exu_0/next_mul_cnt_0_sqmuxa</cell>
 </row>
 <row>
- <cell>3</cell>
+ <cell>192</cell>
  <cell>INT_NET</cell>
- <cell>Net   : FUNCTIONAL_OUTPUTS/counter_Z[27]</cell>
+ <cell>Net   : MIV_RV32_B/MIV_RV32_CORE_B_0/u_ipcore_0/gen_mtime.u_mtime_irq/un23_rtc_tick_RNI5Q1IR_Z</cell>
 </row>
 <row>
  <cell></cell>
  <cell></cell>
- <cell>Driver: FUNCTIONAL_OUTPUTS/counter[27]</cell>
+ <cell>Driver: MIV_RV32_B/MIV_RV32_CORE_B_0/u_ipcore_0/gen_mtime.u_mtime_irq/un23_rtc_tick_RNI5Q1IR</cell>
 </row>
 <row>
- <cell>3</cell>
+ <cell>192</cell>
  <cell>INT_NET</cell>
- <cell>Net   : FUNCTIONAL_OUTPUTS/counter_Z[26]</cell>
+ <cell>Net   : MIV_RV32_C/MIV_RV32_CORE_C_0/u_ipcore_0/gen_mtime.u_mtime_irq/un23_rtc_tick_RNIFETFQ_Z</cell>
 </row>
 <row>
  <cell></cell>
  <cell></cell>
- <cell>Driver: FUNCTIONAL_OUTPUTS/counter[26]</cell>
+ <cell>Driver: MIV_RV32_C/MIV_RV32_CORE_C_0/u_ipcore_0/gen_mtime.u_mtime_irq/un23_rtc_tick_RNIFETFQ</cell>
 </row>
 <row>
- <cell>3</cell>
+ <cell>192</cell>
  <cell>INT_NET</cell>
- <cell>Net   : FUNCTIONAL_OUTPUTS/counter_Z[25]</cell>
+ <cell>Net   : MIV_RV32_A/MIV_RV32_CORE_A_0/u_ipcore_0/gen_mtime.u_mtime_irq/un23_rtc_tick_RNIR56K41_Z</cell>
 </row>
 <row>
  <cell></cell>
  <cell></cell>
- <cell>Driver: FUNCTIONAL_OUTPUTS/counter[25]</cell>
+ <cell>Driver: MIV_RV32_A/MIV_RV32_CORE_A_0/u_ipcore_0/gen_mtime.u_mtime_irq/un23_rtc_tick_RNIR56K41</cell>
 </row>
 </table>
 </doc>

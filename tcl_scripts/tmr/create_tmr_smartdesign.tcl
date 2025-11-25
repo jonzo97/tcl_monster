@@ -79,7 +79,11 @@ puts "\[Step 4/8\] Instantiating triple voter..."
 # See docs/libero_build_flow_lessons.md for details.
 sd_instantiate_hdl_module -sd_name {TMR_TOP} -hdl_module_name {triple_voter_1bit} -hdl_file {hdl/triple_voter_1bit.v} -instance_name {VOTER_EXT_RESETN}
 
-puts "✓ Triple voter instantiated (1-bit for EXT_RESETN)"
+# Instantiate 64-bit voter for TIME_COUNT_OUT (MTIME register)
+# This creates the REAL data path through the cores' timer logic!
+sd_instantiate_hdl_module -sd_name {TMR_TOP} -hdl_module_name {triple_voter_64bit} -hdl_file {hdl/triple_voter_64bit.v} -instance_name {VOTER_TIME_COUNT}
+
+puts "✓ Triple voters instantiated (1-bit EXT_RESETN + 64-bit TIME_COUNT)"
 puts ""
 
 # ============================================================================
@@ -123,16 +127,18 @@ sd_connect_pins -sd_name {TMR_TOP} -pin_names {"CLK_IN" "MIV_RV32_A:CLK"}
 sd_connect_pins -sd_name {TMR_TOP} -pin_names {"CLK_IN" "MIV_RV32_B:CLK"}
 sd_connect_pins -sd_name {TMR_TOP} -pin_names {"CLK_IN" "MIV_RV32_C:CLK"}
 
-# Connect clock to voter
+# Connect clock to voters
 sd_connect_pins -sd_name {TMR_TOP} -pin_names {"CLK_IN" "VOTER_EXT_RESETN:clk"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"CLK_IN" "VOTER_TIME_COUNT:clk"}
 
 # Connect reset to all MI-V cores
 sd_connect_pins -sd_name {TMR_TOP} -pin_names {"RST_N_IN" "MIV_RV32_A:RESETN"}
 sd_connect_pins -sd_name {TMR_TOP} -pin_names {"RST_N_IN" "MIV_RV32_B:RESETN"}
 sd_connect_pins -sd_name {TMR_TOP} -pin_names {"RST_N_IN" "MIV_RV32_C:RESETN"}
 
-# Connect reset to voter
+# Connect reset to voters
 sd_connect_pins -sd_name {TMR_TOP} -pin_names {"RST_N_IN" "VOTER_EXT_RESETN:rst_n"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"RST_N_IN" "VOTER_TIME_COUNT:rst_n"}
 
 # Heartbeat LED (simple clock indicator)
 sd_connect_pins -sd_name {TMR_TOP} -pin_names {"HEARTBEAT_LED" "CLK_IN"}
@@ -146,13 +152,19 @@ puts ""
 
 puts "\[Step 7/8\] Connecting MI-V cores through voter..."
 
-# Connect each core's EXT_RESETN to voter inputs
+# Connect each core's EXT_RESETN to 1-bit voter inputs
 sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_A:EXT_RESETN" "VOTER_EXT_RESETN:input_a"}
 sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_B:EXT_RESETN" "VOTER_EXT_RESETN:input_b"}
 sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_C:EXT_RESETN" "VOTER_EXT_RESETN:input_c"}
 
+# Connect each core's TIME_COUNT_OUT (64-bit MTIME) to 64-bit voter inputs
+# This creates the REAL data path through the cores' timer logic!
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_A:TIME_COUNT_OUT" "VOTER_TIME_COUNT:input_a"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_B:TIME_COUNT_OUT" "VOTER_TIME_COUNT:input_b"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_C:TIME_COUNT_OUT" "VOTER_TIME_COUNT:input_c"}
+
 # Voter outputs will be connected to functional outputs module (not directly to LEDs)
-# This creates the data path: Cores → Voter → Functional Outputs → LEDs → Pins
+# This creates the data path: Cores → Timers → Voters → Functional Outputs → LEDs → Pins
 
 puts "✓ MI-V cores connected through voter"
 puts ""
@@ -180,12 +192,15 @@ puts "\[Step 9/9\] Connecting functional outputs..."
 sd_connect_pins -sd_name {TMR_TOP} -pin_names {"CLK_IN" "FUNCTIONAL_OUTPUTS:clk"}
 sd_connect_pins -sd_name {TMR_TOP} -pin_names {"RST_N_IN" "FUNCTIONAL_OUTPUTS:rst_n"}
 
-# Connect voted EXT_RESETN to functional outputs (KEY CONNECTION!)
+# Connect voted EXT_RESETN to functional outputs
 sd_connect_pins -sd_name {TMR_TOP} -pin_names {"VOTER_EXT_RESETN:voted_output" "FUNCTIONAL_OUTPUTS:voted_resetn"}
 
-# Connect disagreement and fault flags to functional outputs
-sd_connect_pins -sd_name {TMR_TOP} -pin_names {"VOTER_EXT_RESETN:disagreement" "FUNCTIONAL_OUTPUTS:disagreement"}
-sd_connect_pins -sd_name {TMR_TOP} -pin_names {"VOTER_EXT_RESETN:fault_flags" "FUNCTIONAL_OUTPUTS:fault_flags"}
+# Connect voted TIME_COUNT to functional outputs (KEY CONNECTION! 64-bit data path!)
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"VOTER_TIME_COUNT:voted_output" "FUNCTIONAL_OUTPUTS:voted_time_count"}
+
+# Connect disagreement and fault flags from TIME_COUNT voter (more dynamic)
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"VOTER_TIME_COUNT:disagreement" "FUNCTIONAL_OUTPUTS:disagreement"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"VOTER_TIME_COUNT:fault_flags" "FUNCTIONAL_OUTPUTS:fault_flags"}
 
 # Connect functional outputs to external LED ports
 sd_connect_pins -sd_name {TMR_TOP} -pin_names {"FUNCTIONAL_OUTPUTS:led_pattern" "LED_PATTERN"}

@@ -1,7 +1,7 @@
 Jitter Estimation Report
 ========================
 
-Date           : Mon Nov 24 12:43:58 2025
+Date           : Mon Nov 24 13:04:00 2025
 Libero version : 2024.2.0.13
 Design         : TMR_TOP
 Family         : PolarFire
@@ -15,7 +15,7 @@ System Jitter Calculation
 -------------------------
 
 Worst aggressor based on load:    CLK_IN
-System jitter (worst aggressor):  0.000 ns
+System jitter (worst aggressor):  0.001 ns
 
 
 Jitter Calculation per Clock Domain
@@ -23,9 +23,9 @@ Jitter Calculation per Clock Domain
 
 Clock: CLK_IN
 
- (1) System jitter (worst aggressor):              0.000 ns
+ (1) System jitter (worst aggressor):              0.001 ns
  (2) Input jitter:                                 0.000 ns
 
-     Resulting clock jitter (max of (1) and (2)):  0.000 ns
+     Resulting clock jitter (max of (1) and (2)):  0.001 ns
 
 

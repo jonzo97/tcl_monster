@@ -1,0 +1,636 @@
+[
+  {
+    "design": "breakoutboardfiles",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 0,
+    "entry_candidates": []
+  },
+  {
+    "design": "mpf_ac468_df",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 0,
+    "entry_candidates": []
+  },
+  {
+    "design": "mpf_an4568_v2022p1_df (1)",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 0,
+    "entry_candidates": []
+  },
+  {
+    "design": "mpf_an4569_v2023p2_eval_df",
+    "libero_version": "Libero SoC          --  Version: v2023.2",
+    "libero_version_source": "mpf_an4569_v2023p2_eval_df/Readme.txt",
+    "tcl_file_count": 24,
+    "entry_candidates": [
+      "mpf_an4569_v2023p2_eval_df/tftp_iap/TCL_Scripts/script.tcl",
+      "mpf_an4569_v2023p2_eval_df/tftp_iap/TCL_Scripts/src/src_components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an4576_v2025p1_df",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 2,
+    "entry_candidates": [
+      "mpf_an4576_v2025p1_df/script.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an4576_v2025p1_jb",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 0,
+    "entry_candidates": []
+  },
+  {
+    "design": "mpf_an4591_df",
+    "libero_version": "Libero SoC Version    : Libero SoC v2024.2",
+    "libero_version_source": "mpf_an4591_df/Readme.txt",
+    "tcl_file_count": 22,
+    "entry_candidates": [
+      "mpf_an4591_df/HW/script.tcl",
+      "mpf_an4591_df/HW/src/components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an4592_df",
+    "libero_version": "Libero SoC          --  Version: Libero SoC v2024.1",
+    "libero_version_source": "mpf_an4592_df/Readme.txt",
+    "tcl_file_count": 18,
+    "entry_candidates": [
+      "mpf_an4592_df/HW/script.tcl",
+      "mpf_an4592_df/HW/src/components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an4593_df",
+    "libero_version": "Libero SoC          --  Version: Libero SoC v2025.1",
+    "libero_version_source": "mpf_an4593_df/Readme.txt",
+    "tcl_file_count": 17,
+    "entry_candidates": [
+      "mpf_an4593_df/HW/script.tcl",
+      "mpf_an4593_df/HW/src/components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an4594_df",
+    "libero_version": "Libero SoC Version    : Libero SoC v2025.1",
+    "libero_version_source": "mpf_an4594_df/Readme.txt",
+    "tcl_file_count": 23,
+    "entry_candidates": [
+      "mpf_an4594_df/HW/script.tcl",
+      "mpf_an4594_df/HW/src/components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an4596_v2022p2_df",
+    "libero_version": "Libero SoC   --  Version: Libero SoC V2022.2",
+    "libero_version_source": "mpf_an4596_v2022p2_df/readme.txt",
+    "tcl_file_count": 39,
+    "entry_candidates": [
+      "mpf_an4596_v2022p2_df/TCL_Scripts/FIR_RTL/script.tcl",
+      "mpf_an4596_v2022p2_df/TCL_Scripts/FIR_RTL/src/src_components/PF_DSP_FLOW_DEMO_TOP.tcl",
+      "mpf_an4596_v2022p2_df/TCL_Scripts/FIR_RTL/src/src_components/top.tcl",
+      "mpf_an4596_v2022p2_df/TCL_Scripts/core_FIR/script.tcl",
+      "mpf_an4596_v2022p2_df/TCL_Scripts/core_FIR/src/src_components/PF_DSP_FLOW_DEMO_TOP.tcl",
+      "mpf_an4596_v2022p2_df/TCL_Scripts/core_FIR/src/src_components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an4597_df (1)",
+    "libero_version": "Libero SoC          --  Version: Libero SoC v2025.1",
+    "libero_version_source": "mpf_an4597_df/Readme.txt",
+    "tcl_file_count": 73,
+    "entry_candidates": [
+      "mpf_an4597_df/HW/Eval_Kit/script.tcl",
+      "mpf_an4597_df/HW/Eval_Kit/src/components/top.tcl",
+      "mpf_an4597_df/HW/Splash_Kit/script.tcl",
+      "mpf_an4597_df/HW/Splash_Kit/src/components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an4623_v2022p3_df",
+    "libero_version": "Libero SoC          --  Version: Libero SoC v2022.3",
+    "libero_version_source": "mpf_an4623_v2022p3_df/Readme.txt",
+    "tcl_file_count": 18,
+    "entry_candidates": [
+      "mpf_an4623_v2022p3_df/TCL_Scripts/script.tcl",
+      "mpf_an4623_v2022p3_df/TCL_Scripts/src/src_components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an4660_df",
+    "libero_version": "Libero SoC Version        : Libero SoC v2024.2",
+    "libero_version_source": "mpf_an4660_df/readme.txt",
+    "tcl_file_count": 15,
+    "entry_candidates": [
+      "mpf_an4660_df/HW/script.tcl",
+      "mpf_an4660_df/HW/src/components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an4661_v2024p1_eval_df",
+    "libero_version": "Libero SoC          --  Version: Libero SoC v2024.1",
+    "libero_version_source": "mpf_an4661_v2024p1_eval_df/readme.txt",
+    "tcl_file_count": 54,
+    "entry_candidates": [
+      "mpf_an4661_v2024p1_eval_df/TCL_Scripts/Low_Power/script.tcl",
+      "mpf_an4661_v2024p1_eval_df/TCL_Scripts/Low_Power/src/components/XCVR_Top.tcl",
+      "mpf_an4661_v2024p1_eval_df/TCL_Scripts/Low_Power/src/components/top.tcl",
+      "mpf_an4661_v2024p1_eval_df/TCL_Scripts/Normal/script.tcl",
+      "mpf_an4661_v2024p1_eval_df/TCL_Scripts/Normal/src/components/XCVR_Top.tcl",
+      "mpf_an4661_v2024p1_eval_df/TCL_Scripts/Normal/src/components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an4662_df",
+    "libero_version": "Libero SoC          --  Version: Libero SoC  v2024.2",
+    "libero_version_source": "mpf_an4662_df/Readme.txt",
+    "tcl_file_count": 94,
+    "entry_candidates": [
+      "mpf_an4662_df/HW/64b66b/script.tcl",
+      "mpf_an4662_df/HW/64b66b/src/components/top.tcl",
+      "mpf_an4662_df/HW/8b10b/script.tcl",
+      "mpf_an4662_df/HW/8b10b/src/components/top.tcl",
+      "mpf_an4662_df/HW/PMA/script.tcl",
+      "mpf_an4662_df/HW/PMA/src/components/top.tcl",
+      "mpf_an4662_df/HW/PMA_bitslip/script.tcl",
+      "mpf_an4662_df/HW/PMA_bitslip/src/components/top.tcl",
+      "mpf_an4662_df/HW/Smartbert/script.tcl",
+      "mpf_an4662_df/HW/Smartbert/src/components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an4663_v2024p1_df",
+    "libero_version": "Libero SoC Version        : Libero SoC  v2024.1",
+    "libero_version_source": "mpf_an4663_v2024p1_df/readme.txt",
+    "tcl_file_count": 15,
+    "entry_candidates": [
+      "mpf_an4663_v2024p1_df/TCL_Scripts/script.tcl",
+      "mpf_an4663_v2024p1_df/TCL_Scripts/src/components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an4664_df",
+    "libero_version": "Libero SoC Version    : Libero SoC v2025.1",
+    "libero_version_source": "mpf_an4664_df/Readme.txt",
+    "tcl_file_count": 28,
+    "entry_candidates": [
+      "mpf_an4664_df/HW/script.tcl",
+      "mpf_an4664_df/HW/src/components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an4682_df",
+    "libero_version": "Libero SoC            --  Version: Libero SoC v2025.1",
+    "libero_version_source": "mpf_an4682_df/Readme.txt",
+    "tcl_file_count": 14,
+    "entry_candidates": [
+      "mpf_an4682_df/HW/script.tcl",
+      "mpf_an4682_df/HW/src/components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an4684_v2025p1_df",
+    "libero_version": "v2025.1",
+    "libero_version_source": "mpf_an4684_v2025p1_df/TCL_Scripts_readme.txt",
+    "tcl_file_count": 47,
+    "entry_candidates": [
+      "mpf_an4684_v2025p1_df/script.tcl",
+      "mpf_an4684_v2025p1_df/src/components/dp_rx_top.tcl",
+      "mpf_an4684_v2025p1_df/src/components/dp_top.tcl",
+      "mpf_an4684_v2025p1_df/src/components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an4684_v2025p1_jb",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 0,
+    "entry_candidates": []
+  },
+  {
+    "design": "mpf_an4768_v2025p1_df",
+    "libero_version": "v2025.1",
+    "libero_version_source": "mpf_an4768_v2025p1_df/TCL_Scripts_readme.txt",
+    "tcl_file_count": 35,
+    "entry_candidates": [
+      "mpf_an4768_v2025p1_df/script.tcl",
+      "mpf_an4768_v2025p1_df/src/components/HDMI_TOP.tcl",
+      "mpf_an4768_v2025p1_df/src/components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an4768_v2025p1_jb",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 0,
+    "entry_candidates": []
+  },
+  {
+    "design": "mpf_an4792_v2022p2_df",
+    "libero_version": "Libero SoC Version      : v2022.2",
+    "libero_version_source": "mpf_an4792_v2022p2_df/readme.txt",
+    "tcl_file_count": 28,
+    "entry_candidates": [
+      "mpf_an4792_v2022p2_df/TCL_Scripts/script.tcl",
+      "mpf_an4792_v2022p2_df/TCL_Scripts/src/src_components/LiteFast_XCVR_Top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an4895_v2022p3_df",
+    "libero_version": "Libero SoC Version   : Libero SoC v2022.3",
+    "libero_version_source": "mpf_an4895_v2022p3_df/readme.txt",
+    "tcl_file_count": 12,
+    "entry_candidates": [
+      "mpf_an4895_v2022p3_df/TCL_Scripts/script.tcl",
+      "mpf_an4895_v2022p3_df/TCL_Scripts/src/src_components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an4949_v2022p3_df",
+    "libero_version": "Libero SoC   --  Version: Libero SoC V2022.3",
+    "libero_version_source": "mpf_an4949_v2022p3_df/readme.txt",
+    "tcl_file_count": 38,
+    "entry_candidates": [
+      "mpf_an4949_v2022p3_df/TCL_Script/script.tcl",
+      "mpf_an4949_v2022p3_df/TCL_Script/src/src_components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an4950_v2023p1_df",
+    "libero_version": "Libero SoC   --  Version: Libero SoC v2023.1",
+    "libero_version_source": "mpf_an4950_v2023p1_df/readme.txt",
+    "tcl_file_count": 19,
+    "entry_candidates": [
+      "mpf_an4950_v2023p1_df/TCL_Scripts/script.tcl",
+      "mpf_an4950_v2023p1_df/TCL_Scripts/src/src_components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an4997_df",
+    "libero_version": "Libero SoC Version        : Libero SoC  v2025.1",
+    "libero_version_source": "mpf_an4997_df/Readme.txt",
+    "tcl_file_count": 16,
+    "entry_candidates": [
+      "mpf_an4997_df/HW/script.tcl",
+      "mpf_an4997_df/HW/src/components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an5014_v2023p1_eval_df",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 49,
+    "entry_candidates": [
+      "mpf_an5014_v2023p1_eval_df/script_support/components/SDR_TOP.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an5021_v2025p1_df",
+    "libero_version": "v2024.1",
+    "libero_version_source": "mpf_an5021_v2025p1_df/Device/TCL_Scripts_readme.txt",
+    "tcl_file_count": 85,
+    "entry_candidates": [
+      "mpf_an5021_v2025p1_df/Device/script.tcl",
+      "mpf_an5021_v2025p1_df/Device/src/components/CAM_IOD_TIP_TOP.tcl",
+      "mpf_an5021_v2025p1_df/Device/src/components/CXP_DEVICE_TOP.tcl",
+      "mpf_an5021_v2025p1_df/Device/src/components/CoaXpress_TOP_C0.tcl",
+      "mpf_an5021_v2025p1_df/Device/src/components/IMX334_IF_TOP_C1_C2.tcl",
+      "mpf_an5021_v2025p1_df/Device/src/components/top.tcl",
+      "mpf_an5021_v2025p1_df/Host/script.tcl",
+      "mpf_an5021_v2025p1_df/Host/src/components/CoaXpress_TOP_C0.tcl",
+      "mpf_an5021_v2025p1_df/Host/src/components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an5021_v2025p1_gui",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 0,
+    "entry_candidates": []
+  },
+  {
+    "design": "mpf_an5021_v2025p1_jb",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 0,
+    "entry_candidates": []
+  },
+  {
+    "design": "mpf_an5069_v2023p2_df",
+    "libero_version": "Libero SoC          --  Version: Libero SoC v2023.2",
+    "libero_version_source": "mpf_an5069_v2023p2_df/readme.txt",
+    "tcl_file_count": 28,
+    "entry_candidates": [
+      "mpf_an5069_v2023p2_df/TCL_Scripts/script.tcl",
+      "mpf_an5069_v2023p2_df/TCL_Scripts/src/src_components/BASEKR_TOP.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an5102_v2023p1_df",
+    "libero_version": "Libero SoC   --  Version: Libero SoC v2023.1",
+    "libero_version_source": "mpf_an5102_v2023p1_df/readme.txt",
+    "tcl_file_count": 28,
+    "entry_candidates": [
+      "mpf_an5102_v2023p1_df/TCL_Scripts/script.tcl",
+      "mpf_an5102_v2023p1_df/TCL_Scripts/src/src_components/top.tcl",
+      "mpf_an5102_v2023p1_df/TCL_Scripts/src/src_components/top_10g.tcl",
+      "mpf_an5102_v2023p1_df/TCL_Scripts/src/src_components/top_tb.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an5188_v2024p1_df",
+    "libero_version": "v2024.1",
+    "libero_version_source": "mpf_an5188_v2024p1_df/TCL_Scripts_readme.txt",
+    "tcl_file_count": 49,
+    "entry_candidates": [
+      "mpf_an5188_v2024p1_df/script.tcl",
+      "mpf_an5188_v2024p1_df/src/components/IMX_TOP.tcl",
+      "mpf_an5188_v2024p1_df/src/components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an5188_v2024p1_gui",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 0,
+    "entry_candidates": []
+  },
+  {
+    "design": "mpf_an5188_v2024p1_jb",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 0,
+    "entry_candidates": []
+  },
+  {
+    "design": "mpf_an5270_v2025p1_df",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 97,
+    "entry_candidates": [
+      "mpf_an5270_v2025p1_df/script.tcl",
+      "mpf_an5270_v2025p1_df/src/components/CAM_IOD_TIP_TOP.tcl",
+      "mpf_an5270_v2025p1_df/src/components/IMX334_IF_TOP.tcl",
+      "mpf_an5270_v2025p1_df/src/components/Video_Processing_Block_TOP.tcl",
+      "mpf_an5270_v2025p1_df/src/components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an5270_v2025p1_gui",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 0,
+    "entry_candidates": []
+  },
+  {
+    "design": "mpf_an5270_v2025p1_jb",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 0,
+    "entry_candidates": []
+  },
+  {
+    "design": "mpf_an5341_v2024p1_df",
+    "libero_version": "Libero SoC Version   : Libero SoC  v2024.1",
+    "libero_version_source": "mpf_an5341_v2024p1_df/readme.txt",
+    "tcl_file_count": 44,
+    "entry_candidates": [
+      "mpf_an5341_v2024p1_df/TCL_Scripts/External_loopback/script.tcl",
+      "mpf_an5341_v2024p1_df/TCL_Scripts/External_loopback/src/components/top.tcl",
+      "mpf_an5341_v2024p1_df/TCL_Scripts/Internal_loopback/script.tcl",
+      "mpf_an5341_v2024p1_df/TCL_Scripts/Internal_loopback/src/components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an5454_v2024p2_df",
+    "libero_version": "v2024.1",
+    "libero_version_source": "mpf_an5454_v2024p2_df/TCL_Scripts_readme.txt",
+    "tcl_file_count": 85,
+    "entry_candidates": [
+      "mpf_an5454_v2024p2_df/script.tcl",
+      "mpf_an5454_v2024p2_df/src/components/CAM_IOD_TIP_TOP.tcl",
+      "mpf_an5454_v2024p2_df/src/components/IMX334_IF_TOP.tcl",
+      "mpf_an5454_v2024p2_df/src/components/Video_pipeline_top.tcl",
+      "mpf_an5454_v2024p2_df/src/components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an5454_v2024p2_jb",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 0,
+    "entry_candidates": []
+  },
+  {
+    "design": "mpf_an5466_df",
+    "libero_version": "Libero SoC          --  Version: Libero SoC  v2024.1",
+    "libero_version_source": "mpf_an5466_df/Readme.txt",
+    "tcl_file_count": 28,
+    "entry_candidates": [
+      "mpf_an5466_df/HW/TCL_Scripts/script.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an5488_df",
+    "libero_version": "Libero SoC Version        : Libero SoC v2025.1",
+    "libero_version_source": "mpf_an5488_df/readme.txt",
+    "tcl_file_count": 33,
+    "entry_candidates": [
+      "mpf_an5488_df/hw/script.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an5522_v2025p1_HSB2507_df",
+    "libero_version": "v2023.2",
+    "libero_version_source": "mpf_an5522_v2025p1_HSB2507_df/TCL_Scripts_readme.txt",
+    "tcl_file_count": 34,
+    "entry_candidates": [
+      "mpf_an5522_v2025p1_HSB2507_df/script.tcl",
+      "mpf_an5522_v2025p1_HSB2507_df/src/components/CAM_IOD_TIP_TOP.tcl",
+      "mpf_an5522_v2025p1_HSB2507_df/src/components/HOLOLINK_top_wrapper.tcl",
+      "mpf_an5522_v2025p1_HSB2507_df/src/components/IMX477_IF_TOP.tcl",
+      "mpf_an5522_v2025p1_HSB2507_df/src/components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an5522_v2025p1_HSB2507_jb",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 0,
+    "entry_candidates": []
+  },
+  {
+    "design": "mpf_an5524_v2024p2_df",
+    "libero_version": "Libero SoC Version        : Libero SoC  v2024.2",
+    "libero_version_source": "mpf_an5524_v2024p2_df/readme.txt",
+    "tcl_file_count": 48,
+    "entry_candidates": [
+      "mpf_an5524_v2024p2_df/TCL_Scripts/Ethernet_OAM_10G_script/script.tcl",
+      "mpf_an5524_v2024p2_df/TCL_Scripts/Ethernet_OAM_10G_script/src/components/top.tcl",
+      "mpf_an5524_v2024p2_df/TCL_Scripts/Ethernet_OAM_1G_script/script.tcl",
+      "mpf_an5524_v2024p2_df/TCL_Scripts/Ethernet_OAM_1G_script/src/components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an5616_df",
+    "libero_version": "v2024.1",
+    "libero_version_source": "mpf_an5616_df/HW/TCL_Scripts_readme.txt",
+    "tcl_file_count": 47,
+    "entry_candidates": [
+      "mpf_an5616_df/HW/script.tcl",
+      "mpf_an5616_df/HW/src/components/CPRI_TOP.tcl",
+      "mpf_an5616_df/HW/src/components/DDC_Top.tcl",
+      "mpf_an5616_df/HW/src/components/DUC_Top.tcl",
+      "mpf_an5616_df/HW/src/components/RISCV_TOP.tcl",
+      "mpf_an5616_df/HW/src/components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an5864_v2025p1_eval_df",
+    "libero_version": "Libero SoC Version   : Libero SoC  v2025.1",
+    "libero_version_source": "mpf_an5864_v2025p1_eval_df/Readme.txt",
+    "tcl_file_count": 15,
+    "entry_candidates": [
+      "mpf_an5864_v2025p1_eval_df/HW/script.tcl",
+      "mpf_an5864_v2025p1_eval_df/HW/src/components/PF_EVALKIT_TOP.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an5978_df",
+    "libero_version": "Libero SoC Version   : Libero SoC  v2025.1",
+    "libero_version_source": "mpf_an5978_df/Readme.txt",
+    "tcl_file_count": 22,
+    "entry_candidates": [
+      "mpf_an5978_df/HW/script.tcl",
+      "mpf_an5978_df/HW/src/components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an6141_v2025p1_df",
+    "libero_version": "v2025.1",
+    "libero_version_source": "mpf_an6141_v2025p1_df/TCL_Scripts_readme.txt",
+    "tcl_file_count": 39,
+    "entry_candidates": [
+      "mpf_an6141_v2025p1_df/script.tcl",
+      "mpf_an6141_v2025p1_df/src/components/top.tcl",
+      "mpf_an6141_v2025p1_df/src/top_recursive.tcl"
+    ]
+  },
+  {
+    "design": "mpf_an6141_v2025p1_jb",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 0,
+    "entry_candidates": []
+  },
+  {
+    "design": "mpf_dg0757_df",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 61,
+    "entry_candidates": [
+      "mpf_dg0757_df/mpf_10GBaseR_df/Libero_Project/designer/top/top_fp.tcl",
+      "mpf_dg0757_df/mpf_10GBaseR_df/Libero_Project/designer/top/top_fp/top.tcl",
+      "mpf_dg0757_df/mpf_10GBaseR_df/Libero_Project/synthesis/top_syn.tcl",
+      "mpf_dg0757_df/mpf_10GBaseR_df/Simulation_Project/BaseR_Sim/designer/top/top_fp.tcl",
+      "mpf_dg0757_df/mpf_10GBaseR_df/Simulation_Project/BaseR_Sim/designer/top/top_fp/top.tcl",
+      "mpf_dg0757_df/mpf_10GBaseR_df/Simulation_Project/BaseR_Sim/designer/top_10g/operating_conditions.tcl",
+      "mpf_dg0757_df/mpf_10GBaseR_df/Simulation_Project/BaseR_Sim/designer/top_10g/run_compile.tcl",
+      "mpf_dg0757_df/mpf_10GBaseR_df/Simulation_Project/BaseR_Sim/designer/top_10g/run_pinrpt.tcl",
+      "mpf_dg0757_df/mpf_10GBaseR_df/Simulation_Project/BaseR_Sim/designer/top_10g/run_placer_coverage.tcl",
+      "mpf_dg0757_df/mpf_10GBaseR_df/Simulation_Project/BaseR_Sim/designer/top_10g/run_placer_coverage_st_shell_cmd.tcl",
+      "mpf_dg0757_df/mpf_10GBaseR_df/Simulation_Project/BaseR_Sim/designer/top_10g/run_placer_coverage_st_shell_des.tcl",
+      "mpf_dg0757_df/mpf_10GBaseR_df/Simulation_Project/BaseR_Sim/designer/top_10g/run_placer_st_shell_cmd.tcl",
+      "mpf_dg0757_df/mpf_10GBaseR_df/Simulation_Project/BaseR_Sim/designer/top_10g/run_placer_st_shell_des.tcl",
+      "mpf_dg0757_df/mpf_10GBaseR_df/Simulation_Project/BaseR_Sim/designer/top_10g/run_prober.tcl",
+      "mpf_dg0757_df/mpf_10GBaseR_df/Simulation_Project/BaseR_Sim/designer/top_10g/run_rwnetlist.tcl"
+    ]
+  },
+  {
+    "design": "mpf_dg0799_eval_df",
+    "libero_version": "Libero SoC Version        : Libero SoC v12.6",
+    "libero_version_source": "mpf_dg0799_eval_df/readme.txt",
+    "tcl_file_count": 38,
+    "entry_candidates": [
+      "mpf_dg0799_eval_df/Libero_Project/designer/top/top_fp.tcl",
+      "mpf_dg0799_eval_df/Libero_Project/designer/top/top_fp/top.tcl",
+      "mpf_dg0799_eval_df/Libero_Project/designer/top/top_run_timrpt_st_shell_txt.tcl",
+      "mpf_dg0799_eval_df/Libero_Project/synthesis/top_syn.tcl",
+      "mpf_dg0799_eval_df/TCL_Script/script.tcl",
+      "mpf_dg0799_eval_df/TCL_Script/src/src_components/top.tcl"
+    ]
+  },
+  {
+    "design": "mpf_dg0841_liberosocpolarfirev2p3",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 0,
+    "entry_candidates": []
+  },
+  {
+    "design": "mpf_dg0843_df",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 4,
+    "entry_candidates": []
+  },
+  {
+    "design": "mpf_dg0849_liberosoc_gui",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 0,
+    "entry_candidates": []
+  },
+  {
+    "design": "mpf_dg0884_cxp_genicam_df",
+    "libero_version": "Libero SoC Version: v12.4",
+    "libero_version_source": "mpf_dg0884_cxp_genicam_df/readme.txt",
+    "tcl_file_count": 0,
+    "entry_candidates": []
+  },
+  {
+    "design": "mpf_dg0884_liberosoc_gui",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 0,
+    "entry_candidates": []
+  },
+  {
+    "design": "mpf_dg0884_liberosoc_jb",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 0,
+    "entry_candidates": []
+  },
+  {
+    "design": "mpf_dg0889_liberosoc_df",
+    "libero_version": "Libero SoC Version      : v2023.1",
+    "libero_version_source": "mpf_dg0889_liberosoc_df/readme.txt",
+    "tcl_file_count": 64,
+    "entry_candidates": [
+      "mpf_dg0889_liberosoc_df/script_support/components/CAM_IOD_TIP_TOP.tcl",
+      "mpf_dg0889_liberosoc_df/script_support/components/IMX334_IF_TOP.tcl",
+      "mpf_dg0889_liberosoc_df/script_support/components/VIDEO_KIT_TOP.tcl"
+    ]
+  },
+  {
+    "design": "mpf_dg0889_liberosoc_jb",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 0,
+    "entry_candidates": []
+  },
+  {
+    "design": "mpf_dg0889_liberosoc_jb (1)",
+    "libero_version": null,
+    "libero_version_source": null,
+    "tcl_file_count": 0,
+    "entry_candidates": []
+  }
+]

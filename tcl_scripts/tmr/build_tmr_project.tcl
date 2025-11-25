@@ -29,6 +29,9 @@ organize_tool_files -tool {SYNTHESIZE} \
     -module {TMR_TOP} \
     -input_type {constraint}
 
+# Ensure Synplify reads the FDC
+configure_tool -name {SYNTHESIZE} -params {SYNPLIFY_OPTIONS:set_option -include C:/tcl_monster/constraint/tmr_synthesis_directives.fdc}
+
 # I/O constraints
 create_links -io_pdc {C:/tcl_monster/constraint/tmr/miv_tmr_io.pdc}
 organize_tool_files -tool {PLACEROUTE} \

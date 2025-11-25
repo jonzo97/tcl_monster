@@ -1,16 +1,19 @@
 // TMR Functional Outputs Module
 // Adds observable functionality to prevent synthesis optimization
 //
-// This module takes the voted EXT_RESETN signal and drives multiple
+// This module takes the voted TIME_COUNT (64-bit MTIME) and drives multiple
 // functional blocks that connect to I/O pins, forcing synthesis to
-// keep all TMR logic.
+// keep all TMR logic including the MTIME timer in each core.
 
 module tmr_functional_outputs (
     input wire clk,
     input wire rst_n,
 
-    // Voted input from TMR voter
+    // Voted input from TMR voter (1-bit EXT_RESETN)
     input wire voted_resetn,
+
+    // Voted 64-bit TIME_COUNT from TMR voter (MTIME value)
+    input wire [63:0] voted_time_count,
 
     // Disagreement indicators from voter
     input wire disagreement,
@@ -24,68 +27,33 @@ module tmr_functional_outputs (
 );
 
     // ==================================================================
-    // Free-Running Counter (proves voted signal is used)
+    // LED Pattern from VOTED TIME_COUNT (KEY functional path!)
     // ==================================================================
-
-    reg [27:0] counter;  // 28-bit counter (wraps at ~268M cycles)
-    reg [3:0] pattern_select;
-
-    always @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
-            counter <= 28'h0;
-            pattern_select <= 4'h0;
-        end else if (voted_resetn) begin  // Counter enabled by voted signal
-            counter <= counter + 1'b1;
-            if (counter[27:24] != pattern_select) begin
-                pattern_select <= counter[27:24];
-            end
-        end else begin
-            counter <= 28'h0;  // Counter frozen if voted_resetn low
-        end
-    end
-
-    // ==================================================================
-    // LED Pattern Generator (8 different patterns based on counter)
-    // ==================================================================
+    // Uses upper bits of voted time count directly to drive LEDs
+    // This creates a real data path: Cores → Timer → Voter → LEDs
+    // Synthesis CANNOT optimize this away because the value changes!
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             led_pattern <= 8'h00;
+        end else if (voted_resetn) begin
+            // Use bits [31:24] of voted time - changes every ~2.7s at 50MHz
+            led_pattern <= voted_time_count[31:24];
         end else begin
-            case (pattern_select)
-                4'h0: led_pattern <= 8'b00000001;
-                4'h1: led_pattern <= 8'b00000011;
-                4'h2: led_pattern <= 8'b00000111;
-                4'h3: led_pattern <= 8'b00001111;
-                4'h4: led_pattern <= 8'b00011111;
-                4'h5: led_pattern <= 8'b00111111;
-                4'h6: led_pattern <= 8'b01111111;
-                4'h7: led_pattern <= 8'b11111111;
-                4'h8: led_pattern <= 8'b01111111;
-                4'h9: led_pattern <= 8'b00111111;
-                4'hA: led_pattern <= 8'b00011111;
-                4'hB: led_pattern <= 8'b00001111;
-                4'hC: led_pattern <= 8'b00000111;
-                4'hD: led_pattern <= 8'b00000011;
-                4'hE: led_pattern <= 8'b00000001;
-                4'hF: led_pattern <= 8'b00000000;
-            endcase
+            led_pattern <= 8'h00;
         end
     end
 
     // ==================================================================
-    // Status LED (blinks at 1 Hz when voted_resetn is high)
+    // Status LED (blinks based on voted time count)
     // ==================================================================
-
-    reg [25:0] blink_counter;  // For 50 MHz clock, 26 bits gives ~1.3s period
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            blink_counter <= 26'h0;
             status_led <= 1'b0;
         end else if (voted_resetn) begin
-            blink_counter <= blink_counter + 1'b1;
-            status_led <= blink_counter[25];  // Toggle at ~0.75 Hz
+            // Use bit 25 of voted time - toggles at ~0.75 Hz at 50MHz
+            status_led <= voted_time_count[25];
         end else begin
             status_led <= 1'b0;
         end
@@ -110,15 +78,15 @@ module tmr_functional_outputs (
     // ==================================================================
 
     // This module ensures that:
-    // 1. voted_resetn drives counter (used functionally, not just tied off)
-    // 2. counter drives LED pattern (observable outputs to pins)
+    // 1. voted_time_count bits directly drive LED outputs (not just registered)
+    // 2. LED pattern changes based on actual MTIME value from cores
     // 3. Multiple outputs (13 LEDs total) prevent optimization
     // 4. Disagreement/fault signals are registered and output
     //
     // Synthesis CANNOT optimize away TMR logic because:
-    // - voted_resetn controls counter enable
-    // - Counter value affects LED pattern
-    // - LED outputs connect to I/O pins
-    // - Real data path: cores → voter → counter → LEDs → pins
+    // - voted_time_count value affects LED pattern directly
+    // - TIME_COUNT_OUT is a free-running counter in each core
+    // - Voting creates data path: cores → voters → LEDs → pins
+    // - The MTIME module in each core must be preserved
 
 endmodule

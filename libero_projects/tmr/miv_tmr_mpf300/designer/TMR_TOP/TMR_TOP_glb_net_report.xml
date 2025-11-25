@@ -3,7 +3,7 @@
 <doc>
 <title>Global Net Report</title>
 <text>Microchip Technology Inc. - Microchip Libero Software Release v2024.2 (Version 2024.2.0.13)</text>
-<text>Date: Mon Nov 24 12:46:01 2025
+<text>Date: Mon Nov 24 13:06:25 2025
 </text>
 <section>
 <name>Global Nets Information</name>
@@ -20,7 +20,7 @@
  <cell>I_1/U0</cell>
  <cell>(1158, 162)</cell>
  <cell>I_1/U0_Y</cell>
- <cell>68</cell>
+ <cell>1438</cell>
 </row>
 <row>
  <cell>2</cell>
@@ -108,10 +108,10 @@
  <cell>I_1/U0</cell>
  <cell>(1158, 162)</cell>
  <cell>I_1/U0_Y</cell>
- <cell>68</cell>
+ <cell>1438</cell>
  <cell>1</cell>
- <cell>(578, 339)</cell>
- <cell>65</cell>
+ <cell>(578, 177)</cell>
+ <cell>115</cell>
 </row>
 <row>
  <cell> </cell>
@@ -120,8 +120,28 @@
  <cell></cell>
  <cell></cell>
  <cell>2</cell>
- <cell>(578, 366)</cell>
+ <cell>(578, 204)</cell>
+ <cell>875</cell>
+</row>
+<row>
+ <cell> </cell>
+ <cell></cell>
+ <cell></cell>
+ <cell></cell>
+ <cell></cell>
  <cell>3</cell>
+ <cell>(578, 231)</cell>
+ <cell>405</cell>
+</row>
+<row>
+ <cell> </cell>
+ <cell></cell>
+ <cell></cell>
+ <cell></cell>
+ <cell></cell>
+ <cell>4</cell>
+ <cell>(578, 258)</cell>
+ <cell>43</cell>
 </row>
 <row>
  <cell>2</cell>
@@ -130,7 +150,7 @@
  <cell>I_1/U0_gbs_1</cell>
  <cell>1</cell>
  <cell> </cell>
- <cell>(1750, 13)</cell>
+ <cell>(1744, 367)</cell>
  <cell>1</cell>
 </row>
 </table>
@@ -147,15 +167,15 @@
 </row>
 <row>
  <cell>The number of clock signals through     Row Global resources</cell>
- <cell>2</cell>
+ <cell>4</cell>
 </row>
 <row>
  <cell>The number of clock signals through  Sector Global resources</cell>
- <cell>2</cell>
+ <cell>16</cell>
 </row>
 <row>
  <cell>The number of clock signals through Cluster Global resources</cell>
- <cell>10</cell>
+ <cell>212</cell>
 </row>
 </table>
 <text></text>

@@ -1,0 +1,115 @@
+# PolarFire Application Notes with Downloadable Design Archives
+
+Source page: https://www.microchip.com/en-us/products/fpgas-and-plds/fpgas/polarfire-fpgas#demoguides  
+Note: “secure” links may require Microchip login. DF = design files, GUI = GUI project, JB = job files.
+
+- ac468 — https://www.microchip.com/en-us/application-notes/ac468  
+  - https://ww1.microchip.com/downloads/secure/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_ac468_df.zip
+- an4568 — https://www.microchip.com/en-us/application-notes/an4568  
+  - https://ww1.microchip.com/downloads/secure/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4568_v2022p1_df.zip
+- an4569 — https://www.microchip.com/en-us/application-notes/an4569  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4569_v2023p2_eval_df.zip
+- an4576 — https://www.microchip.com/en-us/application-notes/an4576  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4576_v2025p1_df.zip  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4576_v2025p1_jb.zip
+- an4591 — https://www.microchip.com/en-us/application-notes/an4591  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4591_df.zip
+- an4592 — https://www.microchip.com/en-us/application-notes/an4592  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4592_df.zip
+- an4593 — https://www.microchip.com/en-us/application-notes/an4593  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4593_df.zip
+- an4594 — https://www.microchip.com/en-us/application-notes/an4594  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4594_df.zip
+- an4596 — https://www.microchip.com/en-us/application-notes/an4596  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4596_v2022p2_df.zip
+- an4597 — https://www.microchip.com/en-us/application-notes/an4597  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4597_df.zip
+- an4623 — https://www.microchip.com/en-us/application-notes/an4623  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4623_v2022p3_df.zip
+- an4660 — https://www.microchip.com/en-us/application-notes/an4660  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4660_df.zip
+- an4661 — https://www.microchip.com/en-us/application-notes/an4661  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4661_v2024p1_eval_df.zip
+- an4662 — https://www.microchip.com/en-us/application-notes/an4662  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4662_df.zip
+- an4663 — https://www.microchip.com/en-us/application-notes/an4663  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4663_v2024p1_df.zip
+- an4664 — https://www.microchip.com/en-us/application-notes/an4664  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4664_df.zip
+- an4682 — https://www.microchip.com/en-us/application-notes/an4682  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4682_df.zip
+- an4684 — https://www.microchip.com/en-us/application-notes/an4684  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4684_v2025p1_df.zip  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4684_v2025p1_jb.zip
+- an4768 — https://www.microchip.com/en-us/application-notes/an4768  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4768_v2025p1_df.zip  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4768_v2025p1_jb.zip
+- an4792 — https://www.microchip.com/en-us/application-notes/an4792  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4792_v2022p2_df.zip
+- an4895 — https://www.microchip.com/en-us/application-notes/an4895  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4895_v2022p3_df.zip
+- an4949 — https://www.microchip.com/en-us/application-notes/an4949  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4949_v2022p3_df.zip
+- an4950 — https://www.microchip.com/en-us/application-notes/an4950  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4950_v2023p1_df.zip
+- an4997 — https://www.microchip.com/en-us/application-notes/an4997  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an4997_df.zip
+- an5014 — https://www.microchip.com/en-us/application-notes/an5014  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an5014_v2023p1_eval_df.zip
+- an5021 — https://www.microchip.com/en-us/application-notes/an5021  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an5021_v2025p1_df.zip  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an5021_v2025p1_gui.zip  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an5021_v2025p1_jb.zip
+- an5069 — https://www.microchip.com/en-us/application-notes/an5069  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an5069_v2023p2_df.zip
+- an5102 — https://www.microchip.com/en-us/application-notes/an5102  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an5102_v2023p1_df.zip
+- an5188 — https://www.microchip.com/en-us/application-notes/an5188  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an5188_v2024p1_df.zip  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an5188_v2024p1_gui.zip  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an5188_v2024p1_jb.zip
+- an5270 — https://www.microchip.com/en-us/application-notes/an5270  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an5270_v2025p1_df.zip  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an5270_v2025p1_gui.zip  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an5270_v2025p1_jb.zip
+- an5341 — https://www.microchip.com/en-us/application-notes/an5341  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an5341_v2024p1_df.zip
+- an5454 — https://www.microchip.com/en-us/application-notes/an5454  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an5454_v2024p2_df.zip  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an5454_v2024p2_jb.zip
+- an5466 — https://www.microchip.com/en-us/application-notes/an5466  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an5466_df.zip
+- an5488 — https://www.microchip.com/en-us/application-notes/an5488  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an5488_df.zip
+- an5522 — https://www.microchip.com/en-us/application-notes/an5522  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an5522_v2025p1_HSB2507_df.zip  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an5522_v2025p1_HSB2507_jb.zip
+- an5524 — https://www.microchip.com/en-us/application-notes/an5524  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an5524_v2024p2_df.zip
+- an5616 — https://www.microchip.com/en-us/application-notes/an5616  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an5616_df.zip
+- an5672 — https://www.microchip.com/en-us/application-notes/an5672  
+  - https://ww1.microchip.com/downloads/aemdocuments/documents/fpga/ProductDocuments/PackagingSpecifications/breakoutboardfiles.zip
+- an5864 — https://www.microchip.com/en-us/application-notes/an5864  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an5864_v2025p1_eval_df.zip
+- an5978 — https://www.microchip.com/en-us/application-notes/an5978  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an5978_df.zip
+- an6141 — https://www.microchip.com/en-us/application-notes/an6141  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an6141_v2025p1_df.zip  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_an6141_v2025p1_jb.zip
+- dg0757 — https://www.microchip.com/en-us/application-notes/dg0757  
+  - https://ww1.microchip.com/downloads/secure/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_dg0757_df.zip
+- dg0799 — https://www.microchip.com/en-us/application-notes/dg0799  
+  - https://ww1.microchip.com/downloads/secure/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_dg0799_eval_df.zip
+- dg0841 — https://www.microchip.com/en-us/application-notes/dg0841  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_dg0841_liberosocpolarfirev2p3.rar
+- dg0843 — https://www.microchip.com/en-us/application-notes/dg0843  
+  - https://ww1.microchip.com/downloads/secure/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_dg0843_df.zip
+- dg0884 — https://www.microchip.com/en-us/application-notes/dg0884  
+  - https://ww1.microchip.com/downloads/secure/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_dg0884_cxp_genicam_df.zip  
+  - https://ww1.microchip.com/downloads/secure/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_dg0884_liberosoc_gui.zip  
+  - https://ww1.microchip.com/downloads/secure/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_dg0884_liberosoc_jb.zip
+- dg0889 — https://www.microchip.com/en-us/application-notes/dg0889  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_dg0849_liberosoc_gui.zip  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_dg0889_liberosoc_df.zip  
+  - https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/SOCDesignFiles/mpf_dg0889_liberosoc_jb.zip

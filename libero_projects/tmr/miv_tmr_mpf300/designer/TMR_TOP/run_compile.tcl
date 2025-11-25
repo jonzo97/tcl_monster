@@ -20,6 +20,13 @@ set_defvar -name {USE_CONSTRAINT_FLOW} -value True
 set_defvar -name {FHB_AUTO_INSTANTIATION} -value {0}
 set_defvar -name {SYSTEM_CONTROLLER_SUSPEND_MODE} -value {0}
 
+set_partition_info -name "/TMR_TOP" -timestamp "1764021873"
+set_partition_info -name "/TMR_TOP/TMR_TOP" -timestamp "1764021873"
+set_partition_info -name "/TMR_TOP/TMR_TOP" -timestamp "1764021873"
+set_partition_info -name "/TMR_TOP/TMR_TOP" -timestamp "1764021873"
+set_partition_info -name "/TMR_TOP/TMR_TOP" -timestamp "1764021873"
+set_partition_info -name "/TMR_TOP/TMR_TOP" -timestamp "1764021873"
+set_partition_info -name "/TMR_TOP/TMR_TOP" -timestamp "1764021873"
 set_compile_info \
     -category {"Device Selection"} \
     -name {"Family"} \
@@ -70,4 +77,5 @@ compile \
     -fam PolarFire \
     -die PA5M300TS \
     -pkg fcg1152 \
+    -partition_pdc_file {C:\tcl_monster\libero_projects\tmr\miv_tmr_mpf300\designer\TMR_TOP\TMR_TOP.nmatinit.pdc} \
     -merge_pdc 0

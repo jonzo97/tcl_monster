@@ -132,3 +132,10 @@ hw_platform.h
 # Generated synthesis component files (regenerable)
 *_syn_comps.v
 component/polarfire_syn_comps.v
+
+# Extracted HDL dumps from reference designs (use summaries instead)
+ref_designs_hdl/
+
+# Reference design drops (external archives); keep only our notes/metadata
+ref_designs/*
+!ref_designs/*.md

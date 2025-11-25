@@ -151,6 +151,111 @@ save_project
 close_project
 ```
 
+## Standard TCL Script Structure
+
+**Source:** Analysis of 64 PolarFire reference designs (1,549 TCL files) by codex
+
+**For comprehensive guide, see:** `docs/TCL_MASTERY.md` | **Quick reference:** `docs/TCL_QUICK_REFERENCE.md`
+
+### THREE CRITICAL PATTERNS (NEVER SKIP!)
+
+#### 1. Numbered Script Topology (58+ reference designs use this)
+
+**Standard structure:**
+```
+project/
+├── src/components/      # IP/SmartDesign TCL configs
+├── constraint/          # PDC/SDC files
+├── common.tcl          # IP versions, project variables
+├── 1_create_design.tcl      # Project + HDL import
+├── 2_constrain_design.tcl   # PDC/SDC linking with organize_tool_files
+├── [3_*.tcl]                # Reserved for variants (optional)
+├── 4_implement_design.tcl   # SYNTH → PLACE → VERIFYTIMING → GENFILE
+└── 5_program_design.tcl     # export_prog_job + save
+```
+
+**Why:** Standardizes build flow, enables multi-variant designs, simplifies maintenance
+
+**Step 3 intentionally skipped** in single-variant flows to allow easy variant addition later without renumbering.
+
+#### 2. Constraint Linking Pattern (44+ reference designs REQUIRE this)
+
+**CRITICAL:** `import_files` alone is NOT sufficient - constraints must be explicitly associated with tools.
+
+```tcl
+# Step 1: Create links (register files with project)
+create_links -io_pdc {C:/path/io.pdc}
+create_links -sdc {C:/path/timing.sdc}
+
+# Step 2: Associate with tools (BOTH for SDC!)
+organize_tool_files -tool {SYNTHESIZE} \
+    -file {C:/path/timing.sdc} \
+    -module {top} \
+    -input_type {constraint}
+
+organize_tool_files -tool {PLACEROUTE} \
+    -file {C:/path/timing.sdc} \
+    -module {top} \
+    -input_type {constraint}
+
+organize_tool_files -tool {PLACEROUTE} \
+    -file {C:/path/io.pdc} \
+    -module {top} \
+    -input_type {constraint}
+```
+
+**Why:** Without `organize_tool_files`, synthesis uses auto-inferred timing and P&R ignores pin constraints.
+
+**Errors if missing:**
+- "No timing constraint associated to 'Place and Route' tool"
+- "No User PDC file specified"
+- "I/O Locked: 0 (0%)" despite PDC with `-fixed true`
+
+#### 3. VERIFYTIMING Gate (49+ reference designs use this)
+
+**ALWAYS insert timing gate between PLACEROUTE and bitstream generation:**
+
+```tcl
+run_tool -name {SYNTHESIZE}
+run_tool -name {PLACEROUTE}
+run_tool -name {VERIFYTIMING}  # <- TIMING GATE (catches closure issues early)
+run_tool -name {GENERATEPROGRAMMINGDATA}
+run_tool -name {GENERATEPROGRAMMINGFILE}
+
+export_prog_job \
+    -job_file_name $project_name \
+    -export_dir $projectDir/designer/top/export \
+    -bitstream_file_type {TRUSTED_FACILITY}
+```
+
+**Why:** Catches timing closure failures BEFORE spending time on bitstream generation. Standard practice in production flows.
+
+**Benefits:**
+- Early detection of timing violations
+- Detailed timing reports for debugging
+- Prevents surprise failures late in build flow
+
+### Additional Key Lessons from 64-Design Corpus
+
+**Component-First Philosophy (9.6:1 ratio):**
+- Prefer `create_and_configure_core` + `sd_instantiate_component` (96% of instantiations)
+- Use `sd_instantiate_hdl_module` sparingly (< 10%) - only for simple leaf blocks
+- Avoids HDL sub-module hierarchy issues entirely
+
+**IP Version Pinning:**
+- Centralize IP versions in `common.tcl` for reproducibility
+- See `docs/ref_designs/ip_versions.md` for ready-to-use version blocks
+
+**HDL Import Rule:**
+- ONLY import leaf modules you will directly instantiate in SmartDesign
+- DON'T import HDL files that instantiate modules you want to use with `sd_instantiate_hdl_module`
+- This prevents "Cannot instantiate sub-module" errors
+
+**See also:**
+- `docs/TCL_MASTERY.md` - Comprehensive TCL guide (consolidated all lessons)
+- `docs/REFERENCE_DESIGNS.md` - How to use 64-design corpus for pattern mining
+- `docs/ref_designs/tcl_deep_dive.md` - Statistical analysis and patterns
+
 ## Architecture and Design Philosophy
 
 ### Modular Structure
@@ -450,3 +555,5 @@ create_and_configure_core \
 - Integration with version control and CI/CD workflows
 
 **See `docs/ROADMAP.md` for detailed timeline and estimates**
+- PolarFire ref design mining: see docs/ref_designs/claude_passoff.md for TCL/HDL/IP indices, recipes, and reuse snippets.
+

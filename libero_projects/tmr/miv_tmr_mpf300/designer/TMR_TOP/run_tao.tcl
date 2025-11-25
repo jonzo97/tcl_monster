@@ -14,6 +14,7 @@ read_verilog -mode system_verilog {C:\tcl_monster\libero_projects\tmr\miv_tmr_mp
 read_verilog -mode system_verilog {C:\tcl_monster\libero_projects\tmr\miv_tmr_mpf300\component\work\MIV_RV32_CORE_C\MIV_RV32_CORE_C.v}
 read_verilog -mode system_verilog {C:\tcl_monster\libero_projects\tmr\miv_tmr_mpf300\hdl\tmr_functional_outputs.v}
 read_verilog -mode system_verilog {C:\tcl_monster\libero_projects\tmr\miv_tmr_mpf300\hdl\triple_voter_1bit.v}
+read_verilog -mode system_verilog {C:\tcl_monster\libero_projects\tmr\miv_tmr_mpf300\hdl\triple_voter_64bit.v}
 read_verilog -mode system_verilog {C:\tcl_monster\libero_projects\tmr\miv_tmr_mpf300\component\work\TMR_TOP\TMR_TOP.v}
 set_top_level {TMR_TOP}
 map_netlist
