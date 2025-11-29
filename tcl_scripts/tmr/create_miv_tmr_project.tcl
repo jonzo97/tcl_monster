@@ -67,8 +67,9 @@ set hdl_files [list \
     "C:/tcl_monster/hdl/tmr/triple_voter_64bit.v" \
     "C:/tcl_monster/hdl/tmr/tmr_functional_outputs.v" \
     "C:/tcl_monster/hdl/tmr/uart_tx_voter.v" \
-    "C:/tcl_monster/hdl/tmr/gpio_voter.v" \
+    "C:/tcl_monster/hdl/tmr/gpio_voter_32bit.v" \
     "C:/tcl_monster/hdl/tmr/memory_read_voter.v" \
+    "C:/tcl_monster/hdl/tmr/ahb_tmr_voter.v" \
 ]
 
 foreach hdl_file $hdl_files {
@@ -98,11 +99,11 @@ puts ""
 # Step 4: Create Triplicated Memory (3x 64KB LSRAM)
 # ============================================================================
 
-puts "\[4/7\] Creating triplicated memory (3x 64KB LSRAM)..."
+puts "\[4/7\] Creating triplicated memory (3x 32KB LSRAM with AHB)..."
 
 source C:/tcl_monster/tcl_scripts/tmr/create_tmr_memory.tcl
 
-puts "✓ Triplicated memory created (3x 64KB PF_SRAM)"
+puts "✓ Triplicated memory created (3x 32KB PF_SRAM_AHB)"
 puts ""
 
 # ============================================================================
@@ -153,11 +154,11 @@ puts "  Name: $project_name"
 puts "  Location: $project_location"
 puts ""
 puts "Components Created:"
-puts "  • 3x MI-V RV32IMC cores"
-puts "  • 3x 64KB PF_SRAM banks (192KB total)"
+puts "  • 3x MI-V RV32IMC cores (AHB + APB masters enabled)"
+puts "  • 3x 32KB PF_SRAM_AHB banks (96KB total, AHB-Lite interface)"
 puts "  • 3x CoreUARTapb (115200 baud)"
 puts "  • 3x CoreGPIO (8 pins)"
-puts "  • 6x Custom voter modules (Verilog)"
+puts "  • 7x Custom voter modules (including AHB TMR voter)"
 puts ""
 puts "Next Steps:"
 puts "  1. Create SmartDesign canvas (tmr_top)"

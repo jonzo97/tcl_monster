@@ -197,8 +197,8 @@ puts "\[Step 7b/12\] Instantiating peripheral voters..."
 # Instantiate UART TX voter (single-bit)
 sd_instantiate_hdl_module -sd_name {TMR_TOP} -hdl_module_name {uart_tx_voter} -hdl_file {hdl/uart_tx_voter.v} -instance_name {VOTER_UART_TX}
 
-# Instantiate GPIO voter (8-bit)
-sd_instantiate_hdl_module -sd_name {TMR_TOP} -hdl_module_name {gpio_voter} -hdl_file {hdl/gpio_voter.v} -instance_name {VOTER_GPIO_OUT}
+# Instantiate GPIO voter (32-bit to match CoreGPIO APB_WIDTH)
+sd_instantiate_hdl_module -sd_name {TMR_TOP} -hdl_module_name {gpio_voter_32bit} -hdl_file {hdl/gpio_voter_32bit.v} -instance_name {VOTER_GPIO_OUT}
 
 puts "✓ Peripheral voters instantiated (UART TX, GPIO)"
 puts ""
@@ -213,9 +213,9 @@ puts "\[Step 7c/12\] Creating peripheral I/O ports..."
 sd_create_scalar_port -sd_name {TMR_TOP} -port_name {UART_RX} -port_direction {IN}
 sd_create_scalar_port -sd_name {TMR_TOP} -port_name {UART_TX} -port_direction {OUT}
 
-# GPIO I/O ports (8-bit bus)
-sd_create_bus_port -sd_name {TMR_TOP} -port_name {GPIO_OUT} -port_direction {OUT} -port_range {[7:0]}
-sd_create_bus_port -sd_name {TMR_TOP} -port_name {GPIO_IN} -port_direction {IN} -port_range {[7:0]}
+# GPIO output port (32-bit bus to match CoreGPIO APB_WIDTH:32)
+# Only lower IO_NUM (8) bits are used
+sd_create_bus_port -sd_name {TMR_TOP} -port_name {GPIO_OUT} -port_direction {OUT} -port_range {[31:0]}
 
 puts "✓ Peripheral I/O ports created"
 puts ""
@@ -249,10 +249,9 @@ sd_connect_pins -sd_name {TMR_TOP} -pin_names {"UART_RX" "UART_A:RX"}
 sd_connect_pins -sd_name {TMR_TOP} -pin_names {"UART_RX" "UART_B:RX"}
 sd_connect_pins -sd_name {TMR_TOP} -pin_names {"UART_RX" "UART_C:RX"}
 
-# Broadcast GPIO inputs to all 3 GPIOs (no voting on inputs)
-sd_connect_pins -sd_name {TMR_TOP} -pin_names {"GPIO_IN" "GPIO_A:GPIO_IN"}
-sd_connect_pins -sd_name {TMR_TOP} -pin_names {"GPIO_IN" "GPIO_B:GPIO_IN"}
-sd_connect_pins -sd_name {TMR_TOP} -pin_names {"GPIO_IN" "GPIO_C:GPIO_IN"}
+# NOTE: GPIO is configured for OUTPUT mode only (IO_TYPE_BIT_0_31:0xFF)
+# GPIO_IN connections removed - not needed for output-only configuration
+# If bidirectional GPIO is needed later, add GPIO_IN connections here
 
 puts "✓ Peripherals connected (clock, reset, inputs)"
 puts ""
@@ -337,31 +336,138 @@ puts "✓ Functional outputs connected to voted signals and LED pins"
 puts ""
 
 # ============================================================================
-# Step 8: Instantiate Triplicated Memory (3x 64KB PF_SRAM)
+# Step 8: Instantiate Triplicated Memory with AHB TMR Voter
 # ============================================================================
 
-puts "\[Step 8/11\] Instantiating triplicated memory banks..."
+puts "\[Step 8/12\] Instantiating triplicated memory with AHB voter..."
 
-# Instantiate 3x PF_SRAM banks (64KB each)
-sd_instantiate_component -sd_name {TMR_TOP} -component_name {PF_SRAM_BANK_A} -instance_name {MEM_BANK_A}
-sd_instantiate_component -sd_name {TMR_TOP} -component_name {PF_SRAM_BANK_B} -instance_name {MEM_BANK_B}
-sd_instantiate_component -sd_name {TMR_TOP} -component_name {PF_SRAM_BANK_C} -instance_name {MEM_BANK_C}
+# Instantiate 3x PF_SRAM_AHB banks (32KB each with AHB-Lite interface)
+sd_instantiate_component -sd_name {TMR_TOP} -component_name {PF_SRAM_AHB_A} -instance_name {MEM_BANK_A}
+sd_instantiate_component -sd_name {TMR_TOP} -component_name {PF_SRAM_AHB_B} -instance_name {MEM_BANK_B}
+sd_instantiate_component -sd_name {TMR_TOP} -component_name {PF_SRAM_AHB_C} -instance_name {MEM_BANK_C}
 
-# Instantiate memory read voter (32-bit data width)
-sd_instantiate_hdl_module -sd_name {TMR_TOP} -hdl_module_name {memory_read_voter} -hdl_file {hdl/memory_read_voter.v} -instance_name {VOTER_MEM_READ}
+# Instantiate AHB TMR Voter (connects cores to memory through voting logic)
+sd_instantiate_hdl_module -sd_name {TMR_TOP} -hdl_module_name {ahb_tmr_voter} -hdl_file {hdl/ahb_tmr_voter.v} -instance_name {AHB_VOTER}
 
-# NOTE: Full memory integration with MI-V cores requires AHB-Lite interconnect
-# For initial build, memory banks are instantiated but not yet connected to cores
-# This demonstrates the memory voter module integration
-
-puts "✓ Memory banks and voter instantiated"
+puts "✓ Memory banks and AHB voter instantiated"
 puts ""
 
 # ============================================================================
-# Step 11: Save, Generate, and Set as Root
+# Step 9: Connect AHB TMR Voter - Clock and Reset
 # ============================================================================
 
-puts "\[Step 11/11\] Saving SmartDesign..."
+puts "\[Step 9/12\] Connecting AHB voter clock and reset..."
+
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"CLK_IN" "AHB_VOTER:HCLK"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"RST_N_IN" "AHB_VOTER:HRESETn"}
+
+puts "✓ AHB voter clock and reset connected"
+puts ""
+
+# ============================================================================
+# Step 10: Connect MI-V Core AHB Masters to Voter
+# ============================================================================
+
+puts "\[Step 10/12\] Wiring MI-V AHB masters to voter..."
+
+# Core A AHB Master → Voter (port names: AHB_HADDR, not AHBL_M_HADDR)
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_A:AHB_HADDR" "AHB_VOTER:HADDR_A"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_A:AHB_HWDATA" "AHB_VOTER:HWDATA_A"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_A:AHB_HWRITE" "AHB_VOTER:HWRITE_A"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_A:AHB_HTRANS" "AHB_VOTER:HTRANS_A"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_A:AHB_HSIZE" "AHB_VOTER:HSIZE_A"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_A:AHB_HBURST" "AHB_VOTER:HBURST_A"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HRDATA_A" "MIV_RV32_A:AHB_HRDATA"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HREADY_A" "MIV_RV32_A:AHB_HREADY"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HRESP_A" "MIV_RV32_A:AHB_HRESP"}
+
+# Core B AHB Master → Voter
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_B:AHB_HADDR" "AHB_VOTER:HADDR_B"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_B:AHB_HWDATA" "AHB_VOTER:HWDATA_B"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_B:AHB_HWRITE" "AHB_VOTER:HWRITE_B"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_B:AHB_HTRANS" "AHB_VOTER:HTRANS_B"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_B:AHB_HSIZE" "AHB_VOTER:HSIZE_B"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_B:AHB_HBURST" "AHB_VOTER:HBURST_B"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HRDATA_B" "MIV_RV32_B:AHB_HRDATA"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HREADY_B" "MIV_RV32_B:AHB_HREADY"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HRESP_B" "MIV_RV32_B:AHB_HRESP"}
+
+# Core C AHB Master → Voter
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_C:AHB_HADDR" "AHB_VOTER:HADDR_C"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_C:AHB_HWDATA" "AHB_VOTER:HWDATA_C"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_C:AHB_HWRITE" "AHB_VOTER:HWRITE_C"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_C:AHB_HTRANS" "AHB_VOTER:HTRANS_C"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_C:AHB_HSIZE" "AHB_VOTER:HSIZE_C"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MIV_RV32_C:AHB_HBURST" "AHB_VOTER:HBURST_C"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HRDATA_C" "MIV_RV32_C:AHB_HRDATA"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HREADY_C" "MIV_RV32_C:AHB_HREADY"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HRESP_C" "MIV_RV32_C:AHB_HRESP"}
+
+puts "✓ MI-V AHB masters connected to voter"
+puts ""
+
+# ============================================================================
+# Step 11: Connect Voter to Memory Banks (AHB Slaves)
+# ============================================================================
+
+puts "\[Step 11/12\] Wiring voter to memory banks..."
+
+# Memory Bank A (AHB Slave)
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HADDR_MEM_A" "MEM_BANK_A:HADDR"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HWDATA_MEM_A" "MEM_BANK_A:HWDATA"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HWRITE_MEM_A" "MEM_BANK_A:HWRITE"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HTRANS_MEM_A" "MEM_BANK_A:HTRANS"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HSIZE_MEM_A" "MEM_BANK_A:HSIZE"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HBURST_MEM_A" "MEM_BANK_A:HBURST"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HSEL_MEM_A" "MEM_BANK_A:HSEL"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MEM_BANK_A:HRDATA" "AHB_VOTER:HRDATA_MEM_A"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MEM_BANK_A:HREADYOUT" "AHB_VOTER:HREADY_MEM_A"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MEM_BANK_A:HRESP" "AHB_VOTER:HRESP_MEM_A"}
+
+# Memory Bank A - Clock and Reset
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"CLK_IN" "MEM_BANK_A:HCLK"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"RST_N_IN" "MEM_BANK_A:HRESETN"}
+
+# Memory Bank B (AHB Slave)
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HADDR_MEM_B" "MEM_BANK_B:HADDR"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HWDATA_MEM_B" "MEM_BANK_B:HWDATA"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HWRITE_MEM_B" "MEM_BANK_B:HWRITE"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HTRANS_MEM_B" "MEM_BANK_B:HTRANS"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HSIZE_MEM_B" "MEM_BANK_B:HSIZE"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HBURST_MEM_B" "MEM_BANK_B:HBURST"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HSEL_MEM_B" "MEM_BANK_B:HSEL"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MEM_BANK_B:HRDATA" "AHB_VOTER:HRDATA_MEM_B"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MEM_BANK_B:HREADYOUT" "AHB_VOTER:HREADY_MEM_B"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MEM_BANK_B:HRESP" "AHB_VOTER:HRESP_MEM_B"}
+
+# Memory Bank B - Clock and Reset
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"CLK_IN" "MEM_BANK_B:HCLK"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"RST_N_IN" "MEM_BANK_B:HRESETN"}
+
+# Memory Bank C (AHB Slave)
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HADDR_MEM_C" "MEM_BANK_C:HADDR"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HWDATA_MEM_C" "MEM_BANK_C:HWDATA"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HWRITE_MEM_C" "MEM_BANK_C:HWRITE"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HTRANS_MEM_C" "MEM_BANK_C:HTRANS"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HSIZE_MEM_C" "MEM_BANK_C:HSIZE"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HBURST_MEM_C" "MEM_BANK_C:HBURST"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"AHB_VOTER:HSEL_MEM_C" "MEM_BANK_C:HSEL"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MEM_BANK_C:HRDATA" "AHB_VOTER:HRDATA_MEM_C"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MEM_BANK_C:HREADYOUT" "AHB_VOTER:HREADY_MEM_C"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"MEM_BANK_C:HRESP" "AHB_VOTER:HRESP_MEM_C"}
+
+# Memory Bank C - Clock and Reset
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"CLK_IN" "MEM_BANK_C:HCLK"}
+sd_connect_pins -sd_name {TMR_TOP} -pin_names {"RST_N_IN" "MEM_BANK_C:HRESETN"}
+
+puts "✓ Voter connected to all 3 memory banks"
+puts ""
+
+# ============================================================================
+# Step 12: Save, Generate, and Set as Root
+# ============================================================================
+
+puts "\[Step 12/12\] Saving SmartDesign..."
 
 # Save SmartDesign
 save_smartdesign -sd_name {TMR_TOP}
@@ -386,44 +492,50 @@ puts ""
 # ============================================================================
 
 puts "╔════════════════════════════════════════════════════════════════════╗"
-puts "║  TMR SmartDesign with Peripherals, Memory & Voters Complete       ║"
+puts "║  TMR SmartDesign with Full AHB Memory Integration Complete        ║"
 puts "╚════════════════════════════════════════════════════════════════════╝"
 puts ""
 puts "TMR Architecture:"
-puts "  ✓ 3x MI-V RV32IMC cores (synchronized clock/reset)"
-puts "  ✓ 3x 64KB PF_SRAM memory banks (192KB total)"
+puts "  ✓ 3x MI-V RV32IMC cores (AHB + APB masters enabled)"
+puts "  ✓ 3x 32KB PF_SRAM_AHB banks (96KB total, AHB-Lite interface)"
+puts "  ✓ AHB TMR Voter (full bus voting: addr, data, control)"
 puts "  ✓ 3x CoreUARTapb (115200 baud) with TX voter"
 puts "  ✓ 3x CoreGPIO (8-bit) with output voter"
-puts "  ✓ Voter modules (cores, memory read, UART TX, GPIO outputs)"
 puts "  ✓ Functional outputs module (counter + LED patterns)"
 puts "  ✓ Fault detection and disagreement monitoring"
 puts ""
-puts "Data Flow Paths:"
-puts "  Cores → Voter → Functional Block → Counter → LEDs"
-puts "  UART 3x TX → UART Voter → External TX"
+puts "Memory Data Flow (FULL TMR):"
+puts "  Core A AHB ─┐"
+puts "  Core B AHB ─┼─→ AHB Voter ─→ Memory Banks A/B/C"
+puts "  Core C AHB ─┘      ↓"
+puts "                 Voted HRDATA ─→ All Cores"
+puts ""
+puts "Peripheral Data Flow:"
+puts "  UART 3x TX → TX Voter → External TX"
 puts "  GPIO 3x Out → GPIO Voter → External GPIO"
 puts "  External RX → Broadcast to 3x UART RX"
 puts "  External GPIO In → Broadcast to 3x GPIO In"
 puts ""
+puts "Memory Map:"
+puts "  0x60000000-0x60007FFF: External SRAM (voted, 32KB)"
+puts "  0x70000000-0x7000FFFF: APB peripherals (UART, GPIO, Timer)"
+puts "  0x80000000-0x8000FFFF: TCM (internal, per-core, 64KB)"
+puts ""
 puts "I/O Signals (24 pins total):"
-puts "  Clock/Reset:"
-puts "    CLK_IN, RST_N_IN"
-puts "  LED Status (13 pins):"
-puts "    HEARTBEAT_LED, LED_PATTERN\[7:0\], STATUS_LED, DISAGREE_LED, FAULT_LEDS\[2:0\]"
-puts "  Peripherals (10 pins):"
-puts "    UART_RX, UART_TX, GPIO_IN\[7:0\], GPIO_OUT\[7:0\]"
+puts "  Clock/Reset: CLK_IN, RST_N_IN"
+puts "  LED Status: HEARTBEAT, LED_PATTERN\[7:0\], STATUS, DISAGREE, FAULT\[2:0\]"
+puts "  Peripherals: UART_RX, UART_TX, GPIO_IN\[7:0\], GPIO_OUT\[7:0\]"
 puts ""
 puts "Voting Strategy:"
-puts "  Outputs: Voted (2-of-3 majority)"
-puts "    - UART TX, GPIO outputs"
-puts "  Inputs: Broadcast (no voting)"
-puts "    - UART RX, GPIO inputs"
+puts "  Memory: Full AHB bus voting (address + write data + read data)"
+puts "  Peripherals: Output voting (UART TX, GPIO out)"
+puts "  Inputs: Broadcast (no voting needed)"
 puts ""
 puts "Expected Synthesis Results:"
-puts "  - ~36,000 LUTs (3x MI-V cores + peripherals + voters)"
-puts "  - All 3 cores preserved in netlist"
-puts "  - All voter logic synthesized"
-puts "  - Peripherals functional with fault masking"
+puts "  - ~40,000 LUTs (3x MI-V + memory + AHB voter + peripherals)"
+puts "  - ~96KB LSRAM (3x 32KB memory banks)"
+puts "  - All TMR paths preserved"
+puts "  - Full fault masking on memory and peripheral outputs"
 puts ""
 puts "Next Step:"
 puts "  ./run_libero.sh tcl_scripts/tmr/build_tmr_project.tcl SCRIPT"
